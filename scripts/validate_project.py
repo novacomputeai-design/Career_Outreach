@@ -37,6 +37,8 @@ def validate():
             errors.append("mismatched skill name: " + name)
         if len(descriptions) != 1 or not 1 <= len(descriptions[0]) <= 1024:
             errors.append("invalid skill description: " + name)
+        elif ": " in descriptions[0] and not descriptions[0].startswith(("\\\"", "\u0027")):
+            errors.append("unquoted YAML colon in skill description: " + name)
     for path in ("config/operating-policy.json","evals/cases.json"):
         try:
             json.loads((ROOT/path).read_text(encoding="utf-8"))

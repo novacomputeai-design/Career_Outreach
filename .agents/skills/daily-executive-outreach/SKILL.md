@@ -1,6 +1,6 @@
 ---
 name: daily-executive-outreach
-description: Orchestrate recurring daily career-networking intelligence: discover and vet up to 20 NEW contact-ready executives, Tucson-first and suitable remote, with zero automatic sending.
+description: Orchestrate recurring daily career-networking intelligence to discover and vet up to 20 NEW contact-ready executives, Tucson-first and suitable remote, with zero automatic sending.
 ---
 # daily-executive-outreach
 
