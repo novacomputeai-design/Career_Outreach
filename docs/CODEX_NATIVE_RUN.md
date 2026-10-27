@@ -24,6 +24,38 @@ Capture a redacted execution transcript showing the actual selection mechanism a
 
 With explicit permission, run a small supervised five-person public-source research trial; require credible fresh source evidence, legitimate individual contact routes, private identity-history review, and no messages sent. If permitted live browsing is unavailable, stop and report the gap rather than silently switching to another API.
 
-No private contact history or credentials should be stored in Git. The protected SQLite path is outside the checkout. The current Python CLI does not yet implement a full Codex-compatible candidate ingestion and novelty verification interface, so confirmed new contact-ready counts must remain zero until that bridge and review process are verified.
+No private contact history or credentials should be stored in Git. The protected SQLite path is outside the checkout. The Python CLI has a user-reported relationship capture and a read-minimized relationship lookup (see next section). These do NOT constitute complete provenance-verified candidate ingestion, independent human review, or cross-channel novelty verification. Confirmed new contact-ready counts must remain zero until those additional gates are verified.
 
 Only after the live pilot, seven real daily runs and independent review should we evaluate unattended Codex execution. Current scheduler examples invoke the OPTIONAL older Python provider runtime, not Codex.
+
+## User-declared relationship capture — protected local workflow
+
+After pulling the merged feature, run in PowerShell with the existing encrypted database and DPAPI-protected key files available in your Windows user profile. **Keep credentials out of prompts and Git.** These interactive commands deliberately request names privately rather than putting relationships in PowerShell history.
+
+```powershell
+cd C:\Nova-Skills\Career-Daily-Outreach
+$private = Join-Path $env:LOCALAPPDATA "CareerOutreach"
+$env:OUTREACH_DB_PATH = Join-Path $private "relationships.sqlite"
+$env:OUTREACH_STATE_KEY = [System.Net.NetworkCredential]::new(
+    "", ((Get-Content (Join-Path $private "state-key.dpapi") -Raw).Trim() | ConvertTo-SecureString)
+).Password
+$env:OUTREACH_IDENTITY_KEY = [System.Net.NetworkCredential]::new(
+    "", ((Get-Content (Join-Path $private "identity-key.dpapi") -Raw).Trim() | ConvertTo-SecureString)
+).Password
+
+# Interactive: enter a full name, FIRST_LEARNED or PREVIOUSLY_MET, optional individual official profile URL.
+.\.venv\Scripts\python.exe -m outreach_agent remember-relationship
+
+# Repeat for the second person.
+.\.venv\Scripts\python.exe -m outreach_agent remember-relationship
+
+# Read-minimized checks can be executed for an exact public name by the operator.
+.\.venv\Scripts\python.exe -m outreach_agent relationship-check --person-name "Example Person"
+
+# Clear the credentials from the current PowerShell process once finished.
+Remove-Item Env:OUTREACH_STATE_KEY, Env:OUTREACH_IDENTITY_KEY, Env:OUTREACH_DB_PATH -ErrorAction SilentlyContinue
+```
+
+Use exact public full names (no Dr./Mr. prefix). Do not enter a general organizational contact page as an individual profile. Classifications are `FIRST_LEARNED` (user says this is the first time they learned of the person; no previous contact known to them) or `PREVIOUSLY_MET` (existing relationship). They are user-reported facts, not independently verified sourcing or hiring interest.
+
+A lookup returns only a coarse classification/hold reason; unknown does **NOT** equal objectively new. Conflicting names/profiles or suppression fail closed. No event is fabricated, no drafting is approved, and sending remains disabled. This first manual bridge is not yet a fully validated Codex agent execution across the private store. Native specialist activation and end-to-end privacy tests remain separate.
