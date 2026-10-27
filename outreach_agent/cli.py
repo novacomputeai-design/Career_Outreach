@@ -77,6 +77,8 @@ def main(argv=None):
             emit(result,args.out)
             emit({"run_id":result["run_id"],"provisionally_source_corroborated":result["new_contact_ready"],
                   "shortfall":result["shortfall"],"messages_sent":0,"audit_level":result["audit_status"]})
+            if result["stage"]=="PARTIAL_SOURCE_FAILURE":
+                raise SystemExit("Source coverage failed; report preserved privately for operator review")
         elif args.command=="record":
             store.record_event(args.person_id,args.event,{"note":args.note})
             emit({"event_recorded":args.event,"message_sent_by_agent":False})

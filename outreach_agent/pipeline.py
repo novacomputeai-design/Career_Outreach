@@ -27,6 +27,15 @@ def extract_role_excerpt(source, person_name, current_title):
     passage=raw[start:end].strip()
     return passage if normalize(current_title) in normalize(passage) else None
 
+def plausible_official_domain(organization, source_url):
+    """Conservative lexical employer-domain check; mismatches require human adjudication."""
+    generic={"health","healthcare","systems","company","group","inc","llc","the","and",
+             "university","college","city","of","technology","technologies","services"}
+    tokens=[x for x in re.findall(r"[a-z0-9]+",organization.casefold())
+            if len(x)>=3 and x not in generic]
+    hostname=host(source_url)
+    return bool(tokens) and any(t in hostname for t in tokens)
+
 def research_enrichment(search, lead):
     """Search independently for role corroboration and a published organization contact route.
 
@@ -53,6 +62,10 @@ def research_enrichment(search, lead):
         for hit in routes:
             # Must be an org-owned host from one of the two independently observed sites.
             if host(hit.url) not in (host(lead["source_url"]), host(second.url)):
+                continue
+            if not plausible_official_domain(org,hit.url):
+                continue
+            if normalize(org) not in normalize(hit.title+" "+hit.text[:1000]):
                 continue
             if not re.search(r"(contact|connect|inquir)",hit.url+" "+hit.title,re.I):
                 continue
@@ -164,7 +177,12 @@ def make_brief(search, extractor, store, target=20, max_queries=14, max_enrich=4
         report["source_corroborated_pending_human_review"]=len(report["candidates"])
         report["production_verified_contact_ready"]=0
         report["shortfall"]=max(0,target-report["new_contact_ready"])
-        report["stage"]="COMPLETE_WITH_SHORTFALL" if report["shortfall"] else "COMPLETE"
+        if report["source_errors"] and not leads:
+            report["stage"]="PARTIAL_SOURCE_FAILURE"
+        elif report["source_errors"]:
+            report["stage"]="COMPLETE_WITH_SOURCE_ERRORS"
+        else:
+            report["stage"]="COMPLETE_WITH_SHORTFALL" if report["shortfall"] else "COMPLETE"
         report["audit_status"]="DETERMINISTIC_EVIDENCE_PRECHECK_ONLY"
         report["qualification_warning"]="Second distinct-host source corroboration is not a guarantee of current affiliation or reachable hiring authority; human review remains required."
         store.finish_run(rid,report["stage"],report)

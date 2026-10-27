@@ -125,6 +125,11 @@ class Extractor:
 
 def source_recent_enough(source, max_days=730):
     """An explicitly stale published source cannot verify a CURRENT executive role."""
+    # Old years in URL paths often reveal stale announcements even without metadata.
+    from datetime import date
+    for year in re.findall(r"(?<![0-9])20[0-9]{2}(?![0-9])",urlparse(source.url).path):
+        if int(year) < date.today().year-2:
+            return False
     if not source.published_on:
         return True  # undated => UNKNOWN freshness, not proven current
     from datetime import date

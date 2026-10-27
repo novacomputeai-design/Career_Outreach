@@ -6,7 +6,7 @@ from pathlib import Path
 from cryptography.fernet import Fernet
 from outreach_agent.state import PrivateStore
 from outreach_agent.research import Source, extract_supported, qualified_source_pair
-from outreach_agent.pipeline import make_brief, audit_record, deterministic_score
+from outreach_agent.pipeline import make_brief, audit_record, deterministic_score, plausible_official_domain
 
 ROLE="Avery Example is Vice President Product at Fabricated Systems."
 INIT="Fabricated Systems leads enterprise product platform modernization and AI automation innovation strategy across operating teams."
@@ -92,6 +92,10 @@ class AgentRuntimeTests(unittest.TestCase):
                           target=20,max_queries=1,max_enrich=5)
         self.assertEqual(result["new_contact_ready"],0)
         self.assertIn("no_independent_role_corroboration",str(result["held"]))
+
+    def test_contact_page_from_unrelated_host_not_attributed_to_employer(self):
+        self.assertTrue(plausible_official_domain("Fabricated Systems",S1.url))
+        self.assertFalse(plausible_official_domain("Fabricated Systems","https://conference-sponsors.test/contact"))
 
     def test_score_has_upper_bounds(self):
         x=extract_supported(S1,RAW)
