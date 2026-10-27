@@ -1,4 +1,10 @@
-# Deployment: manual authorization and external services required
+# Deployment: Codex-native is the primary path
+
+Start with [Codex-native activation guide](CODEX_NATIVE_RUN.md). Codex CLI using ChatGPT sign-in is selected as the agent, the 14 skills are local, and no Tavily/OpenAI API credentials are required for this selected path. Actual live web availability and skill invocation still need proof.
+
+The older `python -m outreach_agent run` implementation described below is OPTIONAL and separately requires Tavily/OpenAI API keys. Its Windows Task Scheduler/cron examples do not run the Codex-native skill workflow.
+
+## Optional provider-backed Python deployment
 
 This is a PUBLIC GitHub repository. Private keys, history, daily reports, approved drafts and personal correspondence must remain on a separate protected machine or database outside the checkout.
 
