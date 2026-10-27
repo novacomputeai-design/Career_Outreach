@@ -56,8 +56,10 @@ class AgentRuntimeTests(unittest.TestCase):
         result=make_brief(MockSearch(),MockExtractor(),self.store,
                           target=20,max_queries=1,max_enrich=5)
         self.assertEqual(result["discoveries"],1)
-        self.assertEqual(result["new_contact_ready"],1)
-        self.assertEqual(result["shortfall"],19)
+        self.assertEqual(result["source_corroborated_pending_human_review"],1)
+        self.assertEqual(result["new_contact_ready"],0)
+        self.assertEqual(result["shortfall"],20)
+        self.assertEqual(result["research_shortfall"],19)
         self.assertEqual(result["confirmed_sent"],0)
         self.assertEqual(result["audit_status"],"DETERMINISTIC_EVIDENCE_PRECHECK_ONLY")
         self.assertTrue(audit_record(result["candidates"][0]))
@@ -69,7 +71,8 @@ class AgentRuntimeTests(unittest.TestCase):
         for day in range(7):
             result=make_brief(MockSearch(),MockExtractor(),self.store,
                               target=20,max_queries=1,max_enrich=5)
-            self.assertEqual(result["new_contact_ready"],1 if day==0 else 0)
+            self.assertEqual(result["source_corroborated_pending_human_review"],1 if day==0 else 0)
+            self.assertEqual(result["new_contact_ready"],0)
 
     def test_no_contact_source_blocks(self):
         class NoRoute(MockSearch):
@@ -80,6 +83,7 @@ class AgentRuntimeTests(unittest.TestCase):
         result=make_brief(NoRoute(),MockExtractor(),self.store,
                           target=20,max_queries=1,max_enrich=5)
         self.assertEqual(result["new_contact_ready"],0)
+        self.assertEqual(result["source_corroborated_pending_human_review"],0)
         self.assertIn("no_evidenced_official_contact_route",str(result["held"]))
 
     def test_second_source_missing_blocks(self):
