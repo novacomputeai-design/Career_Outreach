@@ -61,6 +61,9 @@ class AgentRuntimeTests(unittest.TestCase):
         self.assertEqual(result["confirmed_sent"],0)
         self.assertEqual(result["audit_status"],"DETERMINISTIC_EVIDENCE_PRECHECK_ONLY")
         self.assertTrue(audit_record(result["candidates"][0]))
+        self.assertEqual(result["production_verified_contact_ready"],0)
+        saved=self.store.latest_report()
+        self.assertEqual(saved["run_id"],result["run_id"])
 
     def test_same_person_next_run_is_suppressed(self):
         for day in range(7):

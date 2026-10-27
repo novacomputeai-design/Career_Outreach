@@ -14,6 +14,7 @@ from urllib.parse import urlparse
 from .research import Tavily, Extractor, discover, Source, host, normalize, qualified_source_pair, url_valid
 from .state import PrivateStore
 from .learning import summarize
+from .contracts import validate_prospect
 
 def extract_role_excerpt(source, person_name, current_title):
     """Find a short exact, contiguous passage containing name and title."""
@@ -157,6 +158,8 @@ def make_brief(search, extractor, store, target=20, max_queries=14, max_enrich=4
             if len(report["candidates"])>=target:
                 break
         report["new_contact_ready"]=len(report["candidates"])
+        report["source_corroborated_pending_human_review"]=len(report["candidates"])
+        report["production_verified_contact_ready"]=0
         report["shortfall"]=max(0,target-report["new_contact_ready"])
         report["stage"]="COMPLETE_WITH_SHORTFALL" if report["shortfall"] else "COMPLETE"
         report["audit_status"]="DETERMINISTIC_EVIDENCE_PRECHECK_ONLY"
@@ -174,6 +177,8 @@ def audit_record(record):
             "role_quote","second_role_quote","initiative_quote","why_connect","route_url",
             "route_type","observed_on","scores","score_total")
     if any(not record.get(k) for k in needed):
+        return False
+    if validate_prospect(record):
         return False
     urls=[record["source_url"],record["second_role_source_url"],record["route_url"]]
     if not all(url_valid(u) for u in urls) or host(urls[0])==host(urls[1]):

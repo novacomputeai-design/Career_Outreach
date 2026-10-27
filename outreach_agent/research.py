@@ -53,6 +53,7 @@ class Source:
     title: str
     text: str
     retrieved_on: str
+    published_on: str | None = None
     def evidence(self, excerpt):
         return bool(isinstance(excerpt, str) and len(excerpt.strip()) >= 15
                     and normalize(excerpt) in normalize(self.text))
@@ -83,7 +84,8 @@ class Tavily:
             raw=item.get("raw_content") or item.get("content") or ""
             if not isinstance(raw,str) or len(raw.strip()) < 40:
                 continue
-            result.append(Source(u, str(item.get("title",""))[:250], raw[:25000], now))
+            result.append(Source(u, str(item.get("title",""))[:250], raw[:25000], now,
+                                 item.get("published_date") or None))
         return result
 
 class Extractor:
@@ -121,6 +123,18 @@ class Extractor:
         payload=json.loads(response.choices[0].message.content)
         return payload.get("people",[]) if isinstance(payload,dict) else []
 
+def source_recent_enough(source, max_days=730):
+    """An explicitly stale published source cannot verify a CURRENT executive role."""
+    if not source.published_on:
+        return True  # undated => UNKNOWN freshness, not proven current
+    from datetime import date
+    try:
+        published=date.fromisoformat(str(source.published_on)[:10])
+        age=(date.today()-published).days
+        return 0 <= age <= max_days
+    except (TypeError,ValueError):
+        return False
+
 def extract_supported(source, extracted):
     """Validate claim-to-source binding; unlike old structural-only bool flags."""
     if not isinstance(extracted,dict) or any(not isinstance(extracted.get(k),str) or
@@ -130,6 +144,8 @@ def extract_supported(source, extracted):
     title=extracted["current_title"].strip()
     quote=extracted["role_quote"]
     initiative=extracted["initiative_quote"]
+    if not source_recent_enough(source):
+        return None
     if not (source.evidence(quote) and source.evidence(initiative)):
         return None
     # Both identity elements must occur in same source-supported role excerpt.
@@ -184,7 +200,7 @@ def qualified_source_pair(person, source_two, quote_two):
     """Second independently sourced role evidence; never treat model agreement as independence."""
     if not isinstance(source_two,Source) or host(source_two.url)==host(person["source_url"]):
         return False
-    if not source_two.evidence(quote_two):
+    if not source_recent_enough(source_two) or not source_two.evidence(quote_two):
         return False
     excerpt=normalize(quote_two)
     return normalize(person["person_name"]) in excerpt and normalize(person["current_title"]) in excerpt

@@ -35,3 +35,12 @@ On Windows, inspect deploy/windows-task.ps1. On Linux, adapt deploy/cron.example
 
 ## Qualification gate
 The following remain operational requirements, not proven by installing packages: seven real daily runs, native host skill activation, source verification accuracy, >=40 independently assessed people, personal usefulness feedback, suppression correctness, safe recoverability and zero unauthorized sends. A CI pass or exact-quote match alone is NOT independent production qualification.
+
+
+## Recover after an output-file crash
+The completed full report is stored encrypted inside the private database before it is written to an external file. Recovery:
+python -m outreach_agent restore-report --out /private/restored-report.json
+Do not rerun a failed-to-export successful run just to replenish the quota; doing so properly flags already stored identities as duplicates.
+
+## Provenance and freshness limitations
+Actual role verification still requires expert review of first-party current pages. Two distinct hosts and verbatim excerpts are corroboration signals, not proof of hiring authority or current engagement. An explicitly published source older than two years is not accepted as current role evidence. Undated sources remain freshness-unknown.
