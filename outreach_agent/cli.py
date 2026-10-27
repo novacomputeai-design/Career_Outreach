@@ -44,6 +44,8 @@ def main(argv=None):
     approve.add_argument("--draft-file",required=True)
     approve.add_argument("--stage",choices=["CONTENT_APPROVED","SEND_AUTHORIZED"],required=True)
     sub.add_parser("learning")
+    restore=sub.add_parser("restore-report",help="Recover latest encrypted run after an output-file failure")
+    restore.add_argument("--out",required=True)
     strat=sub.add_parser("approve-strategy")
     strat.add_argument("--segment",choices=["tucson","remote"],required=True)
     args=p.parse_args(argv)
@@ -73,6 +75,12 @@ def main(argv=None):
             content=private_path(args.draft_file).read_text(encoding="utf-8")
             emit({"draft_sha256":store.approval(args.person_id,content,args.stage),
                   "approval_stage":args.stage,"message_sent_by_agent":False})
+        elif args.command=="restore-report":
+            saved=store.latest_report()
+            if saved is None:
+                raise RuntimeError("No completed private run is available to restore")
+            emit(saved,args.out)
+            emit({"restored":True,"run_id":saved.get("run_id"),"messages_sent":0})
         elif args.command=="learning":
             counts=store.counts()
             data=summarize(counts)

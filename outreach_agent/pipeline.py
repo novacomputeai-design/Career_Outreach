@@ -147,7 +147,7 @@ def make_brief(search, extractor, store, target=20, max_queries=14, max_enrich=4
                 report["held"].append({"name":lead["person_name"],"reason":"failed_deterministic_evidence_audit"})
                 continue
             try:
-                person_id=store.register(enriched,enriched["segment"])
+                person_id=store.register(enriched,enriched["segment"],run_id=rid)
             except ValueError:
                 report["held"].append({"name":lead["person_name"],"reason":"identity_conflict_on_commit"})
                 continue
@@ -161,7 +161,7 @@ def make_brief(search, extractor, store, target=20, max_queries=14, max_enrich=4
         report["stage"]="COMPLETE_WITH_SHORTFALL" if report["shortfall"] else "COMPLETE"
         report["audit_status"]="DETERMINISTIC_EVIDENCE_PRECHECK_ONLY"
         report["qualification_warning"]="Second distinct-host source corroboration is not a guarantee of current affiliation or reachable hiring authority; human review remains required."
-        store.finish_run(rid,report["stage"],{k:v for k,v in report.items() if k not in ("candidates","held")})
+        store.finish_run(rid,report["stage"],report)
     except Exception as exc:
         report["stage"]="FAILED"
         report["error_type"]=type(exc).__name__

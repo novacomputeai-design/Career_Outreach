@@ -74,6 +74,11 @@ class PrivateStore:
                 encrypted_value BLOB NOT NULL,
                 approved_at TEXT NOT NULL
             );
+            CREATE TABLE IF NOT EXISTS recommendations (
+                run_id TEXT NOT NULL,
+                person_id TEXT NOT NULL REFERENCES people(person_id),
+                PRIMARY KEY(run_id, person_id)
+            );
             CREATE TABLE IF NOT EXISTS runs (
                 run_id TEXT PRIMARY KEY,
                 started TEXT NOT NULL,
@@ -102,7 +107,7 @@ class PrivateStore:
                                (name, pd, pd)).fetchall()
         return [dict(r) for r in rows]
 
-    def register(self, person, segment="other"):
+    def register(self, person, segment="other", run_id=None):
         if segment not in SEGMENTS:
             raise ValueError("Invalid geographic segment")
         if self.match(person):
@@ -117,6 +122,9 @@ class PrivateStore:
                 "INSERT INTO people VALUES (?,?,?,?,?,?,?,?,?)",
                 (person_id, name, pd, self.encrypt(person), segment, "RECOMMENDED", 0, now, now))
             self._event(person_id, "RECOMMENDED", {"source": "daily-audited-recommendation"})
+            if run_id is not None:
+                self.db.execute("INSERT INTO recommendations(run_id,person_id) VALUES(?,?)",
+                                (run_id,person_id))
         return person_id
 
     def _event(self, person_id, kind, note):
@@ -168,6 +176,13 @@ class PrivateStore:
         with self.db:
             self.db.execute("UPDATE runs SET finished=?,state=?,encrypted_summary=? WHERE run_id=?",
                             (utcnow(),status,self.encrypt(summary),run_id))
+
+    def latest_report(self):
+        row=self.db.execute("SELECT encrypted_summary FROM runs WHERE finished IS NOT NULL "
+                            "ORDER BY finished DESC LIMIT 1").fetchone()
+        if row is None or row["encrypted_summary"] is None:
+            return None
+        return self.decrypt(row["encrypted_summary"])
 
     def counts(self):
         return [dict(r) for r in self.db.execute(
