@@ -11,10 +11,10 @@ The repository remains PUBLIC. No live API keys, private contact records or user
 | End-to-end evaluation | SYNTHETIC PASS; REAL EVAL PENDING | tests/test_agent_runtime.py exercises mocked research and 7 repeated runs; evaluation plan requires 7 real days and >=40 manually reviewed real people |
 | Typed skill handoffs | STRUCTURAL IMPLEMENTED | schemas/source-corroborated-prospect.schema.json enforced in pre-publication audit |
 | Workflow ordering | IMPLEMENTED IN PYTHON | Early dedup before costly enrichment, final automated check before report, encrypted run report stored for restoration |
-| Outcome feedback | CODE IMPLEMENTED; NO REAL OUTCOMES | Manual CONTACTED/REPLIED/MEETING/INTRODUCTION events, aggregate metrics, human-approved query priority only |
+| Outcome feedback | CODE IMPLEMENTED; NO REAL OUTCOMES | Manual CONTACTED/REPLIED/MEETING/INTRODUCTION events, aggregate metrics, three specialized learning/provenance skills, human-approved query priority only |
 | Scheduling and recovery | RECIPES IMPLEMENTED; NOT ACTIVATED | deploy/windows-task.ps1, deploy/cron.example, encrypted report recovery; external scheduler, alerting and incident drill still required |
 | Source provenance/freshness | PARTIAL | Excerpts, 2 URLs, observed date, explicit limited assurance; publication freshness checks where source dates supplied |
-| Security | PARTIAL | Encrypted payloads and private-path guard; key management, backup, provider terms, retention, access review and real threat test needed |
+| Security | PARTIAL | Encrypted payloads, HMAC identity indexes, private-path guard, public Git tracked-file hygiene check; key management, backup, provider terms, retention, access review and real threat test needed |
 | Native agent-skill activation | NOT VERIFIED | Skill files exist in .agents/skills; actual host activation trace required |
 | 20 new contact-ready per day | NOT DEMONSTRATED | Pilot may return zero; real yield and conversion unmeasured. Do not count hypothetical leads or assumed contact methods as direct reachability. |
 

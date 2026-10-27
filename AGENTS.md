@@ -13,6 +13,6 @@ This PUBLIC repo holds a personal executive-networking agent design. It is NOT N
 - Validate with `python scripts/validate_project.py` and `python -m unittest discover -s tests -v`. Passing offline tests is NOT a production qualification.
 
 ## Stage order
-organization-discovery > leadership-discovery > contact-verification > relationship-qualification > relationship-memory > outreach-drafting > daily-executive-brief > run-quality-audit. Run follow-up-planning and conversation-preparation conditionally.
+organization-discovery > leadership-discovery > early relationship-memory suppression > contact-verification + provenance-and-freshness > relationship-qualification > outreach-drafting > run-quality-audit > daily-executive-brief > outcome-intelligence > discovery-strategy-optimization. Run follow-up-planning and conversation-preparation conditionally. Distinguish Python integration of equivalent stages from observed NATIVE host skill activation. Code execution alone is not proof of native selection.
 
-Status: instruction skills and deterministic offline validator only; live discovery integration and scheduler are not yet active.
+Status: pilot-ready runtime code and offline tests; live provider/host deployment, actual skill activation trace and real-world qualification are NOT yet verified. See docs/GAP_CLOSURE_MATRIX.md.

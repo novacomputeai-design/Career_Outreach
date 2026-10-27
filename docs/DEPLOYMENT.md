@@ -44,3 +44,10 @@ Do not rerun a failed-to-export successful run just to replenish the quota; doin
 
 ## Provenance and freshness limitations
 Actual role verification still requires expert review of first-party current pages. Two distinct hosts and verbatim excerpts are corroboration signals, not proof of hiring authority or current engagement. An explicitly published source older than two years is not accepted as current role evidence. Undated sources remain freshness-unknown.
+
+
+## Mandatory budgets and user source review
+The research runtime limits calls per run (default 50 Tavily searches and 40 model extraction requests). Override with --max-search-calls and --max-extractions only after reviewing pricing and logs. The person-level record is SOURCE-CORROBORATED, not automatically production-verified.
+After checking current role and organization, the contact route's true reachability and the personal relevance yourself, mark a candidate:
+python -m outreach_agent review-contact --person-id ID --confirm-current-role --confirm-contact-route --confirm-professional-relevance
+This does not send anything; it simply registers human validation. A general contact page is INDIRECT and may not reach the executive.

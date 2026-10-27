@@ -9,7 +9,7 @@ Identify relevant organizational leaders, actual or potential hiring influencers
 
 ## Repository structure
 - `AGENTS.md` — authority and repo rules.
-- `.agents/skills/` — native repository-local Agent Skills, including the daily orchestration skill.
+- `.agents/skills/` — 14 repository-local Agent Skills, including the daily orchestration and learning skills.
 - `config/` — **public-safe** professional positioning and targets.
 - `references/` — evidence, scoring, handoffs, state machine, privacy and source policies.
 - `evals/` — adversarial acceptance cases.
@@ -33,7 +33,7 @@ Identify relevant organizational leaders, actual or potential hiring influencers
 4. Evaluate with `python scripts/validate_project.py` and `python -m unittest discover -s tests -v`.
 
 ## Deployment milestones
-- **Phase A (implemented foundation):** skill contracts, qualification policy, sample daily brief, evaluation and tests.
+- **Phase A (implemented foundation):** 14 skills, typed lead handoff, qualification policy, private store, and offline regression tests.
 - **Phase B (code implemented, deployment NOT VERIFIED):** Tavily and OpenAI research adapters; locally encrypted private contact store. Needs API credentials and live independent testing.
 - **Phase C (not yet implemented):** real-world pilot, audited 20-per-day target, calibrated rankings, human-reviewed messages.
 - **Phase D (recipe available, NOT ACTIVATED):** Windows Task Scheduler and Linux cron examples; runtime monitoring/alerting and seven-day production qualification still pending.

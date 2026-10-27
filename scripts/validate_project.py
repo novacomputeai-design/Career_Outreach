@@ -10,7 +10,8 @@ EXPECTED = {
     "daily-executive-outreach", "organization-discovery", "leadership-discovery",
     "contact-verification", "relationship-qualification", "relationship-memory",
     "outreach-drafting", "daily-executive-brief", "run-quality-audit",
-    "follow-up-planning", "conversation-preparation"
+    "follow-up-planning", "conversation-preparation",
+    "outcome-intelligence", "discovery-strategy-optimization", "provenance-and-freshness"
 }
 
 def validate():
@@ -56,4 +57,4 @@ if __name__ == "__main__":
     if issues:
         print("\n".join("FAIL: "+x for x in issues))
         raise SystemExit(1)
-    print("PASS: 11 skill definitions and project JSON/reference structure (structural only)")
+    print("PASS: 14 skill definitions and project JSON/reference structure (structural only)")

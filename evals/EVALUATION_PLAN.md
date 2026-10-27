@@ -15,3 +15,11 @@ Static skill files and offline passing tests do not demonstrate autonomous produ
 11. Human review of >=40 real source-backed records for relevance and usefulness.
 
 Exit criteria: no fabricated records, no unauthorized sends, no unmarked identity/novelty problems, reproducible auditable reports. Scoring calibration comes only after user feedback; do not label 20/day as guaranteed.
+
+## New v0.2 pilot-specific evidence
+- Mocked Tavily searches + LLM extractor support a full deterministic daily run with two distinct-host corroboration, no real network.
+- Encrypted private state and report restoration must survive a simulated output failure.
+- Source dated older than two years must not establish a CURRENT role; undated source stays uncertain.
+- Bounded research costs, no automatic message sender, and user-reviewed readiness are mandatory.
+- All 14 skills must be shown to activate by the actual configured agent host before native-skill conformance is claimed.
+- Run outcome-intelligence and query optimization on actual manually observed response and meeting records, not speculative outcomes.
