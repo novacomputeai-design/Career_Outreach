@@ -134,6 +134,9 @@ def make_brief(search, extractor, store, target=20, max_queries=14, max_enrich=4
             enriched,reason=research_enrichment(search,lead)
             if not enriched:
                 report["held"].append({"name":lead["person_name"],"reason":reason})
+                if reason=="source_error_BudgetExceeded":
+                    report["source_errors"].append({"stage":"enrichment","error_type":"BudgetExceeded"})
+                    break
                 continue
             scores,total=deterministic_score(enriched)
             if total<70:

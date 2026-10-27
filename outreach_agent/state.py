@@ -149,6 +149,19 @@ class PrivateStore:
             self.db.execute("UPDATE people SET state=?,opted_out=?,updated_at=? WHERE person_id=?",
                             (kind, int(kind=="OPTED_OUT"), utcnow(), person_id))
 
+    def review_contact(self, person_id, *, confirmed_role, confirmed_route, confirmed_fit):
+        """User-initiated independent review of actual role, route and meaningful fit."""
+        if not all(x is True for x in (confirmed_role,confirmed_route,confirmed_fit)):
+            raise ValueError("Role, route and professional fit require separate human confirmation")
+        row=self.db.execute("SELECT state,opted_out FROM people WHERE person_id=?",(person_id,)).fetchone()
+        if row is None or row["opted_out"]:
+            raise ValueError("No eligible person to review")
+        with self.db:
+            self._event(person_id,"CONTACT_REVIEW_APPROVED",
+                        {"human_confirmed_role":True,"human_confirmed_route":True,"human_confirmed_fit":True})
+            self.db.execute("UPDATE people SET state=?,updated_at=? WHERE person_id=?",
+                            ("CONTACT_REVIEW_APPROVED",utcnow(),person_id))
+
     def approval(self, person_id, draft, stage):
         """Content approval does not grant sending authorization. No send mechanism exists."""
         if stage not in ("CONTENT_APPROVED", "SEND_AUTHORIZED"):
@@ -183,6 +196,10 @@ class PrivateStore:
         if row is None or row["encrypted_summary"] is None:
             return None
         return self.decrypt(row["encrypted_summary"])
+
+    def human_reviewed_count(self):
+        return self.db.execute("SELECT COUNT(DISTINCT person_id) FROM events "
+                               "WHERE kind='CONTACT_REVIEW_APPROVED'").fetchone()[0]
 
     def counts(self):
         return [dict(r) for r in self.db.execute(

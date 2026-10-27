@@ -190,6 +190,9 @@ def discover(search, extractor, queries=None, max_queries=14, max_records=80):
                     checked=extract_supported(source,p)
                     if checked:
                         found.append(checked)
+            except BudgetExceeded as exc:
+                errors.append({"source":source.url,"error_type":"BudgetExceeded"})
+                return found,errors
             except Exception as exc:
                 errors.append({"source":source.url,"error_type":type(exc).__name__})
             if len(found)>=max_records:
@@ -204,3 +207,32 @@ def qualified_source_pair(person, source_two, quote_two):
         return False
     excerpt=normalize(quote_two)
     return normalize(person["person_name"]) in excerpt and normalize(person["current_title"]) in excerpt
+
+class BudgetExceeded(RuntimeError):
+    """No more billable API calls are allowed within this daily run."""
+
+class BoundedSearch:
+    def __init__(self, provider, max_calls=50):
+        if max_calls<1:
+            raise ValueError("max_calls must be positive")
+        self.provider=provider
+        self.max_calls=max_calls
+        self.calls=0
+    def search(self,query,limit=8):
+        if self.calls>=self.max_calls:
+            raise BudgetExceeded("Search budget exceeded")
+        self.calls+=1
+        return self.provider.search(query,limit=limit)
+
+class BoundedExtractor:
+    def __init__(self,provider,max_calls=40):
+        if max_calls<1:
+            raise ValueError("max_calls must be positive")
+        self.provider=provider
+        self.calls=0
+        self.max_calls=max_calls
+    def people(self,source):
+        if self.calls>=self.max_calls:
+            raise BudgetExceeded("Model extraction budget exceeded")
+        self.calls+=1
+        return self.provider.people(source)

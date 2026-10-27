@@ -6,7 +6,7 @@ from pathlib import Path
 from .state import PrivateStore
 from .pipeline import make_brief
 from .learning import summarize, propose_strategy
-from .research import Tavily, Extractor, SEARCH_QUERIES
+from .research import Tavily, Extractor, SEARCH_QUERIES, BoundedSearch, BoundedExtractor
 
 ROOT=Path(__file__).resolve().parents[1]
 def private_path(path):
@@ -35,6 +35,8 @@ def main(argv=None):
     run.add_argument("--target",type=int,default=20)
     run.add_argument("--max-queries",type=int,default=14)
     run.add_argument("--max-enrich",type=int,default=48)
+    run.add_argument("--max-search-calls",type=int,default=50)
+    run.add_argument("--max-extractions",type=int,default=40)
     record=sub.add_parser("record")
     record.add_argument("--person-id",required=True)
     record.add_argument("--event",required=True)
@@ -43,6 +45,11 @@ def main(argv=None):
     approve.add_argument("--person-id",required=True)
     approve.add_argument("--draft-file",required=True)
     approve.add_argument("--stage",choices=["CONTENT_APPROVED","SEND_AUTHORIZED"],required=True)
+    review=sub.add_parser("review-contact",help="Explicit human source and route review; never sends")
+    review.add_argument("--person-id",required=True)
+    review.add_argument("--confirm-current-role",action="store_true",required=True)
+    review.add_argument("--confirm-contact-route",action="store_true",required=True)
+    review.add_argument("--confirm-professional-relevance",action="store_true",required=True)
     sub.add_parser("learning")
     restore=sub.add_parser("restore-report",help="Recover latest encrypted run after an output-file failure")
     restore.add_argument("--out",required=True)
@@ -63,7 +70,9 @@ def main(argv=None):
             q=list(SEARCH_QUERIES)
             if store.get_strategy()=="remote":
                 q.sort(key=lambda x: (0 if "remote" in x.lower() else 1))
-            result=make_brief(Tavily(),Extractor(),store,target=args.target,
+            search=BoundedSearch(Tavily(),max_calls=args.max_search_calls)
+            extractor=BoundedExtractor(Extractor(),max_calls=args.max_extractions)
+            result=make_brief(search,extractor,store,target=args.target,
                               max_queries=args.max_queries,max_enrich=args.max_enrich,queries=q)
             emit(result,args.out)
             emit({"run_id":result["run_id"],"provisionally_source_corroborated":result["new_contact_ready"],
@@ -81,6 +90,12 @@ def main(argv=None):
                 raise RuntimeError("No completed private run is available to restore")
             emit(saved,args.out)
             emit({"restored":True,"run_id":saved.get("run_id"),"messages_sent":0})
+        elif args.command=="review-contact":
+            store.review_contact(args.person_id, confirmed_role=args.confirm_current_role,
+                                 confirmed_route=args.confirm_contact_route,
+                                 confirmed_fit=args.confirm_professional_relevance)
+            emit({"person_id":args.person_id,"human_review_confirmed":True,
+                  "message_sent_by_agent":False})
         elif args.command=="learning":
             counts=store.counts()
             data=summarize(counts)
