@@ -1,0 +1,148 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Source-corroborated executive prospect, not proof of hiring intent",
+  "type": "object",
+  "required": [
+    "person_name",
+    "current_title",
+    "organization",
+    "role_quote",
+    "initiative_quote",
+    "source_url",
+    "second_role_source_url",
+    "second_role_quote",
+    "observed_on",
+    "route_url",
+    "route_type",
+    "route_note",
+    "why_connect",
+    "segment",
+    "category",
+    "scores",
+    "score_total",
+    "verified_evidence_grade",
+    "draft_status"
+  ],
+  "properties": {
+    "person_name": {
+      "type": "string",
+      "minLength": 3
+    },
+    "current_title": {
+      "type": "string",
+      "minLength": 4
+    },
+    "organization": {
+      "type": "string",
+      "minLength": 3
+    },
+    "role_quote": {
+      "type": "string",
+      "minLength": 15
+    },
+    "initiative_quote": {
+      "type": "string",
+      "minLength": 15
+    },
+    "source_url": {
+      "type": "string",
+      "format": "uri"
+    },
+    "second_role_source_url": {
+      "type": "string",
+      "format": "uri"
+    },
+    "second_role_quote": {
+      "type": "string",
+      "minLength": 15
+    },
+    "observed_on": {
+      "type": "string",
+      "format": "date"
+    },
+    "route_url": {
+      "type": "string",
+      "format": "uri"
+    },
+    "route_type": {
+      "enum": [
+        "INDIRECT"
+      ]
+    },
+    "route_note": {
+      "type": "string",
+      "minLength": 15
+    },
+    "why_connect": {
+      "type": "string",
+      "minLength": 25
+    },
+    "segment": {
+      "enum": [
+        "tucson",
+        "remote",
+        "other"
+      ]
+    },
+    "category": {
+      "enum": [
+        "hiring-influencer",
+        "strategic-connector"
+      ]
+    },
+    "scores": {
+      "type": "object",
+      "required": [
+        "alignment",
+        "influence",
+        "conversation",
+        "reachability",
+        "geography"
+      ],
+      "properties": {
+        "alignment": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 30
+        },
+        "influence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 25
+        },
+        "conversation": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 20
+        },
+        "reachability": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 15
+        },
+        "geography": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 10
+        }
+      },
+      "additionalProperties": false
+    },
+    "score_total": {
+      "type": "number",
+      "minimum": 70,
+      "maximum": 100
+    },
+    "verified_evidence_grade": {
+      "enum": [
+        "TWO_DISTINCT_SOURCE_HOSTS"
+      ]
+    },
+    "draft_status": {
+      "enum": [
+        "PENDING_CONTENT_APPROVAL"
+      ]
+    }
+  },
+  "additionalProperties": true
+}
