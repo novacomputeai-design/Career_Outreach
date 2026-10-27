@@ -1,0 +1,3 @@
+# Must run on a persistent private host with protected injected environment and filesystem.
+CRON_TZ=America/Phoenix
+0 7 * * * cd /opt/Career_Outreach && /opt/Career_Outreach/.venv/bin/python -m outreach_agent run --out /var/private/career-outreach/latest.json >> /var/private/career-outreach/agent.log 2>&1
