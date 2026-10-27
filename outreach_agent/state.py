@@ -203,7 +203,7 @@ class PrivateStore:
 
     def counts(self):
         return [dict(r) for r in self.db.execute(
-            "SELECT p.segment,e.kind,COUNT(*) AS n FROM events e JOIN people p USING(person_id) "
+            "SELECT p.segment,e.kind,COUNT(DISTINCT e.person_id) AS n FROM events e JOIN people p USING(person_id) "
             "GROUP BY p.segment,e.kind ORDER BY p.segment,e.kind")]
 
     def get_strategy(self):
