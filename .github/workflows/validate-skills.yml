@@ -1,0 +1,24 @@
+name: Validate Executive Outreach Skills
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  static-and-offline-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Validate skill package
+        run: python scripts/validate_project.py
+      - name: Run offline qualification tests
+        run: python -m unittest discover -s tests -v
+
+# No scheduled live sourcing, external outreach, or GitHub secrets in this workflow.

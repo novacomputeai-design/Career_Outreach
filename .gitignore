@@ -1,0 +1,13 @@
+# Local-only confidential inputs and reports
+.env
+.env.*
+private/
+data/
+reports/
+*.sqlite
+*.sqlite3
+*.db
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
