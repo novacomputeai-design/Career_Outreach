@@ -2,7 +2,7 @@
 
 A Tucson-first, industry-agnostic, daily executive-networking research system. **Target: 20 newly qualified, contact-ready people per calendar day**; never manufacture prospects to fill the target. Suitable remote opportunities are also in scope.
 
-**Status: v0.2 executable pilot implementation — optional Tavily/OpenAI research adapters, source-excerpt checks, encrypted private SQLite store, approval-state separation, operator CLI, feedback metrics and scheduling recipes. Requires private API keys, real-world testing and a configured always-on host. NOT production-qualified.**
+**Status: v0.2 with Codex CLI chosen as primary agent and 14 local skills. Python supplies validation and encrypted relationship storage. The older Tavily/OpenAI provider-backed Python runner is optional. No Tavily or OpenAI API key is needed just to sign in and use Codex natively. Native skill activation and live research still require proof. NOT production qualified.**
 
 ## Purpose
 Identify relevant organizational leaders, actual or potential hiring influencers, and strategic connectors for thoughtful professional conversations. This is a personal career/networking workflow, **not** Nova Compute business sales and **not** an automated application or bulk outreach bot.
@@ -26,8 +26,10 @@ Identify relevant organizational leaders, actual or potential hiring influencers
 7. Each report identifies sourcing gaps, skips and shortfalls; no fabricated contacts or urgency.
 8. Do not conflate career networking with outreach on behalf of Nova Compute AI.
 
-## Start
-1. Open this repository in Codex; Codex loads local skills from `.agents/skills/`.
+## Start — Codex-native path
+Read [Codex-native activation guide](docs/CODEX_NATIVE_RUN.md) before starting live research. The first run is read-only and must prove actual skill selection.
+
+1. Open this repository in Codex; confirm local skills from `.agents/skills/` are available.
 2. Invoke `$daily-executive-outreach` (or request the agent to run the daily executive networking workflow).
 3. Provide authorized research capability and a private persistence layer. Skills are instructions, **not schedulers or web connectors**.
 4. Evaluate with `python scripts/validate_project.py` and `python -m unittest discover -s tests -v`.
@@ -39,6 +41,10 @@ Identify relevant organizational leaders, actual or potential hiring influencers
 - **Phase D (recipe available, NOT ACTIVATED):** Windows Task Scheduler and Linux cron examples; runtime monitoring/alerting and seven-day production qualification still pending.
 
 See `references/daily-operating-contract.md` for the detailed workflow.
+
+## Optional Tavily/OpenAI Python runner (NOT the selected Codex architecture)
+
+The following `python -m outreach_agent run` command still requires both provider API keys. This is a fallback implementation; do not use it as proof of Codex-native skill invocation.
 
 ## Executable pilot commands
 
