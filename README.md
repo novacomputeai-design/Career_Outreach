@@ -2,7 +2,7 @@
 
 A Tucson-first, industry-agnostic, daily executive-networking research system. **Target: 20 newly qualified, contact-ready people per calendar day**; never manufacture prospects to fill the target. Suitable remote opportunities are also in scope.
 
-**Status: v0.1 foundation — skills, operating contracts, deterministic qualification, and tests. Not yet connected to a live autonomous web-research provider or private relationship store.**
+**Status: v0.2 executable pilot implementation — optional Tavily/OpenAI research adapters, source-excerpt checks, encrypted private SQLite store, approval-state separation, operator CLI, feedback metrics and scheduling recipes. Requires private API keys, real-world testing and a configured always-on host. NOT production-qualified.**
 
 ## Purpose
 Identify relevant organizational leaders, actual or potential hiring influencers, and strategic connectors for thoughtful professional conversations. This is a personal career/networking workflow, **not** Nova Compute business sales and **not** an automated application or bulk outreach bot.
@@ -34,8 +34,18 @@ Identify relevant organizational leaders, actual or potential hiring influencers
 
 ## Deployment milestones
 - **Phase A (implemented foundation):** skill contracts, qualification policy, sample daily brief, evaluation and tests.
-- **Phase B (not yet implemented):** approved web-research runtime with source adapters and secure local/private contact store.
+- **Phase B (code implemented, deployment NOT VERIFIED):** Tavily and OpenAI research adapters; locally encrypted private contact store. Needs API credentials and live independent testing.
 - **Phase C (not yet implemented):** real-world pilot, audited 20-per-day target, calibrated rankings, human-reviewed messages.
-- **Phase D (not yet implemented):** daily scheduler, operational monitoring, alerting and recovery after Phase C passes.
+- **Phase D (recipe available, NOT ACTIVATED):** Windows Task Scheduler and Linux cron examples; runtime monitoring/alerting and seven-day production qualification still pending.
 
 See `references/daily-operating-contract.md` for the detailed workflow.
+
+## Executable pilot commands
+
+Read [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md) for environment/secret requirements, supported daily schedule recipes and genuine-outcome feedback commands. From a persistent host after installing requirements and protecting the private database/keys:
+
+- python -m outreach_agent run --out /private/daily.json --target 5 --max-queries 4
+- python -m outreach_agent learning
+- python -m unittest discover -s tests -v
+
+No external messages are sent by this code, ever. The daily run's source-corroboration checks are conservative but not a substitute for user review or independent live evaluation. Reports and relationships must remain off this public repository.

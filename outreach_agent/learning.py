@@ -27,3 +27,22 @@ def summarize(event_counts, min_contacted=10):
             "caveats":["Only manually recorded outcomes are counted.",
                        "Contacted people are a self-selected sample; not causal or predictive.",
                        "No autonomous optimization or change to eligibility gates."]}
+
+def propose_strategy(event_counts,min_contacted=10):
+    """Evidence-derived human REVIEW suggestion, never autonomous adaptation."""
+    from collections import defaultdict,Counter
+    groups=defaultdict(Counter)
+    for item in event_counts:
+        groups[item["segment"]][item["kind"]]+=int(item["n"])
+    eligible={k:v for k,v in groups.items() if v["CONTACTED"]>=min_contacted and k in ("tucson","remote")}
+    if len(eligible)<2:
+        return {"status":"INSUFFICIENT_COMPARABLE_DATA","proposed_priority":None,
+                "approved":False,"note":"Both geographic groups need at least 10 observed contacts"}
+    a={k:(v["REPLIED"]/v["CONTACTED"]) for k,v in eligible.items()}
+    top=max(a,key=a.get)
+    if max(a.values())-min(a.values())<0.05:
+        return {"status":"NO_ACTIONABLE_DIFFERENCE","proposed_priority":None,"approved":False,
+                "observed_reply_rates":a}
+    return {"status":"HUMAN_REVIEW_ONLY","proposed_priority":top,"approved":False,
+            "observed_reply_rates":a,
+            "note":"Observational, self-selected results are not causal. Do not automatically adjust searches."}

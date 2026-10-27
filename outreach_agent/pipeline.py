@@ -106,7 +106,7 @@ def proposal(lead):
         "Best regards,\nFadi"
     )
 
-def make_brief(search, extractor, store, target=20, max_queries=14, max_enrich=48):
+def make_brief(search, extractor, store, target=20, max_queries=14, max_enrich=48, queries=None):
     """Run one daily cycle. Stored recommendations prevent repeated 'new' counts."""
     rid="run-"+uuid.uuid4().hex
     store.start_run(rid)
@@ -116,7 +116,7 @@ def make_brief(search, extractor, store, target=20, max_queries=14, max_enrich=4
             "candidates":[],"held":[],"source_errors":[],"stage":"IN_PROGRESS",
             "audit_status":"NOT_RUN","novelty_source":"encrypted_private_store"}
     try:
-        leads,errors=discover(search,extractor,max_queries=max_queries,max_records=max_enrich*2)
+        leads,errors=discover(search,extractor,queries=queries,max_queries=max_queries,max_records=max_enrich*2)
         report["discoveries"]=len(leads)
         report["source_errors"]=errors
         prior_in_batch=set()

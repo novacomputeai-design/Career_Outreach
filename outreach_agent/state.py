@@ -69,6 +69,11 @@ class PrivateStore:
                 sending_authorized TEXT,
                 PRIMARY KEY (person_id, draft_sha)
             );
+            CREATE TABLE IF NOT EXISTS preferences (
+                key TEXT PRIMARY KEY,
+                encrypted_value BLOB NOT NULL,
+                approved_at TEXT NOT NULL
+            );
             CREATE TABLE IF NOT EXISTS runs (
                 run_id TEXT PRIMARY KEY,
                 started TEXT NOT NULL,
@@ -168,6 +173,20 @@ class PrivateStore:
         return [dict(r) for r in self.db.execute(
             "SELECT p.segment,e.kind,COUNT(*) AS n FROM events e JOIN people p USING(person_id) "
             "GROUP BY p.segment,e.kind ORDER BY p.segment,e.kind")]
+
+    def get_strategy(self):
+        row=self.db.execute("SELECT encrypted_value FROM preferences WHERE key='search_priority'").fetchone()
+        if not row:
+            return "tucson"
+        data=self.decrypt(row["encrypted_value"])
+        return data.get("segment","tucson")
+
+    def set_strategy(self,segment):
+        if segment not in ("tucson","remote"):
+            raise ValueError("Only Tucson or US remote are accepted priorities")
+        with self.db:
+            self.db.execute("INSERT OR REPLACE INTO preferences(key,encrypted_value,approved_at) VALUES(?,?,?)",
+                            ("search_priority",self.encrypt({"segment":segment}),utcnow()))
 
     def close(self):
         self.db.close()
