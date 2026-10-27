@@ -1,0 +1,34 @@
+# Daily executive outreach runbook
+
+## Mission and metrics
+Primary objective: career-relevant leadership conversations, not mass messaging.
+Research target: **up to 20 new source-corroborated prospects each daily run**. Human-review-approved contact-ready count is separate and can be zero. Contacted, replied, met, introduced, opportunity and hired are distinct observed outcome metrics; never infer progress from drafted messages.
+
+The current live pipeline is only a pilot; no completed external seven-day behavioral evaluation exists.
+
+## Review queue
+1. Open the latest private report (NEVER check into Git). Search the candidate's primary and independent secondary sources again.
+2. Confirm the person holds the current role, their organization is correct, the topic is relevant to Fadi's real resume experience and the contact pathway is realistic for that individual.
+3. An organization contact form is marked INDIRECT and might not reach the named executive. Do not approve its reachability by assumption.
+4. Use the dedicated human review command only when source, role, reason and route truly satisfy expectations.
+5. Approve draft content separately. If you choose to send externally, authorize sending as an independent action specific to the recipient/draft. No emailing/LinkedIn sender is implemented in this code.
+6. Enter actual CONTACTED and subsequent observed outcome events in the private database; record opt-outs.
+7. Inspect outcome intelligence after meaningful observations. Query-priority suggestions require a user decision; they do not change the qualifying score or exclude industries.
+
+## Evidence and incident handling
+- Missing API keys => do not launch. Requests fail closed rather than simulate leaders.
+- Source failure => status PARTIAL_SOURCE_FAILURE or COMPLETE_WITH_SOURCE_ERRORS; inspect private report/log and do not assert full market coverage.
+- Interrupted output => use restore-report to recover the latest completed private report from encrypted state.
+- Duplicate or changed employer => identity HOLD until reconciled; suppress opted-out people.
+- Source discrepancies, old bios or guessed addresses => HOLD, not counted to target.
+- Keep database, backup and encryption key outside repo; independent secure retention and access review required.
+- No automatic sends. Never commit personal outreach text, replies or relationship logs to public GitHub.
+
+## Seven-day field qualification
+At each daily run preserve (private) run ID, provider status, queries/results and costs, source review decisions, scored candidate list, duplicate counts, actual new human-reviewed count, and discovered errors.
+Independently review >=40 people across at least two relevant organization sectors and Tucson/remote categories. Measure percent YOU would actually consider contacting and why. Verify all 12 adversarial evaluation cases, including stale role, namesake, previous contacts, opt-out, missing sources, injected source instructions and draft-vs-send separation.
+Native skills must be explicitly selected using the actual host's skill mechanism and the selection trace recorded. The Python pipeline simulates stage responsibilities but is not proof of native skill selection.
+Do not claim production readiness until real data and runtime reliability are demonstrated.
+
+## Business outcome hypothesis
+As a hypothetical scenario, 20 personally approved sends a day (not automatically sent by this system) can produce conversations, introductions and potential career opportunities, but no response, meeting, referral or hiring rates are established. Assess whether 20 new daily people is sustainable after actual data.
