@@ -173,7 +173,7 @@ class PrivateStore:
                     raise ValueError("Recorded prior outreach conflicts with FIRST_LEARNED")
             if old == relationship and (not profile_url or old_url):
                 return {"result": "ALREADY_RECORDED", "relationship": relationship,
-                        "human_reviewed_contact_ready": False, "messages_sent": 0}
+                        "granted_contact_readiness": False, "messages_sent": 0}
             saved["user_relationship_status"] = relationship
             saved["user_relationship_basis"] = "USER_REPORTED"
             saved["user_relationship_recorded_at"] = now
@@ -193,7 +193,7 @@ class PrivateStore:
                 self._event(row["person_id"], "USER_REPORTED_RELATIONSHIP",
                             {"relationship": relationship, "basis": "USER_REPORTED"})
             return {"result": "UPDATED_EXISTING_RECORD", "relationship": relationship,
-                    "human_reviewed_contact_ready": False, "messages_sent": 0}
+                    "granted_contact_readiness": False, "messages_sent": 0}
         person = {"person_name": name, "profile_url": profile_url,
                   "user_relationship_status": relationship,
                   "user_relationship_basis": "USER_REPORTED",
@@ -211,7 +211,7 @@ class PrivateStore:
             self._event(person_id, "USER_REPORTED_RELATIONSHIP",
                         {"relationship": relationship, "basis": "USER_REPORTED"})
         return {"result": "RECORDED", "relationship": relationship,
-                "human_reviewed_contact_ready": False, "messages_sent": 0}
+                "granted_contact_readiness": False, "messages_sent": 0}
 
     def check_relationship(self, name, *, profile_url=None):
         """Minimal safe lookup; never implies absence here proves a person is new."""
@@ -221,25 +221,25 @@ class PrivateStore:
         rows = self.match({"person_name": name, "profile_url": profile_url})
         if not rows:
             return {"result": "NOT_FOUND_IN_LOCAL_STORE", "novelty": "UNVERIFIED",
-                    "human_reviewed_contact_ready": False}
+                    "granted_contact_readiness": False}
         if len(rows) != 1:
             return {"result": "AMBIGUOUS_IDENTITY_HOLD", "novelty": "UNVERIFIED",
-                    "human_reviewed_contact_ready": False}
+                    "granted_contact_readiness": False}
         row = rows[0]
         saved = self.decrypt(row["encrypted_record"])
         if normalized(saved.get("person_name")) != normalized(name):
             return {"result": "IDENTITY_CONFLICT_HOLD", "novelty": "UNVERIFIED",
-                    "human_reviewed_contact_ready": False}
+                    "granted_contact_readiness": False}
         old_url = saved.get("profile_url")
         if profile_url and old_url and self.digest(profile_url.rstrip("/")) != self.digest(old_url.rstrip("/")):
             return {"result": "POSSIBLE_NAMESAKE_HOLD", "novelty": "UNVERIFIED",
-                    "human_reviewed_contact_ready": False}
+                    "granted_contact_readiness": False}
         relationship = saved.get("user_relationship_status", "NOT_USER_CLASSIFIED")
         return {"result": "EXISTING_RELATIONSHIP" if relationship == "PREVIOUSLY_MET" else "SEEN_IN_STORE",
                 "user_reported_relationship": relationship,
                 "suppressed": bool(row["opted_out"]),
                 "novelty": "ALREADY_IN_LOCAL_STORE",
-                "human_reviewed_contact_ready": False}
+                "granted_contact_readiness": False}
 
     def _event(self, person_id, kind, note):
         self.db.execute("INSERT INTO events(person_id,kind,occurred_at,encrypted_note) VALUES(?,?,?,?)",
