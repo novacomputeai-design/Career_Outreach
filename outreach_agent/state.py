@@ -17,6 +17,7 @@ REPO = Path(__file__).resolve().parents[1]
 EVENTS = {"RECOMMENDED", "DISMISSED", "CONTACTED", "REPLIED", "MEETING",
           "INTRODUCTION", "OPPORTUNITY", "HIRED", "OPTED_OUT", "FOLLOW_UP"}
 SEGMENTS = {"tucson", "remote", "other"}
+USER_RELATIONSHIPS = {"FIRST_LEARNED", "PREVIOUSLY_MET"}
 
 def utcnow():
     return datetime.now(timezone.utc).isoformat()
@@ -126,6 +127,119 @@ class PrivateStore:
                 self.db.execute("INSERT INTO recommendations(run_id,person_id) VALUES(?,?)",
                                 (run_id,person_id))
         return person_id
+
+
+    def remember_relationship(self, name, relationship, *, profile_url=None, segment="tucson"):
+        """Record a USER-REPORTED relationship, not a source-verified lead or outreach event.
+
+        This intentionally avoids RECOMMENDED/CONTACTED/MEETING and never grants
+        independent contact-readiness. Ambiguous names and conflicting claims fail closed.
+        """
+        name = " ".join(str(name or "").strip().split())
+        profile_url = (profile_url or "").strip() or None
+        relationship = str(relationship or "").upper().strip()
+        if len(name.split()) < 2 or len(name) > 240:
+            raise ValueError("Enter a full person name (at least two words)")
+        if relationship not in USER_RELATIONSHIPS:
+            raise ValueError("Relationship must be FIRST_LEARNED or PREVIOUSLY_MET")
+        if segment not in SEGMENTS:
+            raise ValueError("Invalid geographic segment")
+        if profile_url and not profile_url.startswith(("https://", "http://")):
+            raise ValueError("Profile URL must begin with https:// or http://")
+        query = {"person_name": name, "profile_url": profile_url}
+        matches = self.match(query)
+        if len(matches) > 1:
+            raise ValueError("Ambiguous identity; do not merge namesakes")
+        now = utcnow()
+        if matches:
+            row = matches[0]
+            if row["opted_out"]:
+                raise ValueError("Suppressed identity; do not change relationship through this command")
+            saved = self.decrypt(row["encrypted_record"])
+            if normalized(saved.get("person_name")) != normalized(name):
+                raise ValueError("Profile matches a different name; manual identity review required")
+            old = saved.get("user_relationship_status")
+            if old and old != relationship:
+                raise ValueError("Conflicting relationship history; manual resolution required")
+            old_url = saved.get("profile_url")
+            if profile_url and old_url and self.digest(profile_url.rstrip("/")) != self.digest(old_url.rstrip("/")):
+                raise ValueError("Same-name different-profile conflict; manual identity review required")
+            if relationship == "FIRST_LEARNED":
+                past = self.db.execute(
+                    "SELECT 1 FROM events WHERE person_id=? AND kind IN "
+                    "('CONTACTED','REPLIED','MEETING','INTRODUCTION','OPPORTUNITY','HIRED') LIMIT 1",
+                    (row["person_id"],)).fetchone()
+                if past:
+                    raise ValueError("Recorded prior outreach conflicts with FIRST_LEARNED")
+            if old == relationship and (not profile_url or old_url):
+                return {"result": "ALREADY_RECORDED", "relationship": relationship,
+                        "human_reviewed_contact_ready": False, "messages_sent": 0}
+            saved["user_relationship_status"] = relationship
+            saved["user_relationship_basis"] = "USER_REPORTED"
+            saved["user_relationship_recorded_at"] = now
+            pd = row["profile_digest"]
+            if profile_url and not old_url:
+                saved["profile_url"] = profile_url
+                pd = self.digest(profile_url.rstrip("/"))
+                others = self.db.execute(
+                    "SELECT 1 FROM people WHERE profile_digest=? AND person_id<>?",
+                    (pd, row["person_id"])).fetchone()
+                if others:
+                    raise ValueError("Profile belongs to another stored identity")
+            with self.db:
+                self.db.execute(
+                    "UPDATE people SET encrypted_record=?,profile_digest=?,updated_at=? WHERE person_id=?",
+                    (self.encrypt(saved), pd, now, row["person_id"]))
+                self._event(row["person_id"], "USER_REPORTED_RELATIONSHIP",
+                            {"relationship": relationship, "basis": "USER_REPORTED"})
+            return {"result": "UPDATED_EXISTING_RECORD", "relationship": relationship,
+                    "human_reviewed_contact_ready": False, "messages_sent": 0}
+        person = {"person_name": name, "profile_url": profile_url,
+                  "user_relationship_status": relationship,
+                  "user_relationship_basis": "USER_REPORTED",
+                  "user_relationship_recorded_at": now}
+        name_digest = self.digest(name)
+        profile_digest = self.digest(profile_url.rstrip("/")) if profile_url else None
+        person_id = hashlib.sha256((name_digest + (profile_digest or "")).encode()).hexdigest()[:24]
+        state = ("USER_REPORTED_FIRST_LEARNED" if relationship == "FIRST_LEARNED"
+                 else "EXISTING_RELATIONSHIP")
+        with self.db:
+            self.db.execute(
+                "INSERT INTO people VALUES (?,?,?,?,?,?,?,?,?)",
+                (person_id, name_digest, profile_digest, self.encrypt(person),
+                 segment, state, 0, now, now))
+            self._event(person_id, "USER_REPORTED_RELATIONSHIP",
+                        {"relationship": relationship, "basis": "USER_REPORTED"})
+        return {"result": "RECORDED", "relationship": relationship,
+                "human_reviewed_contact_ready": False, "messages_sent": 0}
+
+    def check_relationship(self, name, *, profile_url=None):
+        """Minimal safe lookup; never implies absence here proves a person is new."""
+        name = " ".join(str(name or "").strip().split())
+        if not name:
+            raise ValueError("Name is required")
+        rows = self.match({"person_name": name, "profile_url": profile_url})
+        if not rows:
+            return {"result": "NOT_FOUND_IN_LOCAL_STORE", "novelty": "UNVERIFIED",
+                    "human_reviewed_contact_ready": False}
+        if len(rows) != 1:
+            return {"result": "AMBIGUOUS_IDENTITY_HOLD", "novelty": "UNVERIFIED",
+                    "human_reviewed_contact_ready": False}
+        row = rows[0]
+        saved = self.decrypt(row["encrypted_record"])
+        if normalized(saved.get("person_name")) != normalized(name):
+            return {"result": "IDENTITY_CONFLICT_HOLD", "novelty": "UNVERIFIED",
+                    "human_reviewed_contact_ready": False}
+        old_url = saved.get("profile_url")
+        if profile_url and old_url and self.digest(profile_url.rstrip("/")) != self.digest(old_url.rstrip("/")):
+            return {"result": "POSSIBLE_NAMESAKE_HOLD", "novelty": "UNVERIFIED",
+                    "human_reviewed_contact_ready": False}
+        relationship = saved.get("user_relationship_status", "NOT_USER_CLASSIFIED")
+        return {"result": "EXISTING_RELATIONSHIP" if relationship == "PREVIOUSLY_MET" else "SEEN_IN_STORE",
+                "user_reported_relationship": relationship,
+                "suppressed": bool(row["opted_out"]),
+                "novelty": "ALREADY_IN_LOCAL_STORE",
+                "human_reviewed_contact_ready": False}
 
     def _event(self, person_id, kind, note):
         self.db.execute("INSERT INTO events(person_id,kind,occurred_at,encrypted_note) VALUES(?,?,?,?)",
