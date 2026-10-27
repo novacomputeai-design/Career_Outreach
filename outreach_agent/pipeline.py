@@ -127,6 +127,7 @@ def make_brief(search, extractor, store, target=20, max_queries=14, max_enrich=4
     date=datetime.now(timezone.utc).date().isoformat()
     report={"run_id":rid,"date_utc":date,"target":target,"discoveries":0,
             "new_contact_ready":0,"drafts_sent":0,"confirmed_sent":0,
+            "source_corroborated_pending_human_review":0,
             "candidates":[],"held":[],"source_errors":[],"stage":"IN_PROGRESS",
             "audit_status":"NOT_RUN","novelty_source":"encrypted_private_store"}
     try:
@@ -173,10 +174,12 @@ def make_brief(search, extractor, store, target=20, max_queries=14, max_enrich=4
             report["candidates"].append(enriched)
             if len(report["candidates"])>=target:
                 break
-        report["new_contact_ready"]=len(report["candidates"])
         report["source_corroborated_pending_human_review"]=len(report["candidates"])
+        # Human review is a separate observed event, never an inferred provider success.
+        report["new_contact_ready"]=0
         report["production_verified_contact_ready"]=0
         report["shortfall"]=max(0,target-report["new_contact_ready"])
+        report["research_shortfall"]=max(0,target-report["source_corroborated_pending_human_review"])
         if report["source_errors"] and not leads:
             report["stage"]="PARTIAL_SOURCE_FAILURE"
         elif report["source_errors"]:
@@ -184,7 +187,7 @@ def make_brief(search, extractor, store, target=20, max_queries=14, max_enrich=4
         else:
             report["stage"]="COMPLETE_WITH_SHORTFALL" if report["shortfall"] else "COMPLETE"
         report["audit_status"]="DETERMINISTIC_EVIDENCE_PRECHECK_ONLY"
-        report["qualification_warning"]="Second distinct-host source corroboration is not a guarantee of current affiliation or reachable hiring authority; human review remains required."
+        report["qualification_warning"]="SOURCE-CORROBORATED IS NOT CONTACT-READY. Second distinct-host source corroboration is not a guarantee of current affiliation or reachable hiring authority; human review remains required."
         store.finish_run(rid,report["stage"],report)
     except Exception as exc:
         report["stage"]="FAILED"

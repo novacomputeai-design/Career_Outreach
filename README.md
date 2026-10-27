@@ -49,3 +49,7 @@ Read [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md) for environment/secret requirement
 - python -m unittest discover -s tests -v
 
 No external messages are sent by this code, ever. The daily run's source-corroboration checks are conservative but not a substitute for user review or independent live evaluation. Reports and relationships must remain off this public repository.
+
+### Pilot evidence-count semantics
+
+`source_corroborated_pending_human_review` is the output of automated research and source checks. **It is NOT the number of contact-ready people.** The `new_contact_ready` and `production_verified_contact_ready` counters remain zero until a separately recorded and auditable independent review is complete. Never interpret a passing GitHub CI run or the research target being met as authorization to contact anyone.
