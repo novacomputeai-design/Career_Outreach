@@ -51,6 +51,10 @@ def main(argv=None):
     review.add_argument("--confirm-contact-route",action="store_true",required=True)
     review.add_argument("--confirm-professional-relevance",action="store_true",required=True)
     sub.add_parser("learning")
+    sub.add_parser("remember-relationship", help="Interactively store a user-reported relationship privately; never sends")
+    lookup=sub.add_parser("relationship-check",help="Minimal read-only private novelty/suppression check")
+    lookup.add_argument("--person-name",required=True)
+    lookup.add_argument("--profile-url")
     status=sub.add_parser("run-readiness",help="Count independently human-reviewed and unsuppressed prospects in a prior run")
     status.add_argument("--run-id",required=True)
     restore=sub.add_parser("restore-report",help="Recover latest encrypted run after an output-file failure")
@@ -106,6 +110,15 @@ def main(argv=None):
             emit({"run_id":args.run_id,"human_reviewed_contact_ready":count,
                   "note":"Counts only recorded human review approvals in this run; complete novelty across other channels still needs reconciliation.",
                   "messages_sent":0})
+        elif args.command=="remember-relationship":
+            # Interactive input avoids recording private relationship classifications in shell history.
+            print("Record a user-reported relationship in the local encrypted store (no outreach).")
+            name=input("Full name (without Dr./Mr. prefix): ").strip()
+            relationship=input("Relationship [FIRST_LEARNED/PREVIOUSLY_MET]: ").strip().upper()
+            profile=input("Individual official profile URL (optional): ").strip() or None
+            emit(store.remember_relationship(name,relationship,profile_url=profile))
+        elif args.command=="relationship-check":
+            emit(store.check_relationship(args.person_name,profile_url=args.profile_url))
         elif args.command=="learning":
             counts=store.counts()
             data=summarize(counts)
