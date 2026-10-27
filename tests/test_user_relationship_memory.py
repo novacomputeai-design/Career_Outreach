@@ -22,7 +22,7 @@ class UserRelationshipTests(unittest.TestCase):
             "Avery Example", "FIRST_LEARNED",
             profile_url="https://fictional-university.test/people/avery-example")
         self.assertEqual(result["result"], "RECORDED")
-        self.assertFalse(result["human_reviewed_contact_ready"])
+        self.assertFalse(result["granted_contact_readiness"])
         self.assertEqual(result["messages_sent"], 0)
         check = self.store.check_relationship("avery   example")
         self.assertEqual(check["result"], "SEEN_IN_STORE")
