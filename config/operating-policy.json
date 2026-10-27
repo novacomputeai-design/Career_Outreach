@@ -1,0 +1,29 @@
+{
+  "version": "0.1.0",
+  "timezone": "America/Phoenix",
+  "cadence": "daily",
+  "daily_target_new_people": 20,
+  "minimum_qualification_score": 70,
+  "industry_restrictions": [],
+  "location_priority": [
+    "Tucson metro and Southern Arizona",
+    "US fully remote"
+  ],
+  "mandatory_gates": [
+    "verified_current_name",
+    "verified_current_role",
+    "verified_organization",
+    "at_least_one_reliable_source_url",
+    "specific_evidence_based_reason",
+    "permitted_professional_route",
+    "private_history_checked",
+    "not_suppressed",
+    "score_at_least_70"
+  ],
+  "outreach": {
+    "automatic_sending": false,
+    "individual_draft_approval": true,
+    "separate_send_authorization": true
+  },
+  "on_shortfall": "report actual eligible count; never lower evidence standards"
+}
