@@ -51,6 +51,8 @@ def main(argv=None):
     review.add_argument("--confirm-contact-route",action="store_true",required=True)
     review.add_argument("--confirm-professional-relevance",action="store_true",required=True)
     sub.add_parser("learning")
+    status=sub.add_parser("run-readiness",help="Count independently human-reviewed and unsuppressed prospects in a prior run")
+    status.add_argument("--run-id",required=True)
     restore=sub.add_parser("restore-report",help="Recover latest encrypted run after an output-file failure")
     restore.add_argument("--out",required=True)
     strat=sub.add_parser("approve-strategy")
@@ -99,6 +101,11 @@ def main(argv=None):
                                  confirmed_fit=args.confirm_professional_relevance)
             emit({"person_id":args.person_id,"human_review_confirmed":True,
                   "message_sent_by_agent":False})
+        elif args.command=="run-readiness":
+            count=store.reviewed_for_run(args.run_id)
+            emit({"run_id":args.run_id,"human_reviewed_contact_ready":count,
+                  "note":"Counts only recorded human review approvals in this run; complete novelty across other channels still needs reconciliation.",
+                  "messages_sent":0})
         elif args.command=="learning":
             counts=store.counts()
             data=summarize(counts)

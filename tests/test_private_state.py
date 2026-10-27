@@ -60,6 +60,16 @@ class MemoryTests(unittest.TestCase):
         counts=self.store.counts()
         self.assertEqual(sum(x["n"] for x in counts if x["kind"]=="REPLIED"),1)
 
+    def test_per_run_contact_ready_count_requires_review_and_excludes_opt_out(self):
+        self.store.start_run("synthetic-run")
+        pid=self.store.register(self.person,run_id="synthetic-run")
+        self.assertEqual(self.store.reviewed_for_run("synthetic-run"),0)
+        self.store.review_contact(pid,confirmed_role=True,confirmed_route=True,confirmed_fit=True)
+        self.assertEqual(self.store.reviewed_for_run("synthetic-run"),1)
+        self.assertEqual(self.store.reviewed_for_run("nonexistent-run"),0)
+        self.store.record_event(pid,"OPTED_OUT")
+        self.assertEqual(self.store.reviewed_for_run("synthetic-run"),0)
+
     def test_opt_out_blocks_further_actions(self):
         pid=self.store.register(self.person)
         self.store.record_event(pid,"OPTED_OUT")

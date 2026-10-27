@@ -201,6 +201,15 @@ class PrivateStore:
         return self.db.execute("SELECT COUNT(DISTINCT person_id) FROM events "
                                "WHERE kind='CONTACT_REVIEW_APPROVED'").fetchone()[0]
 
+    def reviewed_for_run(self, run_id):
+        """Readiness is counted only after independently recorded human review."""
+        row=self.db.execute(
+            "SELECT COUNT(DISTINCT r.person_id) FROM recommendations r "
+            "JOIN people p ON p.person_id=r.person_id "
+            "JOIN events e ON e.person_id=r.person_id AND e.kind='CONTACT_REVIEW_APPROVED' "
+            "WHERE r.run_id=? AND p.opted_out=0", (run_id,)).fetchone()
+        return int(row[0]) if row else 0
+
     def counts(self):
         return [dict(r) for r in self.db.execute(
             "SELECT p.segment,e.kind,COUNT(DISTINCT e.person_id) AS n FROM events e JOIN people p USING(person_id) "
