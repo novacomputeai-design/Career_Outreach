@@ -72,7 +72,7 @@ class EnforcementTests(unittest.TestCase):
             0)
         audit=self.store.recent_governance_decisions()
         self.assertEqual(audit[0]["decision"],"HOLD")
-        self.assertEqual(audit[1]["decision"],"ALLOW_APPROVAL_RECORD")
+        self.assertTrue(any(item["action"]=="CONTENT_APPROVED" and item["decision"]=="ALLOW_APPROVAL_RECORD" for item in audit))
         self.assertTrue(all("Hello" not in str(r) for r in audit))
         self.assertTrue(all(r["policy_version"]=="0.2.1" for r in audit))
 
