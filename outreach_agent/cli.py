@@ -52,6 +52,8 @@ def main(argv=None):
     review.add_argument("--confirm-contact-route",action="store_true",required=True)
     review.add_argument("--confirm-professional-relevance",action="store_true",required=True)
     sub.add_parser("learning")
+    audit=sub.add_parser("governance-audit",help="Owner-only local policy decision audit, no sending")
+    audit.add_argument("--limit",type=int,default=20)
     sub.add_parser("remember-relationship", help="Interactively store a user-reported relationship privately; never sends")
     lookup=sub.add_parser("relationship-check",help="Minimal read-only private novelty/suppression check")
     lookup.add_argument("--person-name",required=True)
@@ -124,6 +126,10 @@ def main(argv=None):
             emit(store.check_relationship(args.person_name,profile_url=args.profile_url))
         elif args.command=="relationship-batch-check":
             emit(screen_batch(store,private_path(args.input)))
+        elif args.command=="governance-audit":
+            emit({"decisions":store.recent_governance_decisions(limit=args.limit),
+                  "privacy":"minimal audit fields; protected event detail remains encrypted",
+                  "messages_sent":0})
         elif args.command=="learning":
             counts=store.counts()
             data=summarize(counts)

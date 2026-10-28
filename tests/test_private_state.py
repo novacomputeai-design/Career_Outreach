@@ -11,9 +11,28 @@ class MemoryTests(unittest.TestCase):
         self.tmp=tempfile.TemporaryDirectory()
         self.store=PrivateStore(Path(self.tmp.name)/"contacts.sqlite",
                                 key=Fernet.generate_key(),identity_key="b"*64)
-        self.person={"person_name":"Completely Fictional Executive",
-                     "organization":"Imaginary Works","profile_url":"https://imaginary-works.test/bio",
-                     "why_connect":"Synthetic testing only"}
+        self.person={
+            "person_name":"Completely Fictional Executive",
+            "organization":"Imaginary Works",
+            "profile_url":"https://imaginary-works.test/bio",
+            "current_title":"Head of Product",
+            "role_quote":"Completely Fictional Executive is Head of Product at Imaginary Works.",
+            "second_role_quote":"Completely Fictional Executive is Head of Product at Imaginary Works.",
+            "initiative_quote":"Imaginary Works is improving enterprise product workflows and digital platforms.",
+            "source_url":"https://imaginary-works.test/team",
+            "second_role_source_url":"https://fictional-event.test/speakers",
+            "observed_on":"2026-10-28",
+            "route_url":"https://imaginary-works.test/contact",
+            "route_type":"INDIRECT",
+            "route_note":"General company contact form; not a verified personal introduction.",
+            "why_connect":"Discuss enterprise product strategy and platform modernization with leadership.",
+            "segment":"tucson",
+            "category":"strategic-connector",
+            "scores":{"alignment":25,"influence":20,"conversation":18,"reachability":7,"geography":10},
+            "score_total":80,
+            "verified_evidence_grade":"TWO_DISTINCT_SOURCE_HOSTS",
+            "draft_status":"PENDING_CONTENT_APPROVAL",
+        }
     def tearDown(self):
         self.store.close()
         self.tmp.cleanup()
@@ -43,6 +62,10 @@ class MemoryTests(unittest.TestCase):
     def test_draft_approval_separate_from_send_authorization(self):
         pid=self.store.register(self.person)
         draft="Hello, let's discuss platforms."
+        with self.assertRaisesRegex(ValueError,"INDEPENDENT_REVIEW_NOT_RECORDED"):
+            self.store.approval(pid,draft,"CONTENT_APPROVED")
+        self.store.review_contact(pid,confirmed_role=True,
+                                  confirmed_route=True,confirmed_fit=True)
         with self.assertRaises(ValueError):
             self.store.approval(pid,draft,"SEND_AUTHORIZED")
         sha=self.store.approval(pid,draft,"CONTENT_APPROVED")
