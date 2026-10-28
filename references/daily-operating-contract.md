@@ -1,4 +1,6 @@
 # Daily run contract
+
+**Authority:** `config/operating-policy.json` v0.2.0; `docs/PRODUCTION_PLAN.md`. Memory screening and deterministic governance are mandatory early release gates; written policy is not equivalent to live enforcement.
 Target 20 verified **new** individual contacts per day (not messages sent). Source research may need many more raw candidates; do not assume any source volume guarantees yield.
 
 ## Required inputs
@@ -7,12 +9,13 @@ Resume-derived profile; date in America/Phoenix; authorized current research too
 ## Workflow
 1. **Organization discovery:** Rotate sectors, Tucson tech parks, employers, innovation ecosystems, company sites, associations, plus US remote prospects. Find actual organizational initiatives or opportunities; source URLs and dates.
 2. **Leadership discovery:** Identify real people with plausible professional connection, differentiate verified hiring authority from suspected hiring influence vs strategic introduction.
-3. **Contact verification:** Independently corroborate person/current position, record primary sources/recency, verify permitted professional route. Explicitly mark indirect route vs direct route.
-4. **Qualification:** Apply `references/scoring-rubric.md` and mandatory hard gates. Topic must be interesting to both parties, not simply a cold job request.
-5. **Memory:** Deduplicate across runs by person identity; prevent previously approached/suppressed contacts from being labeled new.
-6. **Outreach preparation:** Personalize a draft for user review, never send automatically. Draft-content approval is not permission to transmit.
-7. **Daily brief:** Top 20 eligible NEW people ranked with full sources, why connect and next action; existing follow-ups reported separately; shortfall and limitations explicit.
-8. **Quality audit:** Independently review evidence, score arithmetic, novelty, privacy and authorization state.
+3. **Early private memory screen:** compare identities with prior discoveries, contacts, existing relationships and opt-outs in trusted operator-side process; unavailable history => HOLD_UNVERIFIED.
+4. **Contact verification:** Independently corroborate person/current position, record primary sources/recency, verify permitted professional route. Explicitly mark indirect route vs direct route.
+5. **Qualification:** Apply `references/scoring-rubric.md` and mandatory hard gates. Topic must be interesting to both parties, not simply a cold job request.
+6. **Final memory and governance gate:** recheck private history and policy, including name collisions, source/route evidence and prior discoveries; no skill can override HOLD/REJECT.
+7. **Outreach preparation:** Personalize a draft for user review, never send automatically. Draft-content approval is not permission to transmit.
+8. **Quality audit:** Independently review evidence, score arithmetic, novelty, privacy and authorization state **before** the brief.
+9. **Daily brief:** Report up to 20 independently human-reviewed NEW contacts, source-corroborated pending reviews, prior discoveries and follow-ups separately, true shortfalls and blocked checks.
 
 ## State definitions
 DISCOVERED -> VERIFIED -> QUALIFIED -> CONTACT_READY -> DRAFTED -> DRAFT_APPROVED -> SEND_AUTHORIZED -> CONTACTED -> REPLIED -> MEETING -> FOLLOW_UP_PENDING -> CLOSED. Alternative states: HOLD_UNVERIFIED, DUPLICATE, SUPPRESSED, OPTED_OUT, NOT_RELEVANT.

@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0",
+  "version": "0.2.0",
   "timezone": "America/Phoenix",
   "cadence": "daily",
   "daily_target_new_people": 20,
@@ -25,5 +25,52 @@
     "individual_draft_approval": true,
     "separate_send_authorization": true
   },
-  "on_shortfall": "report actual eligible count; never lower evidence standards"
+  "on_shortfall": "report actual eligible count; never lower evidence standards",
+  "governance": {
+    "authority": "config/operating-policy.json",
+    "policy_owner": "human_operator",
+    "contact_ready_requires_independent_human_review": true,
+    "no_model_self_approval": true,
+    "automatic_sending_prohibited": true,
+    "separate_draft_and_send_authorization": true,
+    "draft_authorization_bound_to_content_hash": true,
+    "no_provider_key_required_for_codex_native_path": true,
+    "codex_direct_dpapi_access_prohibited": true,
+    "private_memory_required_for_confirmed_new": true,
+    "source_failures": "HOLD",
+    "history_unavailable": "HOLD_UNVERIFIED",
+    "identity_collision": "HOLD_MANUAL_REVIEW",
+    "opt_out": "SUPPRESS",
+    "existing_relationship": "FOLLOW_UP_NOT_NEW",
+    "seen_before_this_run": "NOT_NEW_THIS_RUN",
+    "cannot_exceed_target_without_human_authorization": true
+  },
+  "memory": {
+    "classifications": [
+      "FIRST_LEARNED",
+      "PREVIOUSLY_MET"
+    ],
+    "novelty_distinctions": [
+      "FIRST_DISCOVERED_THIS_RUN",
+      "ALREADY_DISCOVERED",
+      "UNVERIFIED"
+    ],
+    "permitted_key_location": "user_owned_windows_dpapi_private_store",
+    "private_data_in_repository": false,
+    "codex_access": "operator_supplied_minimal_classification_until_broker_qualified",
+    "protected_batch_reconciliation": "NOT_IMPLEMENTED",
+    "trusted_host_side_broker": "NOT_IMPLEMENTED",
+    "backup_and_restore": "NOT_QUALIFIED"
+  },
+  "production_release_gates": [
+    "versioned_policy_and_consistency_checks",
+    "trusted_private_memory_batch_reconciliation",
+    "deterministic_approval_and_contact_ready_gates",
+    "private_audit_history_and_backup_recovery",
+    "native_skills_and_live_research_qualification",
+    "one_supervised_end_to_end_daily_run",
+    "seven_consecutive_real_daily_runs",
+    "forty_independently_reviewed_real_people",
+    "no_unauthorized_outreach"
+  ]
 }

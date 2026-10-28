@@ -1,5 +1,7 @@
 # Codex-primary Career Outreach activation
 
+**Latest release authority:** `docs/PRODUCTION_PLAN.md` and `config/operating-policy.json`. Historical read-only diagnostics below are not production authorization. The later Windows DPAPI sandbox failure and operator-only lookup restriction take precedence over earlier wrapper guidance.
+
 Architecture chosen October 27, 2026: **Codex CLI is the agent**, and all 14 local `.agents/skills/` packages are its procedures. Python is the deterministic check and private memory helper. The older `python -m outreach_agent run` uses Tavily and OpenAI API keys and is **optional, not the chosen Codex path**.
 
 User-reported Windows diagnostic: `codex-cli 0.164.0`, logged in using ChatGPT. Offline tests: 41 passed. Protected local SQLite initialized and settings persisted. The user has since reported host-native primary skill invocation and a supervised five-person public-source research pilot; **specialist skills and Codex-to-private-store read-only lookup are not yet independently observed.**

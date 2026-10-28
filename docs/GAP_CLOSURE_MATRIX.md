@@ -1,28 +1,18 @@
-# Gap closure review — October 27, 2026
+# Production evidence and gap closure — 2026-10-28
 
-Statuses: IMPLEMENTED IN CODE != VERIFIED LIVE != PRODUCTION QUALIFIED.
-The repository remains PUBLIC. No live API keys, private contact records or user messages are committed.
+Authority: `config/operating-policy.json` v0.2.0 and `docs/PRODUCTION_PLAN.md`. Written instructions and successful CI do NOT prove live runtime policy enforcement.
 
-| Audit item | Current status | Evidence / residual gate |
+| Capability | Observed baseline | Open requirement |
 |---|---|---|
-| Live research engine | CODE IMPLEMENTED; NOT LIVE VERIFIED | outreach_agent/research.py includes Tavily + OpenAI adapters with quote-grounded extraction; user-provided API keys and actual source-run evaluation needed |
-| Independent source verification | PARTIAL | Verbatim evidence checks and distinct-domain corroboration exist; domain independence does not prove current affiliation or employer ownership; qualified human review pending |
-| Durable relationship history | CODE IMPLEMENTED; NOT DEPLOYED | Encrypted SQLite in outreach_agent/state.py, identity digest, opt-out, separate approvals; actual secure host, backups and migration unverified |
-| End-to-end evaluation | SYNTHETIC PASS; REAL EVAL PENDING | tests/test_agent_runtime.py exercises mocked research and 7 repeated runs; evaluation plan requires 7 real days and >=40 manually reviewed real people |
-| Typed skill handoffs | STRUCTURAL IMPLEMENTED | schemas/source-corroborated-prospect.schema.json enforced in pre-publication audit |
-| Workflow ordering | IMPLEMENTED IN PYTHON | Early dedup before costly enrichment, final automated check before report, encrypted run report stored for restoration |
-| Outcome feedback | CODE IMPLEMENTED; NO REAL OUTCOMES | Manual CONTACTED/REPLIED/MEETING/INTRODUCTION events, aggregate metrics, three specialized learning/provenance skills, human-approved query priority only |
-| Scheduling and recovery | RECIPES IMPLEMENTED; NOT ACTIVATED | deploy/windows-task.ps1, deploy/cron.example, encrypted report recovery; external scheduler, alerting and incident drill still required |
-| Source provenance/freshness | PARTIAL | Excerpts, 2 URLs, observed date, explicit limited assurance; publication freshness checks where source dates supplied |
-| Security | PARTIAL | Encrypted payloads, HMAC identity indexes, private-path guard, public Git tracked-file hygiene check; key management, backup, provider terms, retention, access review and real threat test needed |
-| Native agent-skill activation | NOT VERIFIED | Skill files exist in .agents/skills; actual host activation trace required |
-| 20 new contact-ready per day | NOT DEMONSTRATED | Pilot may return zero; real yield and conversion unmeasured. Do not count hypothetical leads or assumed contact methods as direct reachability. |
+| Codex | CLI v0.164.0 authenticated using ChatGPT; primary skill invocation reported | Specialist native invocation NOT VERIFIED |
+| Live research | Supervised five-person Codex web pilot; two provisional, three held, 0 new contact-ready | Source/route review and full skill integration |
+| Private memory | Encrypted SQLite + HMAC identity; owner-shell DPAPI; classifications persisted; offline tests | Reliable batch match, recovery, retention and alias handling |
+| Automatic Codex memory | User tried same DPAPI wrapper inside sandbox | **BLOCKED:** Windows DPAPI decrypt failure; keep sandbox and keys protected |
+| Governance | Versioned rules, opt-outs, separate draft-content and send-authorization records | Hard deterministic runtime gates and policy-versioned audit **NOT END-TO-END** |
+| Daily reports | Honest shortfall counts in optional Python runner | Codex-native reconciled private brief, source review and human approvals |
+| Scheduling | OPTIONAL Tavily/OpenAI Python scheduler examples only | Codex-native monitoring/scheduling and recovery unqualified |
+| Field qualification | Offline tests passed | 7 real daily runs, >=40 independently reviewed real people, 0 unauthorized actions |
 
-## Why a CI pass does not close the production gaps
-The fake sources and synthetic named people in tests are not actual prospects. Live citations, job affiliations, message relevance and ethical outreach require independent human/agent evaluation with allowed sources and authorized accounts. No agent can promise real replies or meetings.
+The Tavily/OpenAI-key research runner is **optional legacy**, not the selected Codex workflow. Do not prompt for API keys for Codex-native operation. **Do not run the DPAPI wrapper inside Codex or bypass its sandbox.**
 
-## Next external prerequisites
-1. User-controlled persistent execution host and secret manager, separately from this public code repository.
-2. Authorized TAVILY_API_KEY and OPENAI_API_KEY or equivalent vetted providers.
-3. A first real 5-person pilot with no automated sending, plus source review and stored feedback.
-4. Multi-day run qualification and security review before enabling an unattended schedule.
+Critical path P0 → P1/P2 → P3 → P4 → P5 is defined in `docs/PRODUCTION_PLAN.md`. Issues #1 #2 #3 #9 remain open; do not claim production readiness.

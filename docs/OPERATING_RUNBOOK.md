@@ -1,5 +1,7 @@
 # Daily executive outreach runbook
 
+**Production authority:** `config/operating-policy.json`, `docs/PRODUCTION_PLAN.md` and `docs/GAP_CLOSURE_MATRIX.md`. Memory and governance are **early mandatory gates**. Codex is the chosen agent; the Tavily/OpenAI API runner is optional legacy.
+
 ## Mission and metrics
 Primary objective: career-relevant leadership conversations, not mass messaging.
 Research target: **up to 20 new source-corroborated prospects each daily run**. Human-review-approved contact-ready count is separate and can be zero. Contacted, replied, met, introduced, opportunity and hired are distinct observed outcome metrics; never infer progress from drafted messages.
@@ -16,7 +18,8 @@ The current live pipeline is only a pilot; no completed external seven-day behav
 7. Inspect outcome intelligence after meaningful observations. Query-priority suggestions require a user decision; they do not change the qualifying score or exclude industries.
 
 ## Evidence and incident handling
-- Missing API keys => do not launch. Requests fail closed rather than simulate leaders.
+- For Codex-native research, verify authorized live browsing, not Tavily/OpenAI API credentials; missing web access => HOLD.
+- Private relationship checks execute ONLY in the owner's trusted PowerShell context until a secured broker qualifies. Codex sandbox DPAPI failure must not be bypassed.
 - Source failure => status PARTIAL_SOURCE_FAILURE or COMPLETE_WITH_SOURCE_ERRORS; inspect private report/log and do not assert full market coverage.
 - Interrupted output => use restore-report to recover the latest completed private report from encrypted state.
 - Duplicate or changed employer => identity HOLD until reconciled; suppress opted-out people.
