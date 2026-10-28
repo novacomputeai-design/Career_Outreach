@@ -1,6 +1,9 @@
 """Offline behavior tests with deliberately SYNTHETIC people and sources."""
 import os
 import tempfile
+from datetime import datetime, timezone
+from unittest.mock import patch
+from zoneinfo import ZoneInfoNotFoundError
 import unittest
 from pathlib import Path
 from cryptography.fernet import Fernet
@@ -40,6 +43,17 @@ class AgentRuntimeTests(unittest.TestCase):
     def tearDown(self):
         self.store.close()
         self.tmp.cleanup()
+
+    def test_phoenix_date_falls_back_without_system_tzdb(self):
+        from outreach_agent.pipeline import phoenix_operating_date
+        # Just after midnight UTC it is still the prior day in Phoenix.
+        instant = datetime(2026, 10, 29, 2, 0, tzinfo=timezone.utc)
+        self.assertEqual(phoenix_operating_date(instant), "2026-10-28")
+        with patch("outreach_agent.pipeline.ZoneInfo",
+                   side_effect=ZoneInfoNotFoundError("America/Phoenix")):
+            self.assertEqual(phoenix_operating_date(instant), "2026-10-28")
+        with self.assertRaisesRegex(ValueError, "timezone-aware"):
+            phoenix_operating_date(datetime(2026, 10, 29, 2, 0))
 
     def test_source_excerpt_must_be_verbatim(self):
         self.assertIsNotNone(extract_supported(S1,RAW))

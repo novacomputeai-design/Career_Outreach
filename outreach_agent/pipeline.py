@@ -9,8 +9,8 @@ import hashlib
 import json
 import re
 import uuid
-from datetime import datetime, timezone
-from zoneinfo import ZoneInfo
+from datetime import datetime, timedelta, timezone
+from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 from urllib.parse import urlparse
 from .research import Tavily, Extractor, discover, Source, host, normalize, qualified_source_pair, url_valid
 from .state import PrivateStore
@@ -155,11 +155,28 @@ def proposal(lead):
         f"Best regards,\nFadi"
     )
 
+def phoenix_operating_date(now=None):
+    """Current Phoenix calendar date, including clean Windows without tzdata.
+
+    Prefer IANA zone data. Phoenix observes UTC-07:00 year-round in the
+    contemporary operating period; use that offset only if the host is
+    missing its IANA database. This does not claim historical tz accuracy.
+    """
+    try:
+        tz = ZoneInfo("America/Phoenix")
+    except ZoneInfoNotFoundError:
+        tz = timezone(timedelta(hours=-7))
+    instant = now if now is not None else datetime.now(timezone.utc)
+    if instant.tzinfo is None or instant.utcoffset() is None:
+        raise ValueError("Operating date requires a timezone-aware instant")
+    return instant.astimezone(tz).date().isoformat()
+
+
 def make_brief(search, extractor, store, target=20, max_queries=14, max_enrich=48, queries=None):
     """Run one daily cycle. Stored recommendations prevent repeated 'new' counts."""
     rid="run-"+uuid.uuid4().hex
     store.start_run(rid)
-    date=datetime.now(ZoneInfo("America/Phoenix")).date().isoformat()
+    date=phoenix_operating_date()
     report={"project_id":PROJECT_ID,"purpose":"individual_career_networking",
             "run_id":rid,"date_local":date,"timezone":"America/Phoenix","target":target,"discoveries":0,
             "new_contact_ready":0,"drafts_sent":0,"confirmed_sent":0,
