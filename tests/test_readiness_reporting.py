@@ -1,7 +1,9 @@
 """Do not label mere operator review events as confirmed NEW/contact-ready."""
 import io
 import json
+import tempfile
 import unittest
+from pathlib import Path
 from contextlib import redirect_stdout
 from unittest.mock import MagicMock, patch
 
@@ -12,9 +14,11 @@ class ReadinessReportTests(unittest.TestCase):
         store = MagicMock()
         store.reviewed_for_run.return_value = 18
         buf = io.StringIO()
-        with patch("outreach_agent.cli.PrivateStore", return_value=store), redirect_stdout(buf):
-            main(["--db", "synthetic-private-path.sqlite", "run-readiness",
-                  "--run-id", "synthetic-run"])
+        with tempfile.TemporaryDirectory() as tmp:
+            path = str(Path(tmp) / "synthetic-private.sqlite")
+            with patch("outreach_agent.cli.PrivateStore", return_value=store), redirect_stdout(buf):
+                main(["--db", path, "run-readiness",
+                      "--run-id", "synthetic-run"])
         report = json.loads(buf.getvalue())
         self.assertEqual(report["run_id"], "synthetic-run")
         self.assertEqual(report["recorded_source_route_fit_reviews"], 18)
@@ -30,9 +34,11 @@ class ReadinessReportTests(unittest.TestCase):
         store = MagicMock()
         store.reviewed_for_run.return_value = 0
         buf = io.StringIO()
-        with patch("outreach_agent.cli.PrivateStore", return_value=store), redirect_stdout(buf):
-            main(["--db", "synthetic-private-path.sqlite", "run-readiness",
-                  "--run-id", "empty-synthetic-run"])
+        with tempfile.TemporaryDirectory() as tmp:
+            path = str(Path(tmp) / "synthetic-private.sqlite")
+            with patch("outreach_agent.cli.PrivateStore", return_value=store), redirect_stdout(buf):
+                main(["--db", path, "run-readiness",
+                      "--run-id", "empty-synthetic-run"])
         report = json.loads(buf.getvalue())
         self.assertEqual(report["recorded_source_route_fit_reviews"], 0)
         self.assertEqual(report["new_contact_ready"], 0)
