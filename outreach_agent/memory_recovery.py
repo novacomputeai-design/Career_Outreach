@@ -86,15 +86,17 @@ def create_encrypted_backup(store: PrivateStore, target: str | Path) -> dict:
         raise ValueError("Snapshot exceeds safe in-memory backup size")
     encrypted = MAGIC + store.crypt.encrypt(_tag(store.identity_key) + raw)
     dest.parent.mkdir(parents=True, exist_ok=True, mode=0o700)
+    created = False
     try:
         with dest.open("xb") as output:
+            created = True
             if os.name == "posix":
                 os.chmod(dest, 0o600)
             output.write(encrypted)
     except Exception:
         # Do not leave a partial backup that could be mistaken for a valid one.
-        if dest.exists():
-            dest.unlink()
+        if created:
+            dest.unlink(missing_ok=True)
         raise
     return {"status": "ENCRYPTED_SNAPSHOT_CREATED",
             "contains_plaintext_credentials": False,
