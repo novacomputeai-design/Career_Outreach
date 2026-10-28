@@ -40,7 +40,7 @@ Read [Codex-native activation guide](docs/CODEX_NATIVE_RUN.md) before starting l
 1. Open this repository in Codex; confirm local skills from `.agents/skills/` are available.
 2. Invoke `$daily-executive-outreach` (or request the agent to run the daily executive networking workflow).
 3. Provide authorized research capability and a private persistence layer. Skills are instructions, **not schedulers or web connectors**.
-4. Evaluate with `python scripts/validate_project.py` and `python -m unittest discover -s tests -v`.
+4. Install or refresh the current dependencies with `python -m pip install -r requirements.txt` (includes Windows IANA timezone data), then evaluate with `python scripts/validate_project.py` and `python -m unittest discover -s tests -v`. The CI matrix requires both Ubuntu and Windows; these checks do not certify live Codex execution.
 
 ## Production plan — mandatory sequence
 
