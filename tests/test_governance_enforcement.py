@@ -10,6 +10,7 @@ from outreach_agent.governance import active_policy, structural_review_gate
 
 def vetted_synthetic():
     return {
+        "project_id":"PERSONAL_CAREER_OUTREACH",
         "person_name":"Morgan Synthetic", "organization":"Fabricated Innovation",
         "current_title":"Head of Product",
         "role_quote":"Morgan Synthetic leads product at Fabricated Innovation.",
@@ -51,7 +52,7 @@ class EnforcementTests(unittest.TestCase):
         self.assertEqual(self.store.human_reviewed_count(),0)
         audit=self.store.recent_governance_decisions()
         self.assertEqual([r["decision"] for r in audit], ["HOLD","HOLD"])
-        self.assertTrue(all(r["policy_version"]=="0.2.1" for r in audit))
+        self.assertTrue(all(r["policy_version"]=="0.2.2" for r in audit))
 
     def test_approval_requires_separate_review_and_exact_draft_hash(self):
         pid=self.store.register(vetted_synthetic())
@@ -74,7 +75,7 @@ class EnforcementTests(unittest.TestCase):
         self.assertEqual(audit[0]["decision"],"HOLD")
         self.assertTrue(any(item["action"]=="CONTENT_APPROVED" and item["decision"]=="ALLOW_APPROVAL_RECORD" for item in audit))
         self.assertTrue(all("Hello" not in str(r) for r in audit))
-        self.assertTrue(all(r["policy_version"]=="0.2.1" for r in audit))
+        self.assertTrue(all(r["policy_version"]=="0.2.2" for r in audit))
 
     def test_rejected_unverified_and_existing_people(self):
         poor=vetted_synthetic()

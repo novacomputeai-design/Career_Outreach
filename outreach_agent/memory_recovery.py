@@ -135,13 +135,30 @@ def _authenticated_snapshot(snapshot: str | Path, state_key, identity_key) -> sq
     try:
         mem.deserialize(raw)
         _check_database(mem)
-        # At least one contact's private encrypted payload must be readable.
-        row = mem.execute("SELECT encrypted_record FROM people LIMIT 1").fetchone()
-        if row:
+        # The snapshot envelope alone does not prove that the supplied HMAC
+        # identity key matches the database's original person digests. Verify
+        # EVERY record against the decrypted identity, not just one token.
+        from .state import normalized
+        import json
+        for row in mem.execute(
+                "SELECT name_digest,profile_digest,encrypted_record FROM people"):
             try:
-                fernet.decrypt(row[0])
-            except InvalidToken as exc:
-                raise ValueError("Private record encryption key mismatch") from exc
+                data = json.loads(fernet.decrypt(row[2]).decode("utf-8"))
+            except (InvalidToken, ValueError, UnicodeDecodeError) as exc:
+                raise ValueError("Private record state-key authentication failed") from exc
+            name = data.get("person_name") if isinstance(data, dict) else None
+            if not isinstance(name, str) or not name.strip():
+                raise ValueError("Private record identity unavailable")
+            expected = hmac.new(identity, normalized(name).encode(), hashlib.sha256).hexdigest()
+            if not hmac.compare_digest(row[0], expected):
+                raise ValueError("Identity key does not match stored person digests")
+            profile = data.get("profile_url")
+            expected_profile = (hmac.new(identity, normalized(profile.rstrip("/")).encode(),
+                                         hashlib.sha256).hexdigest() if profile else None)
+            if bool(expected_profile) != bool(row[1]) or (
+                    expected_profile is not None and
+                    not hmac.compare_digest(row[1], expected_profile)):
+                raise ValueError("Identity key does not match stored profile digests")
     except Exception:
         mem.close()
         raise

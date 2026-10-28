@@ -1,5 +1,5 @@
 {
-  "version": "0.2.1",
+  "version": "0.2.2",
   "timezone": "America/Phoenix",
   "cadence": "daily",
   "daily_target_new_people": 20,
@@ -60,9 +60,9 @@
     "permitted_key_location": "user_owned_windows_dpapi_private_store",
     "private_data_in_repository": false,
     "codex_access": "operator_supplied_minimal_classification_until_broker_qualified",
-    "protected_batch_reconciliation": "NOT_IMPLEMENTED",
+    "protected_batch_reconciliation": "OWNER_WINDOWS_MANUAL_BATCH_PASSED_AUTOMATIC_BROKER_NOT_IMPLEMENTED",
     "trusted_host_side_broker": "NOT_IMPLEMENTED",
-    "backup_and_restore": "NOT_QUALIFIED"
+    "backup_and_restore": "OWNER_WINDOWS_SAME_ACCOUNT_PASSED_PORTABLE_RECOVERY_UNQUALIFIED"
   },
   "production_release_gates": [
     "versioned_policy_and_consistency_checks",
@@ -74,5 +74,11 @@
     "seven_consecutive_real_daily_runs",
     "forty_independently_reviewed_real_people",
     "no_unauthorized_outreach"
-  ]
+  ],
+  "project": {
+    "id": "PERSONAL_CAREER_OUTREACH",
+    "mission": "individual_professional_career_networking",
+    "commercial_sales_outreach_prohibited": true,
+    "project_scope_failure": "HOLD"
+  }
 }

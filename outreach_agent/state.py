@@ -37,6 +37,23 @@ class PrivateStore:
         self.crypt = Fernet(secret.encode() if isinstance(secret, str) else secret)
         self.identity_key = identity.encode() if isinstance(identity, str) else identity
         self.read_only = bool(read_only)
+        existed = self.path.is_file()
+        if existed and not self.read_only:
+            # An existing legacy database must never be silently migrated by
+            # simply opening it in writable mode. Use the explicit backup-first
+            # owner-approved migration, not implicit CREATE TABLE.
+            check = sqlite3.connect(self.path.as_uri() + "?mode=ro", uri=True)
+            try:
+                tables = {r[0] for r in check.execute(
+                    "SELECT name FROM sqlite_master WHERE type='table'")}
+                mandatory = {"people", "events", "approvals", "preferences",
+                             "recommendations", "runs", "governance_decisions"}
+                if not mandatory.issubset(tables):
+                    raise RuntimeError(
+                        "Existing private database needs explicit owner-approved "
+                        "schema migration; writable access refused")
+            finally:
+                check.close()
         if self.read_only:
             if not self.path.is_file():
                 raise FileNotFoundError("Private database unavailable; cannot verify relationship")
@@ -47,7 +64,7 @@ class PrivateStore:
             self.path.parent.mkdir(parents=True, exist_ok=True, mode=0o700)
             self.db = sqlite3.connect(str(self.path))
         self.db.row_factory = sqlite3.Row
-        if not self.read_only:
+        if not self.read_only and not existed:
             if os.name == "posix":
                 os.chmod(self.path, 0o600)
             self.db.executescript("""
@@ -107,6 +124,40 @@ class PrivateStore:
             );
             """)
             self.db.commit()
+        # A database is not safe to query or mutate with a different identity
+        # key. Decrypt each existing record, independently recompute its stored
+        # identity digests, and fail closed BEFORE any user operation.
+        try:
+            self.verify_identity_binding()
+        except Exception:
+            self.db.close()
+            raise
+
+    def verify_identity_binding(self) -> int:
+        """Prove BOTH keys match every existing private identity, never sample."""
+        checked = 0
+        for row in self.db.execute(
+            "SELECT name_digest,profile_digest,encrypted_record FROM people"):
+            try:
+                person = self.decrypt(row["encrypted_record"])
+            except Exception as exc:
+                raise RuntimeError(
+                    "Cannot authenticate private record with the supplied state key"
+                ) from exc
+            if not isinstance(person, dict) or not isinstance(person.get("person_name"), str):
+                raise RuntimeError("Private record identity missing or malformed")
+            expected = self.digest(person["person_name"])
+            if not hmac.compare_digest(expected, row["name_digest"]):
+                raise RuntimeError("Private identity key mismatch; fail closed")
+            profile = person.get("profile_url")
+            expected_profile = self.digest(profile.rstrip("/")) if profile else None
+            if bool(expected_profile) != bool(row["profile_digest"]):
+                raise RuntimeError("Private identity profile binding mismatch")
+            if expected_profile is not None and not hmac.compare_digest(
+                    expected_profile, row["profile_digest"]):
+                raise RuntimeError("Private identity key/profile mismatch")
+            checked += 1
+        return checked
 
     def digest(self, value):
         return hmac.new(self.identity_key, normalized(value).encode(), hashlib.sha256).hexdigest()
@@ -127,6 +178,10 @@ class PrivateStore:
         return [dict(r) for r in rows]
 
     def register(self, person, segment="other", run_id=None):
+        from .project_scope import scope_reasons
+        errors = scope_reasons(person)
+        if errors:
+            raise ValueError("Personal career scope HOLD: " + ",".join(errors))
         if segment not in SEGMENTS:
             raise ValueError("Invalid geographic segment")
         if self.match(person):

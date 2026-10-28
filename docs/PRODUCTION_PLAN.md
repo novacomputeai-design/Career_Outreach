@@ -6,6 +6,10 @@ Status date: 2026-10-28. **NOT PRODUCTION QUALIFIED.**
 
 Personal executive career networking, Tucson/Southern Arizona first, applicable US-remote opportunities and all industries where credible transferable experience exists. Daily research target: **up to 20 new, qualified, genuinely relevant people**; never fabricate quota completion. The principal host is **Codex CLI + 14 local Career Outreach skills**. Python implements deterministic checks and protected local relationship memory. The older Tavily/OpenAI API-based research runner is **optional legacy**, not the chosen execution path; its scripts or scheduler recipes must not be mistaken for the Codex workflow.
 
+**New P0 hardening:** policy v0.2.2 adds personal career scope identification and fail-closed cross-project tripwires; existing database opening verifies the state/identity key pairing against ALL stored person records; writable opening of a legacy DB no longer silently creates the audit table. The owner-approved live migration has NOT been run and must remain separate. These checks are structural and must still pass Windows and live-host qualification.
+
+**P0 hardening v0.2.2:** Adds explicit career project scope, per-record HMAC key binding on existing databases and refusal to open legacy stores for writes before an owner-approved migration. Live Windows qualification and authentic operator review remain separate; no live migration or sending is authorized here.
+
 **One authority for machine-governed policy:** `config/operating-policy.json` (versioned). All documents, skills, validators, databases and daily reports must conform to it; differences are release blockers. A model's assertion that a check passed is not sufficient evidence that a deterministic runtime gate ran.
 
 ## Layered target architecture

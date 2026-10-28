@@ -12,6 +12,7 @@ class MemoryTests(unittest.TestCase):
         self.store=PrivateStore(Path(self.tmp.name)/"contacts.sqlite",
                                 key=Fernet.generate_key(),identity_key="b"*64)
         self.person={
+            "project_id":"PERSONAL_CAREER_OUTREACH",
             "person_name":"Completely Fictional Executive",
             "organization":"Imaginary Works",
             "profile_url":"https://imaginary-works.test/bio",

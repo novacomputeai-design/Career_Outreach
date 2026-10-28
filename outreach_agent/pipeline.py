@@ -15,6 +15,7 @@ from .research import Tavily, Extractor, discover, Source, host, normalize, qual
 from .state import PrivateStore
 from .learning import summarize
 from .contracts import validate_prospect
+from .project_scope import PROJECT_ID, scope_reasons
 
 def extract_role_excerpt(source, person_name, current_title):
     """Find a short exact, contiguous passage containing name and title."""
@@ -156,6 +157,7 @@ def make_brief(search, extractor, store, target=20, max_queries=14, max_enrich=4
             if total<70:
                 report["held"].append({"name":lead["person_name"],"reason":"score_below_70","score":total})
                 continue
+            enriched["project_id"]=PROJECT_ID
             enriched["scores"]=scores
             enriched["score_total"]=total
             enriched["draft"]=proposal(enriched)
@@ -200,6 +202,8 @@ def audit_record(record):
     needed=("person_name","current_title","organization","source_url","second_role_source_url",
             "role_quote","second_role_quote","initiative_quote","why_connect","route_url",
             "route_type","observed_on","scores","score_total")
+    if scope_reasons(record, require_project_id=True):
+        return False
     if any(not record.get(k) for k in needed):
         return False
     if validate_prospect(record):

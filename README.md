@@ -16,6 +16,12 @@ Identify relevant organizational leaders, actual or potential hiring influencers
 - `scripts/` — deterministic checks and local sample brief generation.
 - `.github/workflows/` — CI for validation; live outreach automation is **not** enabled by CI.
 
+## Purpose-bound project isolation
+The operating policy identifies this agent as `PERSONAL_CAREER_OUTREACH`. Deterministic candidate, audit and optional runner checks HOLD suspected Nova subcontracting, prime capture and business sales outreach. No agent may treat federal contracting leads as personal career prospects, even if an official business-development contact is known. This structural gate does not replace human inspection of borderline cases.
+
+## Project isolation
+Only individual career networking is in scope: `PERSONAL_CAREER_OUTREACH`. The candidate and review gates HOLD business-development pursuits, prime/subcontracting sales, and supplier onboarding. This is defense in depth, not a substitute for operator review.
+
 ## Mandatory constraints
 1. Candidate must have a **verified full name, current leadership role, organization, source URLs, specific reason to connect, and legitimate public professional contact path** to count toward the 20.
 2. Tucson first, remote acceptable, **all industries** considered when demonstrably aligned with experience.

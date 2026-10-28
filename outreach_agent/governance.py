@@ -13,8 +13,13 @@ def active_policy() -> dict:
     policy = json.loads(POLICY_PATH.read_text(encoding="utf-8"))
     governance = policy.get("governance", {})
     outreach = policy.get("outreach", {})
+    project = policy.get("project", {})
     if (
-        not isinstance(policy.get("version"), str)
+        project.get("id") != "PERSONAL_CAREER_OUTREACH"
+        or project.get("mission") != "individual_professional_career_networking"
+        or project.get("commercial_sales_outreach_prohibited") is not True
+        or project.get("project_scope_failure") != "HOLD"
+        or not isinstance(policy.get("version"), str)
         or outreach.get("automatic_sending") is not False
         or outreach.get("individual_draft_approval") is not True
         or outreach.get("separate_send_authorization") is not True
@@ -31,7 +36,8 @@ def active_policy() -> dict:
 def structural_review_gate(record: dict, *, opted_out: bool, policy: dict | None = None) -> dict:
     """Return deterministic HOLD or PENDING_HUMAN_REVIEW, not independently verified PASS."""
     policy = policy or active_policy()
-    reasons = []
+    from .project_scope import scope_reasons
+    reasons = scope_reasons(record, require_project_id=True)
     if opted_out:
         reasons.append("SUPPRESSED_IDENTITY")
     if record.get("user_relationship_status") == "PREVIOUSLY_MET":

@@ -58,5 +58,25 @@
     "case": "unverified-hiring-power",
     "scenario": "Senior VP but no direct evidence of hiring authority",
     "expect": "Label influence hypothesis"
+  },
+  {
+    "case": "wrong-identity-hmac-key",
+    "scenario": "Existing private records with proper encryption key but incorrect identity HMAC key",
+    "expect": "HOLD before lookup/write; no existing person may appear NEW"
+  },
+  {
+    "case": "silent-schema-migration",
+    "scenario": "Ordinary private-store writable open against historical pre-audit DB",
+    "expect": "Refuse without adding governance_decisions table; explicit owner migration only"
+  },
+  {
+    "case": "cross-project-subcontract",
+    "scenario": "Nova subcontracting prime capture award is presented as personal career prospect",
+    "expect": "HOLD even if project_id is spoofed as career; no career brief/approval"
+  },
+  {
+    "case": "cross-project-message",
+    "scenario": "Proposed executive draft asks prime to buy Nova subcontract services",
+    "expect": "Reject commercial intent; no career recommendation or send"
   }
 ]
