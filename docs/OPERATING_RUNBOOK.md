@@ -8,6 +8,10 @@ Research target: **up to 20 new source-corroborated prospects each daily run**. 
 
 The current live pipeline is only a pilot; no completed external seven-day behavioral evaluation exists.
 
+## Governance enforcement status
+
+The selected Codex agent may propose leads but cannot self-certify human review, role truth or novelty. The optional Python local store now applies a **structural source and suppression precheck** to `review-contact` and requires a recorded review plus a structurally valid record for `approve`. Both permitted and denied review/approval actions are stored in a protected versioned governance audit. `governance-audit` displays minimal decision metadata to the owner only. These are the first P3 enforcement controls, **not** end-to-end CONTACT_READY certification or independent authentication of the command operator. Separate human draft approval remains required. Existing relationships need a dedicated follow-up approval path; do not treat them as NEW to bypass the gate.
+
 ## Review queue
 1. Open the latest private report (NEVER check into Git). Search the candidate's primary and independent secondary sources again.
 2. Confirm the person holds the current role, their organization is correct, the topic is relevant to Fadi's real resume experience and the contact pathway is realistic for that individual.
