@@ -48,12 +48,15 @@ def validate_governance(root: Path = ROOT) -> list[str]:
             "automatic_sending_prohibited",
             "separate_draft_and_send_authorization",
             "draft_authorization_bound_to_content_hash",
+            "send_authorization_requires_qualified_identity_route_novelty",
             "codex_direct_dpapi_access_prohibited",
             "private_memory_required_for_confirmed_new",
         )
         for k in required_truthy:
             if g.get(k) is not True:
                 issues.append("governance requirement disabled: " + k)
+        if g.get("send_authorization_gate_status") != "BLOCKED_PENDING_RECIPIENT_ROUTE_HISTORY_PROOF":
+            issues.append("send authorization policy must remain blocked until implementation")
         if g.get("history_unavailable") != "HOLD_UNVERIFIED":
             issues.append("missing private history must HOLD_UNVERIFIED")
         if g.get("existing_relationship") != "FOLLOW_UP_NOT_NEW":
