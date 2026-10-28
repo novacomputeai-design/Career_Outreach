@@ -22,6 +22,8 @@ def active_policy() -> dict:
         or governance.get("contact_ready_requires_independent_human_review") is not True
         or governance.get("no_model_self_approval") is not True
         or governance.get("draft_authorization_bound_to_content_hash") is not True
+        or governance.get("send_authorization_requires_qualified_identity_route_novelty") is not True
+        or governance.get("send_authorization_gate_status") != "BLOCKED_PENDING_RECIPIENT_ROUTE_HISTORY_PROOF"
     ):
         raise RuntimeError("Required governance controls missing/disabled; fail closed")
     return policy
@@ -61,8 +63,14 @@ def approval_gate(structural: dict, *, user_review_recorded: bool, stage: str,
         reasons.append("INDEPENDENT_REVIEW_NOT_RECORDED")
     if stage not in ("CONTENT_APPROVED", "SEND_AUTHORIZED"):
         reasons.append("INVALID_APPROVAL_STAGE")
-    if stage == "SEND_AUTHORIZED" and not draft_content_preapproved:
-        reasons.append("EXACT_DRAFT_CONTENT_NOT_APPROVED")
+    if stage == "SEND_AUTHORIZED":
+        if not draft_content_preapproved:
+            reasons.append("EXACT_DRAFT_CONTENT_NOT_APPROVED")
+        # The existing protected memory/source review path does not yet authenticate
+        # the operator, verify independent cross-channel novelty, or bind a named
+        # recipient and permitted exact route to the draft approval. Until those
+        # controls exist and are qualified, never record sending authorization.
+        reasons.append("RECIPIENT_ROUTE_HISTORY_AUTHORIZATION_NOT_QUALIFIED")
     return {
         "policy_version": structural["policy_version"],
         "decision": "HOLD" if reasons else "ALLOW_APPROVAL_RECORD",
