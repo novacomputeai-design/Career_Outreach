@@ -107,5 +107,28 @@ class UserRelationshipTests(unittest.TestCase):
         self.assertEqual(self.store.check_relationship("Avery Example")[
             "result"], "NOT_FOUND_IN_LOCAL_STORE")
 
+
+    def test_read_only_lookup_preserves_state(self):
+        self.store.remember_relationship("Example Leader", "PREVIOUSLY_MET")
+        self.store.close()
+        self.store = PrivateStore(self.path, key=self.key, identity_key=self.identity_key)
+        store = PrivateStore(self.path, key=self.key, identity_key=self.identity_key,
+                             read_only=True)
+        try:
+            check = store.check_relationship("Example Leader")
+            self.assertEqual(check["result"], "EXISTING_RELATIONSHIP")
+            with self.assertRaises(Exception):
+                store.remember_relationship("Another Example", "FIRST_LEARNED")
+        finally:
+            store.close()
+        self.assertEqual(self.store.check_relationship("Another Example")["result"],
+                         "NOT_FOUND_IN_LOCAL_STORE")
+
+    def test_read_only_missing_database_fails_closed(self):
+        with self.assertRaises(FileNotFoundError):
+            PrivateStore(Path(self.tmp.name) / "missing.sqlite",
+                         key=self.key, identity_key=self.identity_key, read_only=True)
+        self.assertFalse((Path(self.tmp.name) / "missing.sqlite").exists())
+
 if __name__ == "__main__":
     unittest.main()
