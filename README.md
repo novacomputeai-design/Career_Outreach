@@ -2,7 +2,7 @@
 
 A Tucson-first, industry-agnostic, daily executive-networking research system. **Target: 20 newly qualified, contact-ready people per calendar day**; never manufacture prospects to fill the target. Suitable remote opportunities are also in scope.
 
-**Status: v0.2 with Codex CLI chosen as primary agent and 14 local skills. Python supplies validation and encrypted relationship storage. The older Tavily/OpenAI provider-backed Python runner is optional. No Tavily or OpenAI API key is needed just to sign in and use Codex natively. Native skill activation and live research still require proof. NOT production qualified.**
+**Status: Codex-primary with Memory and Governance prioritized as early production gates (NOT production-qualified).** Codex authentication, supervised research, private owner-PowerShell relationship checks and offline tests have been observed. Specialist activation, safe automatic reconciliation and runtime governance enforcement remain open. [Production plan](docs/PRODUCTION_PLAN.md).
 
 ## Purpose
 Identify relevant organizational leaders, actual or potential hiring influencers, and strategic connectors for thoughtful professional conversations. This is a personal career/networking workflow, **not** Nova Compute business sales and **not** an automated application or bulk outreach bot.
@@ -34,13 +34,15 @@ Read [Codex-native activation guide](docs/CODEX_NATIVE_RUN.md) before starting l
 3. Provide authorized research capability and a private persistence layer. Skills are instructions, **not schedulers or web connectors**.
 4. Evaluate with `python scripts/validate_project.py` and `python -m unittest discover -s tests -v`.
 
-## Deployment milestones
-- **Phase A (implemented foundation):** 14 skills, typed lead handoff, qualification policy, private store, and offline regression tests.
-- **Phase B (code implemented, deployment NOT VERIFIED):** Tavily and OpenAI research adapters; locally encrypted private contact store. Needs API credentials and live independent testing.
-- **Phase C (not yet implemented):** real-world pilot, audited 20-per-day target, calibrated rankings, human-reviewed messages.
-- **Phase D (recipe available, NOT ACTIVATED):** Windows Task Scheduler and Linux cron examples; runtime monitoring/alerting and seven-day production qualification still pending.
+## Production plan — mandatory sequence
 
-See `references/daily-operating-contract.md` for the detailed workflow.
+1. **P0: Governance policy baseline** — one versioned machine policy, consistent skills/docs and drift regression tests.
+2. **P1–P2: Protected relationship memory** — recovery and controlled owner-context batch reconciliation; do not bypass Codex sandbox DPAPI boundary.
+3. **P3: Deterministic governance enforcement** — block unsafe candidate, approval and consent transitions with audit records.
+4. **P4: Real supervised Codex end-to-end pilot** — research, trusted memory, evidence and qualified human review.
+5. **P5: Production qualification** — seven real daily runs, >=40 independently assessed contacts and operating reliability checks.
+
+See [production plan](docs/PRODUCTION_PLAN.md) and [current gap closure](docs/GAP_CLOSURE_MATRIX.md). No automatic sending.
 
 ## Optional Tavily/OpenAI Python runner (NOT the selected Codex architecture)
 
