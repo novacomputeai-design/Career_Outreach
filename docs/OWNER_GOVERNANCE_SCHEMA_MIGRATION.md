@@ -39,6 +39,8 @@ pwsh -NoProfile -File .\scripts\owner-memory-schema.ps1 -Mode inspect -Database 
 
 Expected `GOVERNANCE_AUDIT_SCHEMA_ADDED`, `backup_verified_before_change=true`, `original_relationship_row_counts_unchanged=true`, and `CURRENT_WITH_GOVERNANCE_AUDIT` for the **test copy**. The live file remains untouched. Do not share private SQLite or snapshot files in chat.
 
+**P0 prerequisite:** The hardened store rejects implicit legacy migrations and verifies every existing record's identity digest against the original HMAC key. The live database still requires a distinct owner decision after qualification. Do not run on the live file from Codex.
+
 ## Live migration remains separate
 
 After independent test-copy qualification, the operator may explicitly choose to migrate the **live** `%LOCALAPPDATA%\CareerOutreach\relationships.sqlite` via the same owner tool with `-Database` set to that exact live file and `-IApproveSchemaChange`. This requires a specific operator decision. Do not automate the live migration or allow Codex to invoke it.
