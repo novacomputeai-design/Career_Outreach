@@ -1,5 +1,5 @@
 # Production qualification — NOT YET COMPLETE
-Static skill files and offline passing tests do not demonstrate autonomous production behavior.
+Static skill files and offline passing tests do not demonstrate autonomous production behavior. `docs/INDEPENDENT_CAREER_HARDENING_AUDIT.md` is the current critical-path evidence map. Every report must carry project_id=PERSONAL_CAREER_OUTREACH; cross-project Nova federal subcontract capture records must HOLD regardless of labels or high score.
 
 ## Independent gates
 1. Native skill discovery and activation proven on actual host, with observed selection trace.

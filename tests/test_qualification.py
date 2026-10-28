@@ -61,6 +61,7 @@ class CandidateGateTests(unittest.TestCase):
         self.assertFalse(evaluate(candidate(contact_route_url="not-a-real-url"), set())[0])
     def test_no_fabricated_quota_completion(self):
         report=build_brief([candidate()], set())
+        self.assertEqual(report["project_id"],"PERSONAL_CAREER_OUTREACH")
         self.assertEqual(report["shortfall"],19)
         self.assertEqual(report["messages_sent"],0)
         self.assertEqual(report["verification_level"],"STRUCTURAL_ONLY")

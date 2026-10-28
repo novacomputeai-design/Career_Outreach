@@ -160,7 +160,8 @@ def make_brief(search, extractor, store, target=20, max_queries=14, max_enrich=4
     rid="run-"+uuid.uuid4().hex
     store.start_run(rid)
     date=datetime.now(ZoneInfo("America/Phoenix")).date().isoformat()
-    report={"run_id":rid,"date_local":date,"timezone":"America/Phoenix","target":target,"discoveries":0,
+    report={"project_id":PROJECT_ID,"purpose":"individual_career_networking",
+            "run_id":rid,"date_local":date,"timezone":"America/Phoenix","target":target,"discoveries":0,
             "new_contact_ready":0,"drafts_sent":0,"confirmed_sent":0,
             "source_corroborated_pending_human_review":0,
             "candidates":[],"held":[],"source_errors":[],"stage":"IN_PROGRESS",

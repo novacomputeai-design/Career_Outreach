@@ -55,6 +55,8 @@ class AgentRuntimeTests(unittest.TestCase):
     def test_full_mock_pipeline_honest_shortfall(self):
         result=make_brief(MockSearch(),MockExtractor(),self.store,
                           target=20,max_queries=1,max_enrich=5)
+        self.assertEqual(result["project_id"],"PERSONAL_CAREER_OUTREACH")
+        self.assertEqual(result["purpose"],"individual_career_networking")
         self.assertEqual(result["discoveries"],1)
         self.assertEqual(result["source_corroborated_pending_human_review"],1)
         self.assertEqual(result["new_contact_ready"],0)

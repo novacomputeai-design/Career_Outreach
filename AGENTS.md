@@ -8,6 +8,8 @@
 
 **Protected memory recovery:** Snapshot/verification/restore-new tools are OWNER-ONLY in normal trusted Windows PowerShell (`docs/PROTECTED_MEMORY_RECOVERY.md`). NEVER invoke DPAPI key loading in Codex's sandbox. No plaintext snapshots, backups or private keys in Git. Do not claim complete disaster recovery from same-profile backups alone.
 
+**Audit gate:** See `docs/INDEPENDENT_CAREER_HARDENING_AUDIT.md`. CI and synthetic source evidence cannot certify a truly new career contact; lack of independent history or reviewer means contact-ready zero. No model may waive P4/P5 field gates.
+
 **Release authority:** See `docs/PRODUCTION_PLAN.md` for memory-first/governance-first stages and `config/operating-policy.json` for machine-readable policy. Models and skill text cannot self-certify that governance ran. Batch relationship screening is **operator-only** (`docs/OPERATOR_BATCH_SCREENING.md`), never a Codex sandbox subprocess.
 
 ## Selected runtime architecture
@@ -29,4 +31,4 @@ This repository currently holds a personal executive-networking agent design. It
 ## Stage order
 organization-discovery > leadership-discovery > early relationship-memory screening > contact-verification + provenance-and-freshness > relationship-qualification > final memory and deterministic governance gate > outreach-drafting > run-quality-audit > daily-executive-brief > outcome-intelligence > discovery-strategy-optimization. Run follow-up-planning and conversation-preparation conditionally. Distinguish Python integration of equivalent stages from observed NATIVE host skill activation. Code execution alone is not proof of native selection.
 
-Status: 41 initial offline tests, local protected database round-trip, primary native Codex skill activation and supervised source research were user-observed. Specialist native invocation, full private-history reconciliation, human-reviewed contact readiness and sustained production qualification are NOT yet verified. See docs/GAP_CLOSURE_MATRIX.md.
+Status: P0 memory/scope/quality hardening CI tests passed; Windows owner validation of the new changes remains pending. Local protected database round-trip, primary native Codex skill activation and supervised source research were user-observed. Specialist native invocation, full private-history reconciliation, human-reviewed contact readiness and sustained production qualification are NOT yet verified. See docs/GAP_CLOSURE_MATRIX.md.

@@ -86,7 +86,10 @@ def main(argv=None):
             result=make_brief(search,extractor,store,target=args.target,
                               max_queries=args.max_queries,max_enrich=args.max_enrich,queries=q)
             emit(result,args.out)
-            emit({"run_id":result["run_id"],"provisionally_source_corroborated":result["source_corroborated_pending_human_review"],
+            from .project_scope import PROJECT_ID
+            if result.get("project_id") != PROJECT_ID:
+                raise RuntimeError("Report project identity mismatch; fail closed")
+            emit({"project_id":PROJECT_ID,"run_id":result["run_id"],"provisionally_source_corroborated":result["source_corroborated_pending_human_review"],
                   "human_reviewed_contact_ready":result["new_contact_ready"],
                   "shortfall":result["shortfall"],"messages_sent":0,"audit_level":result["audit_status"]})
             if result["stage"]=="PARTIAL_SOURCE_FAILURE":

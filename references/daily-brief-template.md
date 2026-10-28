@@ -1,4 +1,5 @@
 # Daily Executive Outreach Brief — TEMPLATE
+**Project ID:** PERSONAL_CAREER_OUTREACH — individual executive career networking ONLY (never Nova business capture)
 **Date:** YYYY-MM-DD (America/Phoenix)
 **Target:** 20 newly qualified people | **New confirmed contact-ready:** N | **Shortfall:** max(0,20−N)
 **Coverage:** organizations researched, people considered, verified, suppressed, source outages, geographic distribution. **Skill activation:** observed native/unknown.

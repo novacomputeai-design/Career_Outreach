@@ -11,7 +11,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
-from outreach_agent.project_scope import scope_reasons
+from outreach_agent.project_scope import scope_reasons, PROJECT_ID
 from urllib.parse import urlparse
 
 CAPS = {"alignment": 30, "influence": 25, "conversation": 20, "reachability": 15, "geography": 10}
@@ -87,7 +87,8 @@ def build_brief(candidates, known_ids, target=TARGET):
     results.sort(key=lambda c: (-c["score_total"], c.get("location_priority", 2),
                                 c["person_name"].casefold()))
     selected = results[:target]
-    return {"target": target, "considered": len(candidates), "passed_structural_gates": len(results),
+    return {"project_id": PROJECT_ID, "purpose":"individual_career_networking",
+            "target": target, "considered": len(candidates), "passed_structural_gates": len(results),
             "contact_ready_pending_independent_evidence_audit": len(selected),
             "shortfall": max(0, target-len(selected)),
             "not_contact_ready": rejected, "candidates": selected,
