@@ -1,5 +1,7 @@
 # Career Outreach repository instructions
 
+**Protected memory recovery:** Snapshot/verification/restore-new tools are OWNER-ONLY in normal trusted Windows PowerShell (`docs/PROTECTED_MEMORY_RECOVERY.md`). NEVER invoke DPAPI key loading in Codex's sandbox. No plaintext snapshots, backups or private keys in Git. Do not claim complete disaster recovery from same-profile backups alone.
+
 **Release authority:** See `docs/PRODUCTION_PLAN.md` for memory-first/governance-first stages and `config/operating-policy.json` for machine-readable policy. Models and skill text cannot self-certify that governance ran. Batch relationship screening is **operator-only** (`docs/OPERATOR_BATCH_SCREENING.md`), never a Codex sandbox subprocess.
 
 ## Selected runtime architecture
