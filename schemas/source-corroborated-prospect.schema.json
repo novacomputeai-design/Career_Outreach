@@ -3,6 +3,7 @@
   "title": "Source-corroborated executive prospect, not proof of hiring intent",
   "type": "object",
   "required": [
+    "project_id",
     "person_name",
     "current_title",
     "organization",
@@ -87,7 +88,8 @@
     "category": {
       "enum": [
         "hiring-influencer",
-        "strategic-connector"
+        "strategic-connector",
+        "hiring-decision-maker"
       ]
     },
     "scores": {
@@ -142,7 +144,33 @@
       "enum": [
         "PENDING_CONTENT_APPROVAL"
       ]
+    },
+    "project_id": {
+      "const": "PERSONAL_CAREER_OUTREACH"
+    },
+    "hiring_authority_quote": {
+      "type": "string",
+      "minLength": 25
     }
   },
-  "additionalProperties": true
+  "additionalProperties": true,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "category": {
+            "const": "hiring-decision-maker"
+          }
+        },
+        "required": [
+          "category"
+        ]
+      },
+      "then": {
+        "required": [
+          "hiring_authority_quote"
+        ]
+      }
+    }
+  ]
 }

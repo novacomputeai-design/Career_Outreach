@@ -29,8 +29,9 @@ For an observed meeting, introduction or opportunity: use MEETING, INTRODUCTION 
 For someone declining: use OPTED_OUT. These events are not inferred from search results.
 Separate draft content approval and permission to send are recorded with:
 python -m outreach_agent approve --person-id ID --draft-file /private/draft.txt --stage CONTENT_APPROVED
-python -m outreach_agent approve --person-id ID --draft-file /private/draft.txt --stage SEND_AUTHORIZED
-These commands NEVER send messages or invite contacts.
+# SEND_AUTHORIZED is intentionally BLOCKED until recipient, route, history and operator authorization are qualified.
+# Do not attempt or automate this transition.
+The CONTENT_APPROVED command never sends a message. Its record is not dispatch authorization.
 Review descriptive feedback via: python -m outreach_agent learning
 After reviewing the sample sizes and tradeoffs, explicitly prioritize one geographic discovery query family with:
 python -m outreach_agent approve-strategy --segment remote

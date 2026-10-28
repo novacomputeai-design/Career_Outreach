@@ -10,6 +10,7 @@ import json
 import re
 import uuid
 from datetime import datetime, timezone
+from zoneinfo import ZoneInfo
 from urllib.parse import urlparse
 from .research import Tavily, Extractor, discover, Source, host, normalize, qualified_source_pair, url_valid
 from .state import PrivateStore
@@ -58,6 +59,11 @@ def research_enrichment(search, lead):
                 break
         if second is None:
             return None, "no_independent_role_corroboration"
+        # Two undated sources cannot independently establish a CURRENT role.
+        # Keep the person in research HOLD instead of promoting a source grade.
+        if (lead.get("primary_role_source_recency") != "DATED_CURRENT"
+                and not second.published_on):
+            return None, "undated_current_role_requires_review"
         routes=search.search('"' + org + '" official website contact',limit=8)
         route=None
         for hit in routes:
@@ -79,6 +85,7 @@ def research_enrichment(search, lead):
         lead=dict(lead)
         lead["second_role_source_url"]=second.url
         lead["second_role_quote"]=passage
+        lead["secondary_role_source_published_on"]=second.published_on
         lead["route_url"]=route.url
         lead["route_type"]="INDIRECT"
         lead["route_note"]="General official organization route, not a verified direct path to this executive"
@@ -88,7 +95,12 @@ def research_enrichment(search, lead):
         return None,"source_error_"+type(exc).__name__
 
 def deterministic_score(lead):
-    """Provisional explainable heuristic, NOT a measure of hiring likelihood."""
+    """Transparent provisional 0–100 career-fit heuristic, not hiring probability.
+
+    Mirrors the rubric's 30/25/20/15/10 caps. The model cannot turn an
+    executive title into proven hiring authority. Scores require independent
+    evidence review and may never override missing-source/novelty HOLD.
+    """
     context=normalize(lead["initiative_quote"]+" "+lead["why_connect"])
     terms={
         "product":["product","platform","portfolio","customer"],
@@ -97,36 +109,58 @@ def deterministic_score(lead):
         "leadership":["strategy","innovation","operational","governance"]
     }
     categories=sum(any(term in context for term in values) for values in terms.values())
-    alignment=min(30,12+categories*4)
+    alignment=min(30,10+categories*4+(4 if len(lead["initiative_quote"])>=90 else 0))
     job=normalize(lead["current_title"])
-    # Seniority is a proxy for potential influence, NOT verified hiring authority.
-    influence=15 if any(k in job for k in ("chief","ceo","president","vice president","vp ","director","head of")) else 8
-    conversation=16 if len(lead["initiative_quote"])>=35 else 11
-    # Indirect general contact is possible but weaker than a confirmed personal introduction.
-    reachability=7 if lead.get("route_type")=="INDIRECT" else 0
+    # Seniority is only a proxy for POTENTIAL influence, never verified hiring.
+    if any(k in job for k in ("chief","ceo","president")):
+        influence=22
+    elif "vice president" in job or job.startswith("vp ") or job.startswith("vp,"):
+        influence=20
+    elif "director" in job or "head of" in job:
+        influence=17
+    else:
+        influence=9
+    conversation=min(20,10+
+        (4 if len(lead["initiative_quote"])>=60 else 0)+
+        (4 if len(lead["why_connect"])>=55 else 0)+
+        (2 if len(lead["initiative_quote"])>=120 else 0))
+    # General corporate form is an INDIRECT route, never a person-specific one.
+    reachability={"INDIRECT":7,"MANUAL":9,"DIRECT":13}.get(lead.get("route_type"),0)
     geography=10 if lead["segment"]=="tucson" else (8 if lead["segment"]=="remote" else 4)
-    values={"alignment":alignment,"influence":influence,"conversation":conversation,
+    scores={"alignment":alignment,"influence":influence,"conversation":conversation,
             "reachability":reachability,"geography":geography}
-    return values,sum(values.values())
+    return scores,sum(scores.values())
 
 def proposal(lead):
-    """Draft is explicitly unsent and deliberately does not claim a vacancy."""
+    """Evidence-specific UNSENT personal career introduction."""
+    from .project_scope import scope_reasons
+    if scope_reasons(lead, require_project_id=True):
+        raise ValueError("Personal career scope HOLD: cannot prepare sales outreach")
+    name=lead["person_name"].split()[0]
+    organization=lead["organization"].strip()
+    quote=" ".join(lead["initiative_quote"].split())
+    reason=" ".join(lead["why_connect"].split()).rstrip(".")
+    if len(quote)<25 or len(reason)<25:
+        raise ValueError("Evidence-specific draft requires a substantive reason")
+    quote=quote[:180].rstrip(" ,;:")
+    reason=reason[:160].rstrip(" ,;:")
     return (
-        "Hello "+lead["person_name"].split()[0]+",\n\n"
-        "I came across your organization's work and thought there could be an interesting "
-        "opportunity to exchange perspectives. My background spans enterprise product "
-        "strategy, technology modernization, and practical AI adoption. "
-        "I'd welcome a brief conversation to learn more about your priorities and "
-        "share relevant experiences if useful.\n\n"
-        "Best regards,\nFadi"
+        f"Hello {name},\n\n"
+        f"I came across {organization}'s work and a specific initiative caught my eye: "
+        f'"{quote}"\n\n'
+        f"My background includes enterprise product strategy, technology "
+        f"modernization and practical AI adoption. One topic I'd enjoy discussing "
+        f"is {reason[0].lower()+reason[1:]}.\n\n"
+        f"Would you be open to a brief conversation to exchange perspectives?\n\n"
+        f"Best regards,\nFadi"
     )
 
 def make_brief(search, extractor, store, target=20, max_queries=14, max_enrich=48, queries=None):
     """Run one daily cycle. Stored recommendations prevent repeated 'new' counts."""
     rid="run-"+uuid.uuid4().hex
     store.start_run(rid)
-    date=datetime.now(timezone.utc).date().isoformat()
-    report={"run_id":rid,"date_utc":date,"target":target,"discoveries":0,
+    date=datetime.now(ZoneInfo("America/Phoenix")).date().isoformat()
+    report={"run_id":rid,"date_local":date,"timezone":"America/Phoenix","target":target,"discoveries":0,
             "new_contact_ready":0,"drafts_sent":0,"confirmed_sent":0,
             "source_corroborated_pending_human_review":0,
             "candidates":[],"held":[],"source_errors":[],"stage":"IN_PROGRESS",
