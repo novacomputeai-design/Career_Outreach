@@ -10,7 +10,7 @@ from outreach_agent.pipeline import make_brief, audit_record, deterministic_scor
 
 ROLE="Avery Example is Vice President Product at Fabricated Systems."
 INIT="Fabricated Systems leads enterprise product platform modernization and AI automation innovation strategy across operating teams."
-S1=Source("https://fabricated-systems.test/leadership", "Leaders", ROLE+" "+INIT, "2026-10-27")
+S1=Source("https://fabricated-systems.test/leadership", "Leaders", ROLE+" "+INIT, "2026-10-27","2026-10-27")
 S2=Source("https://fictional-conference.test/speakers", "Speakers", ROLE+" "+INIT, "2026-10-27")
 CONTACT=Source("https://fabricated-systems.test/contact-us", "Contact Us",
                "Contact the Fabricated Systems organization through this official contact form.", "2026-10-27")
@@ -66,6 +66,34 @@ class AgentRuntimeTests(unittest.TestCase):
         self.assertEqual(result["production_verified_contact_ready"],0)
         saved=self.store.latest_report()
         self.assertEqual(saved["run_id"],result["run_id"])
+
+    def test_undated_sources_do_not_establish_current_role(self):
+        class UndatedSourceSearch(MockSearch):
+            def search(self,query,limit=8):
+                results=super().search(query,limit)
+                return [Source(x.url,x.title,x.text,x.retrieved_on,None) for x in results]
+        result=make_brief(UndatedSourceSearch(),MockExtractor(),self.store,
+                          target=5,max_queries=1,max_enrich=5)
+        self.assertEqual(result["source_corroborated_pending_human_review"],0)
+        self.assertIn("undated_current_role_requires_review",str(result["held"]))
+
+    def test_draft_uses_specific_career_evidence_and_is_not_generic(self):
+        lead=dict(extract_supported(S1,RAW))
+        lead["route_type"]="INDIRECT"
+        from outreach_agent.pipeline import proposal
+        draft=proposal(lead)
+        self.assertIn("enterprise product platform modernization",draft)
+        self.assertIn("Discuss enterprise product strategy",RAW["why_connect"])
+        self.assertIn("discuss enterprise product strategy",draft)
+        self.assertNotIn("Nova Compute",draft)
+        self.assertIn("\\n\\n",draft)
+
+    def test_strong_provisional_score_is_reachable_without_claiming_hiring(self):
+        lead=dict(extract_supported(S1,RAW))
+        lead["route_type"]="INDIRECT"
+        scores,total=deterministic_score(lead)
+        self.assertGreaterEqual(total,85)
+        self.assertLessEqual(scores["influence"],25)
 
     def test_same_person_next_run_is_suppressed(self):
         for day in range(7):
