@@ -7,6 +7,7 @@ import argparse
 import datetime as dt
 import json
 from pathlib import Path
+from outreach_agent.project_scope import scope_reasons
 from urllib.parse import urlparse
 
 CAPS = {"alignment": 30, "influence": 25, "conversation": 20, "reachability": 15, "geography": 10}
@@ -21,7 +22,7 @@ def valid_url(value):
 def evaluate(candidate, known_ids, seen_ids=None):
     """Return (eligible, score, reasons); structural only, not evidence verification."""
     seen_ids = seen_ids if seen_ids is not None else set()
-    errors = []
+    errors = scope_reasons(candidate, require_project_id=True)
     if not isinstance(candidate, dict):
         return False, 0, ["candidate_not_object"]
     person_id = candidate.get("person_id")
