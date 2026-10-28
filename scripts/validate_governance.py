@@ -106,8 +106,9 @@ def validate_governance(root: Path = ROOT) -> list[str]:
         issues.append("private-memory contract lacks operator-only boundary")
     if "Do not invoke this wrapper from Codex" not in memory_skill:
         issues.append("memory skill lacks Codex sandbox DPAPI prohibition")
-    if "before" not in plan.lower() or "governance" not in plan.lower():
-        issues.append("production plan lacks governance timing")
+    priorities = [plan.find(f"**P{n}**") for n in range(6)]
+    if any(i < 0 for i in priorities) or priorities != sorted(priorities):
+        issues.append("production plan must explicitly sequence P0 through P5")
     return issues
 
 if __name__ == "__main__":
