@@ -51,7 +51,7 @@ class OwnerMigrationTests(unittest.TestCase):
             decisions=store.recent_governance_decisions()
             self.assertEqual(len(decisions),1)
             self.assertEqual(decisions[0]["action"],"SCHEMA_MIGRATION")
-            self.assertEqual(decisions[0]["policy_version"],"0.2.1")
+            self.assertEqual(decisions[0]["policy_version"],"0.2.2")
             self.assertEqual(decisions[0]["decision"],"OWNER_INITIATED_APPLIED")
         finally:
             store.close()
