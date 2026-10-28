@@ -75,6 +75,9 @@ def migrate_governance_schema(db_path: str | Path, backups_dir: str | Path,
     if verified["schema_variant"] != SCHEMA_LEGACY:
         raise ValueError("Verified backup does not match legacy schema")
 
+    from .governance import active_policy
+    policy_version = active_policy()["version"]
+
     # The backup exists and both original keys have been checked.
     # Only now is a single additive SQLite DDL statement authorized.
     writer = _connect_existing(source, write=True)
@@ -116,7 +119,7 @@ def migrate_governance_schema(db_path: str | Path, backups_dir: str | Path,
             INSERT INTO governance_decisions
             (person_id,action,policy_version,verdict,occurred_at,encrypted_detail)
             VALUES(?,?,?,?,?,?)
-        """, ("__SYSTEM__", "SCHEMA_MIGRATION", "0.2.1",
+        """, ("__SYSTEM__", "SCHEMA_MIGRATION", policy_version,
               "OWNER_INITIATED_APPLIED", datetime.now(timezone.utc).isoformat(), audit))
         writer.commit()
     except Exception:
