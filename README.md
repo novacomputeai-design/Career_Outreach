@@ -38,7 +38,7 @@ Read [Codex-native activation guide](docs/CODEX_NATIVE_RUN.md) before starting l
 
 1. **P0: Governance policy baseline** — one versioned machine policy, consistent skills/docs and drift regression tests.
 2. **P1–P2: Protected relationship memory** — recovery and controlled owner-context batch reconciliation; do not bypass Codex sandbox DPAPI boundary. See [operator batch proof](docs/OPERATOR_BATCH_SCREENING.md) (not yet Windows-qualified).
-3. **P3: Deterministic governance enforcement** — block unsafe candidate, approval and consent transitions with audit records.
+3. **P3: Deterministic governance enforcement** — initial review and content-approval preconditions plus encrypted audit implemented. **`SEND_AUTHORIZED` is now blocked by code** until independently qualified recipient/route/relationship-history proof and trusted human authorization exist. No sender is integrated.
 4. **P4: Real supervised Codex end-to-end pilot** — research, trusted memory, evidence and qualified human review.
 5. **P5: Production qualification** — seven real daily runs, >=40 independently assessed contacts and operating reliability checks.
 
