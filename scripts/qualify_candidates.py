@@ -6,7 +6,11 @@ NOT INDEPENDENTLY VERIFY THE TRUTH OF LINKS OR CLAIMS.
 import argparse
 import datetime as dt
 import json
+import sys
 from pathlib import Path
+ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
 from outreach_agent.project_scope import scope_reasons
 from urllib.parse import urlparse
 
