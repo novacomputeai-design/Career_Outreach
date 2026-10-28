@@ -170,6 +170,9 @@ def extract_supported(source, extracted):
         "why_connect":extracted["why_connect"].strip(),
         "segment":extracted["segment"], "category":extracted["category"],
         "source_url":source.url, "observed_on":source.retrieved_on,
+        "primary_role_source_recency": (
+            "DATED_CURRENT" if source.published_on else "UNDATED_UNVERIFIED"),
+        "primary_role_source_published_on": source.published_on,
         "title_from_source":True,
         # Never automatically claim the source is current or first-party merely by URL.
         "current_affiliation_confirmed":False, "first_party_confirmed":False
