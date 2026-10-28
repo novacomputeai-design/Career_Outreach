@@ -83,4 +83,28 @@ Expected lookup semantics:
 - `AMBIGUOUS_IDENTITY_HOLD`, `IDENTITY_CONFLICT_HOLD`, and `POSSIBLE_NAMESAKE_HOLD` require manual review.
 - Suppressed identities always block outreach.
 
-Next Codex diagnostic: invoke `$relationship-memory` natively if offered, and perform these two **scoped read-only lookups only** through the wrapper. Show classification only. Do not print private notes, key paths or decrypted keys. Verify no database writes or external outreach. Full secure candidate ingestion, cross-channel novelty and human-reviewed contact readiness are separate uncompleted milestones.
+## Observed Windows Codex sandbox boundary (2026-10-27)
+
+**User-observed:** Both private lookups succeeded when the operator ran the DPAPI wrapper in an ordinary Windows PowerShell session. Both FAILED with `ConvertTo-SecureString` cryptographic operation error when the same wrapper was executed by Codex's sandboxed command runner. Therefore automatic Codex-to-private-history lookups are **BLOCKED**, not passed. The `$relationship-memory` specialist's native activation was also NOT VERIFIED in that session.
+
+**Likely cause, not yet independently proved:** the Codex Windows restricted/elevated sandbox may execute subprocesses under a different Windows user security identity, so CurrentUser DPAPI blobs created under the operator's account cannot be decrypted there. A new `pwsh` process launched *from within Codex* inherits that restricted context. Official background: https://openai.com/index/building-codex-windows-sandbox/
+
+Never work around this by regenerating keys, changing DPAPI to machine-wide scope, passing plaintext keys into Codex, granting the sandbox account access to personal secrets, enabling unrestricted/full-access Codex, or running a decryption helper with elevated privileges at the agent's unrestricted request.
+
+## Safe interim operator-approved workflow
+
+In a normal trusted PowerShell terminal, **outside Codex**, the operator may run:
+
+```powershell
+cd C:\Nova-Skills\Career-Daily-Outreach
+pwsh -NoProfile -File .\scripts\relationship-check.ps1 -PersonName "Josh Lee"
+pwsh -NoProfile -File .\scripts\relationship-check.ps1 -PersonName "David Ebert"
+```
+
+Review results on the host. Optionally supply **only minimal manually approved classifications** to the Codex task (e.g., `Josh Lee: PREVIOUSLY_MET`, `David Ebert: FIRST_LEARNED`). No DPAPI material, raw private records, contact notes, file dumps, or credential content is passed into Codex. Codex may reason about these classifications but MUST mark the private history as **OPERATOR-PROVIDED**, not as agent-verified or full-history reconciled.
+
+Native specialist activation is tested separately using the Codex `/skills` selector or explicit `$relationship-memory` invocation, while forbidding credential/DB tool execution.
+
+## Future qualified automatic bridge
+
+To eliminate manual candidate-by-candidate lookups, design and independently test a dedicated trusted Windows-side broker outside the agent sandbox. It must expose *only* the minimum identity-match/classification response; strictly limit callers, queries, logs, and requests; avoid plaintext keys in Codex's environment or workspace; respect opt-outs; fail closed on missing DPAPI access; and prevent arbitrary raw DB/file access. A host process must never accept unrestricted agent-provided commands. Until the broker has actual Windows qualification evidence, automatic prior-relationship suppression and confirmed NEW counts remain **UNVERIFIED**. Full secure candidate ingestion, cross-channel novelty and human-reviewed contact readiness remain separate milestones.
