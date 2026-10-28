@@ -6,6 +6,9 @@ Target 20 verified **new** individual contacts per day (not messages sent). Sour
 ## Non-negotiable scope preflight
 Before processing candidates or publishing a brief, verify project ID `PERSONAL_CAREER_OUTREACH` and career networking purpose. Reject cross-project sales, federal subcontracting pursuits, RFQs, bid capture and supplier onboarding. Treat scope ambiguity as HOLD for human review and never count it toward 20.
 
+## Mandatory scope preflight
+Every candidate requires project ID `PERSONAL_CAREER_OUTREACH` and an individual-career networking rationale. Cross-project subcontracting, commercial sales and procurement pursuits are HOLD; never report them as career contacts.
+
 ## Required inputs
 Resume-derived profile; date in America/Phoenix; authorized current research tools; private persistent relationship state; optional user-approved prior conversations. The repository itself is PUBLIC and must not store private history.
 
