@@ -409,7 +409,7 @@ class PrivateStore:
                                "WHERE kind='CONTACT_REVIEW_APPROVED'").fetchone()[0]
 
     def reviewed_for_run(self, run_id):
-        """Readiness is counted only after independently recorded human review."""
+        """Count operator-attested source/route/fit reviews, NOT proven-new contact-ready people."""
         row=self.db.execute(
             "SELECT COUNT(DISTINCT r.person_id) FROM recommendations r "
             "JOIN people p ON p.person_id=r.person_id "
