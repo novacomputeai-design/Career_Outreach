@@ -26,7 +26,7 @@ def normalized(text):
     return " ".join(str(text or "").casefold().strip().split())
 
 class PrivateStore:
-    def __init__(self, path, key=None, identity_key=None):
+    def __init__(self, path, key=None, identity_key=None, *, read_only=False):
         self.path = Path(path).expanduser().resolve()
         if self.path == REPO or REPO in self.path.parents:
             raise ValueError("Private database cannot be inside the public repository")
@@ -36,12 +36,21 @@ class PrivateStore:
             raise RuntimeError("Missing encryption and independent >=32-character identity keys")
         self.crypt = Fernet(secret.encode() if isinstance(secret, str) else secret)
         self.identity_key = identity.encode() if isinstance(identity, str) else identity
-        self.path.parent.mkdir(parents=True, exist_ok=True, mode=0o700)
-        self.db = sqlite3.connect(str(self.path))
+        self.read_only = bool(read_only)
+        if self.read_only:
+            if not self.path.is_file():
+                raise FileNotFoundError("Private database unavailable; cannot verify relationship")
+            # SQLite read-only mode avoids initializing or modifying the private schema.
+            # Do not use immutable=1, since that would ignore uncheckpointed WAL updates.
+            self.db = sqlite3.connect(self.path.as_uri() + "?mode=ro", uri=True)
+        else:
+            self.path.parent.mkdir(parents=True, exist_ok=True, mode=0o700)
+            self.db = sqlite3.connect(str(self.path))
         self.db.row_factory = sqlite3.Row
-        if os.name == "posix":
-            os.chmod(self.path, 0o600)
-        self.db.executescript("""
+        if not self.read_only:
+            if os.name == "posix":
+                os.chmod(self.path, 0o600)
+            self.db.executescript("""
             PRAGMA journal_mode=WAL;
             PRAGMA foreign_keys=ON;
             CREATE TABLE IF NOT EXISTS people (
@@ -87,8 +96,8 @@ class PrivateStore:
                 state TEXT NOT NULL,
                 encrypted_summary BLOB
             );
-        """)
-        self.db.commit()
+            """)
+            self.db.commit()
 
     def digest(self, value):
         return hmac.new(self.identity_key, normalized(value).encode(), hashlib.sha256).hexdigest()
