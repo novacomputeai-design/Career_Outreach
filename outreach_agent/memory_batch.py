@@ -19,7 +19,7 @@ def screen_batch(store, input_file: str | Path) -> dict:
     if path.stat().st_size > MAX_BYTES:
         raise ValueError("Private batch input too large (64 KiB max)")
     try:
-        incoming = json.loads(path.read_text(encoding="utf-8"))
+        incoming = json.loads(path.read_text(encoding="utf-8-sig"))
     except (UnicodeError, json.JSONDecodeError) as exc:
         raise ValueError("Invalid private batch JSON") from exc
     if not isinstance(incoming, list) or not 1 <= len(incoming) <= MAX_PEOPLE:
