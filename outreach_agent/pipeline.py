@@ -59,6 +59,11 @@ def research_enrichment(search, lead):
                 break
         if second is None:
             return None, "no_independent_role_corroboration"
+        # Two undated sources cannot independently establish a CURRENT role.
+        # Keep the person in research HOLD instead of promoting a source grade.
+        if (lead.get("primary_role_source_recency") != "DATED_CURRENT"
+                and not second.published_on):
+            return None, "undated_current_role_requires_review"
         routes=search.search('"' + org + '" official website contact',limit=8)
         route=None
         for hit in routes:
@@ -80,6 +85,7 @@ def research_enrichment(search, lead):
         lead=dict(lead)
         lead["second_role_source_url"]=second.url
         lead["second_role_quote"]=passage
+        lead["secondary_role_source_published_on"]=second.published_on
         lead["route_url"]=route.url
         lead["route_type"]="INDIRECT"
         lead["route_note"]="General official organization route, not a verified direct path to this executive"
