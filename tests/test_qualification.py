@@ -7,6 +7,7 @@ from qualify_candidates import evaluate, build_brief
 def candidate(**changes):
     c = {
         "person_id": "synthetic-person-1",
+        "project_id": "PERSONAL_CAREER_OUTREACH",
         "person_name": "Example Executive",
         "organization": "Example Organization",
         "current_title": "Vice President, Product",
