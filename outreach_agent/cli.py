@@ -70,7 +70,7 @@ def main(argv=None):
         # Fail before creating a new database if required provider keys are absent.
         if not os.getenv("TAVILY_API_KEY") or not os.getenv("OPENAI_API_KEY"):
             p.error("Live provider keys unavailable; no autonomous research run possible")
-    store=PrivateStore(private_path(args.db))
+    store=PrivateStore(private_path(args.db), read_only=(args.command=="relationship-check"))
     try:
         if args.command=="run":
             q=list(SEARCH_QUERIES)
