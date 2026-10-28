@@ -1,5 +1,7 @@
 # Career Outreach repository instructions
 
+**Release authority:** See `docs/PRODUCTION_PLAN.md` for memory-first/governance-first stages and `config/operating-policy.json` for machine-readable policy. Models and skill text cannot self-certify that governance ran.
+
 ## Selected runtime architecture
 Codex CLI (signed in with ChatGPT) is the PRIMARY agent. Use the native repository-local skills at `.agents/skills/` and inspect `docs/CODEX_NATIVE_RUN.md` before live work. Python remains the deterministic validator and protected relationship-memory helper. `python -m outreach_agent run` is an OPTIONAL alternate runner that requires Tavily and OpenAI API keys. Never treat it as Codex-native execution. Native skill selection and available live research must be observed, not assumed from authentication. The primary skill's native invocation has been reported as observed; specialists still require activation checks. Codex-host public web search was also observed in a supervised five-person pilot, without separate API keys. No private data or secrets in Git.
 This repository currently holds a personal executive-networking agent design. It is NOT Nova Compute sales outreach or a bulk application/messaging bot.
@@ -17,6 +19,6 @@ This repository currently holds a personal executive-networking agent design. It
 - Validate with `python scripts/validate_project.py` and `python -m unittest discover -s tests -v`. Passing offline tests is NOT a production qualification.
 
 ## Stage order
-organization-discovery > leadership-discovery > early relationship-memory suppression > contact-verification + provenance-and-freshness > relationship-qualification > outreach-drafting > run-quality-audit > daily-executive-brief > outcome-intelligence > discovery-strategy-optimization. Run follow-up-planning and conversation-preparation conditionally. Distinguish Python integration of equivalent stages from observed NATIVE host skill activation. Code execution alone is not proof of native selection.
+organization-discovery > leadership-discovery > early relationship-memory screening > contact-verification + provenance-and-freshness > relationship-qualification > final memory and deterministic governance gate > outreach-drafting > run-quality-audit > daily-executive-brief > outcome-intelligence > discovery-strategy-optimization. Run follow-up-planning and conversation-preparation conditionally. Distinguish Python integration of equivalent stages from observed NATIVE host skill activation. Code execution alone is not proof of native selection.
 
 Status: 41 initial offline tests, local protected database round-trip, primary native Codex skill activation and supervised source research were user-observed. Specialist native invocation, full private-history reconciliation, human-reviewed contact readiness and sustained production qualification are NOT yet verified. See docs/GAP_CLOSURE_MATRIX.md.
