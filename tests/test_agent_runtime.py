@@ -86,7 +86,7 @@ class AgentRuntimeTests(unittest.TestCase):
         self.assertIn("Discuss enterprise product strategy",RAW["why_connect"])
         self.assertIn("discuss enterprise product strategy",draft)
         self.assertNotIn("Nova Compute",draft)
-        self.assertIn("\\n\\n",draft)
+        self.assertIn(chr(10)*2,draft)
 
     def test_strong_provisional_score_is_reachable_without_claiming_hiring(self):
         lead=dict(extract_supported(S1,RAW))
