@@ -41,3 +41,9 @@ A correct daily brief MUST show the career project ID, America/Phoenix date, no 
 Project-boundary adversarial test: presenting a realistic-looking Nova federal award/subcontracting lead as an executive career recommendation must be rejected. A self-declared career project ID accompanying commercial intent must also HOLD. This is a defense-in-depth rule, not permission to copy data from another project.
 
 **Release rule:** Passing CI or a successful synthetic test is necessary but insufficient. The P4/P5 gates require real user-supervised field evidence before production scheduling. Do not unconditionally schedule a fallback API/Python runner and claim it is the Codex-native 14-skill workflow.
+
+## Windows regression remediation — 2026-10-28
+
+Owner Windows PowerShell first validated skill and governance structure but its 95-test suite reported 14 ERROR outcomes. The causes were unavailable IANA timezone data for `America/Phoenix` (6 cases) and unclosed synthetic `sqlite3.connect()` handles locking ephemeral databases on Windows during temporary-directory cleanup (8 cases). This was not evidence of real relationship database corruption. The patch adds the `tzdata` runtime dependency plus a strictly contemporary Phoenix UTC-07:00 fallback when the host has no zoneinfo database, closes each synthetic SQLite connection explicitly, and requires Windows as well as Linux GitHub Actions validation. Owner Windows re-test is still REQUIRED before marking this operationally qualified.
+
+Safe owner verification after merge (normal PowerShell, no Codex/DPAPI keys): `python -m pip install -r requirements.txt`, then both structural validators and `python -m unittest discover -s tests -q`. No live migration, contact lookup, outreach or sending is part of these tests.
