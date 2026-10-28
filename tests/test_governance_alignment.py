@@ -70,5 +70,19 @@ class GovernanceAlignmentTests(unittest.TestCase):
             self.assertIn("Codex memory access policy drift", errors)
             self.assertIn("missing mandatory production-release gates", errors)
 
+    def test_authorization_rule_cannot_be_switched_on_without_failure(self):
+        with tempfile.TemporaryDirectory() as d:
+            root = Path(d)
+            for rel in DOC_PATHS:
+                target = root / rel
+                target.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copy2(ROOT / rel, target)
+            policy = root / "config/operating-policy.json"
+            data = json.loads(policy.read_text(encoding="utf-8"))
+            data["governance"]["send_authorization_gate_status"] = "ALLOW"
+            policy.write_text(json.dumps(data), encoding="utf-8")
+            self.assertIn("send authorization policy must remain blocked until implementation",
+                          validate_governance(root))
+
 if __name__ == "__main__":
     unittest.main()

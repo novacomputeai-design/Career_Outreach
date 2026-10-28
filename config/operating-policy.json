@@ -1,5 +1,5 @@
 {
-  "version": "0.2.0",
+  "version": "0.2.1",
   "timezone": "America/Phoenix",
   "cadence": "daily",
   "daily_target_new_people": 20,
@@ -43,7 +43,9 @@
     "opt_out": "SUPPRESS",
     "existing_relationship": "FOLLOW_UP_NOT_NEW",
     "seen_before_this_run": "NOT_NEW_THIS_RUN",
-    "cannot_exceed_target_without_human_authorization": true
+    "cannot_exceed_target_without_human_authorization": true,
+    "send_authorization_requires_qualified_identity_route_novelty": true,
+    "send_authorization_gate_status": "BLOCKED_PENDING_RECIPIENT_ROUTE_HISTORY_PROOF"
   },
   "memory": {
     "classifications": [

@@ -24,7 +24,7 @@ Personal executive career networking, Tucson/Southern Arizona first, applicable 
 | **P0** | **Versioned policy baseline + instruction reconciliation** | Single policy authority, consistent `AGENTS.md`, skills, private-memory contract, runbook and operating docs; CI tests detect critical contradictions | **IN PROGRESS** |
 | **P1** | **Memory integrity and recovery** | Stable identities, prior discoveries, established contacts, suppression, encrypted data, backup/restore with protected key recovery and Windows tests | **PARTIAL** |
 | **P2** | **Governed private batch reconciliation** | Trusted owner-context batch lookup OUTSIDE Codex DPAPI sandbox; bounded input, minimal classification output, namesake/opt-out HOLD, no plaintext keys to Codex; then independently qualify a narrowly scoped broker if truly needed | **OPERATOR BATCH PASSED ON WINDOWS; automatic broker NOT IMPLEMENTED** |
-| **P3** | **Deterministic governance enforcement and audit** | Single fail-closed decision module wired to candidate-counting, human review and approval-state transitions; auditable policy version, allow/hold/reject reasons, source and reviewer provenance; adversarial tests | **FIRST REVIEW/APPROVAL GATES IMPLEMENTED; full enforcement NOT QUALIFIED** |
+| **P3** | **Deterministic governance enforcement and audit** | Single fail-closed decision module wired to candidate-counting, human review and approval-state transitions; auditable policy version, allow/hold/reject reasons, source and reviewer provenance; adversarial tests | **INITIAL REVIEW/CONTENT GATES CODED; SEND_AUTHORIZED BLOCKED; full enforcement NOT QUALIFIED** |
 | **P4** | **Supervised Codex + skills end-to-end pilot** | Real discovery → evidence check → protected memory reconciliation → gate → independent review → quality brief, no sending. Capture host-native specialist evidence if exposed; otherwise NOT VERIFIED | **NOT YET DEMONSTRATED END-TO-END** |
 | **P5** | **Production qualification / scheduling** | Seven consecutive actual daily runs, >=40 independently assessed real people, no invented contact-ready counts, recovery/incident drill, monitoring, windows-task qualification appropriate to Codex native path, zero unauthorized sends | **NOT STARTED** |
 
@@ -38,7 +38,7 @@ Personal executive career networking, Tucson/Southern Arizona first, applicable 
 - A five-person supervised Codex web search returned two source-based provisional leads, three held, zero confirmed NEW/contact-ready, zero outreach.
 - GitHub CI is offline/structural evidence only. Repo remained PUBLIC at last check; secrets and relationship state are strictly outside it.
 - Protected operator-controlled batch memory screening was verified with real owner-context Windows DPAPI lookups (Josh Lee, David Ebert, synthetic unknown). A fully automatic broker, complete cross-channel memory/novelty, retention/deletion, secure recovery and field qualification remain unverified.
-- First deterministic stage-specific review and draft-approval guards are implemented with policy-versioned encrypted audit decisions. The local run-readiness report is now fail-closed: manual source/route/fit review counts are separate from confirmed-new contact-ready (always zero until complete novelty and independent human-verification gates are qualified). This is NOT proof of actual human identity, current external source truth, recipient/route-bound send authorization or full CONTACT_READY eligibility. No sender exists.
+- First deterministic stage-specific review and draft-approval guards are implemented with policy-versioned encrypted audit decisions. The local run-readiness report is now fail-closed: manual source/route/fit review counts are separate from confirmed-new contact-ready (always zero until complete novelty and independent human-verification gates are qualified). This is NOT proof of actual human identity, current external source truth, recipient/route-bound send authorization or full CONTACT_READY eligibility. The local SEND_AUTHORIZED transition is fail-closed until those prerequisites are qualified. No sender exists.
 
 ## Counter contracts and state distinctions
 
@@ -51,7 +51,7 @@ Personal executive career networking, Tucson/Southern Arizona first, applicable 
 | NOVELTY_UNVERIFIED | Private memory unavailable or incomplete, or no independent prior-history check |
 | NEW_CONTACT_READY | Explicitly human reviewed, source/route/novelty and governance gates passed with per-run evidence |
 | APPROVED_DRAFT | Human approved the content of a specific draft; not permission to send |
-| SEND_AUTHORIZED | Separate human permission for that exact person, draft hash and route; no agent sender exists |
+| SEND_AUTHORIZED | **NOT CURRENTLY GRANTABLE.** It requires separate human permission for an exact person, draft hash and verified route once trusted history and operator controls are qualified. No agent sender exists. |
 
 A person previously discovered in another run cannot be counted as a new discovery again. User-reported first learning does not automatically confer independent review, verified reachability or permission to contact.
 

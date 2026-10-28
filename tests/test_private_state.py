@@ -72,7 +72,12 @@ class MemoryTests(unittest.TestCase):
         self.assertTrue(sha)
         with self.assertRaises(ValueError):
             self.store.approval(pid,draft+" changed","SEND_AUTHORIZED")
-        self.assertEqual(self.store.approval(pid,draft,"SEND_AUTHORIZED"),sha)
+        with self.assertRaisesRegex(ValueError,"RECIPIENT_ROUTE_HISTORY_AUTHORIZATION_NOT_QUALIFIED"):
+            self.store.approval(pid,draft,"SEND_AUTHORIZED")
+        self.assertEqual(len(sha),64)
+        audit=self.store.recent_governance_decisions()
+        self.assertEqual(audit[0]["decision"],"HOLD")
+        self.assertIn("RECIPIENT_ROUTE_HISTORY_AUTHORIZATION_NOT_QUALIFIED",audit[0]["reason_codes"])
 
     def test_real_contact_required_for_reply(self):
         pid=self.store.register(self.person)

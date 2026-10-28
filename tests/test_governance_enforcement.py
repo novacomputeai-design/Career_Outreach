@@ -51,7 +51,7 @@ class EnforcementTests(unittest.TestCase):
         self.assertEqual(self.store.human_reviewed_count(),0)
         audit=self.store.recent_governance_decisions()
         self.assertEqual([r["decision"] for r in audit], ["HOLD","HOLD"])
-        self.assertTrue(all(r["policy_version"]=="0.2.0" for r in audit))
+        self.assertTrue(all(r["policy_version"]=="0.2.1" for r in audit))
 
     def test_approval_requires_separate_review_and_exact_draft_hash(self):
         pid=self.store.register(vetted_synthetic())
@@ -64,11 +64,17 @@ class EnforcementTests(unittest.TestCase):
         sha=self.store.approval(pid,"Hello","CONTENT_APPROVED")
         with self.assertRaisesRegex(ValueError,"EXACT_DRAFT_CONTENT_NOT_APPROVED"):
             self.store.approval(pid,"Modified", "SEND_AUTHORIZED")
-        self.assertEqual(sha,self.store.approval(pid,"Hello","SEND_AUTHORIZED"))
+        with self.assertRaisesRegex(ValueError,"RECIPIENT_ROUTE_HISTORY_AUTHORIZATION_NOT_QUALIFIED"):
+            self.store.approval(pid,"Hello","SEND_AUTHORIZED")
+        self.assertEqual(len(sha),64)
+        self.assertEqual(
+            self.store.db.execute("SELECT COUNT(*) FROM approvals WHERE sending_authorized IS NOT NULL").fetchone()[0],
+            0)
         audit=self.store.recent_governance_decisions()
-        self.assertEqual(audit[0]["decision"],"ALLOW_APPROVAL_RECORD")
+        self.assertEqual(audit[0]["decision"],"HOLD")
+        self.assertTrue(any(item["action"]=="CONTENT_APPROVED" and item["decision"]=="ALLOW_APPROVAL_RECORD" for item in audit))
         self.assertTrue(all("Hello" not in str(r) for r in audit))
-        self.assertTrue(all(r["policy_version"]=="0.2.0" for r in audit))
+        self.assertTrue(all(r["policy_version"]=="0.2.1" for r in audit))
 
     def test_rejected_unverified_and_existing_people(self):
         poor=vetted_synthetic()

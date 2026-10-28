@@ -1,6 +1,6 @@
 # Daily run contract
 
-**Authority:** `config/operating-policy.json` v0.2.0; `docs/PRODUCTION_PLAN.md`. Memory screening and deterministic governance are mandatory early release gates; written policy is not equivalent to live enforcement.
+**Authority:** `config/operating-policy.json` v0.2.1; `docs/PRODUCTION_PLAN.md`. Memory screening and deterministic governance are mandatory early release gates; written policy is not equivalent to live enforcement.
 Target 20 verified **new** individual contacts per day (not messages sent). Source research may need many more raw candidates; do not assume any source volume guarantees yield.
 
 ## Required inputs
@@ -18,7 +18,7 @@ Resume-derived profile; date in America/Phoenix; authorized current research too
 9. **Daily brief:** Report up to 20 independently human-reviewed NEW contacts, source-corroborated pending reviews, prior discoveries and follow-ups separately, true shortfalls and blocked checks.
 
 ## State definitions
-DISCOVERED -> VERIFIED -> QUALIFIED -> CONTACT_READY -> DRAFTED -> DRAFT_APPROVED -> SEND_AUTHORIZED -> CONTACTED -> REPLIED -> MEETING -> FOLLOW_UP_PENDING -> CLOSED. Alternative states: HOLD_UNVERIFIED, DUPLICATE, SUPPRESSED, OPTED_OUT, NOT_RELEVANT.
+DISCOVERED -> VERIFIED -> QUALIFIED -> CONTACT_READY -> DRAFTED -> DRAFT_APPROVED -> SEND_AUTHORIZED -> CONTACTED -> REPLIED -> MEETING -> FOLLOW_UP_PENDING -> CLOSED. **Target state machine only:** CONTACT_READY and SEND_AUTHORIZED are not production-qualified. The current implementation hard-blocks SEND_AUTHORIZED pending trusted history, verified recipient/route and human-operator authentication. Alternative states: HOLD_UNVERIFIED, DUPLICATE, SUPPRESSED, OPTED_OUT, NOT_RELEVANT.
 Only observed human acts can authorize outbound transmission. If durable private history is unavailable, output novelty=UNVERIFIED and 0 confirmed NEW; do not presume an unfamiliar person was never contacted.
 
 ## Expected brief counters
