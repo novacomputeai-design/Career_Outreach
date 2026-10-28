@@ -126,7 +126,7 @@ def deterministic_score(lead):
     return scores,sum(scores.values())
 
 def proposal(lead):
-    """Evidence-specific UNSENT draft; never a generic bulk introduction."""
+    """Evidence-specific UNSENT personal career introduction."""
     from .project_scope import scope_reasons
     if scope_reasons(lead, require_project_id=True):
         raise ValueError("Personal career scope HOLD: cannot prepare sales outreach")
@@ -136,19 +136,17 @@ def proposal(lead):
     reason=" ".join(lead["why_connect"].split()).rstrip(".")
     if len(quote)<25 or len(reason)<25:
         raise ValueError("Evidence-specific draft requires a substantive reason")
-    # Do not blindly paste an unbounded externally supplied text block into
-    # an outbound message. Exact content still requires independent review.
     quote=quote[:180].rstrip(" ,;:")
     reason=reason[:160].rstrip(" ,;:")
     return (
-        f"Hello {name},\\n\\n"
+        f"Hello {name},\n\n"
         f"I came across {organization}'s work and a specific initiative caught my eye: "
-        f"\\\"{quote}\\\"\\n\\n"
-        f"My background includes leading enterprise product strategy, technology "
+        f'"{quote}"\n\n'
+        f"My background includes enterprise product strategy, technology "
         f"modernization and practical AI adoption. One topic I'd enjoy discussing "
-        f"is {reason[0].lower()+reason[1:]}.\\n\\n"
-        f"Would you be open to a brief conversation to exchange perspectives?\\n\\n"
-        f"Best regards,\\nFadi"
+        f"is {reason[0].lower()+reason[1:]}.\n\n"
+        f"Would you be open to a brief conversation to exchange perspectives?\n\n"
+        f"Best regards,\nFadi"
     )
 
 def make_brief(search, extractor, store, target=20, max_queries=14, max_enrich=48, queries=None):
