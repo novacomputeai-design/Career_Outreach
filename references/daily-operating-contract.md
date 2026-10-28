@@ -1,7 +1,10 @@
 # Daily run contract
 
-**Authority:** `config/operating-policy.json` v0.2.1; `docs/PRODUCTION_PLAN.md`. Memory screening and deterministic governance are mandatory early release gates; written policy is not equivalent to live enforcement.
+**Authority:** `config/operating-policy.json` v0.2.2; `docs/PRODUCTION_PLAN.md`. Memory screening and deterministic governance are mandatory early release gates; written policy is not equivalent to live enforcement.
 Target 20 verified **new** individual contacts per day (not messages sent). Source research may need many more raw candidates; do not assume any source volume guarantees yield.
+
+## Non-negotiable scope preflight
+Before processing candidates or publishing a brief, verify project ID `PERSONAL_CAREER_OUTREACH` and career networking purpose. Reject cross-project sales, federal subcontracting pursuits, RFQs, bid capture and supplier onboarding. Treat scope ambiguity as HOLD for human review and never count it toward 20.
 
 ## Required inputs
 Resume-derived profile; date in America/Phoenix; authorized current research tools; private persistent relationship state; optional user-approved prior conversations. The repository itself is PUBLIC and must not store private history.
