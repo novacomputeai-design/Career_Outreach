@@ -8,6 +8,8 @@ Personal executive career networking, Tucson/Southern Arizona first, applicable 
 
 **New P0 hardening:** policy v0.2.2 adds personal career scope identification and fail-closed cross-project tripwires; existing database opening verifies the state/identity key pairing against ALL stored person records; writable opening of a legacy DB no longer silently creates the audit table. The owner-approved live migration has NOT been run and must remain separate. These checks are structural and must still pass Windows and live-host qualification.
 
+**P0 hardening v0.2.2:** Adds explicit career project scope, per-record HMAC key binding on existing databases and refusal to open legacy stores for writes before an owner-approved migration. Live Windows qualification and authentic operator review remain separate; no live migration or sending is authorized here.
+
 **One authority for machine-governed policy:** `config/operating-policy.json` (versioned). All documents, skills, validators, databases and daily reports must conform to it; differences are release blockers. A model's assertion that a check passed is not sufficient evidence that a deterministic runtime gate ran.
 
 ## Layered target architecture
