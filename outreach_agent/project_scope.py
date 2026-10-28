@@ -9,7 +9,7 @@ import re
 
 PROJECT_ID = "PERSONAL_CAREER_OUTREACH"
 BUSINESS_FIELDS = frozenset({
-    "prime_contractor", "prime_contract", "contract_award_id", "award_pi id",
+    "prime_contractor", "prime_contract", "contract_award_id", "award_piid",
     "subcontract_opportunity", "subcontract_budget", "subcontracting_stage",
     "capture_stage", "supplier_registration", "prime_teaming_route",
     "rfq_number", "federal_capture_status", "subcontract_pursuit",
