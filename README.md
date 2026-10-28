@@ -42,7 +42,7 @@ Read [Codex-native activation guide](docs/CODEX_NATIVE_RUN.md) before starting l
 4. **P4: Real supervised Codex end-to-end pilot** — research, trusted memory, evidence and qualified human review.
 5. **P5: Production qualification** — seven real daily runs, >=40 independently assessed contacts and operating reliability checks.
 
-See [production plan](docs/PRODUCTION_PLAN.md) and [current gap closure](docs/GAP_CLOSURE_MATRIX.md). No automatic sending.
+Machine-readable authority: [config/operating-policy.json](config/operating-policy.json). See [production plan](docs/PRODUCTION_PLAN.md) and [current gap closure](docs/GAP_CLOSURE_MATRIX.md). No automatic sending.
 
 ## Optional Tavily/OpenAI Python runner (NOT the selected Codex architecture)
 
