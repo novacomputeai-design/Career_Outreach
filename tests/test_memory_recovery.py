@@ -2,6 +2,7 @@
 import tempfile
 import unittest
 import sqlite3
+from contextlib import closing
 from pathlib import Path
 from cryptography.fernet import Fernet
 
@@ -60,7 +61,7 @@ class MemoryRecoveryTests(unittest.TestCase):
         # Reproduce the user's historical database created before governance_decisions.
         # DROP is done ONLY to a newly created synthetic test database.
         self.source.close()
-        with sqlite3.connect(self.path) as writer:
+        with closing(sqlite3.connect(self.path)) as writer:
             writer.execute("DROP TABLE governance_decisions")
         self.original_bytes = self.path.read_bytes()
         self.source = PrivateStore(self.path, key=self.state_key,
@@ -90,7 +91,7 @@ class MemoryRecoveryTests(unittest.TestCase):
 
     def test_missing_original_base_table_remains_invalid(self):
         self.source.close()
-        with sqlite3.connect(self.path) as writer:
+        with closing(sqlite3.connect(self.path)) as writer:
             writer.execute("DROP TABLE preferences")
         self.source = PrivateStore(self.path, key=self.state_key,
                                    identity_key=self.identity, read_only=True)
