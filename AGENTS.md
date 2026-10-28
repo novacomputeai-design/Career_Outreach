@@ -1,5 +1,7 @@
 # Career Outreach repository instructions
 
+**Hard project isolation:** This public repository is solely `PERSONAL_CAREER_OUTREACH`. The versioned policy and deterministic scope gate must HOLD Nova commercial sales, prime-contractor capture, subcontracting bids, supplier registrations, or other business-development outreach. Never use Nova Federal Subcontracting Google Drive documents, lists or memory here. A mixed-purpose request is a STOP/HOLD, not permission to import. These are tripwires, not independent intent verification.
+
 **Legacy governance table:** Owner-Windows backup and restore-new succeeded for the pre-audit private database. This existing user store lacks the newer governance decisions table; treat live governance event storage as UNQUALIFIED until a separate operator-approved migration passes on the recovery copy and then live. See `docs/OWNER_GOVERNANCE_SCHEMA_MIGRATION.md`. Never let Codex invoke owner-only schema modifications.
 
 **Protected memory recovery:** Snapshot/verification/restore-new tools are OWNER-ONLY in normal trusted Windows PowerShell (`docs/PROTECTED_MEMORY_RECOVERY.md`). NEVER invoke DPAPI key loading in Codex's sandbox. No plaintext snapshots, backups or private keys in Git. Do not claim complete disaster recovery from same-profile backups alone.
