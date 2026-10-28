@@ -25,6 +25,12 @@ def validate_governance(root: Path = ROOT) -> list[str]:
     version = str(p.get("version", ""))
     if not re.fullmatch(r"\d+\.\d+\.\d+", version):
         issues.append("policy must have semantic version")
+    project = p.get("project", {})
+    if (project.get("id") != "PERSONAL_CAREER_OUTREACH" or
+            project.get("mission") != "individual_professional_career_networking" or
+            project.get("commercial_sales_outreach_prohibited") is not True or
+            project.get("project_scope_failure") != "HOLD"):
+        issues.append("project must remain personal career outreach, not business capture")
     if p.get("daily_target_new_people") != 20:
         issues.append("daily research target drift")
     if p.get("minimum_qualification_score") != 70:
