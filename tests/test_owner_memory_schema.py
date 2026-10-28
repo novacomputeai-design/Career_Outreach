@@ -1,6 +1,7 @@
 """Synthetic legacy-schema migration qualification: never touches actual user memory."""
 from __future__ import annotations
 import sqlite3
+from contextlib import closing
 import tempfile
 import unittest
 from pathlib import Path
@@ -23,7 +24,7 @@ class OwnerMigrationTests(unittest.TestCase):
         owner.remember_relationship("Avery Synthetic", "FIRST_LEARNED")
         owner.set_strategy("remote")
         owner.close()
-        with sqlite3.connect(self.dbpath) as db:
+        with closing(sqlite3.connect(self.dbpath)) as db:
             db.execute("DROP TABLE governance_decisions")
         self.before = inspect_memory_schema(self.dbpath)
 
@@ -71,7 +72,7 @@ class OwnerMigrationTests(unittest.TestCase):
         self.assertEqual(inspect_memory_schema(self.dbpath)["schema_variant"],SCHEMA_LEGACY)
 
     def test_missing_original_core_table_holds(self):
-        with sqlite3.connect(self.dbpath) as db:
+        with closing(sqlite3.connect(self.dbpath)) as db:
             db.execute("DROP TABLE preferences")
         with self.assertRaisesRegex(ValueError,"required private-memory tables"):
             migrate_governance_schema(self.dbpath,self.backups,self.key,self.identity)
