@@ -37,7 +37,7 @@ Read [Codex-native activation guide](docs/CODEX_NATIVE_RUN.md) before starting l
 ## Production plan — mandatory sequence
 
 1. **P0: Governance policy baseline** — one versioned machine policy, consistent skills/docs and drift regression tests.
-2. **P1–P2: Protected relationship memory** — encrypted backup/restore-new tools and owner-context batch screening; Windows backup/recovery drill and independent key recovery remain unqualified. See [protected memory recovery](docs/PROTECTED_MEMORY_RECOVERY.md) and [operator batch screening](docs/OPERATOR_BATCH_SCREENING.md).
+2. **P1–P2: Protected relationship memory** — encrypted backup/restore-new tools and owner-context batch screening; Owner-Windows same-account backup/verify/restore-new PASSED; portable key recovery after device loss remains unqualified. Historical user DB still needs an explicit owner-approved audit-table migration, first tested on recovered copy. See [protected memory recovery](docs/PROTECTED_MEMORY_RECOVERY.md) and [operator batch screening](docs/OPERATOR_BATCH_SCREENING.md).
 3. **P3: Deterministic governance enforcement** — initial review and content-approval preconditions plus encrypted audit implemented. **`SEND_AUTHORIZED` is now blocked by code** until independently qualified recipient/route/relationship-history proof and trusted human authorization exist. No sender is integrated.
 4. **P4: Real supervised Codex end-to-end pilot** — research, trusted memory, evidence and qualified human review.
 5. **P5: Production qualification** — seven real daily runs, >=40 independently assessed contacts and operating reliability checks.

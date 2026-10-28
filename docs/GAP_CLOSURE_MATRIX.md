@@ -6,7 +6,7 @@ Authority: `config/operating-policy.json` v0.2.1 and `docs/PRODUCTION_PLAN.md`. 
 |---|---|---|
 | Codex | CLI v0.164.0 authenticated using ChatGPT; primary skill invocation reported | Specialist native invocation NOT VERIFIED |
 | Live research | Supervised five-person Codex web pilot; two provisional, three held, 0 new contact-ready | Source/route review and full skill integration |
-| Private memory | Encrypted SQLite + HMAC identity; owner-shell DPAPI and batch passed on Windows; encrypted online snapshot/verify/restore-new coded | Owner-Windows recovery drill, resilient key recovery beyond current Windows account, retention and alias handling |
+| Private memory | Encrypted SQLite + HMAC identity; owner-shell DPAPI and batch passed on Windows; encrypted online snapshot/verify/restore-new coded | Owner Windows same-account encrypted recovery PASSED; portable key recovery beyond the Windows account, schema migration, retention and alias handling remain |
 | Automatic Codex memory | User tried same DPAPI wrapper inside sandbox | **BLOCKED:** Windows DPAPI decrypt failure; keep sandbox and keys protected |
 | Operator protected batch screening | Bounded owner-context batch code, read-only SQLite, synthetic tests added | Owner-Windows batch proof PASSED for three names; operator-controlled, **not** a Codex automatic broker |
 | Governance | Versioned rules, opt-outs, separate draft-content and send-authorization records | First structural + operator-attested review + exact-draft approval guards with policy-versioned encrypted audit coded; human identity/provenance, trusted novelty, route-bound sending and full CONTACT_READY gate **NOT QUALIFIED**; SEND_AUTHORIZED now fails closed regardless of draft content approval |
