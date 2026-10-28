@@ -1,6 +1,6 @@
 # Career Outreach — Production Plan (authoritative sequence)
 
-Status date: 2026-10-28. **NOT PRODUCTION QUALIFIED.**
+Status date: 2026-10-28. **NOT PRODUCTION QUALIFIED.** See `docs/INDEPENDENT_CAREER_HARDENING_AUDIT.md` for the remediation evidence and non-waivable field gates.
 
 ## Goal and execution authority
 
