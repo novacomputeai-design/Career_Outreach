@@ -10,6 +10,7 @@ from outreach_agent.governance import active_policy, structural_review_gate
 
 def vetted_synthetic():
     return {
+        "project_id":"PERSONAL_CAREER_OUTREACH",
         "person_name":"Morgan Synthetic", "organization":"Fabricated Innovation",
         "current_title":"Head of Product",
         "role_quote":"Morgan Synthetic leads product at Fabricated Innovation.",
