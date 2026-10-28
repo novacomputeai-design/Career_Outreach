@@ -7,6 +7,8 @@ A Tucson-first, industry-agnostic, daily executive-networking research system. *
 ## Purpose
 Identify relevant organizational leaders, actual or potential hiring influencers, and strategic connectors for thoughtful professional conversations. This is a personal career/networking workflow, **not** Nova Compute business sales and **not** an automated application or bulk outreach bot.
 
+**Audit and release evidence:** [Independent career hardening audit](docs/INDEPENDENT_CAREER_HARDENING_AUDIT.md). Static/CI passing does not authorize production or a scheduler.
+
 ## Repository structure
 - `AGENTS.md` — authority and repo rules.
 - `.agents/skills/` — 14 repository-local Agent Skills, including the daily orchestration and learning skills.
