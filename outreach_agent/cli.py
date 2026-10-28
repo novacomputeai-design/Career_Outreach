@@ -4,6 +4,7 @@ import json
 import os
 from pathlib import Path
 from .state import PrivateStore
+from .memory_batch import screen_batch
 from .pipeline import make_brief
 from .learning import summarize, propose_strategy
 from .research import Tavily, Extractor, SEARCH_QUERIES, BoundedSearch, BoundedExtractor
@@ -55,6 +56,8 @@ def main(argv=None):
     lookup=sub.add_parser("relationship-check",help="Minimal read-only private novelty/suppression check")
     lookup.add_argument("--person-name",required=True)
     lookup.add_argument("--profile-url")
+    batch=sub.add_parser("relationship-batch-check",help="Operator-only private batch, read-only, no sending")
+    batch.add_argument("--input",required=True,help="Private JSON input outside Git checkout")
     status=sub.add_parser("run-readiness",help="Count independently human-reviewed and unsuppressed prospects in a prior run")
     status.add_argument("--run-id",required=True)
     restore=sub.add_parser("restore-report",help="Recover latest encrypted run after an output-file failure")
@@ -70,7 +73,7 @@ def main(argv=None):
         # Fail before creating a new database if required provider keys are absent.
         if not os.getenv("TAVILY_API_KEY") or not os.getenv("OPENAI_API_KEY"):
             p.error("Live provider keys unavailable; no autonomous research run possible")
-    store=PrivateStore(private_path(args.db), read_only=(args.command=="relationship-check"))
+    store=PrivateStore(private_path(args.db), read_only=(args.command in ("relationship-check","relationship-batch-check")))
     try:
         if args.command=="run":
             q=list(SEARCH_QUERIES)
@@ -119,6 +122,8 @@ def main(argv=None):
             emit(store.remember_relationship(name,relationship,profile_url=profile))
         elif args.command=="relationship-check":
             emit(store.check_relationship(args.person_name,profile_url=args.profile_url))
+        elif args.command=="relationship-batch-check":
+            emit(screen_batch(store,private_path(args.input)))
         elif args.command=="learning":
             counts=store.counts()
             data=summarize(counts)
