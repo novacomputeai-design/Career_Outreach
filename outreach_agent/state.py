@@ -96,6 +96,15 @@ class PrivateStore:
                 state TEXT NOT NULL,
                 encrypted_summary BLOB
             );
+            CREATE TABLE IF NOT EXISTS governance_decisions (
+                audit_id INTEGER PRIMARY KEY AUTOINCREMENT,
+                person_id TEXT NOT NULL,
+                action TEXT NOT NULL,
+                policy_version TEXT NOT NULL,
+                verdict TEXT NOT NULL,
+                occurred_at TEXT NOT NULL,
+                encrypted_detail BLOB NOT NULL
+            );
             """)
             self.db.commit()
 
@@ -272,36 +281,111 @@ class PrivateStore:
             self.db.execute("UPDATE people SET state=?,opted_out=?,updated_at=? WHERE person_id=?",
                             (kind, int(kind=="OPTED_OUT"), utcnow(), person_id))
 
+
+    def _audit_governance(self, person_id, action, decision, draft_sha=None):
+        """Append a local policy-versioned encrypted decision; no PII in plaintext detail."""
+        self.db.execute(
+            "INSERT INTO governance_decisions(person_id,action,policy_version,verdict,"
+            "occurred_at,encrypted_detail) VALUES(?,?,?,?,?,?)",
+            (person_id, action, decision["policy_version"], decision["decision"],
+             utcnow(), self.encrypt({"reason_codes":decision["reasons"],
+                                    "draft_sha256":draft_sha,
+                                    "assurance":decision["assurance"]})))
+
     def review_contact(self, person_id, *, confirmed_role, confirmed_route, confirmed_fit):
-        """User-initiated independent review of actual role, route and meaningful fit."""
-        if not all(x is True for x in (confirmed_role,confirmed_route,confirmed_fit)):
-            raise ValueError("Role, route and professional fit require separate human confirmation")
-        row=self.db.execute("SELECT state,opted_out FROM people WHERE person_id=?",(person_id,)).fetchone()
-        if row is None or row["opted_out"]:
-            raise ValueError("No eligible person to review")
+        """Manual attestation AFTER structural source gate. Not proof of source truth."""
+        from .governance import active_policy, structural_review_gate
+        policy = active_policy()
+        row = self.db.execute(
+            "SELECT opted_out,encrypted_record FROM people WHERE person_id=?",
+            (person_id,)).fetchone()
+        if row is None:
+            decision = {"decision":"HOLD","reasons":["UNKNOWN_PERSON"],
+                        "policy_version":policy["version"],
+                        "assurance":"LOCAL_OPERATOR_ATTESTATION_ONLY"}
+            with self.db:
+                self._audit_governance(person_id,"CONTACT_REVIEW",decision)
+            raise ValueError("Governance HOLD: UNKNOWN_PERSON")
+        evidence = self.decrypt(row["encrypted_record"])
+        decision = structural_review_gate(evidence,opted_out=bool(row["opted_out"]),policy=policy)
+        if not all(x is True for x in (confirmed_role, confirmed_route, confirmed_fit)):
+            decision["decision"]="HOLD"
+            decision["reasons"].append("INDEPENDENT_HUMAN_ATTESTATION_INCOMPLETE")
+        if decision["decision"]!="PENDING_HUMAN_REVIEW":
+            with self.db:
+                self._audit_governance(person_id,"CONTACT_REVIEW",decision)
+            raise ValueError("Governance HOLD: "+",".join(sorted(set(decision["reasons"]))))
         with self.db:
             self._event(person_id,"CONTACT_REVIEW_APPROVED",
-                        {"human_confirmed_role":True,"human_confirmed_route":True,"human_confirmed_fit":True})
+                        {"human_attested_role":True,"human_attested_route":True,
+                         "human_attested_fit":True,
+                         "policy_version":decision["policy_version"],
+                         "assurance":"OPERATOR_ATTESTATION_NOT_INDEPENDENTLY_AUTHENTICATED"})
+            self._audit_governance(person_id,"CONTACT_REVIEW",
+                                   {"decision":"ALLOW_REVIEW_RECORD","reasons":[],
+                                    "policy_version":decision["policy_version"],
+                                    "assurance":"LOCAL_OPERATOR_ATTESTATION_ONLY"})
             self.db.execute("UPDATE people SET state=?,updated_at=? WHERE person_id=?",
                             ("CONTACT_REVIEW_APPROVED",utcnow(),person_id))
 
     def approval(self, person_id, draft, stage):
-        """Content approval does not grant sending authorization. No send mechanism exists."""
-        if stage not in ("CONTENT_APPROVED", "SEND_AUTHORIZED"):
+        """Fail-closed human approval record, NOT a send operation or recipient verification."""
+        from .governance import active_policy, structural_review_gate, approval_gate
+        policy = active_policy()
+        if stage not in ("CONTENT_APPROVED","SEND_AUTHORIZED"):
             raise ValueError("Invalid approval stage")
-        if not self.db.execute("SELECT 1 FROM people WHERE person_id=? AND opted_out=0",(person_id,)).fetchone():
-            raise ValueError("Unknown or suppressed person")
+        row = self.db.execute(
+            "SELECT opted_out,encrypted_record FROM people WHERE person_id=?",
+            (person_id,)).fetchone()
+        if row is None:
+            decision = {"decision":"HOLD","reasons":["UNKNOWN_PERSON"],
+                        "policy_version":policy["version"],
+                        "assurance":"LOCAL_OPERATOR_ATTESTATION_ONLY"}
+            with self.db:
+                self._audit_governance(person_id,stage,decision)
+            raise ValueError("Governance HOLD: UNKNOWN_PERSON")
+        structural = structural_review_gate(
+            self.decrypt(row["encrypted_record"]),opted_out=bool(row["opted_out"]),
+            policy=policy)
+        reviewed = self.db.execute(
+            "SELECT 1 FROM events WHERE person_id=? AND kind='CONTACT_REVIEW_APPROVED'",
+            (person_id,)).fetchone() is not None
         sha = hashlib.sha256(draft.encode()).hexdigest()
-        row = self.db.execute("SELECT * FROM approvals WHERE person_id=? AND draft_sha=?",
-                              (person_id, sha)).fetchone()
-        if stage == "SEND_AUTHORIZED" and (row is None or row["content_approved"] is None):
-            raise ValueError("Specific draft must be approved before separate send authorization")
+        existing = self.db.execute(
+            "SELECT * FROM approvals WHERE person_id=? AND draft_sha=?",
+            (person_id,sha)).fetchone()
+        decision = approval_gate(
+            structural,user_review_recorded=reviewed,stage=stage,
+            draft_content_preapproved=(existing is not None and
+                                       existing["content_approved"] is not None))
+        if decision["decision"]=="HOLD":
+            with self.db:
+                self._audit_governance(person_id,stage,decision,draft_sha=sha)
+            raise ValueError("Governance HOLD: "+",".join(decision["reasons"]))
         with self.db:
-            self.db.execute("INSERT OR IGNORE INTO approvals(person_id,draft_sha) VALUES(?,?)",(person_id,sha))
-            col = "content_approved" if stage == "CONTENT_APPROVED" else "sending_authorized"
-            self.db.execute(f"UPDATE approvals SET {col}=? WHERE person_id=? AND draft_sha=?",
+            self.db.execute("INSERT OR IGNORE INTO approvals(person_id,draft_sha) VALUES(?,?)",
+                            (person_id,sha))
+            column = "content_approved" if stage=="CONTENT_APPROVED" else "sending_authorized"
+            self.db.execute(f"UPDATE approvals SET {column}=? WHERE person_id=? AND draft_sha=?",
                             (utcnow(),person_id,sha))
+            self._audit_governance(person_id,stage,decision,draft_sha=sha)
         return sha
+
+    def recent_governance_decisions(self, *, limit=20):
+        """Operator-only audit digest: no raw contact notes, private draft content or keys."""
+        if not isinstance(limit,int) or not 1<=limit<=100:
+            raise ValueError("Audit limit must be 1..100")
+        rows=self.db.execute(
+            "SELECT person_id,action,policy_version,verdict,occurred_at,encrypted_detail "
+            "FROM governance_decisions ORDER BY audit_id DESC LIMIT ?",(limit,)).fetchall()
+        results=[]
+        for row in rows:
+            detail=self.decrypt(row["encrypted_detail"])
+            results.append({"person_id":row["person_id"],"action":row["action"],
+                            "policy_version":row["policy_version"],"decision":row["verdict"],
+                            "reason_codes":detail.get("reason_codes",[]),
+                            "occurred_at":row["occurred_at"]})
+        return results
 
     def start_run(self, run_id):
         with self.db:
