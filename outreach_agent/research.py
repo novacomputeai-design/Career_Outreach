@@ -163,6 +163,7 @@ def extract_supported(source, extracted):
     if extracted["category"] not in ("hiring-influencer","strategic-connector"):
         return None
     return {
+        "project_id": "PERSONAL_CAREER_OUTREACH",
         "person_name":name, "current_title":title,
         "organization":extracted["organization"].strip(),
         "role_quote":quote, "initiative_quote":initiative,
