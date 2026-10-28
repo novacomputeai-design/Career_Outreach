@@ -69,6 +69,19 @@ def create_encrypted_backup(store: PrivateStore, target: str | Path) -> dict:
         raw = mem.serialize()
     finally:
         mem.close()
+    # A SQLite online backup from WAL mode can retain WAL-mode header bytes.
+    # The serialized snapshot already contains committed pages, so use the
+    # ordinary rollback-mode header before in-memory deserialize/verify.
+    if raw[18:20] == bytes((2, 2)):
+        raw = raw[:18] + bytes((1, 1)) + raw[20:]
+    if raw[18:20] != bytes((1, 1)):
+        raise ValueError('Unsupported SQLite snapshot journal header')
+    check = sqlite3.connect(':memory:')
+    try:
+        check.deserialize(raw)
+        _check_database(check)
+    finally:
+        check.close()
     if len(raw) > MAX_BACKUP_BYTES // 2:
         raise ValueError("Snapshot exceeds safe in-memory backup size")
     encrypted = MAGIC + store.crypt.encrypt(_tag(store.identity_key) + raw)
