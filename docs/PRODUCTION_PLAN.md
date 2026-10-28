@@ -38,7 +38,7 @@ Personal executive career networking, Tucson/Southern Arizona first, applicable 
 - A five-person supervised Codex web search returned two source-based provisional leads, three held, zero confirmed NEW/contact-ready, zero outreach.
 - GitHub CI is offline/structural evidence only. Repo remained PUBLIC at last check; secrets and relationship state are strictly outside it.
 - Protected operator-controlled batch memory screening was verified with real owner-context Windows DPAPI lookups (Josh Lee, David Ebert, synthetic unknown). A fully automatic broker, complete cross-channel memory/novelty, retention/deletion, secure recovery and field qualification remain unverified.
-- First deterministic stage-specific review and draft-approval guards are implemented with policy-versioned encrypted audit decisions; this is NOT independent proof of actual human identity, current external source truth, recipient/route-bound send authorization or full CONTACT_READY eligibility. No sender exists.
+- First deterministic stage-specific review and draft-approval guards are implemented with policy-versioned encrypted audit decisions. The local run-readiness report is now fail-closed: manual source/route/fit review counts are separate from confirmed-new contact-ready (always zero until complete novelty and independent human-verification gates are qualified). This is NOT proof of actual human identity, current external source truth, recipient/route-bound send authorization or full CONTACT_READY eligibility. No sender exists.
 
 ## Counter contracts and state distinctions
 

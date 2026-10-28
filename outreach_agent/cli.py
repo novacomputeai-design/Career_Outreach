@@ -60,7 +60,7 @@ def main(argv=None):
     lookup.add_argument("--profile-url")
     batch=sub.add_parser("relationship-batch-check",help="Operator-only private batch, read-only, no sending")
     batch.add_argument("--input",required=True,help="Private JSON input outside Git checkout")
-    status=sub.add_parser("run-readiness",help="Count independently human-reviewed and unsuppressed prospects in a prior run")
+    status=sub.add_parser("run-readiness",help="Count recorded source/route/fit reviews only; not confirmed NEW or contact-ready")
     status.add_argument("--run-id",required=True)
     restore=sub.add_parser("restore-report",help="Recover latest encrypted run after an output-file failure")
     restore.add_argument("--out",required=True)
@@ -112,8 +112,13 @@ def main(argv=None):
                   "message_sent_by_agent":False})
         elif args.command=="run-readiness":
             count=store.reviewed_for_run(args.run_id)
-            emit({"run_id":args.run_id,"human_reviewed_contact_ready":count,
-                  "note":"Counts only recorded human review approvals in this run; complete novelty across other channels still needs reconciliation.",
+            emit({"run_id":args.run_id,
+                  "recorded_source_route_fit_reviews":count,
+                  "new_contact_ready":0,
+                  "production_verified_contact_ready":0,
+                  "novelty_verification":"UNVERIFIED",
+                  "contact_ready_gate":"HOLD_PENDING_TRUSTED_HISTORY_AND_INDEPENDENT_REVIEW",
+                  "note":"Review records attest structural source, route and fit checks only. Private-history novelty, independent reviewer identity and full CONTACT_READY governance are not certified; no contact-ready status is granted.",
                   "messages_sent":0})
         elif args.command=="remember-relationship":
             # Interactive input avoids recording private relationship classifications in shell history.
