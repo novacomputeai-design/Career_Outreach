@@ -1,5 +1,7 @@
 # Career Outreach repository instructions
 
+**Project isolation:** This is `PERSONAL_CAREER_OUTREACH`, for individual professional advancement only. The policy/structural gate HOLD Nova sales, federal prime capture, supplier outreach and subcontracting pursuits. No cross-project contacts, awards or business CRM records. A mixed request is not implicit permission to import.
+
 **Hard project isolation:** This public repository is solely `PERSONAL_CAREER_OUTREACH`. The versioned policy and deterministic scope gate must HOLD Nova commercial sales, prime-contractor capture, subcontracting bids, supplier registrations, or other business-development outreach. Never use Nova Federal Subcontracting Google Drive documents, lists or memory here. A mixed-purpose request is a STOP/HOLD, not permission to import. These are tripwires, not independent intent verification.
 
 **Legacy governance table:** Owner-Windows backup and restore-new succeeded for the pre-audit private database. This existing user store lacks the newer governance decisions table; treat live governance event storage as UNQUALIFIED until a separate operator-approved migration passes on the recovery copy and then live. See `docs/OWNER_GOVERNANCE_SCHEMA_MIGRATION.md`. Never let Codex invoke owner-only schema modifications.
