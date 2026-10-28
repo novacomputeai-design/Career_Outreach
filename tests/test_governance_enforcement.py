@@ -67,6 +67,9 @@ class EnforcementTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError,"RECIPIENT_ROUTE_HISTORY_AUTHORIZATION_NOT_QUALIFIED"):
             self.store.approval(pid,"Hello","SEND_AUTHORIZED")
         self.assertEqual(len(sha),64)
+        self.assertEqual(
+            self.store.db.execute("SELECT COUNT(*) FROM approvals WHERE sending_authorized IS NOT NULL").fetchone()[0],
+            0)
         audit=self.store.recent_governance_decisions()
         self.assertEqual(audit[0]["decision"],"HOLD")
         self.assertEqual(audit[1]["decision"],"ALLOW_APPROVAL_RECORD")
