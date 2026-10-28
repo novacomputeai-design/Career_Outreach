@@ -3,6 +3,7 @@
 All records are synthetic. No user secrets, sends, or live Windows database.
 """
 import sqlite3
+from contextlib import closing
 import tempfile
 import unittest
 from pathlib import Path
@@ -82,15 +83,16 @@ class ExistingMemoryIntegrityTests(unittest.TestCase):
                          identity_key=self.identity_key,read_only=True)
 
     def test_profile_hmac_tamper_fails_closed(self):
-        with sqlite3.connect(self.path) as db:
+        with closing(sqlite3.connect(self.path)) as db:
             db.execute("UPDATE people SET profile_digest=?",
                        ("e"*64,))
+            db.commit()
         with self.assertRaisesRegex(RuntimeError, "identity key/profile mismatch"):
             PrivateStore(self.path,key=self.state_key,
                          identity_key=self.identity_key,read_only=True)
 
     def test_legacy_database_open_read_only_but_never_implicitly_migrates(self):
-        with sqlite3.connect(self.path) as db:
+        with closing(sqlite3.connect(self.path)) as db:
             db.execute("DROP TABLE governance_decisions")
         source = PrivateStore(self.path,key=self.state_key,
                               identity_key=self.identity_key,read_only=True)
@@ -100,7 +102,7 @@ class ExistingMemoryIntegrityTests(unittest.TestCase):
             source.close()
         with self.assertRaisesRegex(RuntimeError, "explicit owner-approved schema migration"):
             PrivateStore(self.path,key=self.state_key,identity_key=self.identity_key)
-        with sqlite3.connect(self.path) as db:
+        with closing(sqlite3.connect(self.path)) as db:
             self.assertIsNone(db.execute(
                 "SELECT name FROM sqlite_master WHERE name='governance_decisions'").fetchone())
 
