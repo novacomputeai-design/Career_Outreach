@@ -1,11 +1,13 @@
 """Synthetic owner-only SQLite recovery tests; no real data or Windows DPAPI secrets."""
 import tempfile
 import unittest
+import sqlite3
 from pathlib import Path
 from cryptography.fernet import Fernet
 
 from outreach_agent.memory_recovery import (
-    create_encrypted_backup, verify_encrypted_backup, restore_to_new_file)
+    create_encrypted_backup, verify_encrypted_backup, restore_to_new_file,
+    SCHEMA_LEGACY, SCHEMA_CURRENT)
 from outreach_agent.state import PrivateStore, REPO
 
 class MemoryRecoveryTests(unittest.TestCase):
@@ -53,6 +55,54 @@ class MemoryRecoveryTests(unittest.TestCase):
         finally:
             with_private.close()
         self.assertEqual(self.path.read_bytes(), self.original_bytes)
+
+    def test_original_pre_audit_database_is_backed_up_without_migration(self):
+        # Reproduce the user's historical database created before governance_decisions.
+        # DROP is done ONLY to a newly created synthetic test database.
+        self.source.close()
+        with sqlite3.connect(self.path) as writer:
+            writer.execute("DROP TABLE governance_decisions")
+        self.original_bytes = self.path.read_bytes()
+        self.source = PrivateStore(self.path, key=self.state_key,
+                                   identity_key=self.identity, read_only=True)
+        backup = create_encrypted_backup(self.source, self.backup)
+        self.assertEqual(backup["schema_variant"], SCHEMA_LEGACY)
+        verified = verify_encrypted_backup(self.backup, self.state_key, self.identity)
+        self.assertEqual(verified["schema_variant"], SCHEMA_LEGACY)
+        destination = self.root / "legacy-restored.sqlite"
+        restored = restore_to_new_file(self.backup, destination,
+                                       self.state_key, self.identity)
+        self.assertEqual(restored["schema_variant"], SCHEMA_LEGACY)
+        reopened = PrivateStore(destination, key=self.state_key,
+                                identity_key=self.identity, read_only=True)
+        try:
+            self.assertEqual(reopened.check_relationship("Jordan Example")[
+                "user_reported_relationship"], "PREVIOUSLY_MET")
+            self.assertEqual(reopened.check_relationship("Avery Example")[
+                "user_reported_relationship"], "FIRST_LEARNED")
+            self.assertEqual(reopened.get_strategy(), "remote")
+            self.assertIsNone(reopened.db.execute(
+                "SELECT name FROM sqlite_master WHERE name='governance_decisions'"
+            ).fetchone())
+        finally:
+            reopened.close()
+        self.assertEqual(self.path.read_bytes(), self.original_bytes)
+
+    def test_missing_original_base_table_remains_invalid(self):
+        self.source.close()
+        with sqlite3.connect(self.path) as writer:
+            writer.execute("DROP TABLE preferences")
+        self.source = PrivateStore(self.path, key=self.state_key,
+                                   identity_key=self.identity, read_only=True)
+        with self.assertRaisesRegex(ValueError, "required private-memory tables"):
+            create_encrypted_backup(self.source, self.backup)
+        self.assertFalse(self.backup.exists())
+
+    def test_current_schema_reports_current_variant(self):
+        result = create_encrypted_backup(self.source, self.backup)
+        self.assertEqual(result["schema_variant"], SCHEMA_CURRENT)
+        verified = verify_encrypted_backup(self.backup, self.state_key, self.identity)
+        self.assertEqual(verified["schema_variant"], SCHEMA_CURRENT)
 
     def test_never_overwrite_snapshot_or_existing_restored_file(self):
         create_encrypted_backup(self.source, self.backup)

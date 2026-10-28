@@ -19,10 +19,15 @@ from .state import REPO, PrivateStore
 MAGIC = b"CAREER-OUTREACH-ENCRYPTED-SQLITE-V1\n"
 IDENTITY_CONTEXT = b"CareerOutreach:memory-recovery:identity-key:v1"
 MAX_BACKUP_BYTES = 256 * 1024 * 1024
-REQUIRED_TABLES = frozenset({
-    "people", "events", "approvals", "preferences", "recommendations",
-    "runs", "governance_decisions",
+# The private database is long-lived: an original user database predates
+# the optional P3 governance audit table. Backups must preserve that valid
+# pre-audit schema without quietly changing the original live database.
+BASE_TABLES = frozenset({
+    "people", "events", "approvals", "preferences", "recommendations", "runs",
 })
+GOVERNANCE_TABLE = "governance_decisions"
+SCHEMA_LEGACY = "LEGACY_PRE_GOVERNANCE_AUDIT"
+SCHEMA_CURRENT = "CURRENT_WITH_GOVERNANCE_AUDIT"
 
 
 def _private_path(path: str | Path) -> Path:
@@ -40,15 +45,18 @@ def _keys(state_key: bytes | str, identity_key: bytes | str):
     return Fernet(state), identity
 
 
-def _check_database(db: sqlite3.Connection) -> None:
+def _check_database(db: sqlite3.Connection) -> str:
     integrity = db.execute("PRAGMA integrity_check").fetchone()
     if not integrity or integrity[0] != "ok":
         raise ValueError("Snapshot SQLite integrity verification failed")
     available = {row[0] for row in db.execute(
         "SELECT name FROM sqlite_master WHERE type='table'"
     ).fetchall()}
-    if not REQUIRED_TABLES.issubset(available):
+    if not BASE_TABLES.issubset(available):
         raise ValueError("Snapshot does not have the required private-memory tables")
+    # Only this documented legacy variant is accepted. No missing base table
+    # or damaged SQLite image may be treated as a valid backup.
+    return SCHEMA_CURRENT if GOVERNANCE_TABLE in available else SCHEMA_LEGACY
 
 
 def _tag(identity_key: bytes) -> bytes:
@@ -65,7 +73,7 @@ def create_encrypted_backup(store: PrivateStore, target: str | Path) -> dict:
     mem = sqlite3.connect(":memory:")
     try:
         store.db.backup(mem)
-        _check_database(mem)
+        schema_version = _check_database(mem)
         raw = mem.serialize()
     finally:
         mem.close()
@@ -79,7 +87,8 @@ def create_encrypted_backup(store: PrivateStore, target: str | Path) -> dict:
     check = sqlite3.connect(':memory:')
     try:
         check.deserialize(raw)
-        _check_database(check)
+        if _check_database(check) != schema_version:
+            raise ValueError("Snapshot schema changed during serialization")
     finally:
         check.close()
     if len(raw) > MAX_BACKUP_BYTES // 2:
@@ -99,6 +108,7 @@ def create_encrypted_backup(store: PrivateStore, target: str | Path) -> dict:
             dest.unlink(missing_ok=True)
         raise
     return {"status": "ENCRYPTED_SNAPSHOT_CREATED",
+            "schema_variant": schema_version,
             "contains_plaintext_credentials": False,
             "source_database_modified": False,
             "requires_original_state_and_identity_keys": True}
@@ -140,8 +150,12 @@ def _authenticated_snapshot(snapshot: str | Path, state_key, identity_key) -> sq
 
 def verify_encrypted_backup(snapshot, state_key, identity_key) -> dict:
     mem = _authenticated_snapshot(snapshot, state_key, identity_key)
-    mem.close()
+    try:
+        schema_version = _check_database(mem)
+    finally:
+        mem.close()
     return {"status": "AUTHENTICATED_SQLITE_BACKUP_VALID",
+            "schema_variant": schema_version,
             "original_keys_match": True,
             "private_records_printed": False,
             "live_database_modified": False}
@@ -153,6 +167,7 @@ def restore_to_new_file(snapshot, destination, state_key, identity_key) -> dict:
     if dest.exists():
         raise FileExistsError("Recovery destination exists; live files cannot be overwritten")
     mem = _authenticated_snapshot(snapshot, state_key, identity_key)
+    schema_version = _check_database(mem)
     created = False
     try:
         dest.parent.mkdir(parents=True, exist_ok=True, mode=0o700)
@@ -174,5 +189,6 @@ def restore_to_new_file(snapshot, destination, state_key, identity_key) -> dict:
     finally:
         mem.close()
     return {"status": "RESTORED_TO_NEW_PRIVATE_PATH",
+            "schema_variant": schema_version,
             "live_database_overwritten": False,
             "requires_original_state_and_identity_keys": True}
