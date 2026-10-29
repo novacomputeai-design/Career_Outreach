@@ -166,6 +166,23 @@ def write_review_packet(data,output_dir:Path):
         with (target/filename).open("x",encoding="utf-8-sig",newline="") as fh:
             writer=csv.writer(fh)
             writer.writerows([[_csv_safe(x) for x in row] for row in packet[key]])
+    # Feed the existing owner-ONLY protected memory batch checker with exact
+    # ordered PUBLIC names/profiles. No private relationship data is included.
+    public_candidates = [
+        {key: person[key] for key in ("project_id","person_name","profile_url","why_connect")
+         if key in person and person[key] is not None}
+        for person in data["candidates"]
+    ]
+    names = [
+        {key: person[key] for key in ("person_name","profile_url")
+         if key in person and person[key] is not None}
+        for person in public_candidates
+    ]
+    for filename, value in (("candidate-batch.json",names),
+                            ("candidate-public-review.json",public_candidates)):
+        with (target/filename).open("x",encoding="utf-8") as stream:
+            json.dump(value,stream,ensure_ascii=False,indent=2)
+            stream.write("\n")
     with (target/"manifest.json").open("x",encoding="utf-8") as fh:
         json.dump(packet["manifest"],fh,indent=2)
         fh.write("\n")
