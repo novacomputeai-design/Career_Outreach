@@ -39,6 +39,26 @@ class PersonalCareerBoundaryTests(unittest.TestCase):
         self.assertIn("COMMERCIAL_PURPOSE_NOT_PERSONAL_CAREER", reasons)
         self.assertIn("CROSS_PROJECT_COMMERCIAL_OUTREACH_INTENT", reasons)
 
+    def test_disguised_supplier_message_with_career_id_holds(self):
+        for rationale in (
+            "Send our capability statement to the prime's vendor onboarding team.",
+            "Offer our AI services to support the awarded contract.",
+            "Pursue a government task order for our company.",
+            "Nova Compute would provide technical solutions to the supplier team.",
+        ):
+            with self.subTest(rationale=rationale):
+                record={"project_id":PROJECT_ID,"person_name":"Avery Example",
+                        "why_connect":rationale,"purpose":"career_networking"}
+                self.assertIn("CROSS_PROJECT_COMMERCIAL_OUTREACH_INTENT",
+                              scope_reasons(record, require_project_id=True))
+
+    def test_career_conversation_with_government_employer_stays_eligible(self):
+        record={"project_id":PROJECT_ID,
+                "organization":"Fabricated Government Contractor",
+                "why_connect":"Discuss enterprise product leadership with the COO.",
+                "purpose":"individual_career_networking"}
+        self.assertEqual(scope_reasons(record, require_project_id=True), [])
+
     def test_missing_project_id_never_pretends_to_be_qualified(self):
         self.assertIn("PROJECT_ID_NOT_VERIFIED",
                       scope_reasons({"person_name": "Taylor Example"}, require_project_id=True))

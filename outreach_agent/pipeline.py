@@ -131,29 +131,56 @@ def deterministic_score(lead):
             "reachability":reachability,"geography":geography}
     return scores,sum(scores.values())
 
+def _career_conversation_topic(rationale: str) -> str:
+    """Normalize a research rationale into a readable topic, without inventing one.
+
+    This is a drafting aid, NOT independent evidence or professional approval.
+    A malformed/generated rationale is held instead of yielding awkward copy.
+    """
+    reason = " ".join(str(rationale or "").split()).strip(" .;:")
+    reason = re.sub(
+        r"^(?:to\s+)?(?:discuss|explore|compare approaches to|talk about|"
+        r"exchange (?:ideas|perspectives) (?:on|about)|"
+        r"a substantive discussion (?:of|about)|a conversation (?:on|about))\s+",
+        "", reason, flags=re.I,
+    )
+    reason = re.sub(
+        r"\s+with (?:a relevant leader|an experienced product leader|"
+        r"this executive|the executive)$", "", reason, flags=re.I,
+    ).strip(" .;:")
+    if len(reason) < 12 or len(reason) > 160 or re.search(
+        r"^(?:to\s+)?(?:discuss|connect with|reach out|request a job)\b",
+        reason, re.I,
+    ):
+        raise ValueError("Career conversation topic requires editorial review")
+    return reason[0].lower() + reason[1:]
+
+
 def proposal(lead):
-    """Evidence-specific UNSENT personal career introduction."""
-    from .project_scope import scope_reasons
+    """Evidence-specific UNSENT personal-career draft, after research audit."""
     if scope_reasons(lead, require_project_id=True):
         raise ValueError("Personal career scope HOLD: cannot prepare sales outreach")
-    name=lead["person_name"].split()[0]
-    organization=lead["organization"].strip()
-    quote=" ".join(lead["initiative_quote"].split())
-    reason=" ".join(lead["why_connect"].split()).rstrip(".")
-    if len(quote)<25 or len(reason)<25:
-        raise ValueError("Evidence-specific draft requires a substantive reason")
-    quote=quote[:180].rstrip(" ,;:")
-    reason=reason[:160].rstrip(" ,;:")
+    first_name = lead["person_name"].split()[0]
+    organization = lead["organization"].strip()
+    initiative = " ".join(lead["initiative_quote"].split()).strip(" .;:")
+    if len(initiative) < 25:
+        raise ValueError("A supported, specific initiative is required")
+    topic = _career_conversation_topic(lead["why_connect"])
+    # The excerpt is taken from a source, not a fabricated résumé achievement.
+    # All words remain pending Fadi's individual editorial/content approval.
+    initiative = initiative[:160].rstrip(" ,;:")
+    topic = topic[:125].rstrip(" ,;:")
     return (
-        f"Hello {name},\n\n"
-        f"I came across {organization}'s work and a specific initiative caught my eye: "
-        f'"{quote}"\n\n'
-        f"My background includes enterprise product strategy, technology "
-        f"modernization and practical AI adoption. One topic I'd enjoy discussing "
-        f"is {reason[0].lower()+reason[1:]}.\n\n"
-        f"Would you be open to a brief conversation to exchange perspectives?\n\n"
+        f"Hello {first_name},\n\n"
+        f"I came across this update about {organization}: "
+        f"“{initiative}.” "
+        f"My background is in enterprise product strategy, modernization, "
+        f"and practical AI adoption. "
+        f"I'd value exchanging perspectives on {topic}.\n\n"
+        f"Would you be open to a brief introductory conversation?\n\n"
         f"Best regards,\nFadi"
     )
+
 
 def phoenix_operating_date(now=None):
     """Current Phoenix calendar date, including clean Windows without tzdata.
@@ -212,11 +239,17 @@ def make_brief(search, extractor, store, target=20, max_queries=14, max_enrich=4
             enriched["project_id"]=PROJECT_ID
             enriched["scores"]=scores
             enriched["score_total"]=total
-            enriched["draft"]=proposal(enriched)
             enriched["draft_status"]="PENDING_CONTENT_APPROVAL"
-            # Pre-report evidence audit (not fully independent adversarial qualification).
+            # Critical ordering: audit verified-source STRUCTURE and career scope
+            # before composing an individual introduction. No draft on HOLD.
+            # This precheck does not establish truth, novelty or human approval.
             if not audit_record(enriched):
                 report["held"].append({"name":lead["person_name"],"reason":"failed_deterministic_evidence_audit"})
+                continue
+            try:
+                enriched["draft"]=proposal(enriched)
+            except ValueError:
+                report["held"].append({"name":lead["person_name"],"reason":"draft_rationale_requires_editorial_review"})
                 continue
             try:
                 person_id=store.register(enriched,enriched["segment"],run_id=rid)

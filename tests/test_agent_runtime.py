@@ -100,9 +100,39 @@ class AgentRuntimeTests(unittest.TestCase):
         draft=proposal(lead)
         self.assertIn("enterprise product platform modernization",draft)
         self.assertIn("Discuss enterprise product strategy",RAW["why_connect"])
-        self.assertIn("discuss enterprise product strategy",draft)
+        self.assertIn("exchanging perspectives on enterprise product strategy",draft)
+        self.assertNotIn("is discuss",draft)
+        self.assertNotIn("with a relevant leader",draft)
         self.assertNotIn("Nova Compute",draft)
         self.assertIn(chr(10)*2,draft)
+
+    def test_individual_drafts_have_real_specific_topic_not_one_generic_copy(self):
+        from outreach_agent.pipeline import proposal
+        lead=dict(extract_supported(S1,RAW),route_type="INDIRECT")
+        one=proposal(lead)
+        other=dict(lead,person_name="Morgan Example",organization="Fictional Products",
+                   initiative_quote="Fictional Products is building a new customer platform.",
+                   why_connect="Explore product operating models and customer platforms.")
+        two=proposal(other)
+        self.assertNotEqual(one,two)
+        self.assertIn("product operating models and customer platforms",two)
+        self.assertNotIn("is explore",two)
+        self.assertIn("Fadi",two)
+        with self.assertRaisesRegex(ValueError,"editorial review"):
+            proposal(dict(lead,why_connect="Discuss."))
+
+    def test_draft_generation_never_precedes_structural_gate(self):
+        # This fails if a model could draft before the pre-report audit HOLD.
+        from unittest.mock import patch
+        with patch("outreach_agent.pipeline.audit_record",return_value=False) as audit:
+            with patch("outreach_agent.pipeline.proposal",
+                       side_effect=AssertionError("draft executed before audit")) as drafter:
+                report=make_brief(MockSearch(),MockExtractor(),self.store,
+                                  target=5,max_queries=1,max_enrich=5)
+        self.assertTrue(audit.called)
+        drafter.assert_not_called()
+        self.assertEqual(report["candidates"],[])
+        self.assertIn("failed_deterministic_evidence_audit",str(report["held"]))
 
     def test_strong_provisional_score_is_reachable_without_claiming_hiring(self):
         lead=dict(extract_supported(S1,RAW))

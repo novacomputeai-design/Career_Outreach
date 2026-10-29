@@ -21,7 +21,16 @@ BUSINESS_INTENT = re.compile(
     r"federal capture|teaming (?:agreement|opportunity|partner)|"
     r"supplier onboarding|bid on (?:an? )?(?:award|rfq|contract)|"
     r"sell (?:our|nova)|pitch nova|nova compute (?:sales|services|capabilities)|"
-    r"nova (?:subcontract|federal capture))\b",
+    r"nova (?:subcontract|federal capture)|"
+    r"(?:submit|send) (?:our |a |the )?(?:capability statement|bid|proposal|quote)|"
+    r"(?:supplier|vendor) (?:registration|portal|onboarding)|"
+    r"(?:pitch|offer|provide|sell) (?:our |nova(?: compute)? |my company'?s? )?"
+    r"(?:ai |software |automation |technical )?(?:services|solutions|capabilities)|"
+    r"(?:pursue|win|bid for|bid on) (?:a |the )?(?:government |federal )?"
+    r"(?:contract|award|task order|solicitation)|"
+    r"(?:nova compute|our company)\b.{0,75}\b"
+    r"(?:deliver|provide|sell|subcontract|teaming|supplier|services)\b|"
+    r"(?:deliver|provide|sell)\b.{0,75}\b(?:to nova|for nova compute))\b",
     flags=re.IGNORECASE,
 )
 FORBIDDEN_PURPOSES = frozenset({
@@ -29,7 +38,7 @@ FORBIDDEN_PURPOSES = frozenset({
     "COMMERCIAL_SALES", "SUPPLIER_TEAMING",
 })
 INTENT_FIELDS = ("why_connect", "outreach_objective", "engagement_goal",
-                 "outreach_purpose", "draft")
+                 "outreach_purpose", "purpose", "draft")
 
 
 def scope_reasons(record: dict, *, require_project_id: bool = False) -> list[str]:

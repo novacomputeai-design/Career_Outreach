@@ -6,7 +6,7 @@
 Primary objective: career-relevant leadership conversations, not mass messaging.
 Research target: **up to 20 new source-corroborated prospects each daily run**. Human-review-approved contact-ready count is separate and can be zero. Contacted, replied, met, introduced, opportunity and hired are distinct observed outcome metrics; never infer progress from drafted messages.
 
-The current live pipeline is only a pilot; no completed external seven-day behavioral evaluation exists.
+The current live pipeline is only a pilot; no completed external seven-day behavioral evaluation exists. The owner independently completed the live backup-first governance schema migration on 2026-10-28, but trusted Codex history reconciliation and CONTACT_READY remain blocked.
 
 ## Governance enforcement status
 
@@ -15,6 +15,10 @@ The selected Codex agent may propose leads but cannot self-certify human review,
 ## Report counting assurance
 
 The local `run-readiness` command reports only the count of **recorded operator-attested source/route/fit reviews**. Those records are not independently authenticated reviewer identities and are not full private-history novelty reconciliation. The output deliberately fixes `new_contact_ready=0` and `production_verified_contact_ready=0` until a separate governed, verifiable promotion mechanism is implemented and qualified. Do not convert these review counts into the daily 20 new contacts quota.
+
+## Owner-controlled identity handoff
+
+Use `docs/OPERATOR_BATCH_SCREENING.md` for private-read-only name/profile matching and `scripts/reconcile_operator_screening.py` for exact batch binding. This bridge never certifies cross-channel novelty, authenticates an approver, or runs DPAPI inside Codex. Treat `NOT_FOUND_IN_LOCAL_STORE` as HOLD and keep all contact-ready counts at zero until outside history is independently reviewed. Public screening files and operator reports must remain outside Git.
 
 ## Review queue
 1. Open the latest private report (NEVER check into Git). Search the candidate's primary and independent secondary sources again.
@@ -37,7 +41,7 @@ The local `run-readiness` command reports only the count of **recorded operator-
 
 ## Seven-day field qualification
 At each daily run preserve (private) run ID, provider status, queries/results and costs, source review decisions, scored candidate list, duplicate counts, actual new human-reviewed count, and discovered errors.
-Independently review >=40 people across at least two relevant organization sectors and Tucson/remote categories. Measure percent YOU would actually consider contacting and why. Verify all 12 adversarial evaluation cases, including stale role, namesake, previous contacts, opt-out, missing sources, injected source instructions and draft-vs-send separation.
+Independently review >=40 people across at least two relevant organization sectors and Tucson/remote categories. Measure percent YOU would actually consider contacting and why. Verify all currently defined adversarial evaluation cases, including stale role, namesake, previous contacts, opt-out, missing sources, injected source instructions and draft-vs-send separation.
 Native skills must be explicitly selected using the actual host's skill mechanism and the selection trace recorded. The Python pipeline simulates stage responsibilities but is not proof of native skill selection.
 Do not claim production readiness until real data and runtime reliability are demonstrated.
 

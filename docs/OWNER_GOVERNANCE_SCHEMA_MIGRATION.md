@@ -1,8 +1,8 @@
 # Explicit owner-approved governance schema migration
 
-**Status:** code and synthetic qualification only. Existing private relationship memory is not modified by GitHub changes. This migration must run under the owner's ordinary Windows account **outside Codex** and must be authorized separately.
+**Status: COMPLETE — owner-verified LIVE migration on 2026-10-28.** The authorized owner ran the backup-first migration in ordinary Windows PowerShell outside Codex. The original records were reported unchanged. This is owner-terminal evidence, not a GitHub-hosted private database inspection.
 
-The original private SQLite database was created before the `governance_decisions` table. Its relationship records are valid and have already passed owner-Windows encrypted backup, authenticated verification and restore-new qualification. The newer governance audit commands require that table; an owner-approved additive migration is needed.
+The original private SQLite database was created before the `governance_decisions` table. Same-account encrypted backup/restore and the additive migration on a recovered COPY passed, followed by the distinct owner-authorized LIVE migration. There is no need to rerun it on the current database.
 
 ## Safe migration contract
 
@@ -39,12 +39,12 @@ pwsh -NoProfile -File .\scripts\owner-memory-schema.ps1 -Mode inspect -Database 
 
 Expected `GOVERNANCE_AUDIT_SCHEMA_ADDED`, `backup_verified_before_change=true`, `original_relationship_row_counts_unchanged=true`, and `CURRENT_WITH_GOVERNANCE_AUDIT` for the **test copy**. The live file remains untouched. Do not share private SQLite or snapshot files in chat.
 
-**P0 prerequisite:** The hardened store rejects implicit legacy migrations and verifies every existing record's identity digest against the original HMAC key. The live database still requires a distinct owner decision after qualification. Do not run on the live file from Codex.
+**P0 outcome:** The hardened store rejects implicit legacy migrations and verifies every existing person's digest. The distinct live owner decision was granted and migration completed. Do not execute migrations from Codex.
 
-**P0 hardening:** Regular writable opens of the original legacy store now fail closed until explicit migration. The original identity HMAC key must match all existing people before any write. Do not migrate the live store during code qualification.
+**P0 hardening:** Regular writable opens of an unmigrated legacy database fail closed; the original identity HMAC key must match existing people before any read/write. This safeguard still applies to any restored legacy copy.
 
-## Live migration remains separate
+## Live migration completion record
 
-After independent test-copy qualification, the operator may explicitly choose to migrate the **live** `%LOCALAPPDATA%\CareerOutreach\relationships.sqlite` via the same owner tool with `-Database` set to that exact live file and `-IApproveSchemaChange`. This requires a specific operator decision. Do not automate the live migration or allow Codex to invoke it.
+On 2026-10-28 the owner ran the guarded command on `%LOCALAPPDATA%\CareerOutreach\relationships.sqlite`. Terminal output included `AUTHENTICATED_SQLITE_BACKUP_VALID` for its pre-change legacy snapshot, `original_keys_match=true`, then `LIVE GOVERNANCE MIGRATION VERIFIED`, `Pre-change encrypted backup: VERIFIED`, `Existing relationship record counts: UNCHANGED`, `Governance audit schema: CURRENT`, `No outreach authorized or sent.` The earlier owner inspection had 2 people, 2 events and 1 preference. The pre-change backup's `live_database_modified=false` applies to BACKUP VERIFICATION, not to the deliberately applied migration. Avoid rerunning the migration; a new need for schema changes requires its own authorization.
 
 This tool is not a complete identity, novelty or source verification system. Full contact-ready eligibility and `SEND_AUTHORIZED` remain blocked. The secure off-device recovery of both original keys remains unqualified.

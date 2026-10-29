@@ -5,9 +5,26 @@ No writing to SQLite, no network, no model-driven authorization.
 """
 from __future__ import annotations
 import json
+import hashlib
 from pathlib import Path
 from urllib.parse import urlparse
 from .state import normalized
+
+def candidate_input_fingerprint(people: list[tuple[str, str | None]]) -> str:
+    """Bind an operator-screening response to exact names/profiles AND order.
+
+    This SHA is for accidental mixup detection, not operator authentication.
+    It must not be treated as independent proof of novelty or a secret MAC.
+    """
+    normalized_input = [
+        {"person_name": " ".join(name.strip().split()),
+         "profile_url": profile}
+        for name, profile in people
+    ]
+    encoded = json.dumps(normalized_input, ensure_ascii=False,
+                         separators=(",", ":"), sort_keys=True).encode("utf-8")
+    return hashlib.sha256(encoded).hexdigest()
+
 
 MAX_BYTES = 65536
 MAX_PEOPLE = 100
@@ -66,6 +83,7 @@ def screen_batch(store, input_file: str | Path) -> dict:
             minimal["suppressed"] = record["suppressed"]
         rows.append(minimal)
     return {"verification_level":"OPERATOR_PROTECTED_LOCAL_STORE_ONLY",
+            "input_fingerprint":candidate_input_fingerprint(clean),
             "complete_cross_channel_history_verified":False,
             "new_contact_ready_granted":0,
             "people_checked":len(rows),
