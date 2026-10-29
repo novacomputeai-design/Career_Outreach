@@ -32,3 +32,6 @@ date / target / considered / verified / qualified / confirmed new contact-ready 
 
 ## Runtime boundary
 SKILL.md is a procedure, NOT a scheduler, API connection or CRM. A real daily run needs authorized search, private storage, an agent host, a scheduler, logs, independent testing and a human approval UI. CI only tests repository integrity.
+
+## V1.1 employer-first discovery gate
+Before leadership discovery, establish an evidence-supported organizational challenge or posted leadership vacancy, possible permanent employment scope, track and opportunity class O1/O2A/O2B/O3/O4 per references/opportunity-first-contract.md. Aim for a rolling 60% AI strategy / 40% product leadership and diverse employer parents. Do not infer a vacancy from AI initiatives. Then apply existing person verification, owner-only protected memory, independent review and no-send gates without modification.

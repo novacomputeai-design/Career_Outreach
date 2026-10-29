@@ -1,5 +1,5 @@
 {
-  "version": "0.2.2",
+  "version": "0.3.0",
   "timezone": "America/Phoenix",
   "cadence": "daily",
   "daily_target_new_people": 20,
@@ -80,5 +80,30 @@
     "mission": "individual_professional_career_networking",
     "commercial_sales_outreach_prohibited": true,
     "project_scope_failure": "HOLD"
+  },
+  "opportunity_search": {
+    "version": "1.1",
+    "mission": "permanent_internal_leadership_employment",
+    "track_allocation": {
+      "AI_STRATEGY": 60,
+      "PRODUCT_LEADERSHIP": 40
+    },
+    "minimum_organization_score": 75,
+    "minimum_decision_maker_score": 70,
+    "classifications": [
+      "O1",
+      "O2A",
+      "O2B",
+      "O3",
+      "O4"
+    ],
+    "organization_first": true,
+    "never_infer_hiring_from_ai_initiative": true,
+    "owner_attestation_requires_private_review": true,
+    "require_person_specific_route": true,
+    "score_never_overrides_hard_gates": true,
+    "exploratory_hiring_unconfirmed": true,
+    "unchanged_person_drive_exporter": true,
+    "opportunity_assessment_contact_ready": false
   }
 }

@@ -15,3 +15,6 @@ After a daily run or when verified previous engagements or explicit user feedbac
 5. Never read or copy private email bodies to public repository or execute an external send.
 ## Output
 Source-of-truth event counts, caveats, no contact-status invention, recommendations for human review.
+
+## Organization-first V1.1
+Track actual organizational strategy conversation, discussion of a possible role, stated hiring sponsorship, interview and offer separately from researched employer signal, discovered person, message draft or meeting request. A person already known may be connected to a newly developing employer opportunity without becoming a new contact. Keep owner discussion history private.

@@ -15,3 +15,6 @@ After outcome-intelligence reports real contact and reply histories.
 5. User must explicitly approve any new priority via the private operator command. Keep strategy revisions audited and reversible.
 ## Output
 Either NO_CHANGE or a documented experiment suggestion with explicit APPROVAL_REQUIRED and never self-approved.
+
+## Organization-first V1.1
+Optimize only from Fadi's documented judgment of whether a sourced organizational opportunity merits a senior leadership conversation, and separately from observed role-development/interview/offer outcomes. Never optimize for AI keyword overlap, famous titles or arbitrary lead count. The 60/40 split is human-set and cannot be auto-tuned.
