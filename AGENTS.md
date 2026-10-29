@@ -10,6 +10,8 @@
 
 **Release authority:** See `docs/PRODUCTION_PLAN.md` for memory-first/governance-first stages and `config/operating-policy.json` for machine-readable policy. Models and skill text cannot self-certify that governance ran. Batch relationship screening is **operator-only** (`docs/OPERATOR_BATCH_SCREENING.md`), never a Codex sandbox subprocess.
 
+**Google Drive review handoff:** `docs/DRIVE_REVIEW_HANDOFF.md` defines public-only 5-person research JSON, bounded owner-only export to approved Drive review CSVs, and separate operator-side DPAPI relationship screening. Google Sheet is NOT private-memory authority, an authenticated Codex connector, or sending approval. No model may write Google review data as contact-ready or automatically overwrite existing rows. No autonomous sending.
+
 ## Selected runtime architecture
 Codex CLI (signed in with ChatGPT) is the PRIMARY agent. Use the native repository-local skills at `.agents/skills/` and inspect `docs/CODEX_NATIVE_RUN.md` before live work. Python remains the deterministic validator and protected relationship-memory helper. `python -m outreach_agent run` is an OPTIONAL alternate runner that requires Tavily and OpenAI API keys. Never treat it as Codex-native execution. Native skill selection and available live research must be observed, not assumed from authentication. The primary skill's native invocation has been reported as observed; specialists still require activation checks. Codex-host public web search was also observed in a supervised five-person pilot, without separate API keys. No private data or secrets in Git.
 This repository currently holds a personal executive-networking agent design. It is NOT Nova Compute sales outreach or a bulk application/messaging bot.

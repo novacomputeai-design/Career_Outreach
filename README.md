@@ -9,6 +9,8 @@ Identify relevant organizational leaders, actual or potential hiring influencers
 
 **Audit and release evidence:** [Independent career hardening audit](docs/INDEPENDENT_CAREER_HARDENING_AUDIT.md). Static/CI passing does not authorize production or a scheduler.
 
+**Controlled Google Drive report path:** see [Fadi's supervised Google Drive review handoff](docs/DRIVE_REVIEW_HANDOFF.md). Exporter creates public-only research review CSVs and separate owner-only screening inputs outside the public checkout; it does not authenticate to Drive or grant contact readiness. The existing private Google Sheet can be updated by an owner-authorized connector only after checking for duplicates.
+
 ## Repository structure
 - `AGENTS.md` — authority and repo rules.
 - `.agents/skills/` — 14 repository-local Agent Skills, including the daily orchestration and learning skills.
