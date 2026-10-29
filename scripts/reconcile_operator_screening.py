@@ -8,11 +8,14 @@ database access, no sending, and no contact-ready promotions.
 from __future__ import annotations
 import argparse
 import json
+import os
+import sys
 from pathlib import Path
 
-from outreach_agent.operator_handoff import reconcile_operator_screening
-
 ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+from outreach_agent.operator_handoff import reconcile_operator_screening
 
 
 def private_json(path: str, *, exists: bool) -> Path:
@@ -51,7 +54,7 @@ def main() -> None:
     with output.open("x", encoding="utf-8") as stream:
         json.dump(result, stream, ensure_ascii=False, indent=2)
         stream.write("\n")
-    if __import__("os").name == "posix":
+    if os.name == "posix":
         output.chmod(0o600)
     print(json.dumps({
         "status": "OWNER_RECONCILIATION_REPORT_CREATED",
