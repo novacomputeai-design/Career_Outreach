@@ -17,3 +17,6 @@ The synthetic V1.1 adversarial tests cover posted roles versus generic AI initia
 
 ## Field qualification still open
 Independent current source truth, actual employer hiring need, named decision-maker and person-specific route, owner evaluation of the ten prior records and a five-opportunity pilot, native specialist activation and sustained P4/P5 reliability. Do not schedule autonomous discovery or send outbound contact.
+
+## Field preflight finding — executive dependency decoupled
+Real employer job postings often provide an application page but no named hiring manager. The initial V1.1 evaluator rejected these and could discard strong opportunities. The preflight patch now allows `ORGANIZATION_REVIEW_EXECUTIVE_PENDING` for O1 and public O2A with no individual and a zero person score. This remains entirely separate from personal novelty, route verification, contact readiness and sending authorization. Independently revisit actual employer postings: indexed jobs can be expired or absent on the primary board; a syntactically valid URL alone NEVER establishes a live vacancy.

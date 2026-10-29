@@ -11,3 +11,4 @@ When the operator asks for the Drive pilot, read `../../../docs/DRIVE_REVIEW_HAN
 
 ## Organization-first V1.1
 Present organizational challenge, evidence, potential permanent leadership mandate, O1/O2A/O2B/O3/O4 classification and hiring certainty BEFORE the person. Distinguish posted vacancies, emerging roles and hiring-unconfirmed strategic exploration. Show separate organization/person score, employer concentration, opportunity shortfall and review status. Existing person-only Drive exporter remains strict and must not receive V1.1 fields.
+**Preflight V1.1 correction:** Include a separate `ORGANIZATION_REVIEW_EXECUTIVE_PENDING` section for evidence-based potential employers with no named individual; count it as organization research only, not a contact or a verified current vacancy. Clearly distinguish live employer ATS proof from indexed/expired jobs and mark unresolved status. Do not drop a credible role solely because no executive has been found.

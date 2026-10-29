@@ -8,3 +8,4 @@ For each organization research official people, leadership, governance, speaker,
 
 ## Organization-first V1.1
 Select relevant accountable initiative owners or potential leadership hiring sponsors only AFTER qualifying the employer. Verify current role and documented responsibility, not prestige or CEO title alone; hiring power remains a hypothesis until evidenced. Require a person-specific professional engagement route; an O2B executive discussion is HIRING_UNCONFIRMED.
+**Preflight V1.1 correction:** A genuine O1 employer opening may have no named sponsor. Preserve its organization-only research assessment and attempt legitimate sponsor discovery later. Leave decision-maker fields blank and person scores at zero until corroborated. This stage never authorizes sending. O2B requires accountable executive evidence before exploratory shortlist.

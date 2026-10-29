@@ -137,25 +137,34 @@ def evaluate_opportunity(record, *, policy=None):
         reasons.append("WORK_ARRANGEMENT_NOT_VERIFIED_FEASIBLE")
     if not f["credentials_match"]:
         reasons.append("REQUIRED_CREDENTIALS_NOT_MATCHED")
-    if len(_text(p, "name").split()) < 2:
-        reasons.append("PERSON_IDENTITY_INCOMPLETE")
-    _text(p, "current_title")
-    _text(p, "conversation_thesis")
-    _url(p.get("role_source_url"), "decision_maker.role_source_url")
-    ownership_url = _url(p.get("initiative_ownership_source_url"),
-                         "decision_maker.initiative_ownership_source_url",
-                         required=False)
-    if p.get("authority") not in AUTHORITIES or p.get("route_type") not in ROUTES:
-        raise ValueError("Invalid person authority/route classification")
-    route_url = _url(p.get("route_url"), "decision_maker.route_url", required=False)
-    if p["route_type"] == "NO_ROUTE" or not route_url:
-        reasons.append("NO_PERSON_SPECIFIC_ROUTE")
-    if p["route_type"] == "INDIRECT":
-        reasons.append("INDIRECT_ROUTE_REQUIRES_PERSON_SPECIFIC_REVIEW")
-    if p["authority"] in {"UNVERIFIED", "POTENTIAL_INFLUENCER"}:
-        reasons.append("EXECUTIVE_SPONSOR_NOT_ESTABLISHED")
-    if p["authority"] == "DOCUMENTED_INITIATIVE_OWNER" and not ownership_url:
-        reasons.append("INITIATIVE_OWNERSHIP_SOURCE_MISSING")
+    # Employer opportunities must survive research even if the job listing
+    # does not disclose an executive. This is NOT permission to contact anyone.
+    has_executive = bool(p.get("name"))
+    ownership_url = ""
+    if has_executive:
+        if len(_text(p, "name").split()) < 2:
+            reasons.append("PERSON_IDENTITY_INCOMPLETE")
+        _text(p, "current_title")
+        _text(p, "conversation_thesis")
+        _url(p.get("role_source_url"), "decision_maker.role_source_url")
+        ownership_url = _url(p.get("initiative_ownership_source_url"),
+                             "decision_maker.initiative_ownership_source_url",
+                             required=False)
+        if p.get("authority") not in AUTHORITIES or p.get("route_type") not in ROUTES:
+            raise ValueError("Invalid person authority/route classification")
+        route_url = _url(p.get("route_url"), "decision_maker.route_url", required=False)
+        if p["route_type"] == "NO_ROUTE" or not route_url:
+            reasons.append("NO_PERSON_SPECIFIC_ROUTE")
+        if p["route_type"] == "INDIRECT":
+            reasons.append("INDIRECT_ROUTE_REQUIRES_PERSON_SPECIFIC_REVIEW")
+        if p["authority"] in {"UNVERIFIED", "POTENTIAL_INFLUENCER"}:
+            reasons.append("EXECUTIVE_SPONSOR_NOT_ESTABLISHED")
+        if p["authority"] == "DOCUMENTED_INITIATIVE_OWNER" and not ownership_url:
+            reasons.append("INITIATIVE_OWNERSHIP_SOURCE_MISSING")
+    else:
+        if any(value not in ("", None, "NO_ROUTE", "UNVERIFIED")
+               for value in p.values()):
+            reasons.append("PARTIAL_EXECUTIVE_EVIDENCE_NOT_VERIFIED")
     kind, signal = record["classification"], m["employment_signal"]
     if kind == "O1":
         if signal != "POSTED_OPENING" or not mandate_url:
@@ -171,8 +180,8 @@ def evaluate_opportunity(record, *, policy=None):
     elif kind == "O2B":
         if signal != "NONE" or not m["employment_hypothesis"]:
             reasons.append("EXPLORATION_MUST_NOT_CLAIM_HIRING")
-        if (p["authority"] not in {"DOCUMENTED_INITIATIVE_OWNER",
-                                   "DOCUMENTED_HIRING_SPONSOR"}
+        if (p.get("authority") not in {"DOCUMENTED_INITIATIVE_OWNER",
+                                      "DOCUMENTED_HIRING_SPONSOR"}
                 or not ownership_url):
             reasons.append("ACCOUNTABLE_EXECUTIVE_NOT_CORROBORATED")
     elif kind == "O3":
@@ -185,12 +194,17 @@ def evaluate_opportunity(record, *, policy=None):
     person_score = sum(record["scores"]["person"].values())
     if org_score < settings["minimum_organization_score"]:
         reasons.append("ORGANIZATION_SCORE_BELOW_THRESHOLD")
-    if person_score < settings["minimum_decision_maker_score"]:
+    if has_executive and person_score < settings["minimum_decision_maker_score"]:
         reasons.append("DECISION_MAKER_SCORE_BELOW_THRESHOLD")
+    if not has_executive and person_score != 0:
+        reasons.append("EXECUTIVE_SCORE_WITHOUT_PERSON_EVIDENCE")
+    if not has_executive and kind == "O2B":
+        reasons.append("ACCOUNTABLE_EXECUTIVE_NOT_CORROBORATED")
     if record["project_id"] != PROJECT_ID:
         reasons.append("PROJECT_ID_NOT_VERIFIED")
     decision = ("RESEARCH_HOLD" if reasons else
-                "EXPLORATORY_REVIEW" if kind == "O2B"
+                "ORGANIZATION_REVIEW_EXECUTIVE_PENDING" if not has_executive
+                else "EXPLORATORY_REVIEW" if kind == "O2B"
                 else "SHORTLIST_PENDING_HUMAN_REVIEW")
     return {
         "schema_version": SCHEMA_VERSION, "project_id": PROJECT_ID,
@@ -213,7 +227,8 @@ def audit_opportunity_portfolio(assessments, *, pilot_size=5, policy=None):
     if not isinstance(assessments, list) or not all(isinstance(x, dict) for x in assessments):
         raise ValueError("Portfolio must contain opportunity assessments")
     selected = [x for x in assessments if x.get("decision") in {
-        "SHORTLIST_PENDING_HUMAN_REVIEW", "EXPLORATORY_REVIEW"}]
+        "SHORTLIST_PENDING_HUMAN_REVIEW", "EXPLORATORY_REVIEW",
+        "ORGANIZATION_REVIEW_EXECUTIVE_PENDING"}]
     tracks = Counter(x["track"] for x in selected)
     parents = Counter(x["parent_organization"].strip().casefold() for x in selected)
     employers = Counter(x["organization_name"].strip().casefold() for x in selected)
@@ -229,6 +244,9 @@ def audit_opportunity_portfolio(assessments, *, pilot_size=5, policy=None):
         "target": pilot_size, "shortlisted_for_review": len(selected),
         "track_counts": dict(tracks),
         "shortfall": max(0, pilot_size - len(selected)),
+        "executive_research_pending": sum(
+            x["decision"] == "ORGANIZATION_REVIEW_EXECUTIVE_PENDING"
+            for x in selected),
         "portfolio_warnings": warnings,
         "target_allocation": settings["track_allocation"],
         "not_human_approved": True, "new_contact_ready": 0,

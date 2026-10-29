@@ -54,6 +54,47 @@ class OpportunityFirstTests(unittest.TestCase):
         self.assertFalse(r["contact_ready"])
         self.assertFalse(r["send_authorized"])
 
+    def test_valid_posting_without_named_hiring_manager_is_preserved(self):
+        x = case("O1", "PRODUCT_LEADERSHIP")
+        x["decision_maker"] = {}
+        x["scores"]["person"] = {
+            "influence": 0, "initiative_ownership": 0, "conversation_value": 0,
+            "route": 0, "role_evidence": 0}
+        result = evaluate_opportunity(x)
+        self.assertEqual(result["decision"], "ORGANIZATION_REVIEW_EXECUTIVE_PENDING")
+        self.assertEqual(result["decision_maker_score"], 0)
+        self.assertFalse(result["contact_ready"])
+        self.assertFalse(result["send_authorized"])
+
+    def test_emerging_public_mandate_without_executive_is_retained(self):
+        x = case("O2A")
+        x["decision_maker"] = {}
+        x["scores"]["person"] = dict.fromkeys(x["scores"]["person"], 0)
+        self.assertEqual(evaluate_opportunity(x)["decision"],
+                         "ORGANIZATION_REVIEW_EXECUTIVE_PENDING")
+
+    def test_exploration_without_accountable_executive_remains_hold(self):
+        x = case("O2B")
+        x["decision_maker"] = {}
+        x["scores"]["person"] = dict.fromkeys(x["scores"]["person"], 0)
+        self.assertEqual(evaluate_opportunity(x)["decision"], "RESEARCH_HOLD")
+
+    def test_no_executive_cannot_receive_fabricated_person_score(self):
+        x = case("O1")
+        x["decision_maker"] = {}
+        result = evaluate_opportunity(x)
+        self.assertEqual(result["decision"], "RESEARCH_HOLD")
+        self.assertIn("EXECUTIVE_SCORE_WITHOUT_PERSON_EVIDENCE", result["reasons"])
+
+    def test_portfolio_preserves_real_opportunities_without_people(self):
+        x = case("O1")
+        x["decision_maker"] = {}
+        x["scores"]["person"] = dict.fromkeys(x["scores"]["person"], 0)
+        r = audit_opportunity_portfolio([evaluate_opportunity(x)])
+        self.assertEqual(r["shortlisted_for_review"], 1)
+        self.assertEqual(r["executive_research_pending"], 1)
+        self.assertEqual(r["new_contact_ready"], 0)
+
     def test_posted_product_leader_role(self):
         x = case("O1", "PRODUCT_LEADERSHIP")
         x["mandate"]["title_or_function"] = "Head of Product"
