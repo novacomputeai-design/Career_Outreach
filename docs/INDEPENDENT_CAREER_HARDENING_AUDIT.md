@@ -17,15 +17,15 @@
 
 - Owner-Windows protected DPAPI relationship lookup and batch screening work in ordinary PowerShell, not in Codex's sandbox.
 - Same-user Windows encrypted memory snapshot, authentication verification and restore to new private SQLite file passed.
-- The recovered **test copy**, not the live private database, passed explicit additive governance schema migration with unchanged original row counts.
+- The recovered test COPY passed an additive migration; subsequently the owner explicitly authorized and completed the LIVE backup-first schema migration on 2026-10-28. Supplied terminal output confirmed encrypted snapshot authentication, original keys match, current governance schema, unchanged original relationship row counts and no messages sent. This is owner-terminal evidence, not a GitHub inspection of the private database.
 - Supervised Codex public-source research was reported earlier, but specialized native skill-selection/activation and complete public-to-private-to-reviewed execution were not independently qualified.
 
 ## Open release blockers — none may be waived by a model
 
 | Gate | Required objective evidence | Status |
 |---|---|---|
-| Windows P0 regression | Pull latest main, run policy validators and full synthetic tests in ordinary user shell; read-only protected relationship batch still works | PENDING OWNER PROOF |
-| Private live schema | Inspect original live DB READ-ONLY; separately approved, backup-first live migration after owner decision; recheck known identities and audit | NOT EXECUTED |
+| Windows P0 regression | Owner ran 96/96 local Windows tests, both structural validators and read-only live schema inspection; GitHub Windows + Ubuntu jobs each passed 96 tests at main a0a6f85 | PASSED FOR THEN-CURRENT MAIN; this feature patch needs new CI and owner qualification |
+| Private live schema | Owner-approved backup-first live migration, authenticated encrypted pre-change backup and unchanged original counts; current governance schema | OWNER TERMINAL VERIFIED 2026-10-28; portable recovery and cross-channel history separate |
 | Portable recovery | User-approved protection and recovery of original Fernet and HMAC identity keys across lost Windows account/device, without publishing or passing to Codex | NOT QUALIFIED |
 | Complete novelty | Private identity aliases and historical contacts/discoveries, external history sources with access and provenance; missing history -> 0 verified NEW | NOT QUALIFIED |
 | Current role/route | Independent person/source verification, permitted route checks, freshness and actual relevance reviewed by operator | NOT FIELD QUALIFIED |
@@ -44,6 +44,16 @@ Project-boundary adversarial test: presenting a realistic-looking Nova federal a
 
 ## Windows regression remediation — 2026-10-28
 
-Owner Windows PowerShell first validated skill and governance structure but its 95-test suite reported 14 ERROR outcomes. The causes were unavailable IANA timezone data for `America/Phoenix` (6 cases) and unclosed synthetic `sqlite3.connect()` handles locking ephemeral databases on Windows during temporary-directory cleanup (8 cases). This was not evidence of real relationship database corruption. The patch adds the `tzdata` runtime dependency plus a strictly contemporary Phoenix UTC-07:00 fallback when the host has no zoneinfo database, closes each synthetic SQLite connection explicitly, and requires Windows as well as Linux GitHub Actions validation. Owner Windows re-test is still REQUIRED before marking this operationally qualified.
+Owner Windows PowerShell first validated skill and governance structure but its 95-test suite reported 14 ERROR outcomes. The causes were unavailable IANA timezone data for `America/Phoenix` (6 cases) and unclosed synthetic `sqlite3.connect()` handles locking ephemeral databases on Windows during temporary-directory cleanup (8 cases). This was not evidence of real relationship database corruption. The patch adds the `tzdata` runtime dependency plus a strictly contemporary Phoenix UTC-07:00 fallback when the host has no zoneinfo database, closes each synthetic SQLite connection explicitly, and requires Windows as well as Linux GitHub Actions validation. Owner subsequently installed tzdata and passed 96/96 Windows tests and both structural validators, then confirmed the pre-change protected backup and current live governance schema.
 
 Safe owner verification after merge (normal PowerShell, no Codex/DPAPI keys): `python -m pip install -r requirements.txt`, then both structural validators and `python -m unittest discover -s tests -q`. No live migration, contact lookup, outreach or sending is part of these tests.
+
+## Five-findings remediation (2026-10-28)
+
+1. **Professional copy:** Normalize verified conversation topics (e.g., `Discuss X` → `exchanging perspectives on X`), shorten sourced initiatives and keep the message personal, unsent and subject to Fadi's editorial review. Synthetic tests cover grammatical and distinctive copy; real recipient-value quality is NOT field-qualified.
+2. **Ordering:** In the optional Python pilot, enforce evidence/identity/source STRUCTURAL audit before drafting; an adversarial test proves no draft call on audit HOLD. This is NOT proof of source truth or native Codex invocation.
+3. **Scope:** Extend explicit Nova sales, capability-statement, supplier and contract pursuits in the personal-career tripwire, including spoofed career IDs; synthetic tests do not fully resolve ambiguous natural-language intent. Fadi reviews every borderline case.
+4. **Evidence reconciliation:** Document the owner-verified, completed LIVE governance migration and P0 Windows run; no claim of independent access to the private DB. Instructions do not authorize a second migration.
+5. **Protected memory:** Operator-only, ordered-name/profile SHA-fingerprint and minimal reconciliation report, with no keys, private notes, broker, contact-ready or send authority. SHA is a consistency check, NOT authenticated provenance. Real Windows handoff, external history checks and specialist native activation still require field evidence.
+
+**This remains NOT PRODUCTION QUALIFIED.** The selected agent is Codex + its 14 native skills, not the optional Python API runner. CONTACT_READY and SEND_AUTHORIZED remain blocked until independent, owner-approved live proof.
