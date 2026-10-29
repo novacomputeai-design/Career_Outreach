@@ -92,6 +92,12 @@ class ReviewPacketTests(unittest.TestCase):
             with (output/"prospects-review.csv").open("r",encoding="utf-8-sig",newline="") as f:
                 row=list(csv.reader(f))[1]
             self.assertTrue(row[2].startswith("'="))
+            batch=json.loads((output/"candidate-batch.json").read_text(encoding="utf-8"))
+            owner=json.loads((output/"candidate-public-review.json").read_text(encoding="utf-8"))
+            self.assertEqual(batch[0]["person_name"],"Avery Example")
+            self.assertEqual(owner[0]["project_id"],PROJECT_ID)
+            self.assertNotIn("private_note",str(owner))
+            self.assertNotIn("why_connect",str(batch))
             with self.assertRaises(FileExistsError):
                 write_review_packet(x,output)
 
