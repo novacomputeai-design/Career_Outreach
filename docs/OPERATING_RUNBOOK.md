@@ -20,6 +20,10 @@ The local `run-readiness` command reports only the count of **recorded operator-
 
 Use `docs/OPERATOR_BATCH_SCREENING.md` for private-read-only name/profile matching and `scripts/reconcile_operator_screening.py` for exact batch binding. This bridge never certifies cross-channel novelty, authenticates an approver, or runs DPAPI inside Codex. Treat `NOT_FOUND_IN_LOCAL_STORE` as HOLD and keep all contact-ready counts at zero until outside history is independently reviewed. Public screening files and operator reports must remain outside Git.
 
+## Google Drive research review report
+
+For the selected Codex primary runtime, use `docs/DRIVE_REVIEW_HANDOFF.md` to prepare an unsent public-only research JSON and owner-generated CSV review packet. Import only into the already designated private Google Sheets tracker after checking for duplicate identities and existing rows. Codex has no automatic Google API privilege merely because ChatGPT has an authenticated connector; the local encrypted database remains the authoritative private memory. This exported report never establishes contact-ready or sending authority.
+
 ## Review queue
 1. Open the latest private report (NEVER check into Git). Search the candidate's primary and independent secondary sources again.
 2. Confirm the person holds the current role, their organization is correct, the topic is relevant to Fadi's real resume experience and the contact pathway is realistic for that individual.
