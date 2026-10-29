@@ -68,6 +68,23 @@ def validate_governance(root: Path = ROOT) -> list[str]:
         if g.get("existing_relationship") != "FOLLOW_UP_NOT_NEW":
             issues.append("existing relationships must not count as new")
 
+    opp = p.get("opportunity_search", {})
+    if (opp.get("version") != "1.1"
+            or opp.get("mission") != "permanent_internal_leadership_employment"
+            or opp.get("track_allocation") != {"AI_STRATEGY": 60, "PRODUCT_LEADERSHIP": 40}
+            or opp.get("minimum_organization_score") != 75
+            or opp.get("minimum_decision_maker_score") != 70
+            or opp.get("organization_first") is not True
+            or opp.get("never_infer_hiring_from_ai_initiative") is not True
+            or opp.get("owner_attestation_requires_private_review") is not True
+            or opp.get("require_person_specific_route") is not True
+            or opp.get("score_never_overrides_hard_gates") is not True
+            or opp.get("opportunity_assessment_contact_ready") is not False
+            or opp.get("unchanged_person_drive_exporter") is not True):
+        issues.append("V1.1 opportunity-first policy or safety gates drift")
+    if not (root / "references/opportunity-first-contract.md").is_file():
+        issues.append("V1.1 opportunity contract missing")
+
     m = p.get("memory")
     if not isinstance(m, dict):
         issues.append("memory authority missing")

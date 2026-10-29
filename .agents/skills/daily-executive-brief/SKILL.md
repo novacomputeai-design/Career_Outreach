@@ -8,3 +8,6 @@ Read `../../../references/daily-brief-template.md`. Only count people who passed
 
 ## Approved Google Drive review handoff
 When the operator asks for the Drive pilot, read `../../../docs/DRIVE_REVIEW_HANDOFF.md`. Prepare only the specified public research JSON outside Git; owner runs `scripts/prepare_drive_review_packet.py`, then owner-only protected relationship screening outside Codex. Do not write private memory or message bodies to Google, claim native connector access without proof, auto-import repeated rows, count an unknown name as NEW or approve sending. Report blocked gates and native skill invocation evidence honestly.
+
+## Organization-first V1.1
+Present organizational challenge, evidence, potential permanent leadership mandate, O1/O2A/O2B/O3/O4 classification and hiring certainty BEFORE the person. Distinguish posted vacancies, emerging roles and hiring-unconfirmed strategic exploration. Show separate organization/person score, employer concentration, opportunity shortfall and review status. Existing person-only Drive exporter remains strict and must not receive V1.1 fields.

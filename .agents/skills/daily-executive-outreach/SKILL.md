@@ -8,3 +8,6 @@ Read `../../../references/daily-operating-contract.md`. Before sourcing, verify 
 
 ## First-release report boundary
 For the five-person supervised Google review run, follow `../../../docs/DRIVE_REVIEW_HANDOFF.md`: source-backed public people/role/initiative/route into a bounded private JSON research packet only. Call the relevant specialists using Codex's supported native mechanism and record each actual activation. No Google connector access or memory authority is conferred by a GitHub skill. Operator alone screens encrypted relationship memory and imports a reviewed report into Google. Keep contact-ready=0, sending=0 until independently qualified.
+
+## Organization-first V1.1
+Before executive discovery read ../../../references/opportunity-first-contract.md. Operate on 60% AI Strategy/Transformation and 40% complex Enterprise Product Leadership, any industry, Tucson-first then feasible US-remote. Qualify employer initiative/need, realistic permanent leadership contribution, class O1/O2A/O2B/O3/O4, then identify sponsor and route. Run opportunity structural and portfolio audits; neither authorizes contact, employment claims, protected-memory access, human review or sending.
