@@ -14,6 +14,9 @@ Required when research is run: organization-discovery, provenance-and-freshness,
 
 Pipeline: organization and AI/product strategy -> specific documented business objective -> initiative and hiring evidence -> executive responsibility graph -> resume-grounded contribution -> independent engagement pathway -> factual audit -> owner opportunity brief. Include research holds and zero useful findings honestly. Contact-ready, send authorization and application submission are always false in the current research process.
 
+## Offline handoff boundary
+When a bounded public-only V2.1 opportunity JSON is created in a protected user-owned run folder, use `scripts/assess_career_opportunities.py --input PRIVATE_INPUT --out PRIVATE_UNUSED_OUTPUT` for structural preflight. This validates format/claims but does not fetch pages, authenticate the owner, access DPAPI, authorize outreach or record applications. Preserve the complete owner-only and source-truth gaps. If a real Codex skill was not selected natively, report NOT_VERIFIED, not an invented activation.
+
 ## Output boundary
 
 Return only cited facts, clearly marked hypotheses and reason-coded HOLDs. Record whether this specialist was natively selected, NOT_VERIFIED, or SKIPPED_NOT_APPLICABLE. Research findings and drafts are not contact-ready or sent.

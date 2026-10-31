@@ -12,6 +12,9 @@ For each opportunity show employer/location and work eligibility; candidate capa
 
 Separate manual official application possibility from actual application; no unnamed-manager fabrication. Counts: organizations investigated, distinct initiatives/opportunities, assessable, evidence holds, owner Pursue/Research more/Reject, actual observed engagement and hiring events; people/legacy 20 capacity as secondary only. Keep existing strict 19-column person-only Drive export unchanged. V2.1 opportunity reviews must use separately versioned, safe records; no private feedback to PUBLIC Git or automatic Drive mutation. No sending.
 
+## Versioned review packet
+Use `outreach_agent/career_intelligence_packet.py` through the safe offline CLI for V2.1 public-only organization reports. The existing strict 19-column person exporter remains legacy/unchanged; do not insert V2.1 schema keys into it or transfer private feedback to Google Drive. Do not call a structural preflight CONTACT_READY.
+
 ## Output boundary
 
 Return only cited facts, clearly marked hypotheses and reason-coded HOLDs. Record whether this specialist was natively selected, NOT_VERIFIED, or SKIPPED_NOT_APPLICABLE. Research findings and drafts are not contact-ready or sent.

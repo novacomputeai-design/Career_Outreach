@@ -99,9 +99,11 @@ def validate_governance(root: Path = ROOT) -> list[str]:
         issues.append("V2.1 operating contract missing")
     if not (root / "outreach_agent/career_intelligence.py").is_file():
         issues.append("V2.1 structural evaluator missing")
-    for name in ("organization-discovery", "leadership-discovery",
-                 "relationship-qualification", "daily-executive-outreach",
-                 "daily-executive-brief", "run-quality-audit"):
+    for name in ("daily-executive-outreach", "organization-discovery", "leadership-discovery",
+                 "contact-verification", "provenance-and-freshness", "relationship-memory",
+                 "relationship-qualification", "outreach-drafting", "conversation-preparation",
+                 "follow-up-planning", "run-quality-audit", "daily-executive-brief",
+                 "outcome-intelligence", "discovery-strategy-optimization"):
         skill = read(".agents/skills/" + name + "/SKILL.md")
         if "V2.1 authority" not in skill:
             issues.append("V2.1 skill authority missing: " + name)
