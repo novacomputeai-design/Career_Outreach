@@ -1,20 +1,15 @@
 ---
 name: discovery-strategy-optimization
-description: Review user-verified outcomes and recommend reversible Tucson or remote discovery priority adjustments without changing qualification standards or silently editing preferences.
+description: Suggest reversible research improvements from owner decisions and verified career outcomes without self-editing policy.
 ---
 # discovery-strategy-optimization
 
-## Activation
-After outcome-intelligence reports real contact and reply histories.
+**V2.1 authority:** Read `../../../references/career-intelligence-operating-contract-v2.1.md` and `../../../config/operating-policy.json` before use. Project `PERSONAL_CAREER_OUTREACH` is personal permanent leadership employment only. This skill cannot certify source truth, run owner-only DPAPI tools, approve sending, auto-apply or change policy. `SEND_AUTHORIZED` remains BLOCKED.
 
 ## Procedure
-1. Examine observation counts by Tucson versus remote and optional user feedback about meaningful professional relevance.
-2. Insufficient denominators -> NO_CHANGE. At least ten genuinely contacted people per compared segment required before suggesting an observational rate difference.
-3. Suggestions must state data sizes, feedback gaps, confounding and alternative explanations; a non-reply does not establish irrelevance.
-4. Recommend only a search-query ordering experiment, not a sector ban, discriminatory ranking, score inflation or automation of external messaging.
-5. User must explicitly approve any new priority via the private operator command. Keep strategy revisions audited and reversible.
-## Output
-Either NO_CHANGE or a documented experiment suggestion with explicit APPROVAL_REQUIRED and never self-approved.
 
-## Organization-first V1.1
-Optimize only from Fadi's documented judgment of whether a sourced organizational opportunity merits a senior leadership conversation, and separately from observed role-development/interview/offer outcomes. Never optimize for AI keyword overlap, famous titles or arbitrary lead count. The 60/40 split is human-set and cannot be auto-tuned.
+Evaluate owner acceptance and rejection reasons (location, contribution, scope, role, sponsor, relevance) separately from observed reply/meeting/interview results. Tucson first; any industry; remote roles eligible. AI strategy 60 versus product 40 is a directional capability-research preference, NOT a required opportunity mix and NOT strategic versus direct hiring allocation. Avoid overfitting the six-company experiment; do not exclude a sector merely due to one rejection. With insufficient comparable outcome data output NO_CHANGE plus targeted future research hypotheses. Any strategy change requires explicit owner approval and auditable policy update; never edit scores, routes or sending rules automatically.
+
+## Output boundary
+
+Return only cited facts, clearly marked hypotheses and reason-coded HOLDs. Record whether this specialist was natively selected, NOT_VERIFIED, or SKIPPED_NOT_APPLICABLE. Research findings and drafts are not contact-ready or sent.

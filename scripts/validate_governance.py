@@ -85,6 +85,26 @@ def validate_governance(root: Path = ROOT) -> list[str]:
     if not (root / "references/opportunity-first-contract.md").is_file():
         issues.append("V1.1 opportunity contract missing")
 
+    ci = p.get("career_intelligence", {})
+    if (ci.get("version") != "2.1"
+            or ci.get("mission") != "permanent_internal_leadership_employment"
+            or ci.get("active_research_contract") is not True
+            or ci.get("legacy_controls", {}).get("legacy_score_only") is not True
+            or ci.get("safety", {}).get("send_authorized") is not False
+            or ci.get("safety", {}).get("auto_apply") is not False
+            or ci.get("evidence", {}).get("score_never_grants_readiness") is not True
+            or ci.get("executive", {}).get("official_ats_with_no_manager_allowed") is not True):
+        issues.append("V2.1 career opportunity authority or safety requirements missing")
+    if not (root / "references/career-intelligence-operating-contract-v2.1.md").is_file():
+        issues.append("V2.1 operating contract missing")
+    if not (root / "outreach_agent/career_intelligence.py").is_file():
+        issues.append("V2.1 structural evaluator missing")
+    for name in ("organization-discovery", "leadership-discovery",
+                 "relationship-qualification", "daily-executive-outreach",
+                 "daily-executive-brief", "run-quality-audit"):
+        skill = read(".agents/skills/" + name + "/SKILL.md")
+        if "V2.1 authority" not in skill:
+            issues.append("V2.1 skill authority missing: " + name)
     m = p.get("memory")
     if not isinstance(m, dict):
         issues.append("memory authority missing")

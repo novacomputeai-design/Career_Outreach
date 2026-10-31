@@ -1,7 +1,17 @@
 ---
 name: relationship-memory
-description: Reconcile executive identity, past interactions, duplicate contacts, suppression and follow-up from a durable private relationship history; keep private records out of public Git.
+description: Preserve private identity and relationship history while tracking opportunities independently from people.
 ---
 # relationship-memory
 
-Read `../../../references/private-memory-contract.md`. On Windows, `scripts/relationship-check.ps1` is a trusted **operator-only** read-only DPAPI gateway. A 2026-10-27 qualification attempt demonstrated that direct subprocess invocation from Codex's Windows sandbox fails DPAPI decryption, although operator PowerShell succeeds. **Do not invoke this wrapper from Codex again until an independently validated trusted broker design exists.** Do not read/print DPAPI contents, environment variables, or raw SQLite. Accept an operator-provided minimal classification as USER-REPORTED, not automatic Codex memory verification. See `../../../docs/CODEX_NATIVE_RUN.md`. A lookup `NOT_FOUND_IN_LOCAL_STORE` means **UNVERIFIED**, not NEW. `FIRST_LEARNED` means user-reported first discovery, **not** prior outreach nor contact-readiness; `PREVIOUSLY_MET` is an existing relationship. This gateway neither inserts candidates nor sends messages. Lookup stable individual identity across aliases/changes of company; compare current discovery with prior runs, approvals, messages, replies, meetings and opt-outs. A past contact moves to FOLLOW_UP, not NEW. A previously recommended NEW person should not be counted again unless user explicitly resets eligibility. Opt-outs block all outreach. If authorized private state is unavailable, mark novelty UNVERIFIED and report zero confirmed NEW rather than claiming uniqueness. Store sensitive personal interactions only in a secure private system, not this repository.
+**V2.1 authority:** Read `../../../references/career-intelligence-operating-contract-v2.1.md` and `../../../config/operating-policy.json` before use. Project `PERSONAL_CAREER_OUTREACH` is personal permanent leadership employment only. This skill cannot certify source truth, run owner-only DPAPI tools, approve sending, auto-apply or change policy. `SEND_AUTHORIZED` remains BLOCKED.
+
+## Procedure
+
+This repository is PUBLIC. Protected relationship data, histories and opt-outs belong only to the user-owned Windows DPAPI store. Do not invoke this wrapper from Codex; operator-only PowerShell may run approved batch screening outside the sandbox. Do not read keys, raw SQLite, private notes or personal emails inside Codex. Local NOT_FOUND means novelty UNVERIFIED, not NEW.
+
+Never merge an opportunity with a person. Existing PREVIOUSLY_MET/FIRST_LEARNED individuals may be linked to new initiative or ATS opportunity records without becoming newly discovered people. Person-specific opt-out prevents contacting that person but does not erase a separate official employer vacancy. Alias/company changes and identity collisions require reviewed linkage; never silently merge namesakes. No memory migration without separate owner authorization and tested encrypted backup.
+
+## Output boundary
+
+Return only cited facts, clearly marked hypotheses and reason-coded HOLDs. Record whether this specialist was natively selected, NOT_VERIFIED, or SKIPPED_NOT_APPLICABLE. Research findings and drafts are not contact-ready or sent.

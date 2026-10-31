@@ -1,11 +1,19 @@
 ---
 name: organization-discovery
-description: Research diverse Tucson-first and US-remote organizations across any industry for enterprise product, AI strategy, leadership, digital transformation and innovation opportunities.
+description: Research employer objectives, AI initiatives, enterprise products and transformation activity with claim-specific sources.
 ---
 # organization-discovery
 
-Read public candidate profile and source policy. Rotate through Tech Parks Arizona and tenants, local employers, public/university/healthcare organizations, business associations, corporate sites, regional news and relevant remote-friendly national employers. Do not select by industry label alone. For each organization record name, location/work mode, observed recent strategic initiative or leadership context, source/date, connection to the candidate's transferable capabilities and confidence. Distinguish a plausible need from a documented vacancy. Return a diverse, ranked pool with SOURCE_OBSERVED versus HYPOTHESIS labels. Never invent an organization, role or event; don't force volume.
+**V2.1 authority:** Read `../../../references/career-intelligence-operating-contract-v2.1.md` and `../../../config/operating-policy.json` before use. Project `PERSONAL_CAREER_OUTREACH` is personal permanent leadership employment only. This skill cannot certify source truth, run owner-only DPAPI tools, approve sending, auto-apply or change policy. `SEND_AUTHORIZED` remains BLOCKED.
 
-## Organization-first V1.1
-First apply ../../../references/opportunity-first-contract.md. Investigate dated, organization-specific strategic change or explicit leadership opportunities BEFORE choosing people; classify O1/O2A/O2B/O3/O4 and permanent employment feasibility, preserving facts vs hypotheses. Target 60% AI strategy and 40% enterprise product leadership, industry-agnostic, Tucson-first then feasible US remote, with diversified employer parents. AI adoption does not prove an unmet strategy or hiring.
-**Preflight V1.1 correction:** A relevant posted opportunity without a named hiring manager must be retained as organization research (`ORGANIZATION_REVIEW_EXECUTIVE_PENDING`), not rejected or given a fabricated executive. Independently confirm active listing state on the employer's own careers site; index/snippet presence or a URL string alone is insufficient. Do not promote closed/expired postings.
+## Procedure
+
+Discover any-industry employers Tucson/Southern Arizona first, followed by genuinely feasible US-remote employers. Do not privilege high-profile names, AI keyword frequency or job aggregators over actual evidence.
+
+For every candidate record employer and work mode; what leadership publicly states; business outcome; AI/product/operational initiative; tangible pilot/deployment/partnership/organizational activity when evidenced; maturity as SOURCE_SUPPORTED or UNKNOWN; relevant current vacancy when verified; conflicting/unknown details and exact research questions. Document exact visited source URL, publisher, original lineage, passage, retrieved_at and published_on or UNDATED. A company saying it uses AI does not prove it needs an AI strategy, new executive or funded position. No public information means UNKNOWN, not absent AI.
+
+Output organization + separate initiative records and candidate business objectives, not invented executive contact lists. Neither a Tucson location nor an interesting announcement alone establishes meaningful candidate contribution.
+
+## Output boundary
+
+Return only cited facts, clearly marked hypotheses and reason-coded HOLDs. Record whether this specialist was natively selected, NOT_VERIFIED, or SKIPPED_NOT_APPLICABLE. Research findings and drafts are not contact-ready or sent.

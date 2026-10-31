@@ -1,3 +1,5 @@
+> **V2.1 candidate branch:** Organization-opportunity records use a separate V2.1 schema and employer intelligence brief. Existing 19-column person-only Drive exporter and private DPAPI workflow are unchanged. Legacy V1.1 score/20-person goals must not be used to qualify V2.1 opportunities. No real native skill activation or contact authorization has been established by this branch.
+
 # Codex-primary Career Outreach activation
 
 **Latest release authority:** `docs/PRODUCTION_PLAN.md` and `config/operating-policy.json`. Historical read-only diagnostics below are not production authorization. The later Windows DPAPI sandbox failure and operator-only lookup restriction take precedence over earlier wrapper guidance.

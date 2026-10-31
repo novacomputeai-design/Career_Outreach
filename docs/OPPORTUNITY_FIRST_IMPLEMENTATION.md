@@ -1,3 +1,5 @@
+> **V2.1 integration notice:** This section records the historical V1.1/legacy run state. The V2.1 candidate contract and `config/operating-policy.json > career_intelligence` control new research behavior. Legacy person scores and the 20-person daily figure are not V2.1 qualification criteria. All privacy, P0–P5 and no-send release gates remain in effect. Neither CI nor draft PR counts as a real native skill run.
+
 # V1.1 organization-first implementation status
 
 This is an **additive** career-opportunity precheck, not a second agent, automatic scheduler or a production qualification. Policy: config/operating-policy.json > opportunity_search. Source contract: references/opportunity-first-contract.md. Deterministic structural assessor: outreach_agent/opportunity_qualification.py.

@@ -1,10 +1,17 @@
 ---
 name: contact-verification
-description: Verify each prospective leader's current identity, role, organization and a permitted professional contact route using traceable, dated evidence.
+description: Verify professional person-specific contact and official employer application routes without guessing addresses.
 ---
 # contact-verification
 
-Read `../../../references/source-and-contact-policy.md`. Resolve namesakes, dated bios and employer changes; prefer current first-party evidence. Capture URL, observed date, claim supported and any discrepancy. Obtain a legitimately public professional contact path: published business contact, official indirect form, permitted event/association introduction or manually used platform link. Label DIRECT, INDIRECT or MANUAL; a form is not a personal address. NEVER infer email addresses or automate LinkedIn scraping/sending. Mark VERIFIED only when all material claims and a route are supported, otherwise HOLD with reason. Preserve source-level confidence.
+**V2.1 authority:** Read `../../../references/career-intelligence-operating-contract-v2.1.md` and `../../../config/operating-policy.json` before use. Project `PERSONAL_CAREER_OUTREACH` is personal permanent leadership employment only. This skill cannot certify source truth, run owner-only DPAPI tools, approve sending, auto-apply or change policy. `SEND_AUTHORIZED` remains BLOCKED.
 
-## Organization-first V1.1
-An INDIRECT generic employer contact form does not establish access to the named executive. Keep active engagement on HOLD until a supported individual direct or permitted manual route is documented and reviewed. Never invent personal addresses or automate LinkedIn.
+## Procedure
+
+Current executive name, affiliation and role require evidence separate from initiative responsibility. Identify legitimate WARM_INTRO, DIRECT or MANUAL person-specific route with supporting source; INDIRECT_GENERAL is not a verified path to an executive. No email prediction, restricted-site scraping, access bypass, automated LinkedIn actions or personal-number harvesting.
+
+DIRECT_HIRING can preserve a current official ATS application as MANUAL_APPLICATION_POSSIBLE_OWNER_AUTH_REQUIRED without a named hiring manager. An application and a direct message are separate external actions, neither authorized by a research assessment. If person route/history is unknown, label NO_VERIFIED_PERSON_ROUTE or PRIVATE_HISTORY_UNAVAILABLE and do not promote contact readiness.
+
+## Output boundary
+
+Return only cited facts, clearly marked hypotheses and reason-coded HOLDs. Record whether this specialist was natively selected, NOT_VERIFIED, or SKIPPED_NOT_APPLICABLE. Research findings and drafts are not contact-ready or sent.

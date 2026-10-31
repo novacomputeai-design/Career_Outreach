@@ -1,3 +1,7 @@
+# Legacy V1/V1.1 personal contact scoring — compatibility only
+
+**V2.1 WARNING:** Do not use person scores, organization scores, or historic 70/75 thresholds to qualify a V2.1 employer opportunity, to grant engagement readiness, or to generate a 20-person quota. See `references/career-intelligence-operating-contract-v2.1.md` and `outreach_agent/career_intelligence.py`. Older scoring exists only for regression tests and the OPTIONAL legacy Python pipeline.
+
 # Provisional evidence-based score
 Score each verified individual 0–100; these weights are hypotheses for calibration, not predictive confidence.
 
