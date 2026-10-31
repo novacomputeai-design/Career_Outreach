@@ -1,5 +1,5 @@
 {
-  "version": "0.2.2",
+  "version": "0.4.0",
   "timezone": "America/Phoenix",
   "cadence": "daily",
   "daily_target_new_people": 20,
@@ -80,5 +80,114 @@
     "mission": "individual_professional_career_networking",
     "commercial_sales_outreach_prohibited": true,
     "project_scope_failure": "HOLD"
+  },
+  "opportunity_search": {
+    "version": "1.1",
+    "mission": "permanent_internal_leadership_employment",
+    "track_allocation": {
+      "AI_STRATEGY": 60,
+      "PRODUCT_LEADERSHIP": 40
+    },
+    "minimum_organization_score": 75,
+    "minimum_decision_maker_score": 70,
+    "classifications": [
+      "O1",
+      "O2A",
+      "O2B",
+      "O3",
+      "O4"
+    ],
+    "organization_first": true,
+    "never_infer_hiring_from_ai_initiative": true,
+    "owner_attestation_requires_private_review": true,
+    "require_person_specific_route": true,
+    "score_never_overrides_hard_gates": true,
+    "exploratory_hiring_unconfirmed": true,
+    "unchanged_person_drive_exporter": true,
+    "opportunity_assessment_contact_ready": false,
+    "legacy_only": true,
+    "authority": "legacy V1.1 compatibility regression only"
+  },
+  "career_intelligence": {
+    "version": "2.1",
+    "mission": "permanent_internal_leadership_employment",
+    "active_research_contract": true,
+    "themes": [
+      "AI_STRATEGY_TRANSFORMATION",
+      "ENTERPRISE_PRODUCT_LEADERSHIP",
+      "BOTH"
+    ],
+    "pathways": [
+      "STRATEGIC_EXPLORATION",
+      "DIRECT_HIRING"
+    ],
+    "location_priority": [
+      "TUCSON_SOUTHERN_ARIZONA",
+      "US_REMOTE"
+    ],
+    "industry_restrictions": [],
+    "research_emphasis": {
+      "AI_STRATEGY_TRANSFORMATION": 60,
+      "ENTERPRISE_PRODUCT_LEADERSHIP": 40,
+      "hard_quota": false
+    },
+    "legacy_controls": {
+      "person_capacity_ceiling": 20,
+      "legacy_score_only": true
+    },
+    "success": {
+      "owner_worthwhile_opportunities": true,
+      "substantive_conversations": true,
+      "hiring_progress": true,
+      "zero_worthwhile_is_valid": true
+    },
+    "research_states": [
+      "ASSESSABLE",
+      "RESEARCH_PENDING",
+      "EVIDENCE_HOLD",
+      "CLOSED_INACTIVE",
+      "EXCLUDED"
+    ],
+    "owner_decisions": [
+      "PURSUE",
+      "RESEARCH_MORE",
+      "REJECT"
+    ],
+    "engagement_states": [
+      "RESEARCH_PENDING",
+      "ENGAGEMENT_REVIEW_ELIGIBLE",
+      "SUPPRESSED",
+      "NOT_PREPARED"
+    ],
+    "evidence": {
+      "claim_specific_source": true,
+      "visited_source": true,
+      "source_origin_lineage": true,
+      "primary_ats_recheck": true,
+      "score_never_grants_readiness": true,
+      "source_outage": "EVIDENCE_HOLD"
+    },
+    "executive": {
+      "ownership_claim_exact": true,
+      "title_not_sponsorship": true,
+      "specific_route_for_targeted_engagement": true,
+      "official_ats_with_no_manager_allowed": true
+    },
+    "safety": {
+      "contact_ready_from_research": false,
+      "send_authorized": false,
+      "automatic_sending": false,
+      "auto_apply": false,
+      "owner_pursue_not_consent": true,
+      "protected_dpapi_in_codex": false,
+      "private_data_in_public_repo": false,
+      "unchanged_person_exporter": true
+    },
+    "qualification": {
+      "synthetic_mastery_not_live_proof": true,
+      "windows_and_ubuntu_ci_required": true,
+      "codex_native_skill_proof_required": true,
+      "p4_p5_required": true
+    }
   }
 }

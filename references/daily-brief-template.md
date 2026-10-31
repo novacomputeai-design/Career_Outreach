@@ -1,19 +1,17 @@
-# Daily Executive Outreach Brief — TEMPLATE
-**Project ID:** PERSONAL_CAREER_OUTREACH — individual executive career networking ONLY (never Nova business capture)
-**Date:** YYYY-MM-DD (America/Phoenix)
-**Target:** 20 newly qualified people | **New confirmed contact-ready:** N | **Shortfall:** max(0,20−N)
-**Coverage:** organizations researched, people considered, verified, suppressed, source outages, geographic distribution. **Skill activation:** observed native/unknown.
-**No automatic messages were sent.**
+# V2.1 Executive Career Opportunity Intelligence Brief — TEMPLATE
+**Project:** PERSONAL_CAREER_OUTREACH | **Date:** YYYY-MM-DD Phoenix | **Native skills:** observed / NOT_VERIFIED / SKIPPED_NOT_APPLICABLE
+**Research activity:** organizations studied; initiatives analyzed; distinct opportunities identified; assessable; held/closed; current employer ATS roles.
+**Owner feedback:** Pursue / Research more / Reject / Unreviewed, with reason and appropriate privacy protections.
+**Actual external actions:** messages sent 0, applications submitted 0, invitations 0 unless independently observed and separately authorized.
 
-## New people to consider (max 20)
-| Priority | Name | Current position / organization | Person category | Evidence-based reason to connect | Evidence URLs + dates | Route (direct/indirect/manual) | Score | Proposed next action |
-|---|---|---|---|---|---|---|---:|---|
+## Per opportunity
+- Employer and work arrangement; independent capability_theme and engagement_pathway.
+- Exact business objective or current employer ATS requisition, claim-level sources, original lineage and dates, unknowns and conflicts.
+- Strategy versus execution versus hiring evidence; maturity only when directly supported.
+- Executive ownership graph and current role verification, DOCUMENTED versus FUNCTIONALLY_PLAUSIBLE versus UNKNOWN.
+- Actual candidate background, bounded contribution hypothesis, qualification gaps and limitations.
+- Professional route with accurate DIRECT/WARM_INTRO/MANUAL/INDIRECT_GENERAL label or official ATS application.
+- research_state, engagement_readiness, separately operator-provided owner_decision, reason codes, and explicit permitted research versus blocked external actions.
 
-## Separate existing-relationship follow-ups
-Evidence of prior contact, what was discussed, appropriate next step. Do not count as new.
-
-## Approval queue
-Each individually drafted message is only PENDING_CONTENT_APPROVAL; separate SEND_AUTHORIZED confirmation necessary.
-
-## Gaps and reviewer checks
-State missing data, unresolved identity conflicts, incomplete history, any pipeline or source error, and whether 20 were supportable. Never invent sources or claim a message was transmitted.
+## Follow-ups and evidence gaps
+Known persons are not counted new. Preserve organization-only and job-only findings; report stale positions, disputed identities, source outages, native skill activation gaps and human decisions separately. 20 people/day and numeric fit score are NOT V2.1 success criteria.

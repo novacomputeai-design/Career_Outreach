@@ -1,15 +1,20 @@
-# Personal Executive Outreach Intelligence Agent
+> **V2.1 review branch:** Read [the V2.1 contract](references/career-intelligence-operating-contract-v2.1.md). Legacy V1.1 score gates, 20-person counts and the optional Tavily/OpenAI runtime remain solely for backward compatibility. No field proof, outreach, application or production authority follows from this branch.
 
-A Tucson-first, industry-agnostic, daily executive-networking research system. **Target: 20 newly qualified, contact-ready people per calendar day**; never manufacture prospects to fill the target. Suitable remote opportunities are also in scope.
+# Personal Executive Career Opportunity Intelligence Agent
+
+A Tucson-first, industry-agnostic personal **career opportunity intelligence** system. The objective is a meaningful permanent leadership position through verified organizational initiatives, executive ownership and real hiring pathways—not 20 new contact names per day.
 
 **Status: Codex-primary with Memory and Governance prioritized as early production gates (NOT production-qualified).** Codex authentication, supervised research, private owner-PowerShell relationship checks and offline tests have been observed. Specialist activation, safe automatic reconciliation and runtime governance enforcement remain open. [Production plan](docs/PRODUCTION_PLAN.md).
 
 ## Purpose
-Identify relevant organizational leaders, actual or potential hiring influencers, and strategic connectors for thoughtful professional conversations. This is a personal career/networking workflow, **not** Nova Compute business sales and **not** an automated application or bulk outreach bot.
+Discover and investigate specific organizational AI/product and transformation priorities, map accountable executives, evaluate demonstrable contribution, and support strategic conversations or current advertised leadership roles. This is a personal career/networking workflow, **not** Nova Compute business sales and **not** an automated application or bulk outreach bot.
 
 **Audit and release evidence:** [Independent career hardening audit](docs/INDEPENDENT_CAREER_HARDENING_AUDIT.md). Static/CI passing does not authorize production or a scheduler.
 
 **Controlled Google Drive report path:** see [Fadi's supervised Google Drive review handoff](docs/DRIVE_REVIEW_HANDOFF.md). Exporter creates public-only research review CSVs and separate owner-only screening inputs outside the public checkout; it does not authenticate to Drive or grant contact readiness. The existing private Google Sheet can be updated by an owner-authorized connector only after checking for duplicates.
+
+## V2.1 read-only research handoff (review branch only)
+Read `docs/CAREER_V2_1_IMPLEMENTATION_STATUS.md`. The Codex native orchestrator may collect visited-source claim records; on owner-controlled Windows, use `python scripts/assess_career_opportunities.py --input PRIVATE_INPUT.json --out PRIVATE_UNUSED_OUTPUT.json` with both paths **outside the PUBLIC repo**. This performs an offline structural review, not independent truth verification. The 14-skill native-activation trace and real Windows owner-side screening are separate gates. Do not auto-apply, contact or send.
 
 ## Repository structure
 - `AGENTS.md` — authority and repo rules.

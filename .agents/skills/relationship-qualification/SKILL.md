@@ -1,7 +1,19 @@
 ---
 name: relationship-qualification
-description: Score and filter verified potential executive career connections using evidence-backed alignment, influence, concrete conversation value, reachability and location.
+description: Evaluate contribution and pathway feasibility without legacy numeric-score promotion.
 ---
 # relationship-qualification
 
-Read `../../../references/scoring-rubric.md`. Allocate points out of 30 fit, 25 influence, 20 specific conversation rationale, 15 reachability, 10 location/work mode. Include precise fact URLs, distinguish supported facts from hypotheses. Threshold >=70, but hard gates first: verified current person/title/organization, sourced reason, lawful contact path, no opt-out, private-history novelty check. Don't inflate scores to meet 20. Tucson preferred but high-quality fully remote US accepted, all industries eligible. Return PASS/HOLD/REJECT and numerical breakdown.
+**V2.1 authority:** Read `../../../references/career-intelligence-operating-contract-v2.1.md` and `../../../config/operating-policy.json` before use. Project `PERSONAL_CAREER_OUTREACH` is personal permanent leadership employment only. This skill cannot certify source truth, run owner-only DPAPI tools, approve sending, auto-apply or change policy. `SEND_AUTHORIZED` remains BLOCKED.
+
+## Procedure
+
+Use the V2.1 opportunity record. Assess independently: organizational attractiveness; demonstrated candidate contribution (objective -> decision/problem HYPOTHESIS -> approved experience -> plausible value -> limits); and feasible leadership-employment/engagement path. Mark mismatched mandatory credentials and infeasible nonremote work location as holds, not low scores. Treat geography as search priority, not a substitute for value.
+
+STRATEGIC_EXPLORATION: a directly evidenced strategic signal and truthful contribution may be ASSESSABLE without a known sponsor, but never assumed hiring. Only DOCUMENTED relevant executive ownership plus specific verified route yields ENGAGEMENT_REVIEW_ELIGIBLE (still not contact-ready). DIRECT_HIRING: verify official active ATS requisition, mandatory fit, Arizona/remote feasibility; retain valid role without manager; manual application requires owner authorization.
+
+Never let old >=70/75 person/organization scores override a missing claim, owner rejection, route, credentials, opt-out or other hard gate. Return research_state, engagement_readiness, reasons and blocked next actions.
+
+## Output boundary
+
+Return only cited facts, clearly marked hypotheses and reason-coded HOLDs. Record whether this specialist was natively selected, NOT_VERIFIED, or SKIPPED_NOT_APPLICABLE. Research findings and drafts are not contact-ready or sent.
