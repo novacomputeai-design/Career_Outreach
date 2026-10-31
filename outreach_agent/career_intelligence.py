@@ -76,6 +76,12 @@ def _claim(claims, claim_id, *, kind=None, subject=None, object_id=None):
         return None
     if object_id and item.get("object_id") != object_id:
         return None
+    if kind == "CURRENT_EXECUTIVE_ROLE" and _day(item["retrieved_at"]) < date.today() - timedelta(days=90):
+        return None
+    if kind == "EXECUTIVE_OWNERSHIP":
+        published = _day(item.get("published_on"))
+        if published and published < date.today() - timedelta(days=730):
+            return None
     return item
 
 
@@ -245,6 +251,12 @@ def audit_packet(records):
     results = [evaluate_opportunity(x) for x in records]
     keys = [opportunity_identity(x)[0] for x in records]
     collisions = [i for i, k in enumerate(keys) if k is None or keys.count(k) > 1]
+    for i in collisions:
+        results[i] = dict(results[i])
+        results[i]["research_state"] = "EVIDENCE_HOLD"
+        results[i]["engagement_readiness"] = "NOT_PREPARED"
+        results[i]["reasons"] = sorted(set(results[i]["reasons"] + ["IDENTITY_COLLISION_HOLD"]))
+        results[i]["manual_application"] = "NOT_ELIGIBLE"
     counts = Counter(x["research_state"] for x in results)
     return {"schema_version": VERSION, "reviewed": len(records),
             "research_states": dict(counts), "identity_holds": collisions,

@@ -222,6 +222,18 @@ class CorePathwayTests(unittest.TestCase):
         p=audit_packet([sample(),sample()])
         self.assertEqual(p["identity_holds"],[0,1])
 
+    def test_collision_blocks_batch_engagement(self):
+        r=audit_packet([sample(),sample()])
+        self.assertEqual(r["research_states"].get("EVIDENCE_HOLD"),2)
+        self.assertEqual(r["results"][0]["engagement_readiness"],"NOT_PREPARED")
+
+    def test_stale_current_executive_role_is_not_verified(self):
+        x=sample(executive=True)
+        old=(date.today()-timedelta(days=120)).isoformat()
+        x["claims"][-2]["retrieved_at"]=old
+        x["claims"][-2]["published_on"]=old
+        self.assertIn("CURRENT_EXECUTIVE_ROLE_UNVERIFIED",evaluate_opportunity(x)["reasons"])
+
     def test_documented_owner_with_missing_route_is_hold(self):
         x=sample(executive=True);x["executive"]["route"]["verified_for_person"]=False
         self.assertEqual(evaluate_opportunity(x)["engagement_readiness"],"RESEARCH_PENDING")
