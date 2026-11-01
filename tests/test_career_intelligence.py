@@ -96,6 +96,65 @@ class CorePathwayTests(unittest.TestCase):
         x["claims"]=[c for c in x["claims"] if c["claim_id"] != "objective"]
         self.assertEqual(evaluate_opportunity(x)["research_state"], "ASSESSABLE")
 
+    def test_composite_direct_hiring_reports_all_independent_failures(self):
+        """One broken vacancy must not conceal stale identity and ownership."""
+        x = sample("DIRECT_HIRING", executive=True)
+        x["claims"][1]["claim_text"] = "Unrelated text not found in source excerpt"
+        x["claims"][-1]["object_id"] = "other-requisition"
+        stale = (date.today() - timedelta(days=120)).isoformat()
+        x["claims"][-2]["retrieved_at"] = stale
+        x["claims"][-2]["published_on"] = stale
+        x["executive"]["route"]["verified_for_person"] = False
+        result = evaluate_opportunity(x)
+        self.assertEqual(result["research_state"], "EVIDENCE_HOLD")
+        self.assertEqual(result["engagement_readiness"], "NOT_PREPARED")
+        self.assertTrue({
+            "JOB_STATUS_UNVERIFIED",
+            "EXECUTIVE_OWNERSHIP_SOURCE_MISSING",
+            "CURRENT_EXECUTIVE_ROLE_UNVERIFIED",
+            "NO_VERIFIED_PERSON_ROUTE",
+        }.issubset(result["reasons"]))
+        for key in ("contact_ready", "send_authorized", "outbound_sent",
+                    "application_submitted", "private_history_checked"):
+            self.assertFalse(result[key])
+        self.assertEqual(result["manual_application"], "NOT_ELIGIBLE")
+
+    def test_composite_misleading_ai_claim_accumulates_strategy_defects(self):
+        x = sample("STRATEGIC_EXPLORATION", executive=True)
+        x["claims"][0]["page_read_success"] = False
+        x["contribution"]["leadership_need_assumed"] = True
+        x["contribution"]["hiring_claim"] = True
+        x["claims"][-1]["object_id"] = "unsupported-initiative"
+        result = evaluate_opportunity(x)
+        self.assertEqual(result["research_state"], "EVIDENCE_HOLD")
+        self.assertEqual(result["engagement_readiness"], "NOT_PREPARED")
+        self.assertTrue({
+            "OBJECTIVE_NOT_SOURCE_SUPPORTED",
+            "UNSUPPORTED_HIRING_CLAIM",
+            "INVENTED_LEADERSHIP_GAP",
+            "EXECUTIVE_OWNERSHIP_SOURCE_MISSING",
+        }.issubset(result["reasons"]))
+        self.assertFalse(result["send_authorized"])
+
+    def test_valid_official_job_survives_bad_named_executive(self):
+        x = sample("DIRECT_HIRING", executive=True)
+        x["claims"][-1]["object_id"] = "other-requisition"
+        result = evaluate_opportunity(x)
+        self.assertEqual(result["research_state"], "ASSESSABLE")
+        self.assertEqual(result["engagement_readiness"], "RESEARCH_PENDING")
+        self.assertIn("EXECUTIVE_OWNERSHIP_SOURCE_MISSING", result["reasons"])
+        self.assertEqual(result["manual_application"], "OWNER_AUTH_REQUIRED")
+        self.assertFalse(result["application_submitted"])
+
+    def test_closed_job_collects_executive_diagnostics_without_application(self):
+        x = sample("DIRECT_HIRING", executive=True)
+        x["job"]["state"] = "CLOSED"
+        x["claims"][-1]["object_id"] = "other-requisition"
+        result = evaluate_opportunity(x)
+        self.assertEqual(result["research_state"], "CLOSED_INACTIVE")
+        self.assertTrue({"JOB_CLOSED", "EXECUTIVE_OWNERSHIP_SOURCE_MISSING"}.issubset(result["reasons"]))
+        self.assertEqual(result["manual_application"], "NOT_ELIGIBLE")
+
     def test_t07_closed_job(self):
         x=sample("DIRECT_HIRING"); x["job"]["state"]="CLOSED"
         self.assertEqual(evaluate_opportunity(x)["research_state"], "CLOSED_INACTIVE")

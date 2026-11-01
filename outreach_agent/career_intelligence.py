@@ -155,10 +155,13 @@ def evaluate_opportunity(record):
         reasons.append("CONTRIBUTION_NOT_LINKED_TO_OBJECTIVE")
     if thesis.get("hiring_claim") is True and pathway == "STRATEGIC_EXPLORATION":
         reasons.append("UNSUPPORTED_HIRING_CLAIM")
-    if reasons:
-        return _decision("RESEARCH_PENDING", "NOT_PREPARED", reasons, pathway=pathway)
-
+    # Diagnose independent issues before choosing the final fail-closed state.
+    # Earlier versions returned on the first job defect and hid stale executive
+    # roles, unsupported ownership edges, or missing person-specific routes.
+    preliminary_reasons = bool(reasons)
     job = record.get("job") or {}
+    job_reasons = []
+    job_closed = False
     application = False
     if pathway == "DIRECT_HIRING":
         job_id = job.get("requisition_id")
@@ -166,55 +169,80 @@ def evaluate_opportunity(record):
                            kind="JOB_ACTIVE", subject=org.get("organization_id"),
                            object_id=job_id)
         if job.get("state") == "CLOSED":
-            return _decision("CLOSED_INACTIVE", "NOT_PREPARED", ["JOB_CLOSED"], pathway=pathway)
-        if (not job_id or not _url(job.get("official_ats_url")) or
-                not job_claim or job.get("state") != "ACCEPTING"):
-            reasons.append("JOB_STATUS_UNVERIFIED")
-        elif _day(job_claim.get("retrieved_at")) < date.today() - timedelta(days=7):
-            reasons.append("JOB_STATUS_STALE")
-        if job_claim and job_claim.get("source_url") != job.get("official_ats_url"):
-            reasons.append("JOB_PRIMARY_SOURCE_MISMATCH")
-        if job.get("mandatory_requirements_met") is not True:
-            reasons.append("MANDATORY_QUALIFICATION_GAP")
-        if job.get("work_mode_feasible") is not True:
-            reasons.append("WORK_LOCATION_INELIGIBLE")
-        if reasons:
-            return _decision("EVIDENCE_HOLD", "NOT_PREPARED", reasons, pathway=pathway)
-        application = True
+            job_closed = True
+            reasons.append("JOB_CLOSED")
+        else:
+            if (not job_id or not _url(job.get("official_ats_url")) or
+                    not job_claim or job.get("state") != "ACCEPTING"):
+                job_reasons.append("JOB_STATUS_UNVERIFIED")
+            elif _day(job_claim.get("retrieved_at")) < date.today() - timedelta(days=7):
+                job_reasons.append("JOB_STATUS_STALE")
+            if job_claim and job_claim.get("source_url") != job.get("official_ats_url"):
+                job_reasons.append("JOB_PRIMARY_SOURCE_MISMATCH")
+            if job.get("mandatory_requirements_met") is not True:
+                job_reasons.append("MANDATORY_QUALIFICATION_GAP")
+            if job.get("work_mode_feasible") is not True:
+                job_reasons.append("WORK_LOCATION_INELIGIBLE")
+            reasons.extend(job_reasons)
+            application = not job_reasons and not preliminary_reasons
 
-    # An accepted strategic research finding may have no named executive.
-    if pathway == "STRATEGIC_EXPLORATION" and thesis.get("leadership_need_assumed") is True:
-        return _decision("EVIDENCE_HOLD", "NOT_PREPARED", ["INVENTED_LEADERSHIP_GAP"], pathway=pathway)
+    # Neither pathway permits a fabricated need for leadership.
+    if thesis.get("leadership_need_assumed") is True:
+        reasons.append("INVENTED_LEADERSHIP_GAP")
+
+    executive_reasons = []
+    suppressed = False
     if executive is None:
-        return _decision("ASSESSABLE", "RESEARCH_PENDING",
-                         ["EXECUTIVE_OWNER_UNVERIFIED"] if pathway == "STRATEGIC_EXPLORATION"
-                         else ["HIRING_SPONSOR_NOT_IDENTIFIED"],
-                         pathway=pathway, application=application)
-    if not isinstance(executive, dict):
+        executive_reasons.append(
+            "EXECUTIVE_OWNER_UNVERIFIED" if pathway == "STRATEGIC_EXPLORATION"
+            else "HIRING_SPONSOR_NOT_IDENTIFIED"
+        )
+    elif not isinstance(executive, dict):
         raise ValueError("executive must be object or null")
-    if executive.get("opted_out") is True:
-        return _decision("ASSESSABLE", "SUPPRESSED", ["OPT_OUT_SUPPRESSION"],
-                         pathway=pathway, application=application)
+    elif executive.get("opted_out") is True:
+        # Suppression belongs to this person, not a separate employer vacancy.
+        suppressed = True
+        executive_reasons.append("OPT_OUT_SUPPRESSION")
+    else:
+        owner_edge = executive.get("ownership") or {}
+        role = owner_edge.get("role_type")
+        if role not in ROLE_TYPES or owner_edge.get("ownership_grade") != "DOCUMENTED":
+            executive_reasons.append("EXECUTIVE_OWNER_UNVERIFIED")
+        elif not _claim(claims, owner_edge.get("claim_id"),
+                        kind="EXECUTIVE_OWNERSHIP", subject=executive.get("person_id"),
+                        object_id=(initiative.get("initiative_id")
+                                   if pathway == "STRATEGIC_EXPLORATION"
+                                   else job.get("requisition_id"))):
+            executive_reasons.append("EXECUTIVE_OWNERSHIP_SOURCE_MISSING")
+        if not _claim(claims, executive.get("current_role_claim_id"),
+                      kind="CURRENT_EXECUTIVE_ROLE", subject=executive.get("person_id")):
+            executive_reasons.append("CURRENT_EXECUTIVE_ROLE_UNVERIFIED")
+        route = executive.get("route") or {}
+        if (route.get("route_type") not in ("DIRECT", "MANUAL", "WARM_INTRO")
+                or route.get("verified_for_person") is not True
+                or not _url(route.get("url"))):
+            executive_reasons.append("NO_VERIFIED_PERSON_ROUTE")
+    reasons.extend(executive_reasons)
 
-    owner_edge = executive.get("ownership") or {}
-    role = owner_edge.get("role_type")
-    if role not in ROLE_TYPES or owner_edge.get("ownership_grade") != "DOCUMENTED":
-        reasons.append("EXECUTIVE_OWNER_UNVERIFIED")
-    elif not _claim(claims, owner_edge.get("claim_id"),
-                    kind="EXECUTIVE_OWNERSHIP", subject=executive.get("person_id"),
-                    object_id=initiative.get("initiative_id") if pathway == "STRATEGIC_EXPLORATION" else job.get("requisition_id")):
-        reasons.append("EXECUTIVE_OWNERSHIP_SOURCE_MISSING")
-    if not _claim(claims, executive.get("current_role_claim_id"),
-                  kind="CURRENT_EXECUTIVE_ROLE", subject=executive.get("person_id")):
-        reasons.append("CURRENT_EXECUTIVE_ROLE_UNVERIFIED")
-    route = executive.get("route") or {}
-    if (route.get("route_type") not in ("DIRECT", "MANUAL", "WARM_INTRO")
-            or route.get("verified_for_person") is not True
-            or not _url(route.get("url"))):
-        reasons.append("NO_VERIFIED_PERSON_ROUTE")
-    return _decision("ASSESSABLE",
-                     "RESEARCH_PENDING" if reasons else "ENGAGEMENT_REVIEW_ELIGIBLE",
-                     reasons, pathway=pathway, application=application)
+    # State precedence is independent of diagnostic completeness. Employer
+    # vacancies can survive missing managers; no route is inferred or sent.
+    if job_closed:
+        return _decision("CLOSED_INACTIVE", "NOT_PREPARED", reasons,
+                         pathway=pathway)
+    if job_reasons or "INVENTED_LEADERSHIP_GAP" in reasons:
+        return _decision("EVIDENCE_HOLD", "NOT_PREPARED", reasons,
+                         pathway=pathway)
+    if preliminary_reasons:
+        return _decision("RESEARCH_PENDING", "NOT_PREPARED", reasons,
+                         pathway=pathway)
+    if suppressed:
+        return _decision("ASSESSABLE", "SUPPRESSED", reasons,
+                         pathway=pathway, application=application)
+    if executive_reasons:
+        return _decision("ASSESSABLE", "RESEARCH_PENDING", reasons,
+                         pathway=pathway, application=application)
+    return _decision("ASSESSABLE", "ENGAGEMENT_REVIEW_ELIGIBLE", reasons,
+                     pathway=pathway, application=application)
 
 
 def assess_owner_feedback(assessment, research_result):

@@ -45,6 +45,29 @@ class PacketTests(unittest.TestCase):
         self.assertEqual(x["manual_application"], "OWNER_AUTH_REQUIRED")
         self.assertEqual(r["applications_submitted"],0)
 
+    def test_composite_adversarial_packet_preserves_every_independent_hold(self):
+        """End-to-end packet audit reports all simultaneous claim defects."""
+        from datetime import timedelta
+        x=sample("DIRECT_HIRING",executive=True)
+        x["claims"][1]["claim_text"]="False current opening not found in excerpt"
+        x["claims"][-1]["object_id"]="wrong-program"
+        old=(date.today()-timedelta(days=120)).isoformat()
+        x["claims"][-2]["retrieved_at"]=old
+        x["claims"][-2]["published_on"]=old
+        x["executive"]["route"]["verified_for_person"]=False
+        report=build_review_packet(self.pack([x]))
+        finding=report["research_summary"]["results"][0]
+        self.assertEqual(finding["research_state"],"EVIDENCE_HOLD")
+        self.assertEqual(finding["engagement_readiness"],"NOT_PREPARED")
+        self.assertTrue({
+            "JOB_STATUS_UNVERIFIED", "EXECUTIVE_OWNERSHIP_SOURCE_MISSING",
+            "CURRENT_EXECUTIVE_ROLE_UNVERIFIED", "NO_VERIFIED_PERSON_ROUTE"
+        }.issubset(finding["reasons"]))
+        self.assertEqual(report["contact_ready"],0)
+        self.assertEqual(report["outbound_sent"],0)
+        self.assertEqual(report["applications_submitted"],0)
+        self.assertFalse(report["source_truth_independently_verified"])
+
     def test_rehearsal_adversarial_stale_job(self):
         x=sample("DIRECT_HIRING")
         x["job"]["state"]="CLOSED"
