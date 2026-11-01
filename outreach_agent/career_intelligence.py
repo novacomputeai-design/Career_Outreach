@@ -21,7 +21,7 @@ ROLE_TYPES = {"STRATEGIC_SPONSOR", "BUSINESS_OUTCOME_OWNER",
               "AI_OR_TECHNICAL_EXECUTION_OWNER", "PRODUCT_PORTFOLIO_OWNER",
               "HIRING_SPONSOR", "INTRODUCER"}
 ROUTES = {"DIRECT", "MANUAL", "WARM_INTRO", "INDIRECT_GENERAL", "NO_ROUTE"}
-RESEARCH_STATES = {"ASSESSABLE", "RESEARCH_PENDING", "EVIDENCE_HOLD",
+RESEARCH_STATES = {"DISCOVERED", "ASSESSABLE", "EVIDENCE_HOLD",
                    "CLOSED_INACTIVE", "EXCLUDED"}
 ENGAGEMENT_STATES = {"RESEARCH_PENDING", "ENGAGEMENT_REVIEW_ELIGIBLE",
                      "SUPPRESSED", "NOT_PREPARED"}
@@ -97,7 +97,7 @@ def _decision(state, readiness, reasons, *, pathway, application=False):
                             "UNVERIFIED_OR_INACTIVE"),
         "manual_application": "OWNER_AUTH_REQUIRED" if application else "NOT_ELIGIBLE",
         "source_assurance": "SELF_REPORTED_STRUCTURAL_METADATA_NOT_INDEPENDENTLY_WEB_VERIFIED",
-        "owner_decision": "NOT_RECORDED_IN_RESEARCH",
+        "owner_decision": "NOT_REVIEWED",
         "private_history_checked": False,
         "contact_ready": False,
         "draft_approved": False,
@@ -233,7 +233,17 @@ def evaluate_opportunity(record):
         return _decision("EVIDENCE_HOLD", "NOT_PREPARED", reasons,
                          pathway=pathway)
     if preliminary_reasons:
-        return _decision("RESEARCH_PENDING", "NOT_PREPARED", reasons,
+        # V2.1 uses EVIDENCE_HOLD for material claim, identity or
+        # feasibility defects; incomplete candidate preparation alone
+        # remains DISCOVERED, not engagement-only RESEARCH_PENDING.
+        evidence_holds = {
+            "OBJECTIVE_NOT_SOURCE_SUPPORTED", "DUPLICATE_CLAIM_ID",
+            "CONTRIBUTION_NOT_LINKED_TO_OBJECTIVE", "UNSUPPORTED_HIRING_CLAIM",
+            "ORGANIZATION_IDENTITY_MISSING", "WORK_ARRANGEMENT_NOT_CONFIRMED",
+        }
+        state = ("EVIDENCE_HOLD" if evidence_holds.intersection(reasons)
+                 else "DISCOVERED")
+        return _decision(state, "NOT_PREPARED", reasons,
                          pathway=pathway)
     if suppressed:
         return _decision("ASSESSABLE", "SUPPRESSED", reasons,

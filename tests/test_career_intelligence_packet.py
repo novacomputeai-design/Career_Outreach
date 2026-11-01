@@ -68,6 +68,19 @@ class PacketTests(unittest.TestCase):
         self.assertEqual(report["applications_submitted"],0)
         self.assertFalse(report["source_truth_independently_verified"])
 
+    def test_unverified_strategic_objective_hold_reaches_public_packet(self):
+        x = sample()
+        x["claims"][0]["page_read_success"] = False
+        x["contribution"]["candidate_claim_approved"] = False
+        report = build_review_packet(self.pack([x]))
+        finding = report["research_summary"]["results"][0]
+        self.assertEqual(finding["research_state"], "EVIDENCE_HOLD")
+        self.assertEqual(finding["engagement_readiness"], "NOT_PREPARED")
+        self.assertEqual(finding["owner_decision"], "NOT_REVIEWED")
+        self.assertIn("OBJECTIVE_NOT_SOURCE_SUPPORTED", finding["reasons"])
+        self.assertFalse(report["source_truth_independently_verified"])
+        self.assertEqual(report["contact_ready"], 0)
+
     def test_rehearsal_adversarial_stale_job(self):
         x=sample("DIRECT_HIRING")
         x["job"]["state"]="CLOSED"

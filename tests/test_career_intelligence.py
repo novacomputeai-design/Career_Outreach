@@ -76,7 +76,7 @@ class CorePathwayTests(unittest.TestCase):
 
     def test_t03_location_does_not_auto_promote(self):
         x = sample(); x["contribution"]["candidate_claim_approved"] = False
-        self.assertEqual(evaluate_opportunity(x)["research_state"], "RESEARCH_PENDING")
+        self.assertEqual(evaluate_opportunity(x)["research_state"], "DISCOVERED")
 
     def test_t04_no_hiring_still_assessable(self):
         self.assertEqual(evaluate_opportunity(sample())["research_state"], "ASSESSABLE")
@@ -155,6 +155,65 @@ class CorePathwayTests(unittest.TestCase):
         self.assertTrue({"JOB_CLOSED", "EXECUTIVE_OWNERSHIP_SOURCE_MISSING"}.issubset(result["reasons"]))
         self.assertEqual(result["manual_application"], "NOT_ELIGIBLE")
 
+    def test_unread_synthetic_objective_is_evidence_hold_not_pending(self):
+        """The executed Sonoran-like handoff uses canonical V2.1 state enums."""
+        x = sample()
+        x["capability_theme"] = "AI_STRATEGY_TRANSFORMATION"
+        x["contribution"]["candidate_claim_approved"] = False
+        for cid, kind, description in (
+            ("objective", "BUSINESS_OBJECTIVE", "Fictional AI permit processing objective"),
+            ("pilot", "PILOT", "Fictional active pilot across three offices"),
+            ("funded-role", "JOB_ACTIVE", "Fictional funded executive role"),
+        ):
+            item = claim(cid, kind, description, url="https://synthetic.invalid/" + cid)
+            item["page_read_success"] = False
+            item["support_relationship"] = "NONE"
+            item["excerpt"] = ""
+            if cid == "objective":
+                x["claims"] = [item]
+            else:
+                x["claims"].append(item)
+        result = evaluate_opportunity(x)
+        self.assertEqual(result["research_state"], "EVIDENCE_HOLD")
+        self.assertEqual(result["engagement_readiness"], "NOT_PREPARED")
+        self.assertEqual(result["owner_decision"], "NOT_REVIEWED")
+        self.assertTrue({
+            "OBJECTIVE_NOT_SOURCE_SUPPORTED", "UNAPPROVED_CANDIDATE_CLAIM",
+            "EXECUTIVE_OWNER_UNVERIFIED",
+        }.issubset(result["reasons"]))
+        self.assertEqual(result["hiring_evidence"], "STRATEGIC_ACTIVITY_NO_HIRING_EVIDENCE")
+        for flag in ("contact_ready", "send_authorized", "application_submitted"):
+            self.assertFalse(result[flag])
+
+    def test_missing_candidate_attestation_is_discovered_not_evidence_hold(self):
+        x = sample()
+        x["contribution"]["candidate_claim_approved"] = False
+        result = evaluate_opportunity(x)
+        self.assertEqual(result["research_state"], "DISCOVERED")
+        self.assertEqual(result["engagement_readiness"], "NOT_PREPARED")
+        self.assertNotIn("OBJECTIVE_NOT_SOURCE_SUPPORTED", result["reasons"])
+
+    def test_unsupported_strategic_hiring_assertion_is_evidence_hold(self):
+        x = sample()
+        x["contribution"]["hiring_claim"] = True
+        result = evaluate_opportunity(x)
+        self.assertEqual(result["research_state"], "EVIDENCE_HOLD")
+        self.assertIn("UNSUPPORTED_HIRING_CLAIM", result["reasons"])
+        self.assertFalse(result["application_submitted"])
+
+    def test_mismatched_contribution_objective_is_evidence_hold(self):
+        x = sample()
+        x["contribution"]["business_objective_claim_id"] = "unrelated-objective"
+        result = evaluate_opportunity(x)
+        self.assertEqual(result["research_state"], "EVIDENCE_HOLD")
+        self.assertIn("CONTRIBUTION_NOT_LINKED_TO_OBJECTIVE", result["reasons"])
+
+    def test_research_state_enum_does_not_contain_engagement_readiness(self):
+        from outreach_agent.career_intelligence import RESEARCH_STATES, ENGAGEMENT_STATES
+        self.assertIn("DISCOVERED", RESEARCH_STATES)
+        self.assertNotIn("RESEARCH_PENDING", RESEARCH_STATES)
+        self.assertIn("RESEARCH_PENDING", ENGAGEMENT_STATES)
+
     def test_t07_closed_job(self):
         x=sample("DIRECT_HIRING"); x["job"]["state"]="CLOSED"
         self.assertEqual(evaluate_opportunity(x)["research_state"], "CLOSED_INACTIVE")
@@ -188,7 +247,7 @@ class CorePathwayTests(unittest.TestCase):
 
     def test_t14_url_alone_insufficient(self):
         x=sample();x["claims"][0]["page_read_success"]=False
-        self.assertEqual(evaluate_opportunity(x)["research_state"],"RESEARCH_PENDING")
+        self.assertEqual(evaluate_opportunity(x)["research_state"],"EVIDENCE_HOLD")
 
     def test_t15_unverified_ownership_quote(self):
         x=sample(executive=True);x["claims"][-1]["object_id"]="other-program"
@@ -266,7 +325,7 @@ class CorePathwayTests(unittest.TestCase):
     def test_t32_gap_cannot_be_scored_away(self):
         x=sample();x["score_total"]=100
         x["contribution"]["candidate_claim_approved"]=False
-        self.assertEqual(evaluate_opportunity(x)["research_state"],"RESEARCH_PENDING")
+        self.assertEqual(evaluate_opportunity(x)["research_state"],"DISCOVERED")
 
     def test_t33_two_employers_separate(self):
         a,b=sample(),sample();b["organization"]["organization_id"]="org-2"
