@@ -52,7 +52,7 @@ class OwnerJournalTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 append_owner_preference(temp,KEY,report=report,witness=receipt,index=0,
                                         decision="PURSUE",reason="ROLE_MATCH",
-                                        memory_result={"result":"NO_NAMED_EXECUTIVE"},consent=True)
+                                        memory_result={"result":"NOT_FOUND_IN_LOCAL_STORE"},consent=True)
 
     def test_source_packet_replay_rejected(self):
         report,receipt=prepared()
@@ -61,6 +61,14 @@ class OwnerJournalTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 append_owner_preference(temp,KEY,report=report,witness=receipt,index=0,
                                         decision="PURSUE",reason="ROLE_MATCH",
+                                        memory_result={"result":"NOT_FOUND_IN_LOCAL_STORE"},consent=True)
+
+    def test_missing_history_for_named_executive_fails_closed(self):
+        report,receipt=prepared()
+        with tempfile.TemporaryDirectory() as temp:
+            with self.assertRaises(ValueError):
+                append_owner_preference(temp,KEY,report=report,witness=receipt,index=0,
+                                        decision="RESEARCH_MORE",reason="SOURCE_GAP",
                                         memory_result={"result":"NO_NAMED_EXECUTIVE"},consent=True)
 
     def test_missing_owner_consent_fails(self):
@@ -69,14 +77,14 @@ class OwnerJournalTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 append_owner_preference(temp,KEY,report=report,witness=receipt,index=0,
                                         decision="PURSUE",reason="ROLE_MATCH",
-                                        memory_result={"result":"NO_NAMED_EXECUTIVE"},consent=False)
+                                        memory_result={"result":"NOT_FOUND_IN_LOCAL_STORE"},consent=False)
 
     def test_modified_journal_detected_after_restart(self):
         report,receipt=prepared()
         with tempfile.TemporaryDirectory() as temp:
             append_owner_preference(temp,KEY,report=report,witness=receipt,index=0,
                                     decision="RESEARCH_MORE",reason="SOURCE_GAP",
-                                    memory_result={"result":"NO_NAMED_EXECUTIVE"},consent=True)
+                                    memory_result={"result":"NOT_FOUND_IN_LOCAL_STORE"},consent=True)
             journal=Path(temp)/"owner-reviews.jsonl"
             journal.write_text(journal.read_text().replace("SOURCE_GAP","ROLE_MATCH"))
             with self.assertRaises(ValueError):
@@ -92,7 +100,7 @@ class OwnerJournalTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 append_owner_preference(temp,KEY,report=report,witness=receipt,index=0,
                                         decision="RESEARCH_MORE",reason="SOURCE_GAP",
-                                        memory_result={"result":"NO_NAMED_EXECUTIVE"},consent=True)
+                                        memory_result={"result":"NOT_FOUND_IN_LOCAL_STORE"},consent=True)
 
     def test_same_witness_other_key_does_not_pass(self):
         report,receipt=prepared()
@@ -100,7 +108,7 @@ class OwnerJournalTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 append_owner_preference(temp,b"Z"*32,report=report,witness=receipt,index=0,
                                         decision="REJECT",reason="SOURCE_GAP",
-                                        memory_result={"result":"NO_NAMED_EXECUTIVE"},consent=True)
+                                        memory_result={"result":"NOT_FOUND_IN_LOCAL_STORE"},consent=True)
 
 if __name__=="__main__":
     unittest.main()

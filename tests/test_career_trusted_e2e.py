@@ -37,7 +37,7 @@ class TrustedHandoffIntegratedTests(unittest.TestCase):
             self.assertEqual(len(snapshot["continuity"]),1)
             decision=append_owner_preference(root/"owner-journal",KEY,
                 report=report,witness=receipt,index=0,decision="PURSUE",
-                reason="LEADERSHIP_SCOPE",memory_result={"result":"NO_NAMED_EXECUTIVE"},
+                reason="LEADERSHIP_SCOPE",memory_result={"result":"NOT_FOUND_IN_LOCAL_STORE"},
                 consent=True)
             self.assertEqual(decision["decision_recorded"],"PURSUE")
             self.assertFalse(decision["send_authorized"])

@@ -136,6 +136,8 @@ def append_owner_preference(folder, secret, *, report, witness, index, decision,
         "IDENTITY_CONFLICT_HOLD", "POSSIBLE_NAMESAKE_HOLD", "NO_NAMED_EXECUTIVE",
     }:
         raise ValueError("INVALID_PRIVATE_HISTORY_CLASSIFICATION")
+    if (record.get("executive") is None) != (classification == "NO_NAMED_EXECUTIVE"):
+        raise ValueError("PRIVATE_HISTORY_PERSON_BINDING_MISMATCH")
     base = _private_folder(folder)
     base.mkdir(parents=True, exist_ok=True)
     journal, lock = base / "owner-reviews.jsonl", base / "owner-reviews.lock"
