@@ -1,3 +1,7 @@
+## V2.2 owner-trusted research boundary (draft)
+
+For an explicit supervised V2.2 pilot, see [the separate owner-side handoff guide](docs/CAREER_V22_TRUSTED_HANDOFF.md). Codex generates research-only input; the V2.2 offline evaluator checks its structure; a normal interactive Windows owner session can independently fetch allowlisted public source text, sign the source receipt with the existing protected identity key, look up local relationship history read-only, and record a HMAC-bound research preference. **This does not prove source semantics, native skill invocation, cross-channel novelty, independent human identity, contact permission or production mastery.** No migrations, outreach, applications or sending are authorized.
+
 > **V2.2 integration hardening — DRAFT:** See [mastery gates](docs/CAREER_V22_MASTERING_GATES.md) and [V2.2 candidate contract](references/career-intelligence-operating-contract-v2.2.md). New contribution/timing logic, strict schema, public-only private opportunity history, and supervised offline V2.2 CLI are being integrated. **NOT production-ready or source-truth/native-skill verified; no contact, messages or applications.** V2.1 remains the baseline; PR #25 and main are not replaced by this draft.
 
 > **V2.1 review branch:** Read [the V2.1 contract](references/career-intelligence-operating-contract-v2.1.md). Legacy V1.1 score gates, 20-person counts and the optional Tavily/OpenAI runtime remain solely for backward compatibility. No field proof, outreach, application or production authority follows from this branch.
