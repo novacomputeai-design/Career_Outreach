@@ -91,6 +91,30 @@ def _claim(claims, claim_id, *, kind=None, subject=None, object_id=None):
     return item
 
 
+def _affiliation_conflicts(claims, person_id, organization_id, role_claim):
+    """Fail closed on a source-reported departure contradicting current employment.
+
+    An independently dated former-affiliation claim, or an unresolved report
+    about departure, cannot be silenced by freshly retrieving an old biography.
+    This is structural triage; source truth still requires human verification.
+    """
+    conflict_ids = []
+    role_published = _day(role_claim.get("published_on")) if role_claim else None
+    for item in claims.values():
+        if (not isinstance(item, dict)
+                or item.get("claim_type") != "EXECUTIVE_AFFILIATION_ENDED"
+                or item.get("subject_id") != person_id
+                or item.get("object_id") != organization_id):
+            continue
+        departure_date = _day(item.get("published_on"))
+        # A later dated/current reappointment could supersede an old departure,
+        # but an undated source or role leaves chronology unresolved.
+        if departure_date and role_published and departure_date < role_published:
+            continue
+        conflict_ids.append(item.get("claim_id"))
+    return sorted(x for x in set(conflict_ids) if isinstance(x, str))
+
+
 def _decision(state, readiness, reasons, *, pathway, application=False,
               hiring_evidence=None):
     reason_set = set(reasons)
@@ -165,6 +189,7 @@ def evaluate_opportunity(record):
     thesis = record.get("contribution") or {}
     executive = record.get("executive")
     job = record.get("job") or {}
+    affiliation_conflict_ids = []
     hiring_evidence = ("STRATEGIC_ACTIVITY_NO_HIRING_EVIDENCE"
                        if pathway == "STRATEGIC_EXPLORATION"
                        else "UNVERIFIED_OR_INACTIVE")
@@ -175,6 +200,7 @@ def evaluate_opportunity(record):
                            hiring_evidence=hiring_evidence)
         qualification_assessment = (_qualification_assessment(job)
                                     if pathway == "DIRECT_HIRING" else [])
+        result["executive_affiliation_conflict_claim_ids"] = list(affiliation_conflict_ids)
         result["qualification_assessment"] = qualification_assessment
         eligibility = job.get("candidate_eligibility") or {}
         result["eligibility_assessment"] = {
@@ -366,9 +392,19 @@ def evaluate_opportunity(record):
                                    if pathway == "STRATEGIC_EXPLORATION"
                                    else job.get("requisition_id"))):
             executive_reasons.append("EXECUTIVE_OWNERSHIP_SOURCE_MISSING")
-        if not _claim(claims, executive.get("current_role_claim_id"),
-                      kind="CURRENT_EXECUTIVE_ROLE", subject=executive.get("person_id")):
+        role_claim = _claim(claims, executive.get("current_role_claim_id"),
+                            kind="CURRENT_EXECUTIVE_ROLE", subject=executive.get("person_id"),
+                            object_id=org.get("organization_id"))
+        if not role_claim:
             executive_reasons.append("CURRENT_EXECUTIVE_ROLE_UNVERIFIED")
+        affiliation_conflict_ids = _affiliation_conflicts(
+            claims, executive.get("person_id"), org.get("organization_id"), role_claim)
+        if affiliation_conflict_ids:
+            # Report conflicts even when the newer source is only a lead to verify.
+            # A source-conflict HOLD must not turn a former employee into a
+            # currently accountable executive through stale official bio text.
+            executive_reasons.append("CURRENT_EXECUTIVE_AFFILIATION_CONFLICT")
+            executive_reasons.append("SOURCE_CONFLICT")
         route = executive.get("route") or {}
         if (route.get("route_type") not in ("DIRECT", "MANUAL", "WARM_INTRO")
                 or route.get("verified_for_person") is not True
@@ -384,6 +420,8 @@ def evaluate_opportunity(record):
         return decision("EXCLUDED", "NOT_PREPARED", reasons)
     if job_reasons or "INVENTED_LEADERSHIP_GAP" in reasons:
         return decision("EVIDENCE_HOLD", "NOT_PREPARED", reasons)
+    if affiliation_conflict_ids and pathway == "STRATEGIC_EXPLORATION":
+        return decision("EVIDENCE_HOLD", "NOT_PREPARED", reasons)
     if preliminary_reasons:
         # V2.1 uses EVIDENCE_HOLD for material claim, identity or
         # feasibility defects; incomplete candidate preparation alone
@@ -396,6 +434,11 @@ def evaluate_opportunity(record):
         state = ("EVIDENCE_HOLD" if evidence_holds.intersection(reasons)
                  else "DISCOVERED")
         return decision(state, "NOT_PREPARED", reasons)
+    if affiliation_conflict_ids:
+        # Do not invalidate an independent employer ATS just because a
+        # proposed named manager's affiliation is disputed.
+        return decision("ASSESSABLE", "RESEARCH_PENDING", reasons,
+                        application=application)
     if suppressed:
         return decision("ASSESSABLE", "SUPPRESSED", reasons,
                         application=application)

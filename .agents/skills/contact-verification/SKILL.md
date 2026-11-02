@@ -8,7 +8,7 @@ description: Verify professional person-specific contact and official employer a
 
 ## Procedure
 
-Current executive name, affiliation and role require evidence separate from initiative responsibility. Identify legitimate WARM_INTRO, DIRECT or MANUAL person-specific route with supporting source; INDIRECT_GENERAL is not a verified path to an executive. No email prediction, restricted-site scraping, access bypass, automated LinkedIn actions or personal-number harvesting.
+Current executive name, affiliation and role require evidence separate from initiative responsibility. Resolve newer departure/conflicting-employer evidence before evaluating a person-specific route. A former employee or outside advisor is not a current internal employer decision-maker. A public platform profile URL is at most a possible MANUAL person-specific route after identity/profile verification; it is neither a warm introduction, a confirmed reachable inbox, nor outreach authorization. Identify legitimate WARM_INTRO, DIRECT or MANUAL person-specific route with supporting source; INDIRECT_GENERAL is not a verified path to an executive. No email prediction, restricted-site scraping, access bypass, automated LinkedIn actions or personal-number harvesting.
 
 DIRECT_HIRING can preserve a current official ATS application as MANUAL_APPLICATION_POSSIBLE_OWNER_AUTH_REQUIRED without a named hiring manager. An application and a direct message are separate external actions, neither authorized by a research assessment. If person route/history is unknown, label NO_VERIFIED_PERSON_ROUTE or PRIVATE_HISTORY_UNAVAILABLE and do not promote contact readiness.
 

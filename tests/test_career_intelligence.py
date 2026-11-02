@@ -61,7 +61,7 @@ def sample(pathway="STRATEGIC_EXPLORATION", executive=False):
                       "verified_for_person": True}}
         r["claims"].extend([
             claim("current-role", "CURRENT_EXECUTIVE_ROLE",
-                  "Pat Example serves as business vice president.", subject="person-a"),
+                  "Pat Example serves as business vice president.", subject="person-a", obj="org-1"),
             claim("ownership", "EXECUTIVE_OWNERSHIP",
                   "Pat Example sponsors the enterprise AI platform initiative.",
                   subject="person-a", obj="initiative-1" if pathway == "STRATEGIC_EXPLORATION" else "req-123")])
@@ -368,6 +368,97 @@ class CorePathwayTests(unittest.TestCase):
         result = evaluate_opportunity(x)
         self.assertIn("EXECUTIVE_OWNERSHIP_SOURCE_MISSING", result["reasons"])
         self.assertEqual(result["engagement_readiness"], "RESEARCH_PENDING")
+
+    def test_current_role_claim_must_bind_the_target_employer(self):
+        x = sample(executive=True)
+        x["claims"][-2]["object_id"] = "other-employer"
+        result = evaluate_opportunity(x)
+        self.assertIn("CURRENT_EXECUTIVE_ROLE_UNVERIFIED", result["reasons"])
+        self.assertEqual(result["engagement_readiness"], "RESEARCH_PENDING")
+        self.assertFalse(result["contact_ready"])
+
+    def test_departure_from_another_employer_is_not_this_employer_conflict(self):
+        x = sample(executive=True)
+        x["claims"].append(claim("old-employer-departure", "EXECUTIVE_AFFILIATION_ENDED",
+                                 "The leader left a different employer.",
+                                 subject="person-a", obj="other-employer"))
+        result = evaluate_opportunity(x)
+        self.assertEqual(result["executive_affiliation_conflict_claim_ids"], [])
+        self.assertEqual(result["engagement_readiness"], "ENGAGEMENT_REVIEW_ELIGIBLE")
+
+    def test_former_roche_leader_conflicts_with_outdated_official_bio(self):
+        """Newer independently sourced departure blocks stale current-role promotion."""
+        x = sample(executive=True)
+        x["claims"][-2]["published_on"] = (date.today()-timedelta(days=400)).isoformat()
+        departure = claim(
+            "person-departed", "EXECUTIVE_AFFILIATION_ENDED",
+            "The former digital pathology leader left the employer.",
+            subject="person-a", obj="org-1",
+            url="https://industry.example/2026/former-executive")
+        departure["source_origin_id"] = "independent-industry"
+        x["claims"].append(departure)
+        result = evaluate_opportunity(x)
+        self.assertEqual(result["research_state"], "EVIDENCE_HOLD")
+        self.assertEqual(result["engagement_readiness"], "NOT_PREPARED")
+        self.assertIn("SOURCE_CONFLICT", result["reasons"])
+        self.assertIn("CURRENT_EXECUTIVE_AFFILIATION_CONFLICT", result["reasons"])
+        self.assertEqual(result["executive_affiliation_conflict_claim_ids"], ["person-departed"])
+        self.assertFalse(result["contact_ready"])
+        self.assertFalse(result["send_authorized"])
+
+    def test_unreadable_departure_lead_still_blocks_role_promotion(self):
+        x = sample(executive=True)
+        x["claims"][-2]["published_on"] = "UNDATED"
+        conflict = claim("departure-lead", "EXECUTIVE_AFFILIATION_ENDED",
+                         "The leader has departed the employer.",
+                         subject="person-a", obj="org-1")
+        conflict["page_read_success"] = False
+        x["claims"].append(conflict)
+        result = evaluate_opportunity(x)
+        self.assertEqual(result["research_state"], "EVIDENCE_HOLD")
+        self.assertIn("SOURCE_CONFLICT", result["reasons"])
+        self.assertFalse(result["contact_ready"])
+
+    def test_newer_reappointment_can_supersede_historical_departure(self):
+        x = sample(executive=True)
+        departure = claim("past-departure", "EXECUTIVE_AFFILIATION_ENDED",
+                          "The leader previously left the employer.",
+                          subject="person-a", obj="org-1")
+        departure["published_on"] = (date.today()-timedelta(days=150)).isoformat()
+        x["claims"].append(departure)
+        result = evaluate_opportunity(x)
+        self.assertEqual(result["research_state"], "ASSESSABLE")
+        self.assertEqual(result["engagement_readiness"], "ENGAGEMENT_REVIEW_ELIGIBLE")
+        self.assertEqual(result["executive_affiliation_conflict_claim_ids"], [])
+
+    def test_banner_ai_leader_and_tep_cio_are_not_automatically_initiative_owners(self):
+        # Fictional structurally valid evidence mirrors the different degrees
+        # of responsibility; this does not certify those real individuals.
+        leader = sample(executive=True)
+        banner = evaluate_opportunity(leader)
+        self.assertEqual(banner["research_state"], "ASSESSABLE")
+        self.assertEqual(banner["engagement_readiness"], "ENGAGEMENT_REVIEW_ELIGIBLE")
+        self.assertEqual(banner["source_assurance"],
+                         "SELF_REPORTED_STRUCTURAL_METADATA_NOT_INDEPENDENTLY_WEB_VERIFIED")
+        tep = sample(executive=True)
+        tep["executive"]["ownership"]["ownership_grade"] = "FUNCTIONALLY_PLAUSIBLE"
+        it = evaluate_opportunity(tep)
+        self.assertIn("EXECUTIVE_OWNER_UNVERIFIED", it["reasons"])
+        self.assertEqual(it["research_state"], "ASSESSABLE")
+        self.assertEqual(it["engagement_readiness"], "RESEARCH_PENDING")
+
+    def test_independent_job_route_survives_a_disputed_manager(self):
+        x = sample("DIRECT_HIRING", executive=True)
+        x["claims"][-2]["published_on"] = "UNDATED"
+        x["claims"].append(claim("left-employer", "EXECUTIVE_AFFILIATION_ENDED",
+                                 "The named manager left the company.",
+                                 subject="person-a", obj="org-1"))
+        result = evaluate_opportunity(x)
+        self.assertEqual(result["research_state"], "ASSESSABLE")
+        self.assertEqual(result["engagement_readiness"], "RESEARCH_PENDING")
+        self.assertIn("SOURCE_CONFLICT", result["reasons"])
+        self.assertEqual(result["manual_application"], "OWNER_AUTH_REQUIRED")
+        self.assertFalse(result["application_submitted"])
 
     def test_t11_prior_meeting_does_not_merge_opportunities(self):
         a,b=sample(),sample(); b["initiative"]["initiative_id"]="initiative-2"
