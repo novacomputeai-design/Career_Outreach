@@ -1,0 +1,632 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "V2.2 strict source-claimed research packet; not independent verification, not action authority",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "project_id",
+    "run_id",
+    "date_local",
+    "opportunities"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "2.2"
+    },
+    "project_id": {
+      "const": "PERSONAL_CAREER_OUTREACH"
+    },
+    "run_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{2,99}$"
+    },
+    "date_local": {
+      "type": "string",
+      "format": "date"
+    },
+    "opportunities": {
+      "type": "array",
+      "maxItems": 20,
+      "items": {
+        "type": "object",
+        "required": [
+          "schema_version",
+          "project_id",
+          "organization",
+          "initiative",
+          "claims",
+          "contribution",
+          "engagement_pathway",
+          "capability_theme",
+          "executive",
+          "career_value"
+        ],
+        "properties": {
+          "schema_version": {
+            "const": "2.2"
+          },
+          "project_id": {
+            "const": "PERSONAL_CAREER_OUTREACH"
+          },
+          "purpose": {
+            "type": "string",
+            "minLength": 1
+          },
+          "engagement_pathway": {
+            "enum": [
+              "STRATEGIC_EXPLORATION",
+              "DIRECT_HIRING"
+            ]
+          },
+          "capability_theme": {
+            "enum": [
+              "AI_STRATEGY_TRANSFORMATION",
+              "ENTERPRISE_PRODUCT_LEADERSHIP",
+              "BOTH"
+            ]
+          },
+          "organization": {
+            "$ref": "#/$defs/organization"
+          },
+          "initiative": {
+            "$ref": "#/$defs/initiative"
+          },
+          "claims": {
+            "type": "array",
+            "maxItems": 120,
+            "items": {
+              "$ref": "#/$defs/evidenceClaim"
+            }
+          },
+          "contribution": {
+            "$ref": "#/$defs/contribution"
+          },
+          "executive": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/executive"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "An identifiable executive does not establish specific initiative ownership or a route"
+          },
+          "job": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/job"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "career_value": {
+            "$ref": "#/$defs/careerValue",
+            "description": "Structured hypothesis with verified candidate reference IDs. Only the existence/linkage can be checked offline."
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "$defs": {
+    "evidenceClaim": {
+      "type": "object",
+      "required": [
+        "claim_id",
+        "claim_type",
+        "claim_text",
+        "source_url",
+        "publisher",
+        "source_origin_id",
+        "retrieved_at",
+        "excerpt",
+        "page_read_success",
+        "support_relationship",
+        "subject_id"
+      ],
+      "properties": {
+        "claim_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "claim_type": {
+          "type": "string",
+          "minLength": 1
+        },
+        "claim_text": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_url": {
+          "type": "string",
+          "pattern": "^https://"
+        },
+        "publisher": {
+          "type": "string",
+          "minLength": 1
+        },
+        "source_origin_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "retrieved_at": {
+          "type": "string",
+          "format": "date"
+        },
+        "published_on": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date"
+            },
+            {
+              "const": "UNDATED"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "excerpt": {
+          "type": "string",
+          "minLength": 1
+        },
+        "page_read_success": {
+          "type": "boolean"
+        },
+        "support_relationship": {
+          "enum": [
+            "DIRECT",
+            "CONTEXT_ONLY",
+            "NONE"
+          ]
+        },
+        "evidence_class": {
+          "type": "string"
+        },
+        "subject_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "object_id": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1
+            },
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "conflicts": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "organization": {
+      "type": "object",
+      "required": [
+        "organization_id",
+        "name",
+        "work_mode",
+        "feasible"
+      ],
+      "properties": {
+        "organization_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "work_mode": {
+          "enum": [
+            "TUCSON",
+            "US_REMOTE",
+            "OTHER"
+          ]
+        },
+        "feasible": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "initiative": {
+      "type": "object",
+      "required": [
+        "initiative_id"
+      ],
+      "properties": {
+        "initiative_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "objective_claim_id": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "contribution": {
+      "type": "object",
+      "required": [
+        "business_objective_claim_id",
+        "candidate_basis",
+        "candidate_claim_approved",
+        "proposed_value",
+        "leadership_need_assumed",
+        "hiring_claim"
+      ],
+      "properties": {
+        "business_objective_claim_id": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "candidate_basis": {
+          "type": "string",
+          "minLength": 1
+        },
+        "candidate_claim_approved": {
+          "type": "boolean"
+        },
+        "proposed_value": {
+          "type": "string",
+          "minLength": 1
+        },
+        "mandate_key": {
+          "type": "string",
+          "minLength": 1
+        },
+        "leadership_need_assumed": {
+          "type": "boolean"
+        },
+        "hiring_claim": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ownership": {
+      "type": "object",
+      "required": [
+        "role_type",
+        "ownership_grade",
+        "claim_id"
+      ],
+      "properties": {
+        "role_type": {
+          "enum": [
+            "STRATEGIC_SPONSOR",
+            "BUSINESS_OUTCOME_OWNER",
+            "AI_OR_TECHNICAL_EXECUTION_OWNER",
+            "PRODUCT_PORTFOLIO_OWNER",
+            "HIRING_SPONSOR",
+            "INTRODUCER"
+          ]
+        },
+        "ownership_grade": {
+          "enum": [
+            "DOCUMENTED",
+            "FUNCTIONALLY_PLAUSIBLE",
+            "UNKNOWN"
+          ]
+        },
+        "claim_id": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "route": {
+      "type": "object",
+      "required": [
+        "route_type",
+        "verified_for_person"
+      ],
+      "properties": {
+        "route_type": {
+          "enum": [
+            "DIRECT",
+            "MANUAL",
+            "WARM_INTRO",
+            "INDIRECT_GENERAL",
+            "NO_ROUTE"
+          ]
+        },
+        "verified_for_person": {
+          "type": "boolean"
+        },
+        "url": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "executive": {
+      "type": "object",
+      "required": [
+        "person_id",
+        "name",
+        "current_role_claim_id",
+        "opted_out",
+        "ownership",
+        "route"
+      ],
+      "properties": {
+        "person_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "current_role_claim_id": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "opted_out": {
+          "type": "boolean"
+        },
+        "ownership": {
+          "$ref": "#/$defs/ownership"
+        },
+        "route": {
+          "$ref": "#/$defs/route"
+        }
+      },
+      "additionalProperties": false
+    },
+    "qualification": {
+      "type": "object",
+      "required": [
+        "requirement",
+        "status"
+      ],
+      "properties": {
+        "requirement": {
+          "type": "string",
+          "minLength": 1
+        },
+        "status": {
+          "enum": [
+            "MATCHED",
+            "GAP",
+            "UNVERIFIED"
+          ]
+        },
+        "candidate_evidence_refs": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "job": {
+      "type": "object",
+      "required": [
+        "requisition_id",
+        "official_ats_url",
+        "status_claim_id",
+        "state",
+        "mandatory_qualifications",
+        "work_mode_feasible",
+        "candidate_eligibility",
+        "role_relevance"
+      ],
+      "properties": {
+        "requisition_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "official_ats_url": {
+          "type": "string",
+          "pattern": "^https://"
+        },
+        "status_claim_id": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "state": {
+          "enum": [
+            "ACCEPTING",
+            "CLOSED",
+            "UNKNOWN"
+          ]
+        },
+        "mandatory_qualifications": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/qualification"
+          }
+        },
+        "work_mode_feasible": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "candidate_eligibility": {
+          "type": "object",
+          "properties": {
+            "work_authorization": {
+              "enum": [
+                "ELIGIBLE",
+                "INELIGIBLE",
+                "UNVERIFIED"
+              ]
+            },
+            "citizenship": {
+              "enum": [
+                "ELIGIBLE",
+                "INELIGIBLE",
+                "UNVERIFIED"
+              ]
+            }
+          },
+          "additionalProperties": false
+        },
+        "role_relevance": {
+          "enum": [
+            "MATCH",
+            "ADJACENT",
+            "OUT_OF_SCOPE",
+            "UNVERIFIED"
+          ]
+        },
+        "remote_eligibility": {
+          "enum": [
+            "AZ_ELIGIBLE",
+            "NOT_AZ_ELIGIBLE",
+            "NOT_APPLICABLE",
+            "UNVERIFIED"
+          ]
+        },
+        "citizenship_required": {
+          "type": "boolean"
+        }
+      },
+      "additionalProperties": false
+    },
+    "careerValue": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "business_decision",
+        "proposed_internal_responsibility",
+        "candidate_evidence_refs",
+        "complementary_scope",
+        "existing_owner_status",
+        "expected_outcome",
+        "limitations",
+        "trigger_claim_id",
+        "maturity"
+      ],
+      "properties": {
+        "business_decision": {
+          "type": "string",
+          "minLength": 28
+        },
+        "proposed_internal_responsibility": {
+          "type": "string",
+          "minLength": 28
+        },
+        "candidate_evidence_refs": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": {
+            "enum": [
+              "MOBIUS_PRODUCT_PORTFOLIO",
+              "MOBIUS_AI_PRIORITIZATION",
+              "MOBIUS_PRODUCT_TEAM_LEADERSHIP",
+              "UCHICAGO_PLATFORM_MODERNIZATION",
+              "WELLS_FARGO_REGULATED_OPERATIONS"
+            ]
+          }
+        },
+        "complementary_scope": {
+          "type": "string",
+          "minLength": 28
+        },
+        "existing_owner_status": {
+          "enum": [
+            "EXISTING_OWNER_DOCUMENTED",
+            "OWNER_RESEARCHED_NOT_FOUND",
+            "OWNER_UNKNOWN"
+          ]
+        },
+        "expected_outcome": {
+          "type": "string",
+          "minLength": 25
+        },
+        "limitations": {
+          "type": "string",
+          "minLength": 12
+        },
+        "trigger_claim_id": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "maturity": {
+          "enum": [
+            "ANNOUNCED",
+            "PILOTED",
+            "DEPLOYED",
+            "SCALING",
+            "UNKNOWN"
+          ]
+        }
+      }
+    }
+  }
+}

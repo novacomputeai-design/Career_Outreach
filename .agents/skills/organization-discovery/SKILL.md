@@ -17,3 +17,7 @@ Output organization + separate initiative records and candidate business objecti
 ## Output boundary
 
 Return only cited facts, clearly marked hypotheses and reason-coded HOLDs. Record whether this specialist was natively selected, NOT_VERIFIED, or SKIPPED_NOT_APPLICABLE. Research findings and drafts are not contact-ready or sent.
+
+## V2.2 candidate hardening — supervised opt-in only
+
+Read `../../../references/career-intelligence-operating-contract-v2.2.md` and `../../../docs/CAREER_V22_MASTERING_GATES.md` only when explicitly running the V2.2 pilot. Identify source-backed business-change triggers and actual maturity (ANNOUNCED, PILOTED, DEPLOYED, SCALING, UNKNOWN) before selecting executives. Retain non-AI product transformations. Do not treat reported investment, strategic planning or recent leadership appointment as evidence of hiring. Native activation and source truth require independent proof. Neither a skill text read nor this instruction grants contact, drafting, sending, applications, private-memory access, or production authority.

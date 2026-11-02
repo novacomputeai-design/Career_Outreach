@@ -15,3 +15,7 @@ Use natural first-person professional language with specific relevant experience
 ## Output boundary
 
 Return only cited facts, clearly marked hypotheses and reason-coded HOLDs. Record whether this specialist was natively selected, NOT_VERIFIED, or SKIPPED_NOT_APPLICABLE. Research findings and drafts are not contact-ready or sent.
+
+## V2.2 candidate hardening — supervised opt-in only
+
+Read `../../../references/career-intelligence-operating-contract-v2.2.md` and `../../../docs/CAREER_V22_MASTERING_GATES.md` only when explicitly running the V2.2 pilot. Do not draft from STRONG_CONTRIBUTION, RESEARCH_NOW, or owner PURSUE alone. Draft only upon explicit owner request after required identity, route, history and factual review, and keep exact approved text separate from transmission permission. Current SEND_AUTHORIZED remains blocked. Native activation and source truth require independent proof. Neither a skill text read nor this instruction grants contact, drafting, sending, applications, private-memory access, or production authority.

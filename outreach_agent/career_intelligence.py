@@ -101,10 +101,21 @@ def _affiliation_conflicts(claims, person_id, organization_id, role_claim):
     conflict_ids = []
     role_published = _day(role_claim.get("published_on")) if role_claim else None
     for item in claims.values():
-        if (not isinstance(item, dict)
-                or item.get("claim_type") != "EXECUTIVE_AFFILIATION_ENDED"
-                or item.get("subject_id") != person_id
-                or item.get("object_id") != organization_id):
+        if not isinstance(item, dict):
+            continue
+        # Explicitly contradictory current-role evidence may be categorized
+        # differently from a confirmed departure. Fail closed on an auditable
+        # claim-ID conflict edge, rather than guessing from arbitrary prose.
+        links = item.get("conflicts")
+        explicit_role_conflict = (
+            role_claim is not None and isinstance(links, list)
+            and role_claim.get("claim_id") in links
+            and item.get("claim_id") != role_claim.get("claim_id")
+        )
+        if (item.get("subject_id") != person_id
+                or item.get("object_id") != organization_id
+                or (item.get("claim_type") != "EXECUTIVE_AFFILIATION_ENDED"
+                    and not explicit_role_conflict)):
             continue
         departure_date = _day(item.get("published_on"))
         # A later dated/current reappointment could supersede an old departure,

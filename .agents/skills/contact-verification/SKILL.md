@@ -15,3 +15,7 @@ DIRECT_HIRING can preserve a current official ATS application as MANUAL_APPLICAT
 ## Output boundary
 
 Return only cited facts, clearly marked hypotheses and reason-coded HOLDs. Record whether this specialist was natively selected, NOT_VERIFIED, or SKIPPED_NOT_APPLICABLE. Research findings and drafts are not contact-ready or sent.
+
+## V2.2 candidate hardening — supervised opt-in only
+
+Read `../../../references/career-intelligence-operating-contract-v2.2.md` and `../../../docs/CAREER_V22_MASTERING_GATES.md` only when explicitly running the V2.2 pilot. V2.2 distinguishes PROFILE_IDENTIFIED from VERIFIED MANUAL PERSON ROUTE and VERIFIED WARM INTRO. A media inbox or general company line is indirect only; messaging permissions, identity, history and opt-out remain independently unresolved until checked. Native activation and source truth require independent proof. Neither a skill text read nor this instruction grants contact, drafting, sending, applications, private-memory access, or production authority.
