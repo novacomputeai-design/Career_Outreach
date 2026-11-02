@@ -113,7 +113,7 @@ def _pinned_curl_command(url, ip, binary, header_path):
         raise ValueError("NONPUBLIC_SOCKET_ADDRESS_REJECTED")
     address = "[" + str(ip_obj) + "]" if ip_obj.version == 6 else str(ip_obj)
     return [
-        binary, "--silent", "--show-error", "--fail",
+        binary, "--disable", "--silent", "--show-error", "--fail",
         "--proto", "=https", "--noproxy", "*",
         "--max-redirs", "0", "--connect-timeout", "4", "--max-time", "14",
         "--max-filesize", str(MAX_BYTES),

@@ -83,3 +83,11 @@ The current engineering branch is **not production-qualified**. Do not run these
 The witness requires a functioning local curl executable with --resolve support. The original requests.get implementation permitted DNS validation followed by a separately resolved connection (DNS rebinding); the current fetch rejects mixed public/private DNS records and pins the real HTTPS socket to the checked address. Missing curl, invalid certificates, redirect status or source-rendering restrictions => FETCH_UNAVAILABLE, not an unpinned fallback. This is a defense-in-depth boundary, **not** equivalent to operating-system network sandboxing; owner-controlled network egress isolation is required for a higher-assurance production source verifier.
 
 Before any real owner-Windows exercise, test on a dedicated restored or synthetic environment. An owner's existing DPAPI database is not a test fixture; do not run Codex with owner keys present in its process environment. The private folder and signed research journal are not cryptographically isolated from other programs running under the same Windows user account. Actual role/owner truth must still be checked against independent current evidence.
+
+## Safe next operator step (synthetic only)
+
+Before any DPAPI owner-session operation, switch to the V2.2 draft branch in a normal PowerShell window, verify that the working tree is clean, and run:
+
+    .\scripts\career-v22-synthetic-only.ps1
+
+This runner refuses an incorrect branch or owner state/identity secrets in environment. It exercises only synthetic tests, using generated test keys and temporary databases. It does not read any live DPAPI file or relationships.sqlite, browse real sites, invoke Codex or authorize contact. The pinned curl client is started with --disable as the first option, ignoring potentially unsafe user curl configuration. A local PASS does not satisfy the live independent Codex, operator Windows DPAPI, or source-semantic release gates.

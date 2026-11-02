@@ -36,6 +36,7 @@ class PinnedNetworkTests(unittest.TestCase):
         self.assertEqual(argv[argv.index("--proto")+1], "=https")
         self.assertEqual(argv[argv.index("--noproxy")+1], "*")
         self.assertNotIn("--location", argv)
+        self.assertEqual(argv[1], "--disable")  # Ignore potentially unsafe user curlrc.
         self.assertNotIn("--insecure", argv)
         self.assertNotIn("-k", argv)
 
