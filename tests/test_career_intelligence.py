@@ -386,6 +386,41 @@ class CorePathwayTests(unittest.TestCase):
         self.assertEqual(result["executive_affiliation_conflict_claim_ids"], [])
         self.assertEqual(result["engagement_readiness"], "ENGAGEMENT_REVIEW_ELIGIBLE")
 
+    def test_generic_role_report_with_explicit_conflict_link_blocks_promotion(self):
+        x = sample(executive=True)
+        conflict = claim("newer-public-role", "PUBLIC_ROLE_UPDATE",
+                         "The executive is now listed as an independent advisor.",
+                         subject="person-a", obj="org-1")
+        conflict["conflicts"] = ["current-role"]
+        x["claims"].append(conflict)
+        result = evaluate_opportunity(x)
+        self.assertEqual(result["research_state"], "EVIDENCE_HOLD")
+        self.assertEqual(result["engagement_readiness"], "NOT_PREPARED")
+        self.assertEqual(result["executive_affiliation_conflict_claim_ids"], ["newer-public-role"])
+        self.assertIn("SOURCE_CONFLICT", result["reasons"])
+        self.assertFalse(result["contact_ready"])
+
+    def test_generic_conflict_without_role_reference_is_not_departure_proof(self):
+        x = sample(executive=True)
+        conflict = claim("different-topic", "PUBLIC_ROLE_UPDATE",
+                         "The executive has a professional advisory appointment.",
+                         subject="person-a", obj="org-1")
+        conflict["conflicts"] = ["other-claim"]
+        x["claims"].append(conflict)
+        result = evaluate_opportunity(x)
+        self.assertEqual(result["executive_affiliation_conflict_claim_ids"], [])
+        self.assertNotIn("CURRENT_EXECUTIVE_AFFILIATION_CONFLICT", result["reasons"])
+
+    def test_claim_linked_to_other_employer_cannot_block_current_employer(self):
+        x = sample(executive=True)
+        conflict = claim("other-employer", "PUBLIC_ROLE_UPDATE",
+                         "The executive left a different organization.",
+                         subject="person-a", obj="not-org-1")
+        conflict["conflicts"] = ["current-role"]
+        x["claims"].append(conflict)
+        result = evaluate_opportunity(x)
+        self.assertEqual(result["executive_affiliation_conflict_claim_ids"], [])
+
     def test_former_roche_leader_conflicts_with_outdated_official_bio(self):
         """Newer independently sourced departure blocks stale current-role promotion."""
         x = sample(executive=True)
