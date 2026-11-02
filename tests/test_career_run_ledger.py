@@ -73,6 +73,34 @@ class LedgerTests(unittest.TestCase):
             self.assertEqual(read_latest_continuity(p),[])
             self.assertFalse(p.exists())
 
+    def test_latest_run_follows_immutable_sequence_not_filename(self):
+        with tempfile.TemporaryDirectory() as work:
+            x=sample()
+            a=record_run_snapshot(work,run_id="zzz-run",date_local=date.today().isoformat(),
+                                  opportunity_records=[x],assessments=[evaluate_opportunity(x)])
+            y=copy.deepcopy(x);y["initiative"]["initiative_id"]="new-mandate"
+            b=record_run_snapshot(work,run_id="aaa-run",date_local=date.today().isoformat(),
+                                  opportunity_records=[y],assessments=[evaluate_opportunity(y)])
+            self.assertEqual(a["sequence"],1)
+            self.assertEqual(b["sequence"],2)
+            current=read_latest_continuity(work)
+            self.assertEqual(len(current),2)
+            self.assertTrue(any(x["last_seen_run"]=="aaa-run" for x in current))
+            self.assertEqual(record_run_snapshot(work,run_id="zzz-run",
+                             date_local=date.today().isoformat(),opportunity_records=[x],
+                             assessments=[evaluate_opportunity(x)])["sequence"],1)
+
+    def test_corrupted_history_sequence_fails_closed(self):
+        with tempfile.TemporaryDirectory() as work:
+            x=sample()
+            record_run_snapshot(work,run_id="run-001",date_local=date.today().isoformat(),
+                                opportunity_records=[x],assessments=[evaluate_opportunity(x)])
+            path=Path(work)/"runs"/"run-001.json"
+            data=path.read_text()
+            path.write_text(data.replace('"sequence": 1','"sequence": 999'))
+            with self.assertRaises(ValueError):
+                read_latest_continuity(work)
+
     def test_research_cannot_authorize_contact(self):
         x=sample();o=evaluate_opportunity(x);o["contact_ready"]=True
         with self.assertRaises(ValueError):

@@ -50,6 +50,11 @@ def _read_snapshots(folder):
         if obj.get("kind") != "PUBLIC_ONLY_CAREER_RESEARCH_SNAPSHOT":
             raise ValueError("UNRECOGNIZED_RUN_SNAPSHOT")
         found.append(obj)
+    found.sort(key=lambda x: x.get("sequence", 0))
+    if [x.get("sequence") for x in found] != list(range(1, len(found) + 1)):
+        raise ValueError("RUN_HISTORY_SEQUENCE_MISMATCH")
+    if len(set(x["run_id"] for x in found)) != len(found):
+        raise ValueError("DUPLICATE_RUN_ID_IN_HISTORY")
     return found
 
 
@@ -101,6 +106,8 @@ def build_reconciliation(prior, *, run_id, date_local, opportunity_records, asse
     return {
         "kind": "PUBLIC_ONLY_CAREER_RESEARCH_SNAPSHOT", "version": "1.0",
         "run_id": run_id, "date_local": date_local,
+        "sequence": len(prior) + 1,
+        "previous_run_id": prior[-1]["run_id"] if prior else None,
         "observations": [current[k] for k in sorted(current)],
         "continuity": continuity,
         "source_truth_independently_verified": False,
@@ -119,7 +126,12 @@ def record_run_snapshot(private_history_dir, *, run_id, date_local,
     if run_folder.is_symlink():
         raise ValueError("SYMLINK_HISTORY_DIR_REJECTED")
     prior = _read_snapshots(run_folder)
-    snapshot = build_reconciliation(prior, run_id=run_id, date_local=date_local,
+    existing = next((x for x in prior if x["run_id"] == run_id), None)
+    prior_for_run = ([x for x in prior if x["sequence"] < existing["sequence"]]
+                     if existing else prior)
+    if not existing and prior and date_local < prior[-1]["date_local"]:
+        raise ValueError("OUT_OF_ORDER_RUN_DATE")
+    snapshot = build_reconciliation(prior_for_run, run_id=run_id, date_local=date_local,
                                     opportunity_records=opportunity_records,
                                     assessments=assessments)
     payload = json.dumps(snapshot, sort_keys=True, ensure_ascii=False, indent=2) + "\n"
