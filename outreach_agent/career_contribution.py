@@ -118,6 +118,9 @@ def evaluate_v22_opportunity(record):
                 baseline["engagement_readiness"] = "RESEARCH_PENDING"
             baseline["reasons"] = sorted(set(baseline["reasons"] + ["CONTRIBUTION_RESEARCH_NEEDED"]))
     # A source-reported quality result NEVER grants permission to contact or apply.
+    if baseline["engagement_readiness"] == "ENGAGEMENT_REVIEW_ELIGIBLE":
+        baseline["engagement_readiness"] = "RESEARCH_PENDING"
+        baseline["reasons"] = sorted(set(baseline["reasons"] + ["INDEPENDENT_SOURCE_REVIEW_PENDING"]))
     baseline["contact_ready"] = False
     baseline["send_authorized"] = False
     baseline["application_submitted"] = False

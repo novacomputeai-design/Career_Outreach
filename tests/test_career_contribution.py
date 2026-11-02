@@ -103,7 +103,8 @@ class ContributionMasteryTests(unittest.TestCase):
     def test_10_no_permission_even_if_executive_route_is_supplied(self):
         x = fixture()
         a = evaluate_v22_opportunity(x)
-        self.assertEqual(a["engagement_readiness"], "ENGAGEMENT_REVIEW_ELIGIBLE")
+        self.assertEqual(a["engagement_readiness"], "RESEARCH_PENDING")
+        self.assertIn("INDEPENDENT_SOURCE_REVIEW_PENDING", a["reasons"])
         self.assertFalse(a["contact_ready"])
 
 if __name__ == "__main__":
