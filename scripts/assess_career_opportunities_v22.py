@@ -14,6 +14,7 @@ from outreach_agent.career_contribution import validate_v22_packet, evaluate_v22
 from outreach_agent.career_intelligence import opportunity_identity
 from outreach_agent.career_intelligence_packet import MAX_PACKET_BYTES, _safe_public
 from outreach_agent.career_run_ledger import record_run_snapshot
+from outreach_agent.career_handoff import audit_research_handoffs
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -85,6 +86,7 @@ def main():
     parser.add_argument("--input",required=True)
     parser.add_argument("--out",required=True)
     parser.add_argument("--history-dir",help="user-owned public-claims-only immutable run history; optional")
+    parser.add_argument("--host-trace",help="optional untrusted stage handoff digest-chain JSON; NOT host attestation")
     args=parser.parse_args()
     src,dst=safe_private_path(args.input),safe_private_path(args.out)
     if src==dst or dst.exists():
@@ -93,6 +95,12 @@ def main():
         raise ValueError("INPUT_MISSING_OR_OVERSIZED")
     packet=json.loads(src.read_text(encoding="utf-8-sig"))
     report=assess_v22_packet(packet)
+    if args.host_trace:
+        trace_path=safe_private_path(args.host_trace)
+        if not trace_path.is_file() or trace_path.stat().st_size>MAX_PACKET_BYTES:
+            raise ValueError("HOST_TRACE_NOT_FOUND_OR_OVERSIZED")
+        trace=json.loads(trace_path.read_text(encoding="utf-8-sig"))
+        report["handoff_audit"]=audit_research_handoffs(trace)
     if args.history_dir:
         snapshot=record_run_snapshot(
             args.history_dir,run_id=packet["run_id"],date_local=packet["date_local"],
