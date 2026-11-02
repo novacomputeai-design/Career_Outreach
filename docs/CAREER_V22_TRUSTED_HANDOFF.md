@@ -91,3 +91,15 @@ Before any DPAPI owner-session operation, switch to the V2.2 draft branch in a n
     .\scripts\career-v22-synthetic-only.ps1
 
 This runner refuses an incorrect branch or owner state/identity secrets in environment. It exercises only synthetic tests, using generated test keys and temporary databases. It does not read any live DPAPI file or relationships.sqlite, browse real sites, invoke Codex or authorize contact. The pinned curl client is started with --disable as the first option, ignoring potentially unsafe user curl configuration. A local PASS does not satisfy the live independent Codex, operator Windows DPAPI, or source-semantic release gates.
+
+## Host-native skill activation diagnostic (operator-run, no computer-use UI)
+
+The Codex tool interface used from another service may not expose the local native skill picker. This is **not evidence** that the locally installed Codex CLI cannot discover the skills. OpenAI's documented skill evaluation approach uses explicit `$skill-name` invocation, `/skills` in interactive sessions, and `codex exec --json` to capture host events. Event logs are evidence to inspect, not a skill attestation by themselves.
+
+From a clean checkout on the V2.2 draft branch, with no private relationship keys in environment, run in a **normal operator PowerShell terminal**:
+
+    .\\scripts\\career-v22-native-skill-probe.ps1
+
+The script invokes `codex exec --json --sandbox read-only` on a **skills-discovery-only** prompt and saves stdout JSONL and stderr in a uniquely named local TEMP directory. It neither reads private memory nor carries approval authority. Do not run through a computer-use approval request. No full-auto or workspace write permission is provided. Keep raw event logs private, review/redact before sharing, and report **NATIVE_SKILL_INVOCATION=NOT_VERIFIED** unless actual native host evidence exists. Model claims, self-generated trace files, reading SKILL.md, and zero exit code never count as such evidence.
+
+A separate regression now allows an explicitly referenced, source-reported conflicting current-role claim to raise SOURCE_CONFLICT, even without the exact EXECUTIVE_AFFILIATION_ENDED label, as long as it links the correct person, employer, and current-role claim ID. Unstructured contradictory prose must be normalized by a human/researcher with supporting source evidence; arbitrary text matching is not sufficient to establish departure.
