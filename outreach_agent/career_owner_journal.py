@@ -161,6 +161,8 @@ def append_owner_preference(folder, secret, *, report, witness, index, decision,
             "run_id": report["run_id"],
             "report_sha256": report_hash, "witness_sha256": witness_hash,
             "opportunity_identity": identity, "decision": decision, "reason": reason,
+            "capability_theme": record["capability_theme"],
+            "engagement_pathway": record["engagement_pathway"],
             "local_memory_classification": classification,
             "cross_channel_novelty_verified": False,
             "owner_session": "DPAPI_KEY_BOUND_OPERATOR_PROMPT_NOT_INDEPENDENT_PERSON_ID",
@@ -181,3 +183,25 @@ def append_owner_preference(folder, secret, *, report, witness, index, decision,
         }
     finally:
         lock.unlink(missing_ok=True)
+
+
+def propose_verified_owner_learning(folder, secret):
+    """Advisory proposals from HMAC-verified owner events, never auto-applied."""
+    from .career_owner_learning import propose_career_discovery_improvements
+    history = _read_verified(_private_folder(folder) / "owner-reviews.jsonl", secret)
+    latest = {}
+    for event in history:
+        if ("capability_theme" not in event or "engagement_pathway" not in event):
+            raise ValueError("OWNER_FEEDBACK_VERSION_OR_FIELDS_NOT_SUPPORTED")
+        latest[event["opportunity_identity"]] = {
+            "opportunity_identity": event["opportunity_identity"],
+            "decision": event["decision"], "reason": event["reason"],
+            "capability_theme": event["capability_theme"],
+            "engagement_pathway": event["engagement_pathway"],
+        }
+    result = propose_career_discovery_improvements(list(latest.values()))
+    result["input_journal_mac_verified"] = True
+    result["owner_identity_independently_authenticated"] = False
+    result["policy_modified"] = False
+    result["send_authorized"] = False
+    return result
