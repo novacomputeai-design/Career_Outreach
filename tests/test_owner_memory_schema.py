@@ -10,6 +10,7 @@ from cryptography.fernet import Fernet
 from outreach_agent.memory_schema import (
     inspect_memory_schema, migrate_governance_schema, SCHEMA_LEGACY, SCHEMA_CURRENT)
 from outreach_agent.state import PrivateStore
+from outreach_agent.governance import active_policy
 
 class OwnerMigrationTests(unittest.TestCase):
     def setUp(self):
@@ -52,7 +53,7 @@ class OwnerMigrationTests(unittest.TestCase):
             decisions=store.recent_governance_decisions()
             self.assertEqual(len(decisions),1)
             self.assertEqual(decisions[0]["action"],"SCHEMA_MIGRATION")
-            self.assertEqual(decisions[0]["policy_version"],"0.2.2")
+            self.assertEqual(decisions[0]["policy_version"],active_policy()["version"])
             self.assertEqual(decisions[0]["decision"],"OWNER_INITIATED_APPLIED")
         finally:
             store.close()

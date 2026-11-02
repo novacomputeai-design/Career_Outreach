@@ -1,3 +1,5 @@
+> **V2.1 candidate branch:** Organization-opportunity records use a separate V2.1 schema and employer intelligence brief. Existing 19-column person-only Drive exporter and private DPAPI workflow are unchanged. Legacy V1.1 score/20-person goals must not be used to qualify V2.1 opportunities. No real native skill activation or contact authorization has been established by this branch.
+
 # Fadi — Supervised Google Drive Career Review Handoff
 
 **Mission:** Fadi's personal career advancement only. Project ID: PERSONAL_CAREER_OUTREACH.

@@ -1,3 +1,5 @@
+> **V2.1 integration notice:** This section records the historical V1.1/legacy run state. The V2.1 candidate contract and `config/operating-policy.json > career_intelligence` control new research behavior. Legacy person scores and the 20-person daily figure are not V2.1 qualification criteria. All privacy, P0–P5 and no-send release gates remain in effect. Neither CI nor draft PR counts as a real native skill run.
+
 # Career Outreach — Production Plan (authoritative sequence)
 
 Status date: 2026-10-28. **NOT PRODUCTION QUALIFIED.** See `docs/INDEPENDENT_CAREER_HARDENING_AUDIT.md` for the remediation evidence and non-waivable field gates.

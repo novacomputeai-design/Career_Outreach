@@ -1,7 +1,17 @@
 ---
 name: run-quality-audit
-description: Independently audit each daily executive outreach recommendation for evidence, identity, lawful contact pathway, unique new status, score consistency, approval safety and quota honesty.
+description: Independently audit claim support, initiative ownership, human usefulness and outreach safety before reporting.
 ---
 # run-quality-audit
 
-First reject any commercial business capture/prime/subcontracting opportunity as a project-scope violation; require `PERSONAL_CAREER_OUTREACH` to be independently evident in the candidate contract. First reject business development/prime-subcontract capture as a project-scope violation, even if attached to a named person. Require a verified career-project identity. Independently examine final list against `evals/EVALUATION_PLAN.md`. Flag unverified current positions, ambiguous people, stale sources, unsupported statements, duplicate human identities, no prior-state check, guessed email, low score, false quota completion, and unconsented messaging. Confirm actual native skill activation evidence; no evidence -> NOT VERIFIED. Produce PASS/FAIL/NOT_TESTED per major gate and block reporting candidate as CONTACT_READY when any mandatory field fails. Audit has NO power to authorize sending.
+**V2.1 authority:** Read `../../../references/career-intelligence-operating-contract-v2.1.md` and `../../../config/operating-policy.json` before use. Project `PERSONAL_CAREER_OUTREACH` is personal permanent leadership employment only. This skill cannot certify source truth, run owner-only DPAPI tools, approve sending, auto-apply or change policy. `SEND_AUTHORIZED` remains BLOCKED.
+
+## Procedure
+
+Audit all relevant record boundaries, project intent, exact claims, page-read trace, source date/lineage and contradictions; distinguish candidate resume evidence from invented credentials; scrutinize true current employer ATS status and work mode. Verify executive DOCUMENTED ownership has a claim connecting exact person and initiative; titles alone do not qualify. Check opportunity identity separately from person history, missing owner action vs source truth and suppression vs separate official application.
+
+Reject numeric-score promotion, 20-person quota inflation, user PUSH as source truth, misreported meetings, invented contact routes, cross-project sales and external actions. Record native skill activation evidence; reading SKILL.md alone is NOT_VERIFIED. Include PASS/HOLD/FAIL with reasons and cannot self-authorize any approval or contact-ready state. No live field assurance is derived from synthetic tests.
+
+## Output boundary
+
+Return only cited facts, clearly marked hypotheses and reason-coded HOLDs. Record whether this specialist was natively selected, NOT_VERIFIED, or SKIPPED_NOT_APPLICABLE. Research findings and drafts are not contact-ready or sent.

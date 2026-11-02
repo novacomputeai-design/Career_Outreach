@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "V2.1 public organization career opportunity research input; never contact permission",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "project_id",
+    "run_id",
+    "date_local",
+    "opportunities"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "2.1"
+    },
+    "project_id": {
+      "const": "PERSONAL_CAREER_OUTREACH"
+    },
+    "run_id": {
+      "type": "string",
+      "minLength": 3
+    },
+    "date_local": {
+      "type": "string",
+      "format": "date"
+    },
+    "opportunities": {
+      "type": "array",
+      "maxItems": 20,
+      "items": {
+        "type": "object",
+        "required": [
+          "schema_version",
+          "project_id",
+          "organization",
+          "initiative",
+          "claims",
+          "contribution",
+          "engagement_pathway",
+          "capability_theme",
+          "executive"
+        ],
+        "properties": {
+          "schema_version": {
+            "const": "2.1"
+          },
+          "project_id": {
+            "const": "PERSONAL_CAREER_OUTREACH"
+          },
+          "engagement_pathway": {
+            "enum": [
+              "STRATEGIC_EXPLORATION",
+              "DIRECT_HIRING"
+            ]
+          },
+          "capability_theme": {
+            "enum": [
+              "AI_STRATEGY_TRANSFORMATION",
+              "ENTERPRISE_PRODUCT_LEADERSHIP",
+              "BOTH"
+            ]
+          },
+          "organization": {
+            "type": "object"
+          },
+          "initiative": {
+            "type": "object"
+          },
+          "claims": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "contribution": {
+            "type": "object"
+          },
+          "executive": {
+            "type": [
+              "object",
+              "null"
+            ]
+          },
+          "job": {
+            "type": [
+              "object",
+              "null"
+            ]
+          }
+        }
+      }
+    }
+  }
+}
