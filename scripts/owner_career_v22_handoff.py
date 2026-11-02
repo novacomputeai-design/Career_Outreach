@@ -99,8 +99,9 @@ def main():
                 report,witness,secret,args.index)
             executive=record.get("executive")
             if executive:
-                status=store.check_relationship(executive["name"])
-                # A namesake check without a verified profile is not proof of novelty.
+                profile=input("Public individual profile URL verified by owner [Enter to skip]: ").strip()
+                status=store.check_relationship(executive["name"],profile_url=profile or None)
+                # Name-only matching or missing local history never proves novelty.
                 memory_result={"result":status["result"]}
             else:
                 memory_result={"result":"NO_NAMED_EXECUTIVE"}
