@@ -1,0 +1,549 @@
+{
+  "schema_version": "1.0",
+  "project": "PERSONAL_CAREER_OUTREACH",
+  "baseline_branch": "feat/career-intelligence-v2-2-e2e-hardening",
+  "description": "54 adversarial E2E scenario inventory, NONE automatically marked passed. Static/unit regressions are distinct from independent host execution.",
+  "total": 54,
+  "cases": [
+    {
+      "id": "E2E-01",
+      "name": "business_change_without_ai_keyword",
+      "area": "DISCOVERY_CONTRIBUTION",
+      "execution_status": "NOT_RUN",
+      "observed_result": null,
+      "independent_evidence": [],
+      "live_host_qualified": false,
+      "owner_approval_authorized": false
+    },
+    {
+      "id": "E2E-02",
+      "name": "buzzword_only_no_execution",
+      "area": "DISCOVERY_CONTRIBUTION",
+      "execution_status": "NOT_RUN",
+      "observed_result": null,
+      "independent_evidence": [],
+      "live_host_qualified": false,
+      "owner_approval_authorized": false
+    },
+    {
+      "id": "E2E-03",
+      "name": "local_prestige_without_value",
+      "area": "DISCOVERY_CONTRIBUTION",
+      "execution_status": "NOT_RUN",
+      "observed_result": null,
+      "independent_evidence": [],
+      "live_host_qualified": false,
+      "owner_approval_authorized": false
+    },
+    {
+      "id": "E2E-04",
+      "name": "remote_roles_exclude_arizona",
+      "area": "DISCOVERY_CONTRIBUTION",
+      "execution_status": "NOT_RUN",
+      "observed_result": null,
+      "independent_evidence": [],
+      "live_host_qualified": false,
+      "owner_approval_authorized": false
+    },
+    {
+      "id": "E2E-05",
+      "name": "industry_agnostic_regulated_product_transfer",
+      "area": "DISCOVERY_CONTRIBUTION",
+      "execution_status": "NOT_RUN",
+      "observed_result": null,
+      "independent_evidence": [],
+      "live_host_qualified": false,
+      "owner_approval_authorized": false
+    },
+    {
+      "id": "E2E-06",
+      "name": "ai_product_theme_independent_of_pathway",
+      "area": "DISCOVERY_CONTRIBUTION",
+      "execution_status": "NOT_RUN",
+      "observed_result": null,
+      "independent_evidence": [],
+      "live_host_qualified": false,
+      "owner_approval_authorized": false
+    },
+    {
+      "id": "E2E-07",
+      "name": "recent_trigger_vs_stale_announcement",
+      "area": "DISCOVERY_CONTRIBUTION",
+      "execution_status": "NOT_RUN",
+      "observed_result": null,
+      "independent_evidence": [],
+      "live_host_qualified": false,
+      "owner_approval_authorized": false
+    },
+    {
+      "id": "E2E-08",
+      "name": "announcement_pilot_deployment_scale_separated",
+      "area": "DISCOVERY_CONTRIBUTION",
+      "execution_status": "NOT_RUN",
+      "observed_result": null,
+      "independent_evidence": [],
+      "live_host_qualified": false,
+      "owner_approval_authorized": false
+    },
+    {
+      "id": "E2E-09",
+      "name": "post_appointment_no_hiring_claim",
+      "area": "DISCOVERY_CONTRIBUTION",
+      "execution_status": "NOT_RUN",
+      "observed_result": null,
+      "independent_evidence": [],
+      "live_host_qualified": false,
+      "owner_approval_authorized": false
+    },
+    {
+      "id": "E2E-10",
+      "name": "already_covered_product_function",
+      "area": "DISCOVERY_CONTRIBUTION",
+      "execution_status": "NOT_RUN",
+      "observed_result": null,
+      "independent_evidence": [],
+      "live_host_qualified": false,
+      "owner_approval_authorized": false
+    },
+    {
+      "id": "E2E-11",
+      "name": "generic_ai_strategy_pitch_rejected",
+      "area": "DISCOVERY_CONTRIBUTION",
+      "execution_status": "NOT_RUN",
+      "observed_result": null,
+      "independent_evidence": [],
+      "live_host_qualified": false,
+      "owner_approval_authorized": false
+    },
+    {
+      "id": "E2E-12",
+      "name": "bounded_product_adoption_value_supported",
+      "area": "DISCOVERY_CONTRIBUTION",
+      "execution_status": "NOT_RUN",
+      "observed_result": null,
+      "independent_evidence": [],
+      "live_host_qualified": false,
+      "owner_approval_authorized": false
+    },
+    {
+      "id": "E2E-13",
+      "name": "candidate_skill_claim_unsubstantiated",
+      "area": "DISCOVERY_CONTRIBUTION",
+      "execution_status": "NOT_RUN",
+      "observed_result": null,
+      "independent_evidence": [],
+      "live_host_qualified": false,
+      "owner_approval_authorized": false
+    },
+    {
+      "id": "E2E-14",
+      "name": "clinical_or_utility_credentials_not_invented",
+      "area": "DISCOVERY_CONTRIBUTION",
+      "execution_status": "NOT_RUN",
+      "observed_result": null,
+      "independent_evidence": [],
+      "live_host_qualified": false,
+      "owner_approval_authorized": false
+    },
+    {
+      "id": "E2E-15",
+      "name": "leadership_role_vs_hands_on_engineer",
+      "area": "DISCOVERY_CONTRIBUTION",
+      "execution_status": "NOT_RUN",
+      "observed_result": null,
+      "independent_evidence": [],
+      "live_host_qualified": false,
+      "owner_approval_authorized": false
+    },
+    {
+      "id": "E2E-16",
+      "name": "candidate_cannot_take_chief_function",
+      "area": "DISCOVERY_CONTRIBUTION",
+      "execution_status": "NOT_RUN",
+      "observed_result": null,
+      "independent_evidence": [],
+      "live_host_qualified": false,
+      "owner_approval_authorized": false
+    },
+    {
+      "id": "E2E-17",
+      "name": "source_404_or_login_wall",
+      "area": "SOURCE_EXECUTIVE_TRUTH",
+      "execution_status": "NOT_RUN",
+      "observed_result": null,
+      "independent_evidence": [],
+      "live_host_qualified": false,
+      "owner_approval_authorized": false
+    },
+    {
+      "id": "E2E-18",
+      "name": "source_flag_spoofed_true",
+      "area": "SOURCE_EXECUTIVE_TRUTH",
+      "execution_status": "NOT_RUN",
+      "observed_result": null,
+      "independent_evidence": [],
+      "live_host_qualified": false,
+      "owner_approval_authorized": false
+    },
+    {
+      "id": "E2E-19",
+      "name": "exact_excerpt_semantic_mismatch",
+      "area": "SOURCE_EXECUTIVE_TRUTH",
+      "execution_status": "NOT_RUN",
+      "observed_result": null,
+      "independent_evidence": [],
+      "live_host_qualified": false,
+      "owner_approval_authorized": false
+    },
+    {
+      "id": "E2E-20",
+      "name": "syndicated_second_url",
+      "area": "SOURCE_EXECUTIVE_TRUTH",
+      "execution_status": "NOT_RUN",
+      "observed_result": null,
+      "independent_evidence": [],
+      "live_host_qualified": false,
+      "owner_approval_authorized": false
+    },
+    {
+      "id": "E2E-21",
+      "name": "historical_bio_new_departure_conflict",
+      "area": "SOURCE_EXECUTIVE_TRUTH",
+      "execution_status": "NOT_RUN",
+      "observed_result": null,
+      "independent_evidence": [],
+      "live_host_qualified": false,
+      "owner_approval_authorized": false
+    },
+    {
+      "id": "E2E-22",
+      "name": "former_at_other_employer_not_conflict",
+      "area": "SOURCE_EXECUTIVE_TRUTH",
+      "execution_status": "NOT_RUN",
+      "observed_result": null,
+      "independent_evidence": [],
+      "live_host_qualified": false,
+      "owner_approval_authorized": false
+    },
+    {
+      "id": "E2E-23",
+      "name": "same_name_identity_collision",
+      "area": "SOURCE_EXECUTIVE_TRUTH",
+      "execution_status": "NOT_RUN",
+      "observed_result": null,
+      "independent_evidence": [],
+      "live_host_qualified": false,
+      "owner_approval_authorized": false
+    },
+    {
+      "id": "E2E-24",
+      "name": "initiative_owner_only_title_match",
+      "area": "SOURCE_EXECUTIVE_TRUTH",
+      "execution_status": "NOT_RUN",
+      "observed_result": null,
+      "independent_evidence": [],
+      "live_host_qualified": false,
+      "owner_approval_authorized": false
+    },
+    {
+      "id": "E2E-25",
+      "name": "documented_general_ai_remit_vs_program",
+      "area": "SOURCE_EXECUTIVE_TRUTH",
+      "execution_status": "NOT_RUN",
+      "observed_result": null,
+      "independent_evidence": [],
+      "live_host_qualified": false,
+      "owner_approval_authorized": false
+    },
+    {
+      "id": "E2E-26",
+      "name": "pathai_agreement_vs_legal_close",
+      "area": "SOURCE_EXECUTIVE_TRUTH",
+      "execution_status": "NOT_RUN",
+      "observed_result": null,
+      "independent_evidence": [],
+      "live_host_qualified": false,
+      "owner_approval_authorized": false
+    },
+    {
+      "id": "E2E-27",
+      "name": "employer_claim_vs_actual_outcome",
+      "area": "SOURCE_EXECUTIVE_TRUTH",
+      "execution_status": "NOT_RUN",
+      "observed_result": null,
+      "independent_evidence": [],
+      "live_host_qualified": false,
+      "owner_approval_authorized": false
+    },
+    {
+      "id": "E2E-28",
+      "name": "two_jobs_same_employer_preserved",
+      "area": "CONTINUITY_HIRING_REVIEW",
+      "execution_status": "NOT_RUN",
+      "observed_result": null,
+      "independent_evidence": [],
+      "live_host_qualified": false,
+      "owner_approval_authorized": false
+    },
+    {
+      "id": "E2E-29",
+      "name": "job_removed_next_run_history_preserved",
+      "area": "CONTINUITY_HIRING_REVIEW",
+      "execution_status": "NOT_RUN",
+      "observed_result": null,
+      "independent_evidence": [],
+      "live_host_qualified": false,
+      "owner_approval_authorized": false
+    },
+    {
+      "id": "E2E-30",
+      "name": "requisition_closed_current_strategy_remains",
+      "area": "CONTINUITY_HIRING_REVIEW",
+      "execution_status": "NOT_RUN",
+      "observed_result": null,
+      "independent_evidence": [],
+      "live_host_qualified": false,
+      "owner_approval_authorized": false
+    },
+    {
+      "id": "E2E-31",
+      "name": "historical_record_source_outage",
+      "area": "CONTINUITY_HIRING_REVIEW",
+      "execution_status": "NOT_RUN",
+      "observed_result": null,
+      "independent_evidence": [],
+      "live_host_qualified": false,
+      "owner_approval_authorized": false
+    },
+    {
+      "id": "E2E-32",
+      "name": "same_initiative_distinct_mandate_keys",
+      "area": "CONTINUITY_HIRING_REVIEW",
+      "execution_status": "NOT_RUN",
+      "observed_result": null,
+      "independent_evidence": [],
+      "live_host_qualified": false,
+      "owner_approval_authorized": false
+    },
+    {
+      "id": "E2E-33",
+      "name": "posted_vs_unposted_hiring_signal",
+      "area": "CONTINUITY_HIRING_REVIEW",
+      "execution_status": "NOT_RUN",
+      "observed_result": null,
+      "independent_evidence": [],
+      "live_host_qualified": false,
+      "owner_approval_authorized": false
+    },
+    {
+      "id": "E2E-34",
+      "name": "actual_director_beats_narrow_domain_gap",
+      "area": "CONTINUITY_HIRING_REVIEW",
+      "execution_status": "NOT_RUN",
+      "observed_result": null,
+      "independent_evidence": [],
+      "live_host_qualified": false,
+      "owner_approval_authorized": false
+    },
+    {
+      "id": "E2E-35",
+      "name": "owner_pursue_not_permission",
+      "area": "CONTINUITY_HIRING_REVIEW",
+      "execution_status": "NOT_RUN",
+      "observed_result": null,
+      "independent_evidence": [],
+      "live_host_qualified": false,
+      "owner_approval_authorized": false
+    },
+    {
+      "id": "E2E-36",
+      "name": "owner_reject_retained_as_reasoned_feedback",
+      "area": "CONTINUITY_HIRING_REVIEW",
+      "execution_status": "NOT_RUN",
+      "observed_result": null,
+      "independent_evidence": [],
+      "live_host_qualified": false,
+      "owner_approval_authorized": false
+    },
+    {
+      "id": "E2E-37",
+      "name": "policy_code_schema_state_equivalence",
+      "area": "CONTINUITY_HIRING_REVIEW",
+      "execution_status": "NOT_RUN",
+      "observed_result": null,
+      "independent_evidence": [],
+      "live_host_qualified": false,
+      "owner_approval_authorized": false
+    },
+    {
+      "id": "E2E-38",
+      "name": "legacy_runner_cannot_claim_v2",
+      "area": "CONTINUITY_HIRING_REVIEW",
+      "execution_status": "NOT_RUN",
+      "observed_result": null,
+      "independent_evidence": [],
+      "live_host_qualified": false,
+      "owner_approval_authorized": false
+    },
+    {
+      "id": "E2E-39",
+      "name": "linkedin_profile_vs_messaging_permission",
+      "area": "SAFETY_MEMORY_RELIABILITY",
+      "execution_status": "NOT_RUN",
+      "observed_result": null,
+      "independent_evidence": [],
+      "live_host_qualified": false,
+      "owner_approval_authorized": false
+    },
+    {
+      "id": "E2E-40",
+      "name": "general_press_inbox_not_person_route",
+      "area": "SAFETY_MEMORY_RELIABILITY",
+      "execution_status": "NOT_RUN",
+      "observed_result": null,
+      "independent_evidence": [],
+      "live_host_qualified": false,
+      "owner_approval_authorized": false
+    },
+    {
+      "id": "E2E-41",
+      "name": "private_memory_missing",
+      "area": "SAFETY_MEMORY_RELIABILITY",
+      "execution_status": "NOT_RUN",
+      "observed_result": null,
+      "independent_evidence": [],
+      "live_host_qualified": false,
+      "owner_approval_authorized": false
+    },
+    {
+      "id": "E2E-42",
+      "name": "existing_relationship_not_suppressed_opportunity",
+      "area": "SAFETY_MEMORY_RELIABILITY",
+      "execution_status": "NOT_RUN",
+      "observed_result": null,
+      "independent_evidence": [],
+      "live_host_qualified": false,
+      "owner_approval_authorized": false
+    },
+    {
+      "id": "E2E-43",
+      "name": "opt_out_person_specific",
+      "area": "SAFETY_MEMORY_RELIABILITY",
+      "execution_status": "NOT_RUN",
+      "observed_result": null,
+      "independent_evidence": [],
+      "live_host_qualified": false,
+      "owner_approval_authorized": false
+    },
+    {
+      "id": "E2E-44",
+      "name": "personal_career_vs_nova_sales_injection",
+      "area": "SAFETY_MEMORY_RELIABILITY",
+      "execution_status": "NOT_RUN",
+      "observed_result": null,
+      "independent_evidence": [],
+      "live_host_qualified": false,
+      "owner_approval_authorized": false
+    },
+    {
+      "id": "E2E-45",
+      "name": "untrusted_web_prompt_injection",
+      "area": "SAFETY_MEMORY_RELIABILITY",
+      "execution_status": "NOT_RUN",
+      "observed_result": null,
+      "independent_evidence": [],
+      "live_host_qualified": false,
+      "owner_approval_authorized": false
+    },
+    {
+      "id": "E2E-46",
+      "name": "content_and_send_approval_separate",
+      "area": "SAFETY_MEMORY_RELIABILITY",
+      "execution_status": "NOT_RUN",
+      "observed_result": null,
+      "independent_evidence": [],
+      "live_host_qualified": false,
+      "owner_approval_authorized": false
+    },
+    {
+      "id": "E2E-47",
+      "name": "unauthorized_application_blocked",
+      "area": "SAFETY_MEMORY_RELIABILITY",
+      "execution_status": "NOT_RUN",
+      "observed_result": null,
+      "independent_evidence": [],
+      "live_host_qualified": false,
+      "owner_approval_authorized": false
+    },
+    {
+      "id": "E2E-48",
+      "name": "interrupted_run_recover_without_duplication",
+      "area": "SAFETY_MEMORY_RELIABILITY",
+      "execution_status": "NOT_RUN",
+      "observed_result": null,
+      "independent_evidence": [],
+      "live_host_qualified": false,
+      "owner_approval_authorized": false
+    },
+    {
+      "id": "E2E-49",
+      "name": "wrong_run_or_wrong_person_owner_history",
+      "area": "SAFETY_MEMORY_RELIABILITY",
+      "execution_status": "NOT_RUN",
+      "observed_result": null,
+      "independent_evidence": [],
+      "live_host_qualified": false,
+      "owner_approval_authorized": false
+    },
+    {
+      "id": "E2E-50",
+      "name": "reviewer_identity_claim_not_trusted",
+      "area": "SAFETY_MEMORY_RELIABILITY",
+      "execution_status": "NOT_RUN",
+      "observed_result": null,
+      "independent_evidence": [],
+      "live_host_qualified": false,
+      "owner_approval_authorized": false
+    },
+    {
+      "id": "E2E-51",
+      "name": "source_age_boundary_and_phoenix_date",
+      "area": "SAFETY_MEMORY_RELIABILITY",
+      "execution_status": "NOT_RUN",
+      "observed_result": null,
+      "independent_evidence": [],
+      "live_host_qualified": false,
+      "owner_approval_authorized": false
+    },
+    {
+      "id": "E2E-52",
+      "name": "native_skill_missing_specialist",
+      "area": "SAFETY_MEMORY_RELIABILITY",
+      "execution_status": "NOT_RUN",
+      "observed_result": null,
+      "independent_evidence": [],
+      "live_host_qualified": false,
+      "owner_approval_authorized": false
+    },
+    {
+      "id": "E2E-53",
+      "name": "all_fourteen_conditional_skills",
+      "area": "SAFETY_MEMORY_RELIABILITY",
+      "execution_status": "NOT_RUN",
+      "observed_result": null,
+      "independent_evidence": [],
+      "live_host_qualified": false,
+      "owner_approval_authorized": false
+    },
+    {
+      "id": "E2E-54",
+      "name": "seven_real_runs_and_forty_reviews",
+      "area": "SAFETY_MEMORY_RELIABILITY",
+      "execution_status": "NOT_RUN",
+      "observed_result": null,
+      "independent_evidence": [],
+      "live_host_qualified": false,
+      "owner_approval_authorized": false
+    }
+  ]
+}
