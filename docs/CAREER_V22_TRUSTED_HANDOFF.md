@@ -8,7 +8,7 @@ Codex may create a V2.2 JSON research packet but must never run the owner wrappe
 
 An owner-run source witness:
 - accepts only operator-allowlisted exact HTTPS public hostnames;
-- disallows redirects, non-public DNS answers, unexpected ports, inherited proxy settings and unbounded fetches;
+- disallows redirects, non-public DNS answers, unexpected ports, inherited proxy settings and unbounded fetches; pins the TLS socket using curl --resolve to a public DNS answer verified within the fetch; checks normal hostname and certificate validation (no --insecure);
 - checks independently retrieved webpage text for exact source excerpts;
 - HMAC-binds the receipt to the exact research packet using the owner-private identity key;
 - **does not** establish semantic truth of an executive role, legal transaction, vacancy, or program ownership.
@@ -77,3 +77,9 @@ Only research suggestions emerge. No policy weights change automatically.
 - Real owner Windows read-only field rehearsal, negative tests, interruption recovery and 54-case adverse host results, followed by P4/P5 criteria.
 
 The current engineering branch is **not production-qualified**. Do not run these commands from Codex, a scheduled unattended session, or an untrusted process. No protected database migration is required or authorized.
+
+## Network isolation and operator prerequisites
+
+The witness requires a functioning local curl executable with --resolve support. The original requests.get implementation permitted DNS validation followed by a separately resolved connection (DNS rebinding); the current fetch rejects mixed public/private DNS records and pins the real HTTPS socket to the checked address. Missing curl, invalid certificates, redirect status or source-rendering restrictions => FETCH_UNAVAILABLE, not an unpinned fallback. This is a defense-in-depth boundary, **not** equivalent to operating-system network sandboxing; owner-controlled network egress isolation is required for a higher-assurance production source verifier.
+
+Before any real owner-Windows exercise, test on a dedicated restored or synthetic environment. An owner's existing DPAPI database is not a test fixture; do not run Codex with owner keys present in its process environment. The private folder and signed research journal are not cryptographically isolated from other programs running under the same Windows user account. Actual role/owner truth must still be checked against independent current evidence.

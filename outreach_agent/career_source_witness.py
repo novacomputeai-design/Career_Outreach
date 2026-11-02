@@ -13,6 +13,11 @@ import ipaddress
 import json
 import re
 import socket
+import os
+import shutil
+import subprocess
+import tempfile
+from pathlib import Path
 from urllib.parse import urlsplit
 
 import requests
@@ -92,27 +97,94 @@ def safe_public_host(url, allowed_hosts, resolver=socket.getaddrinfo):
     return True
 
 
-def bounded_fetch(url):
-    """Bounded owner-controlled network read. No redirects or proxy inheritance."""
-    session = requests.Session()
-    session.trust_env = False
-    try:
-        with session.get(url, timeout=(4, 10), allow_redirects=False, stream=True,
-                         headers={"User-Agent": "CareerPublicSourceWitness/1.0"}) as response:
-            if response.status_code != 200:
-                raise ValueError("SOURCE_HTTP_UNAVAILABLE")
-            ct = response.headers.get("Content-Type", "").split(";")[0].lower()
-            if not (ct.startswith("text/") or ct in ("application/xhtml+xml",)):
-                raise ValueError("UNSUPPORTED_SOURCE_CONTENT_TYPE")
-            payload = bytearray()
-            for chunk in response.iter_content(chunk_size=32768):
-                payload.extend(chunk)
-                if len(payload) > MAX_BYTES:
-                    raise ValueError("SOURCE_TOO_LARGE")
-            return bytes(payload).decode("utf-8", errors="replace"), ct
-    finally:
-        session.close()
+def _pinned_curl_command(url, ip, binary, header_path):
+    """Use a prevalidated public IP, preserving TLS SNI/hostname verification.
 
+    --resolve prevents a second DNS answer from choosing the socket target.
+    No proxy, redirect, file://, implicit user shell or certificate bypass.
+    """
+    u = urlsplit(url)
+    host = (u.hostname or "").lower().rstrip(".")
+    if (u.scheme != "https" or not host or u.username or u.password
+            or u.port not in (None, 443) or u.fragment):
+        raise ValueError("SOURCE_HTTPS_HOST_REQUIRED")
+    ip_obj = ipaddress.ip_address(ip)
+    if not ip_obj.is_global:
+        raise ValueError("NONPUBLIC_SOCKET_ADDRESS_REJECTED")
+    address = "[" + str(ip_obj) + "]" if ip_obj.version == 6 else str(ip_obj)
+    return [
+        binary, "--silent", "--show-error", "--fail",
+        "--proto", "=https", "--noproxy", "*",
+        "--max-redirs", "0", "--connect-timeout", "4", "--max-time", "14",
+        "--max-filesize", str(MAX_BYTES),
+        "--resolve", host + ":443:" + address,
+        "--dump-header", str(header_path),
+        "--user-agent", "CareerPublicSourceWitness/1.0",
+        url,
+    ]
+
+
+def bounded_fetch(url, *, resolver=socket.getaddrinfo, runner=subprocess.run,
+                  curl_path=None):
+    """Read one capped HTTPS public page with DNS-pinned TLS and no redirects.
+
+    A missing pinned curl binary is a HOLD, never an unpinned requests fallback.
+    """
+    parsed = urlsplit(url)
+    host = (parsed.hostname or "").lower().rstrip(".")
+    if (parsed.scheme != "https" or not host or parsed.username or parsed.password
+            or parsed.port not in (None, 443) or parsed.fragment):
+        raise ValueError("SOURCE_HTTPS_HOST_REQUIRED")
+    try:
+        ipaddress.ip_address(host)
+    except ValueError:
+        pass
+    else:
+        raise ValueError("NUMERIC_HOST_DISALLOWED")
+    if host in {"localhost", "metadata.google.internal"} or host.endswith(
+            (".local", ".internal")):
+        raise ValueError("LOCAL_HOST_DISALLOWED")
+    addresses = resolver(host, 443, type=socket.SOCK_STREAM)
+    if not addresses:
+        raise ValueError("DNS_UNAVAILABLE")
+    validated = []
+    for info in addresses:
+        ip = ipaddress.ip_address(info[4][0])
+        if not ip.is_global:
+            raise ValueError("NONPUBLIC_DNS_ANSWER_REJECTED")
+        validated.append(str(ip))
+    binary = curl_path or shutil.which("curl.exe" if os.name == "nt" else "curl")
+    if not binary:
+        raise ValueError("PINNED_TLS_CLIENT_UNAVAILABLE")
+    with tempfile.TemporaryDirectory(prefix="career-public-witness-") as tmp:
+        headers = Path(tmp) / "headers"
+        with tempfile.TemporaryFile() as target:
+            command = _pinned_curl_command(url, validated[0], binary, headers)
+            try:
+                process = runner(command, stdout=target, stderr=subprocess.PIPE,
+                                 timeout=20, check=False)
+            except (OSError, subprocess.TimeoutExpired) as exc:
+                raise ValueError("SOURCE_FETCH_FAILED") from exc
+            if process.returncode:
+                raise ValueError("SOURCE_HTTP_UNAVAILABLE")
+            target.seek(0, 2)
+            if target.tell() > MAX_BYTES:
+                raise ValueError("SOURCE_TOO_LARGE")
+            target.seek(0)
+            payload = target.read(MAX_BYTES + 1)
+        raw_headers = headers.read_bytes() if headers.exists() else b""
+        if len(raw_headers) > 65536:
+            raise ValueError("SOURCE_HEADERS_TOO_LARGE")
+        statuses = re.findall(rb"^HTTP/[0-9.]+\s+([0-9]{3})\b", raw_headers,
+                              flags=re.MULTILINE)
+        if not statuses or statuses[-1] != b"200":
+            raise ValueError("SOURCE_HTTP_NOT_200")
+        match = re.findall(rb"^content-type:\s*([^\r\n;]+)",
+                           raw_headers, flags=re.MULTILINE | re.IGNORECASE)
+        ct = match[-1].decode("ascii", errors="ignore").lower().strip() if match else ""
+        if not (ct.startswith("text/") or ct == "application/xhtml+xml"):
+            raise ValueError("UNSUPPORTED_SOURCE_CONTENT_TYPE")
+        return payload.decode("utf-8", errors="replace"), ct
 
 def witness_sources(packet, approved_hosts, *, fetch=bounded_fetch,
                     resolver=socket.getaddrinfo):
