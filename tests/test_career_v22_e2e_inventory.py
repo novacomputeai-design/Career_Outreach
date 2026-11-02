@@ -15,7 +15,8 @@ class AdversarialInventoryTests(unittest.TestCase):
         self.assertEqual(len(cases),54)
         self.assertEqual(self.data["total"],54)
         self.assertEqual(len({x["name"] for x in cases}),54)
-        self.assertTrue(all(not any(c.isdigit() for c in x["name"]) for x in cases))
+        import re
+        self.assertTrue(all(re.fullmatch(r"[a-z][a-z0-9_]+", x["name"]) for x in cases))
 
     def test_no_e2e_case_can_be_paper_passed(self):
         self.assertTrue(all(x["execution_status"]=="NOT_RUN" for x in self.data["cases"]))
