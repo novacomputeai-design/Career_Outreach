@@ -13,3 +13,7 @@ Conditionally activate only for a genuine planned/confirmed conversation; do not
 ## Output boundary
 
 Return only cited facts, clearly marked hypotheses and reason-coded HOLDs. Record whether this specialist was natively selected, NOT_VERIFIED, or SKIPPED_NOT_APPLICABLE. Research findings and drafts are not contact-ready or sent.
+
+## V2.2 candidate hardening — supervised opt-in only
+
+Read `../../../references/career-intelligence-operating-contract-v2.2.md` and `../../../docs/CAREER_V22_MASTERING_GATES.md` only when explicitly running the V2.2 pilot. Only for an owner-planned genuine conversation, prepare evidence-backed questions about the business decision, product ownership, adoption and measurable value. State what is hypothesis versus fact; never assert a leadership vacancy, executive interest or meeting. Native activation and source truth require independent proof. Neither a skill text read nor this instruction grants contact, drafting, sending, applications, private-memory access, or production authority.

@@ -15,3 +15,7 @@ Verify person identity, organization affiliation and up-to-date role separately.
 ## Output boundary
 
 Return only cited facts, clearly marked hypotheses and reason-coded HOLDs. Record whether this specialist was natively selected, NOT_VERIFIED, or SKIPPED_NOT_APPLICABLE. Research findings and drafts are not contact-ready or sent.
+
+## V2.2 candidate hardening — supervised opt-in only
+
+Read `../../../references/career-intelligence-operating-contract-v2.2.md` and `../../../docs/CAREER_V22_MASTERING_GATES.md` only when explicitly running the V2.2 pilot. After identifying a specific complementary leadership responsibility, map business outcome, product portfolio, AI platform, transformation and hiring owners separately. Confirm current affiliation and exact initiative responsibility; a high executive title alone does not establish sponsorship. Search contradictory departures. Native activation and source truth require independent proof. Neither a skill text read nor this instruction grants contact, drafting, sending, applications, private-memory access, or production authority.

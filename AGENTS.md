@@ -1,3 +1,7 @@
+## V2.2 candidate branch — supervised opt-in only
+
+This draft hardening branch adds `references/career-intelligence-operating-contract-v2.2.md` and `docs/CAREER_V22_MASTERING_GATES.md`. Only on explicit supervised V2.2 research requests, use `scripts/assess_career_opportunities_v22.py` to validate a strict V2.2 public-only research packet and optional private immutable opportunity continuity snapshots. This is not the selected production runtime, native Codex activation proof, authenticated source witness, operator memory broker, owner approval, or contact authorization. Preserve current V2.1 and all no-send restrictions. No live DPAPI migration; do not switch or schedule the legacy Python API runner.
+
 ## V2.1 integration authority — draft branch only
 Read `references/career-intelligence-operating-contract-v2.1.md`, `config/operating-policy.json > career_intelligence` and `references/daily-operating-contract.md`. These supersede legacy score-driven executive lead generation for the V2.1 path. Independent capability and engagement axes, exact source claims, owner feedback separated from factual readiness, and conditional native skill activation are mandatory. The old Python researcher, numeric scores and 20-person target remain compatibility-only, never V2.1 recommendation authority. **No contact-ready, sending or application permissions follow from structural research or owner interest.** No Drive/private memory mutations. No autonomous outgoing action. Production P4/P5 still unqualified.
 

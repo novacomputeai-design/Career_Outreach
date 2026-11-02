@@ -18,3 +18,7 @@ Use `outreach_agent/career_intelligence_packet.py` through the safe offline CLI 
 ## Output boundary
 
 Return only cited facts, clearly marked hypotheses and reason-coded HOLDs. Record whether this specialist was natively selected, NOT_VERIFIED, or SKIPPED_NOT_APPLICABLE. Research findings and drafts are not contact-ready or sent.
+
+## V2.2 candidate hardening — supervised opt-in only
+
+Read `../../../references/career-intelligence-operating-contract-v2.2.md` and `../../../docs/CAREER_V22_MASTERING_GATES.md` only when explicitly running the V2.2 pilot. For V2.2 say WHY THIS ORGANIZATION, WHY THIS INTERNAL LEADERSHIP RESPONSIBILITY, WHY THE CANDIDATE, WHY NOW, WHO OWNS THE OUTCOME and WHAT REMAINS UNKNOWN. Show separately opportunity state, contribution quality, timing, source assurance, relationship access and no-action gates. Do not delete earlier same-employer opportunities. Native activation and source truth require independent proof. Neither a skill text read nor this instruction grants contact, drafting, sending, applications, private-memory access, or production authority.

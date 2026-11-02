@@ -15,3 +15,7 @@ For JOB_ACTIVE require a current primary employer/ATS listing accepting applicat
 ## Output boundary
 
 Return only cited facts, clearly marked hypotheses and reason-coded HOLDs. Record whether this specialist was natively selected, NOT_VERIFIED, or SKIPPED_NOT_APPLICABLE. Research findings and drafts are not contact-ready or sent.
+
+## V2.2 candidate hardening — supervised opt-in only
+
+Read `../../../references/career-intelligence-operating-contract-v2.2.md` and `../../../docs/CAREER_V22_MASTERING_GATES.md` only when explicitly running the V2.2 pilot. V2.2 distinguishes a model-supplied source flag from independent observed truth. Capture direct excerpts, publisher lineage, retrieval/publication dates, and conflicts. Inaccessible ATS, undated current owner, stale biographies and employer-reported claims remain explicitly uncertain. Native activation and source truth require independent proof. Neither a skill text read nor this instruction grants contact, drafting, sending, applications, private-memory access, or production authority.
