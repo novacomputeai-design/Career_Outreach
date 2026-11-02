@@ -142,8 +142,8 @@
       "zero_worthwhile_is_valid": true
     },
     "research_states": [
+      "DISCOVERED",
       "ASSESSABLE",
-      "RESEARCH_PENDING",
       "EVIDENCE_HOLD",
       "CLOSED_INACTIVE",
       "EXCLUDED"
@@ -154,10 +154,10 @@
       "REJECT"
     ],
     "engagement_states": [
+      "NOT_PREPARED",
       "RESEARCH_PENDING",
       "ENGAGEMENT_REVIEW_ELIGIBLE",
-      "SUPPRESSED",
-      "NOT_PREPARED"
+      "SUPPRESSED"
     ],
     "evidence": {
       "claim_specific_source": true,
@@ -188,6 +188,15 @@
       "windows_and_ubuntu_ci_required": true,
       "codex_native_skill_proof_required": true,
       "p4_p5_required": true
+    },
+    "v22_candidate_hardening": {
+      "enabled_for_production": false,
+      "requires_contribution_quality": true,
+      "requires_durable_cross_run_ledger": true,
+      "requires_host_native_evidence": true,
+      "contact_ready_from_research": false,
+      "send_authorized": false,
+      "legacy_runtime_not_authoritative": true
     }
   }
 }
