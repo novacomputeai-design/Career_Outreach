@@ -12,7 +12,13 @@ $branch = (& git -C $repo branch --show-current).Trim()
 if ($LASTEXITCODE -ne 0 -or $branch -ne $expected) {
     throw "Wrong branch: $branch. Expected $expected."
 }
-if ((& git -C $repo status --porcelain).Count -gt 0) {
+# Under Set-StrictMode, native-command output may be $null or a scalar.
+# @() reliably returns a 0/1/N-element array before checking .Count.
+$statusLines = @(& git -C $repo status --porcelain)
+if ($LASTEXITCODE -ne 0) {
+    throw "Unable to verify the repository working tree. Stop the probe."
+}
+if ($statusLines.Count -gt 0) {
     throw "Working tree not clean. Do not run a qualification with mixed sources."
 }
 if ($env:OUTREACH_STATE_KEY -or $env:OUTREACH_IDENTITY_KEY -or $env:OUTREACH_DB_PATH) {
@@ -48,7 +54,10 @@ if (Test-Path -LiteralPath $stdout) {
     foreach ($line in Get-Content -LiteralPath $stdout) {
         try {
             $event = $line | ConvertFrom-Json -ErrorAction Stop
-            if ($null -ne $event.type) { $types += [string]$event.type }
+            $typeProperty = $event.PSObject.Properties['type']
+            if ($null -ne $typeProperty -and $null -ne $typeProperty.Value) {
+                $types += [string]$typeProperty.Value
+            }
         } catch {
             # Preserve raw evidence for owner review. Do not infer success.
         }

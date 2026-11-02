@@ -18,6 +18,29 @@ class NativeSkillProbeTests(unittest.TestCase):
         self.assertNotIn("codex exec --sandbox workspace-write",s)
         self.assertIn("Get-Command codex",s)
 
+    def test_strict_mode_git_status_is_always_array(self):
+        s=(ROOT/"scripts"/"career-v22-native-skill-probe.ps1").read_text(encoding="utf-8")
+        self.assertIn("$statusLines = @(& git -C $repo status --porcelain)",s)
+        self.assertIn("if ($LASTEXITCODE -ne 0)",s)
+        self.assertIn("if ($statusLines.Count -gt 0)",s)
+        self.assertNotIn("(& git -C $repo status --porcelain).Count",s)
+
+    @unittest.skipUnless(os.name=="nt","PowerShell native command check on Windows CI")
+    def test_strict_mode_native_git_status_returns_safe_array(self):
+        pwsh=shutil.which("pwsh") or shutil.which("powershell")
+        self.assertIsNotNone(pwsh)
+        root=str(ROOT).replace("'","''")
+        code=(
+            "Set-StrictMode -Version Latest;"
+            "$repo='"+root+"';"
+            "$statusLines=@(& git -C $repo status --porcelain);"
+            "if($LASTEXITCODE -ne 0){throw 'git status failed'};"
+            "if($statusLines.Count -lt 0){throw 'invalid array'};"
+        )
+        result=subprocess.run([pwsh,"-NoProfile","-NonInteractive","-Command",code],
+                              capture_output=True,text=True,timeout=20)
+        self.assertEqual(result.returncode,0,result.stderr)
+
     @unittest.skipUnless(os.name=="nt","PowerShell syntax check only on Windows CI")
     def test_probe_has_valid_powershell_syntax_without_running_codex(self):
         pwsh=shutil.which("pwsh") or shutil.which("powershell")
