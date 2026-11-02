@@ -18,6 +18,17 @@ class NativeSkillProbeTests(unittest.TestCase):
         self.assertNotIn("codex exec --sandbox workspace-write",s)
         self.assertIn("Get-Command codex",s)
 
+    def test_unrelated_notion_oauth_mcp_disabled_for_single_invocation(self):
+        s=(ROOT/"scripts"/"career-v22-native-skill-probe.ps1").read_text(encoding="utf-8")
+        self.assertIn("-c 'mcp_servers.notion.enabled=false'",s)
+        self.assertIn('$ErrorActionPreference = "Continue"',s)
+        self.assertIn("$previousErrorActionPreference",s)
+        self.assertIn("$ErrorActionPreference = $previousErrorActionPreference",s)
+        self.assertIn("2> $stderr",s)
+        self.assertIn("$exitCode = $LASTEXITCODE",s)
+        self.assertNotIn("codex mcp login",s)
+        self.assertNotIn("mcp_servers.notion.enabled=false'",s.replace("-c 'mcp_servers.notion.enabled=false'", ""))
+
     def test_strict_mode_git_status_is_always_array(self):
         s=(ROOT/"scripts"/"career-v22-native-skill-probe.ps1").read_text(encoding="utf-8")
         self.assertIn("$statusLines = @(& git -C $repo status --porcelain)",s)

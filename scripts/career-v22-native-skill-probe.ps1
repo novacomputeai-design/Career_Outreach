@@ -43,9 +43,22 @@ Report the exact names of the repository-local skills that the host makes availa
 
 Push-Location $repo
 try {
-    # Explicit read-only sandbox, no --full-auto or workspace-write.
-    & codex exec --json --sandbox read-only $prompt 1> $stdout 2> $stderr
-    $exitCode = $LASTEXITCODE
+    # One-off Notion MCP override: the disconnected optional Notion OAuth
+    # server must not block this repository-only skills diagnostic. This
+    # does not edit any global Codex configuration or reconnect Notion.
+    #
+    # Windows PowerShell 5.1 may treat native executable stderr as a
+    # non-terminating PowerShell error even when redirected to a file.
+    # Isolate ErrorActionPreference ONLY around this command so a tool's
+    # stderr is logged and the exit code/summary remain observable.
+    $previousErrorActionPreference = $ErrorActionPreference
+    try {
+        $ErrorActionPreference = "Continue"
+        & codex exec --json --sandbox read-only -c 'mcp_servers.notion.enabled=false' $prompt 1> $stdout 2> $stderr
+        $exitCode = $LASTEXITCODE
+    } finally {
+        $ErrorActionPreference = $previousErrorActionPreference
+    }
 } finally {
     Pop-Location
 }
