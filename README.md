@@ -1,3 +1,5 @@
+> **Final targeted V2.2 native-skill remedy:** [App Server skill handoff](docs/CAREER_V22_APP_SERVER_NATIVE_SKILL.md) implements supported host discovery and explicit typed skill inputs. Local read-only diagnostic: .\scripts\career-v22-app-server.ps1. Host acceptance does not certify actual skill execution; production remains HOLD.
+
 ## V2.2 owner-trusted research boundary (draft)
 
 For an explicit supervised V2.2 pilot, see [the separate owner-side handoff guide](docs/CAREER_V22_TRUSTED_HANDOFF.md). Codex generates research-only input; the V2.2 offline evaluator checks its structure; a normal interactive Windows owner session can independently fetch allowlisted public source text, sign the source receipt with the existing protected identity key, look up local relationship history read-only, and record a HMAC-bound research preference. **This does not prove source semantics, native skill invocation, cross-channel novelty, independent human identity, contact permission or production mastery.** No migrations, outreach, applications or sending are authorized.
