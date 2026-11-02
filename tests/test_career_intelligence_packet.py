@@ -17,6 +17,14 @@ class PacketTests(unittest.TestCase):
         self.assertEqual(p["research_summary"]["reviewed"], 0)
         self.assertEqual(p["contact_ready"], 0)
 
+    def test_source_claims_survive_packet_to_review_output(self):
+        x = sample()
+        report = build_review_packet(self.pack([x]))
+        self.assertEqual(report["opportunity_records"][0]["claims"], x["claims"])
+        self.assertEqual(report["research_summary"]["results"][0]["organization_id"],
+                         x["organization"]["organization_id"])
+        self.assertFalse(report["source_truth_independently_verified"])
+
     def test_reject_private_fields_recursively(self):
         q=sample()
         q["contribution"]["private_email"]="private@example.test"

@@ -54,6 +54,10 @@ def build_review_packet(packet):
     return {
         "schema_version": SCHEMA_VERSION, "project_id": PROJECT_ID,
         "run_id": packet["run_id"], "date_local": d.isoformat(),
+        # Keep the public-only source claims beside their assessments so the
+        # owner can audit URLs, excerpts, dates and conflicts without trying to
+        # reconstruct them from reason codes or search results.
+        "opportunity_records": opportunities,
         "research_summary": summary,
         "native_skills_verified": False,
         "source_truth_independently_verified": False,

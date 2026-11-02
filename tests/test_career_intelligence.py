@@ -41,7 +41,12 @@ def sample(pathway="STRATEGIC_EXPLORATION", executive=False):
     if pathway == "DIRECT_HIRING":
         r["job"] = {"requisition_id": "req-123", "official_ats_url": "https://employer.example/jobs/req-123",
                     "status_claim_id": "job-current", "state": "ACCEPTING",
-                    "mandatory_requirements_met": True, "work_mode_feasible": True}
+                    "mandatory_qualifications": [
+                        {"requirement": "Relevant experience", "status": "MATCHED",
+                         "candidate_evidence_refs": ["candidate-profile:experience"]}],
+                    "work_mode_feasible": True,
+                    "candidate_eligibility": {"work_authorization": "ELIGIBLE"},
+                    "role_relevance": "MATCH"}
         r["claims"].append(claim("job-current", "JOB_ACTIVE",
                     "Applications are open for req-123.", obj="req-123",
                     url="https://employer.example/jobs/req-123"))
@@ -89,6 +94,23 @@ class CorePathwayTests(unittest.TestCase):
         self.assertEqual(o["research_state"], "ASSESSABLE")
         self.assertEqual(o["manual_application"], "OWNER_AUTH_REQUIRED")
         self.assertEqual(o["engagement_readiness"], "RESEARCH_PENDING")
+        self.assertEqual(o["hiring_evidence"], "ACTIVE_POSTED_ROLE")
+        self.assertEqual(o["candidate_fit_status"], "REPORTED_MATCH")
+
+    def test_active_job_evidence_survives_unknown_candidate_qualifications(self):
+        x = sample("DIRECT_HIRING")
+        x["job"]["mandatory_qualifications"] = [
+            {"requirement": "Progressive transformation leadership", "status": "UNVERIFIED"}]
+        result = evaluate_opportunity(x)
+        self.assertEqual(result["research_state"], "EVIDENCE_HOLD")
+        self.assertEqual(result["hiring_evidence"], "ACTIVE_POSTED_ROLE")
+        self.assertEqual(result["candidate_fit_status"], "UNVERIFIED")
+        self.assertEqual(result["manual_application"], "NOT_ELIGIBLE")
+
+    def test_strategic_contribution_remains_a_hypothesis_status(self):
+        result = evaluate_opportunity(sample())
+        self.assertEqual(result["candidate_fit_status"],
+                         "CONTRIBUTION_HYPOTHESIS_REPORTED")
 
     def test_direct_hiring_does_not_require_separate_ai_objective(self):
         x=sample("DIRECT_HIRING")
@@ -216,7 +238,9 @@ class CorePathwayTests(unittest.TestCase):
 
     def test_t07_closed_job(self):
         x=sample("DIRECT_HIRING"); x["job"]["state"]="CLOSED"
-        self.assertEqual(evaluate_opportunity(x)["research_state"], "CLOSED_INACTIVE")
+        result=evaluate_opportunity(x)
+        self.assertEqual(result["research_state"], "CLOSED_INACTIVE")
+        self.assertEqual(result["hiring_evidence"], "EXPIRED_OR_WITHDRAWN")
 
     def test_t08_mature_ai_team_no_invented_gap(self):
         x=sample(); x["contribution"]["leadership_need_assumed"]=True
@@ -227,8 +251,123 @@ class CorePathwayTests(unittest.TestCase):
         self.assertEqual(evaluate_opportunity(x)["engagement_readiness"], "RESEARCH_PENDING")
 
     def test_t10_missing_mandatory_credentials(self):
-        x=sample("DIRECT_HIRING"); x["job"]["mandatory_requirements_met"]=False
-        self.assertIn("MANDATORY_QUALIFICATION_GAP", evaluate_opportunity(x)["reasons"])
+        x=sample("DIRECT_HIRING"); x["job"].pop("mandatory_qualifications")
+        x["job"]["mandatory_requirements_met"]=False
+        self.assertIn("MANDATORY_QUALIFICATION_UNVERIFIED", evaluate_opportunity(x)["reasons"])
+
+    def test_mandatory_qualification_gap_is_distinct_from_unknown(self):
+        x = sample("DIRECT_HIRING")
+        x["job"].pop("mandatory_requirements_met", None)
+        x["job"]["mandatory_qualifications"] = [
+            {"requirement": "progressive transformation leadership", "status": "GAP",
+             "candidate_evidence_refs": ["candidate-profile:experience"]},
+            {"requirement": "executive communication", "status": "UNVERIFIED"},
+        ]
+        result = evaluate_opportunity(x)
+        self.assertIn("MANDATORY_QUALIFICATION_GAP", result["reasons"])
+        self.assertIn("MANDATORY_QUALIFICATION_UNVERIFIED", result["reasons"])
+
+    def test_unsubstantiated_qualification_gap_is_downgraded_to_unknown(self):
+        x = sample("DIRECT_HIRING")
+        x["job"].pop("mandatory_requirements_met", None)
+        x["job"]["mandatory_qualifications"] = [
+            {"requirement": "utility experience", "status": "GAP"},
+        ]
+        result = evaluate_opportunity(x)
+        self.assertIn("MANDATORY_QUALIFICATION_UNVERIFIED", result["reasons"])
+        self.assertNotIn("MANDATORY_QUALIFICATION_GAP", result["reasons"])
+        self.assertEqual(result["candidate_fit_status"], "UNVERIFIED")
+
+    def test_legacy_aggregate_true_does_not_verify_all_requirements(self):
+        x = sample("DIRECT_HIRING")
+        x["job"].pop("mandatory_qualifications")
+        x["job"]["mandatory_requirements_met"] = True
+        result = evaluate_opportunity(x)
+        self.assertIn("MANDATORY_QUALIFICATION_UNVERIFIED", result["reasons"])
+        self.assertEqual(result["qualification_assessment"][0]["status"], "UNVERIFIED")
+
+    def test_unread_current_listing_does_not_verify_active_job(self):
+        x = sample("DIRECT_HIRING")
+        x["claims"][-1]["page_read_success"] = False
+        result = evaluate_opportunity(x)
+        self.assertIn("JOB_STATUS_UNVERIFIED", result["reasons"])
+        self.assertNotIn("JOB_STATUS_STALE", result["reasons"])
+
+    def test_missing_role_relevance_keeps_active_role_pending(self):
+        x = sample("DIRECT_HIRING")
+        x["job"].pop("role_relevance")
+        result = evaluate_opportunity(x)
+        self.assertIn("ROLE_RELEVANCE_UNVERIFIED", result["reasons"])
+        self.assertEqual(result["candidate_fit_status"], "UNVERIFIED")
+
+    def test_unknown_work_authorization_is_not_location_failure(self):
+        x = sample("DIRECT_HIRING")
+        x["job"]["candidate_eligibility"] = {"work_authorization": "UNVERIFIED"}
+        result = evaluate_opportunity(x)
+        self.assertIn("WORK_AUTHORIZATION_UNVERIFIED", result["reasons"])
+        self.assertNotIn("WORK_LOCATION_INELIGIBLE", result["reasons"])
+
+    def test_remote_and_citizenship_eligibility_are_separate(self):
+        x = sample("DIRECT_HIRING")
+        x["organization"]["work_mode"] = "US_REMOTE"
+        x["job"]["remote_eligibility"] = "UNVERIFIED"
+        x["job"]["citizenship_required"] = True
+        result = evaluate_opportunity(x)
+        self.assertIn("REMOTE_ELIGIBILITY_UNVERIFIED", result["reasons"])
+        self.assertIn("CITIZENSHIP_UNVERIFIED", result["reasons"])
+        self.assertNotIn("WORK_LOCATION_INELIGIBLE", result["reasons"])
+
+    def test_numeric_serialized_requisition_id_matches_textual_claim_id(self):
+        x = sample("DIRECT_HIRING")
+        x["claims"][-1]["object_id"] = 123
+        x["job"]["requisition_id"] = "123"
+        self.assertEqual(evaluate_opportunity(x)["research_state"], "ASSESSABLE")
+
+    def test_leading_zero_requisition_identity_is_preserved_exactly(self):
+        x = sample("DIRECT_HIRING")
+        x["job"]["requisition_id"] = "01885050"
+        x["claims"][-1]["object_id"] = "01885050"
+        self.assertEqual(evaluate_opportunity(x)["research_state"], "ASSESSABLE")
+        x["claims"][-1]["object_id"] = 1885050
+        self.assertIn("JOB_STATUS_UNVERIFIED", evaluate_opportunity(x)["reasons"])
+
+    def test_citizenship_ineligibility_only_blocks_when_required(self):
+        x = sample("DIRECT_HIRING")
+        x["job"]["citizenship_required"] = False
+        x["job"]["candidate_eligibility"]["citizenship"] = "INELIGIBLE"
+        result = evaluate_opportunity(x)
+        self.assertNotIn("CITIZENSHIP_REQUIREMENT_NOT_MET", result["reasons"])
+        self.assertNotIn("CITIZENSHIP_UNVERIFIED", result["reasons"])
+
+    def test_separate_mandates_under_one_initiative_keep_distinct_identity(self):
+        a = sample()
+        b = sample()
+        a["contribution"]["mandate_key"] = "product-platform"
+        b["contribution"]["mandate_key"] = "enterprise-transformation"
+        self.assertEqual(a["initiative"]["initiative_id"], b["initiative"]["initiative_id"])
+        self.assertNotEqual(opportunity_identity(a)[0], opportunity_identity(b)[0])
+
+    def test_out_of_scope_ai_technical_role_is_excluded(self):
+        x = sample("DIRECT_HIRING")
+        x["job"]["role_relevance"] = "OUT_OF_SCOPE"
+        result = evaluate_opportunity(x)
+        self.assertEqual(result["research_state"], "EXCLUDED")
+        self.assertIn("ROLE_OUTSIDE_TARGET_FUNCTION", result["reasons"])
+
+    def test_strategic_identity_falls_back_to_stable_initiative_id(self):
+        x = sample()
+        x["contribution"].pop("mandate_key")
+        key, reason = opportunity_identity(x)
+        self.assertIsNone(reason)
+        self.assertEqual(key, ("org-1", "STRATEGIC", "initiative-1", "initiative-1"))
+
+    def test_historical_executive_mention_does_not_prove_current_ownership(self):
+        x = sample(executive=True)
+        old = (date.today() - timedelta(days=120)).isoformat()
+        x["claims"][-1]["published_on"] = old
+        result = evaluate_opportunity(x)
+        self.assertIn("EXECUTIVE_OWNERSHIP_SOURCE_MISSING", result["reasons"])
+        self.assertEqual(result["engagement_readiness"], "RESEARCH_PENDING")
 
     def test_t11_prior_meeting_does_not_merge_opportunities(self):
         a,b=sample(),sample(); b["initiative"]["initiative_id"]="initiative-2"
@@ -344,6 +483,25 @@ class CorePathwayTests(unittest.TestCase):
         r=audit_packet([sample(),sample()])
         self.assertEqual(r["research_states"].get("EVIDENCE_HOLD"),2)
         self.assertEqual(r["results"][0]["engagement_readiness"],"NOT_PREPARED")
+
+    def test_six_case_audit_preserves_closed_and_rejected_controls(self):
+        records = [sample("DIRECT_HIRING") for _ in range(6)]
+        for i, record in enumerate(records):
+            record["organization"]["organization_id"] = f"org-{i}"
+            record["organization"]["name"] = f"Employer {i}"
+            record["initiative"]["initiative_id"] = f"initiative-{i}"
+            record["job"]["requisition_id"] = f"req-{i}"
+            record["claims"][-1]["object_id"] = f"req-{i}"
+        records[1]["job"]["state"] = "CLOSED"
+        records[2]["job"]["role_relevance"] = "OUT_OF_SCOPE"
+        result = audit_packet(records)
+        self.assertEqual(result["reviewed"], 6)
+        self.assertEqual(result["results"][1]["research_state"], "CLOSED_INACTIVE")
+        self.assertEqual(result["results"][2]["research_state"], "EXCLUDED")
+        self.assertEqual(result["results"][5]["organization_id"], "org-5")
+        self.assertEqual(result["results"][5]["opportunity_identity"],
+                         ("org-5", "ATS", "req-5"))
+        self.assertEqual(result["identity_holds"], [])
 
     def test_stale_current_executive_role_is_not_verified(self):
         x=sample(executive=True)
