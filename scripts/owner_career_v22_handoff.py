@@ -102,7 +102,7 @@ def main():
                 profile=input("Public individual profile URL verified by owner [Enter to skip]: ").strip()
                 status=store.check_relationship(executive["name"],profile_url=profile or None)
                 # Name-only matching or missing local history never proves novelty.
-                memory_result={"result":status["result"]}
+                memory_result={"result":status["result"], "suppressed":status.get("suppressed")}
             else:
                 memory_result={"result":"NO_NAMED_EXECUTIVE"}
             print("REVIEW TARGET:",record["organization"]["name"])

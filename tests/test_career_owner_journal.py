@@ -71,6 +71,16 @@ class OwnerJournalTests(unittest.TestCase):
                                         decision="RESEARCH_MORE",reason="SOURCE_GAP",
                                         memory_result={"result":"NO_NAMED_EXECUTIVE"},consent=True)
 
+    def test_suppressed_identity_cannot_receive_pursue_preference(self):
+        report,receipt=prepared()
+        with tempfile.TemporaryDirectory() as temp:
+            with self.assertRaises(ValueError):
+                append_owner_preference(temp,KEY,report=report,witness=receipt,index=0,
+                                        decision="PURSUE",reason="LEADERSHIP_SCOPE",
+                                        memory_result={"result":"EXISTING_RELATIONSHIP",
+                                                       "suppressed":True},consent=True)
+            self.assertEqual(verify_owner_journal(temp,KEY)["verified_events"],0)
+
     def test_missing_owner_consent_fails(self):
         report,receipt=prepared()
         with tempfile.TemporaryDirectory() as temp:

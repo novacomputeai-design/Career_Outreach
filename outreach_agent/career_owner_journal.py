@@ -138,6 +138,10 @@ def append_owner_preference(folder, secret, *, report, witness, index, decision,
         raise ValueError("INVALID_PRIVATE_HISTORY_CLASSIFICATION")
     if (record.get("executive") is None) != (classification == "NO_NAMED_EXECUTIVE"):
         raise ValueError("PRIVATE_HISTORY_PERSON_BINDING_MISMATCH")
+    if memory_result.get("suppressed") not in (None, True, False):
+        raise ValueError("INVALID_PRIVATE_SUPPRESSION_STATE")
+    if memory_result.get("suppressed") is True and decision == "PURSUE":
+        raise ValueError("SUPPRESSED_IDENTITY_CANNOT_BE_PRIORITIZED_FOR_ENGAGEMENT")
     base = _private_folder(folder)
     base.mkdir(parents=True, exist_ok=True)
     journal, lock = base / "owner-reviews.jsonl", base / "owner-reviews.lock"
@@ -164,6 +168,7 @@ def append_owner_preference(folder, secret, *, report, witness, index, decision,
             "capability_theme": record["capability_theme"],
             "engagement_pathway": record["engagement_pathway"],
             "local_memory_classification": classification,
+            "locally_suppressed": memory_result.get("suppressed") is True,
             "cross_channel_novelty_verified": False,
             "owner_session": "DPAPI_KEY_BOUND_OPERATOR_PROMPT_NOT_INDEPENDENT_PERSON_ID",
             "contact_ready": False, "send_authorized": False,
