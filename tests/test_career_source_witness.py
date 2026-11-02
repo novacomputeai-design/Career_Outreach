@@ -13,8 +13,11 @@ IP = lambda host,port,**kwargs: [(2,1,0,"",("93.184.216.34",443))]
 class WitnessTests(unittest.TestCase):
     def test_reproduces_exact_claim_but_not_semantic_truth(self):
         p=pack([fixture()])
-        pages={c["source_url"]: (c["excerpt"]+" "+c["claim_text"],"text/plain")
-               for c in p["opportunities"][0]["claims"]}
+        pages={}
+        for c in p["opportunities"][0]["claims"]:
+            url=c["source_url"]
+            previous=pages[url][0] if url in pages else ""
+            pages[url]=(previous+" "+c["excerpt"]+" "+c["claim_text"],"text/plain")
         r=witness_sources(p,{"employer.example"},fetch=lambda u:pages[u],resolver=IP)
         self.assertTrue(r["all_source_text_reproduced"])
         self.assertFalse(r["source_truth_independently_verified"])

@@ -16,9 +16,15 @@ KEY=b"X"*32
 def prepared():
     packet=pack([fixture()])
     report=assess_v22_packet(packet)
+    observations=[
+        {"index":i,"claim_id":claim["claim_id"],"url":claim["source_url"],
+         "status":"HOST_NOT_APPROVED","source_sha256":None}
+        for i,item in enumerate(packet["opportunities"]) for claim in item["claims"]
+    ]
     receipt=sign_witness({
         "project_id":"PERSONAL_CAREER_OUTREACH","run_id":packet["run_id"],
-        "packet_sha256":digest(packet), "all_source_text_reproduced":False,
+        "packet_sha256":digest(packet), "results":observations,
+        "all_source_text_reproduced":False,
         "source_truth_independently_verified":False,
     },KEY)
     return report,receipt
@@ -77,6 +83,16 @@ class OwnerJournalTests(unittest.TestCase):
                 verify_owner_journal(temp,KEY)
             with self.assertRaises(ValueError):
                 verify_owner_journal(temp,b"Z"*32)
+
+    def test_signed_receipt_with_incomplete_claims_is_still_rejected(self):
+        report,receipt=prepared()
+        receipt["results"]=[]
+        receipt=sign_witness(receipt,KEY)
+        with tempfile.TemporaryDirectory() as temp:
+            with self.assertRaises(ValueError):
+                append_owner_preference(temp,KEY,report=report,witness=receipt,index=0,
+                                        decision="RESEARCH_MORE",reason="SOURCE_GAP",
+                                        memory_result={"result":"NO_NAMED_EXECUTIVE"},consent=True)
 
     def test_same_witness_other_key_does_not_pass(self):
         report,receipt=prepared()

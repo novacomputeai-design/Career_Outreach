@@ -15,6 +15,7 @@ from outreach_agent.career_source_witness import (
 )
 from outreach_agent.career_owner_journal import (
     append_owner_preference, validate_owner_handoff, verify_owner_journal,
+    propose_verified_owner_learning,
 )
 from outreach_agent.career_contribution import validate_v22_packet
 from outreach_agent.state import PrivateStore
@@ -64,6 +65,7 @@ def main():
     review.add_argument("--decision",required=True,choices=["PURSUE","RESEARCH_MORE","REJECT"])
     review.add_argument("--reason",required=True)
     verify=sub.add_parser("verify-journal")
+    learning=sub.add_parser("learning-proposals")
     args=parser.parse_args()
 
     if os.name != "nt" or not sys.stdin.isatty():
@@ -117,6 +119,8 @@ def main():
             print(json.dumps(result,sort_keys=True))
         elif args.mode == "verify-journal":
             print(json.dumps(verify_owner_journal(root/"owner-v22",secret)))
+        elif args.mode == "learning-proposals":
+            print(json.dumps(propose_verified_owner_learning(root/"owner-v22",secret)))
     finally:
         store.close()
 

@@ -2,7 +2,7 @@
 # Requires existing DPAPI-protected keys, Windows Python venv and intact database.
 [CmdletBinding()]
 param(
-    [Parameter(Mandatory=$true)][ValidateSet("SourceWitness","OwnerReview","VerifyJournal")][string]$Mode,
+    [Parameter(Mandatory=$true)][ValidateSet("SourceWitness","OwnerReview","VerifyJournal","LearningProposals")][string]$Mode,
     [string]$Packet,
     [string]$Out,
     [string[]]$AllowHost,
@@ -46,6 +46,8 @@ try {
         $argv = @("scripts/owner_career_v22_handoff.py","owner-review",
                   "--report",$Report,"--witness",$Witness,"--index",[string]$Index,
                   "--decision",$Decision,"--reason",$Reason)
+    } elseif ($Mode -eq "LearningProposals") {
+        $argv = @("scripts/owner_career_v22_handoff.py","learning-proposals")
     } else {
         $argv = @("scripts/owner_career_v22_handoff.py","verify-journal")
     }

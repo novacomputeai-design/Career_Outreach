@@ -97,6 +97,19 @@ def validate_owner_handoff(report, witness, secret, index):
         raise ValueError("ASSESSMENT_TAMPER_OR_EVALUATOR_VERSION_MISMATCH")
     if not verify_witness(witness, packet, secret):
         raise ValueError("SOURCE_WITNESS_BINDING_INVALID")
+    observed = witness.get("results")
+    expected = [(i, c["claim_id"], c["source_url"])
+                for i, item in enumerate(records) for c in item["claims"]]
+    if (not isinstance(observed, list) or len(observed) != len(expected)
+            or any((row.get("index"), row.get("claim_id"), row.get("url")) != match
+                   or row.get("status") not in {
+                       "TEXT_REPRODUCED","TEXT_NOT_FOUND",
+                       "FETCH_UNAVAILABLE","HOST_NOT_APPROVED"}
+                   for row, match in zip(observed, expected))):
+        raise ValueError("SOURCE_WITNESS_CLAIM_COVERAGE_INVALID")
+    if witness.get("all_source_text_reproduced") is not (
+            bool(observed) and all(row["status"] == "TEXT_REPRODUCED" for row in observed)):
+        raise ValueError("SOURCE_WITNESS_AGGREGATE_MISMATCH")
     assessment = assessments[index]
     if (assessment.get("contact_ready") is not False
             or assessment.get("send_authorized") is not False
