@@ -24,6 +24,15 @@ def fixture():
         "trigger_claim_id": "trigger",
         "maturity": "DEPLOYED",
     }
+    x["career_value"].update({
+        "problem_claim_id": "operational-problem",
+        "outcome_metric": "Adoption rate of prioritized enterprise AI products",
+        "mandate_boundary": "COMPLEMENTARY_INTERNAL_SCOPE",
+    })
+    x["claims"].append(claim(
+        "operational-problem", "OPERATIONAL_PROBLEM",
+        "Product teams need portfolio prioritization to avoid duplicated AI pilots and measure adoption.",
+        obj="initiative-1"))
     x["claims"].append(claim("trigger", "BUSINESS_TRIGGER",
                              "The employer announced expansion of its AI program."))
     return x
