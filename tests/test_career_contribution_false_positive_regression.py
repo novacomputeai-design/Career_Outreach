@@ -23,7 +23,7 @@ class CareerValueFalsePositiveCLITests(unittest.TestCase):
             outgoing = Path(tmp) / "assessment.json"
             incoming.write_text(json.dumps(pack([record])), encoding="utf-8")
             call = subprocess.run(
-                [sys.executable, str(ROOT / "scripts" / "assess_career_opportunities_v22.py"),
+                [sys.executable, "-m", "scripts.assess_career_opportunities_v22",
                  "--input", str(incoming), "--out", str(outgoing)],
                 cwd=ROOT, capture_output=True, text=True,
             )
