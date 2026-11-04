@@ -94,5 +94,22 @@ class LeaderContactDiscoverySkillTests(unittest.TestCase):
             self.assertNotIn("PASS", row)
 
 
+    def test_focused_depth_and_promising_prospects(self):
+        orch = self.skill["daily-executive-outreach"]
+        brief_skill = self.skill["daily-executive-brief"]
+        contact = self.skill["contact-verification"]
+        org = (SKILL_ROOT / "organization-discovery" / "SKILL.md").read_text(encoding="utf-8")
+        for content in (orch, org, self.brief):
+            self.assertIn("5–8", content)
+        for content in (orch, org, self.brief):
+            self.assertIn("best three", content)
+        self.assertIn("PROMISING_RESEARCH_PROSPECTS", brief_skill)
+        self.assertIn("PROMISING_RESEARCH_PROSPECTS", self.brief)
+        self.assertIn("Do not stop just because an individual profile", contact)
+        self.assertIn("professional-conversation relevance", self.brief)
+        self.assertIn("SEND_AUTHORIZED", self.brief)
+
+
+
 if __name__ == "__main__":
     unittest.main()
