@@ -102,7 +102,7 @@ class LeaderContactDiscoverySkillTests(unittest.TestCase):
         for content in (orch, org, self.brief):
             self.assertIn("5–8", content)
         for content in (orch, org, self.brief):
-            self.assertIn("best three", content)
+            self.assertIn("best three", " ".join(content.split()))
         self.assertIn("PROMISING_RESEARCH_PROSPECTS", brief_skill)
         self.assertIn("PROMISING_RESEARCH_PROSPECTS", self.brief)
         self.assertIn("Do not stop just because an individual profile", contact)
