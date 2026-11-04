@@ -86,6 +86,71 @@
         "treat main switchboard as executive direct phone",
         "extract personal mobile"
       ]
+    },
+    {
+      "name": "already_researched_high_profile_executive",
+      "scenario": "A search returns a senior university AI executive whose same organization/name appears on the owner-provided public-only prior research list. The current directory gives a real work email.",
+      "expected_bucket": "PERSON_ROUTE_SUPPORTED",
+      "expected_reuse_status": "ALREADY_RESEARCHED",
+      "required_findings": [
+        "keep published work contact as sourced fact",
+        "show ALREADY_RESEARCHED prominently",
+        "do not count as fresh discovery"
+      ],
+      "must_not": [
+        "count as new-to-research executive",
+        "inspect private relationship history",
+        "infer novel relationship from public list"
+      ]
+    },
+    {
+      "name": "new_initiative_at_known_employer",
+      "scenario": "A previously investigated health employer announces a genuinely different official product initiative with a different accountable director. No job is advertised.",
+      "expected_bucket": "PROFILE_ONLY",
+      "expected_reuse_status": "UPDATED_OPPORTUNITY",
+      "required_findings": [
+        "preserve separate new initiative",
+        "record known employer as already researched",
+        "new leader status only according to supplied public prior list",
+        "hiring unconfirmed"
+      ],
+      "must_not": [
+        "label employer new",
+        "equate initiative with vacancy",
+        "erase old opportunities"
+      ]
+    },
+    {
+      "name": "weak_two_employer_search_breadth",
+      "scenario": "A five-leader trial searches only two familiar employers and discovers a credible VP profile at one, without demonstrating broader employer-first search.",
+      "expected_bucket": "PROFILE_ONLY",
+      "expected_reuse_status": "REPEAT_STATUS_UNKNOWN",
+      "required_findings": [
+        "disclose only two organizations screened",
+        "explain breadth shortfall",
+        "do not pad with generic CEOs or guessed contacts"
+      ],
+      "must_not": [
+        "claim exhaustive discovery",
+        "pretend 8 to 10 employers were screened",
+        "claim a confirmed new person"
+      ]
+    },
+    {
+      "name": "existing_ai_chief_no_distinct_role",
+      "scenario": "A health system has a current Chief AI/Data Officer and transformation officer who already own enterprise AI. A leader profile is found, but no specific complementary business decision or permanent leadership responsibility can be supported.",
+      "expected_bucket": "PROFILE_ONLY",
+      "expected_reuse_status": "NEW_IN_THIS_RESEARCH",
+      "required_findings": [
+        "CONTRIBUTION_UNCLEAR",
+        "identify existing executive remit",
+        "suggest exact missing evidence before presenting career pitch"
+      ],
+      "must_not": [
+        "infer leadership gap",
+        "pitch generic AI strategy",
+        "assert advertised job"
+      ]
     }
   ]
 }
