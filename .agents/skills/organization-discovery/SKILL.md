@@ -16,6 +16,8 @@ In focused leader-discovery mode, first build a **small organization-first candi
 
 Apply an owner-provided **public-only previously-researched exclusion list** to tag repeats. Keep previously researched leaders or employers as ALREADY_RESEARCHED, not NEW_DISCOVERY. A new independently sourced initiative/requisition at a known employer can be UPDATED_OPPORTUNITY but is not a new organization/person; preserve it separately if valuable. No list provided means REPEAT_STATUS_UNKNOWN, not presumed new. Do not consult DPAPI, private relationship history, or user-specific contact notes.
 
+Before naming leaders, load the public-only previously researched baseline at `../../../config/public-career-research-baseline.json` and any public-only owner-provided updates. Track employer and person repeats **separately**. Known employers may yield a new initiative or different current leader; a previous employer or person's presence in a fresh search does not reset their research history. Do not enter a public career-research name or employer in the private relationship-memory gate, and do not overwrite or append the baseline in a read-only run. Missing/incomplete baseline means REPEAT_STATUS_UNKNOWN, not proven novelty.
+
 Output organization + separate initiative records and candidate business objectives, not invented executive contact lists. Neither a Tucson location nor an interesting announcement alone establishes meaningful candidate contribution.
 
 ## Output boundary
