@@ -1,0 +1,92 @@
+{
+  "schema_version": "1.0",
+  "as_of": "2026-11-04",
+  "scope": "PUBLIC_RESEARCH_ONLY",
+  "provenance": "Public-only names and organizations from supervised career discovery summaries reviewed in this conversation; not independent history, relationship verification or contact approval.",
+  "limitations": [
+    "This is a partial research repeat baseline, not a private relationship database or proof that another person is new to the owner.",
+    "Employers may have new distinct initiatives; an employer match is not a reason to discard every new person or role.",
+    "Never store personal contact histories, private notes, outreach status, work emails, office numbers, profile access tokens or owner decisions in PUBLIC Git.",
+    "Read only during Codex discovery. Proposed additions must be reviewed before a separate owner-approved update."
+  ],
+  "previously_screened_employers": [
+    "Arizona Public Service (APS)",
+    "Arizona State University",
+    "Banner Health",
+    "Caterpillar",
+    "City of Phoenix",
+    "City of Tucson",
+    "Cognizant",
+    "First American",
+    "Hexagon Mining",
+    "HP Inc.",
+    "Marana Health",
+    "Microsoft",
+    "Mister Car Wash",
+    "Pima Community College",
+    "Raytheon / RTX",
+    "Roche Tissue Diagnostics",
+    "State of Arizona",
+    "Sundt Construction",
+    "TMC Health",
+    "Tucson Electric Power",
+    "UnitedHealthcare",
+    "University of Arizona",
+    "Vantage West Credit Union",
+    "Amgen"
+  ],
+  "previously_researched_people": [
+    {
+      "name": "David Ebert",
+      "employer": "University of Arizona"
+    },
+    {
+      "name": "John Rares Almasan",
+      "employer": "Banner Health"
+    },
+    {
+      "name": "Kevin Manemann",
+      "employer": "Banner Health"
+    },
+    {
+      "name": "Isaac Abbs",
+      "employer": "Pima Community College"
+    },
+    {
+      "name": "Carlos Chavez",
+      "employer": "Mister Car Wash"
+    },
+    {
+      "name": "Dave Goddard",
+      "employer": "Hexagon Mining"
+    },
+    {
+      "name": "Kimberly Clark",
+      "employer": "Arizona State University"
+    },
+    {
+      "name": "Chris Mazzarella",
+      "employer": "City of Tucson"
+    },
+    {
+      "name": "Lisa Dee Meyerson Marshall",
+      "employer": "State of Arizona"
+    },
+    {
+      "name": "J.R. Sloan",
+      "employer": "State of Arizona"
+    },
+    {
+      "name": "Josh Lee",
+      "employer": "TMC Health"
+    },
+    {
+      "name": "Susan Gray",
+      "employer": "Tucson Electric Power"
+    },
+    {
+      "name": "Dallas Dukes",
+      "employer": "Tucson Electric Power"
+    }
+  ]
+}
