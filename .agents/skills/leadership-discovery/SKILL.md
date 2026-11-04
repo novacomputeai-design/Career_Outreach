@@ -12,6 +12,12 @@ Identify six distinct relationship functions as relevant: STRATEGIC_SPONSOR, BUS
 
 Verify person identity, organization affiliation and up-to-date role separately. Before promoting CURRENT affiliation, search for departures, recent role changes, and independent contradictory sources. A recently retrieved old/undated official biography is not sufficient when a newer credible source describes the person as former; record both sources and mark SOURCE_CONFLICT/CURRENT_EXECUTIVE_AFFILIATION_CONFLICT until reconciled. Distinguish an industry advisor or introducer who previously worked at the employer from a current internal decision-maker. Do not silently erase the former employee as a potential relationship, but do not assign them the employer initiative. No guessed hiring power or contact route. Strong strategic research or an official hiring vacancy may be preserved with an unknown executive and marked EXECUTIVE_OWNER_UNVERIFIED; do not invent a name to fill the packet. Output sourced responsibility graph and prioritized research questions.
 
+## Select the right person for a conversation
+
+For each evidenced objective, investigate up to three plausible leaders (e.g. responsible VP/Director, CIO/CTO/CAIO, business-unit head). Assess separately: (1) reliable CURRENT employer/title evidence; (2) directly documented responsibility for the exact initiative or a clearly marked FUNCTIONALLY_PLAUSIBLE relationship; (3) whether the person has enough influence to discuss a bounded internal AI/product leadership contribution; and (4) an attainable, lawful professional route. Prefer the leader closest to the business decision with realistic access; do NOT default to CEO prestige or claim a VP is a hiring sponsor without evidence.
+
+Return one PRIMARY leader plus at most one ALTERNATE when supported. For each, give current-role source, initiative-responsibility source or UNKNOWN, selection rationale, role confidence, and unresolved changes/departures. A current official title is not itself proof of initiative ownership, budget, hiring influence, or interest. If no safe name survives checks, keep the organization as EXECUTIVE_OWNER_UNVERIFIED instead of inventing a person.
+
 ## Output boundary
 
 Return only cited facts, clearly marked hypotheses and reason-coded HOLDs. Record whether this specialist was natively selected, NOT_VERIFIED, or SKIPPED_NOT_APPLICABLE. Research findings and drafts are not contact-ready or sent.
