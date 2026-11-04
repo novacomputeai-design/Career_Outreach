@@ -8,7 +8,7 @@ Set-StrictMode -Version Latest
 $ErrorActionPreference = "Stop"
 
 if (-not $ConfirmDisposableGuest) { throw "M2_DISPOSABLE_GUEST_CONFIRMATION_REQUIRED" }
-if (-not $IsWindows -and $PSVersionTable.PSEdition -eq "Core") {
+if ([Environment]::OSVersion.Platform -ne [PlatformID]::Win32NT) {
     throw "M2_WINDOWS_ONLY"
 }
 $model = Get-CimInstance Win32_ComputerSystem -ErrorAction Stop
@@ -44,8 +44,9 @@ $env:OUTREACH_IDENTITY_KEY = [string]$keys[1]
 $env:CAREER_M2_DISPOSABLE_VM_CONFIRMED = "YES"
 
 try {
-    # The guard above verified this path did not exist; force creation to fail
-    # if something creates it concurrently rather than writing existing data.
+    # Recheck before creating a fresh guest-only folder; never populate
+    # any preexisting CareerOutreach directory.
+    if (Test-Path -LiteralPath $private) { throw "M2_PRIVATE_ROOT_BECAME_PRESENT" }
     [IO.Directory]::CreateDirectory($private) | Out-Null
     foreach ($spec in @(
         @{ Value = $env:OUTREACH_STATE_KEY; File = "state-key.dpapi" },
