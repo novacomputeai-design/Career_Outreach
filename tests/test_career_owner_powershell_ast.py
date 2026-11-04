@@ -29,3 +29,21 @@ class OwnerWrapperSyntaxTests(unittest.TestCase):
         result=subprocess.run([pwsh,"-NoProfile","-NonInteractive","-Command",code],
                               capture_output=True,text=True,timeout=20)
         self.assertEqual(result.returncode,0,result.stderr)
+
+    @unittest.skipUnless(os.name=="nt", "Disposable VM PowerShell parser check on Windows only")
+    def test_disposable_guest_m2_scripts_parse_without_execution(self):
+        pwsh=shutil.which("pwsh") or shutil.which("powershell")
+        self.assertIsNotNone(pwsh, "PowerShell parser required")
+        for name in ("gate-m2-disposable-guest-seed.ps1",
+                     "gate-m2-disposable-guest-verify.ps1"):
+            with self.subTest(script=name):
+                target=(ROOT/"scripts"/name).as_posix()
+                code=(
+                    "$errors=$null; $tokens=$null; "
+                    "[System.Management.Automation.Language.Parser]::ParseFile("
+                    "'"+target+"',[ref]$tokens,[ref]$errors) | Out-Null; "
+                    "if ($errors.Count -gt 0) {$errors | Out-String | Write-Error; exit 1}"
+                )
+                result=subprocess.run([pwsh,"-NoProfile","-NonInteractive","-Command",code],
+                                      capture_output=True,text=True,timeout=20)
+                self.assertEqual(result.returncode,0,result.stderr)
