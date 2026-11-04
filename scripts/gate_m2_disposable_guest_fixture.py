@@ -146,9 +146,44 @@ def seed_synthetic_fixture(root: Path, state_key, identity_key) -> dict:
     }
 
 
+def verify_restored_fixture(restored_db: Path, state_key, identity_key) -> dict:
+    """READ ONLY: prove recovered synthetic identities and opt-out are intact."""
+    db = Path(restored_db).resolve()
+    if not db.is_file():
+        raise FileNotFoundError("M2_RESTORED_DB_NOT_FOUND")
+    store = PrivateStore(db, key=state_key, identity_key=identity_key, read_only=True)
+    try:
+        met = store.check_relationship(
+            "Pat Example", profile_url="https://example.org/professional/pat-one")
+        namesake = store.check_relationship(
+            "Pat Example", profile_url="https://example.org/professional/pat-other")
+        seen = store.check_relationship(
+            "Alex Example", profile_url="https://example.org/professional/alex")
+        opted_out = store.check_relationship(
+            "Jordan Example", profile_url="https://example.org/professional/jordan")
+        if (met["result"] != "EXISTING_RELATIONSHIP"
+                or namesake["result"] != "POSSIBLE_NAMESAKE_HOLD"
+                or seen["result"] != "SEEN_IN_STORE"
+                or opted_out["suppressed"] is not True
+                or any(row["granted_contact_readiness"] for row in
+                       (met, namesake, seen, opted_out))):
+            raise ValueError("M2_RESTORED_IDENTITY_OR_SUPPRESSION_MISMATCH")
+    finally:
+        store.close()
+    return {"restored_memory_verified": True,
+            "previously_met": "EXISTING_RELATIONSHIP",
+            "namesake": "POSSIBLE_NAMESAKE_HOLD",
+            "first_learned": "SEEN_IN_STORE",
+            "opt_out": "SUPPRESSED",
+            "read_only": True,
+            "contact_ready": False, "send_authorized": False}
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--private-root", required=True)
+    parser.add_argument("--verify-restored", default=None,
+                        help="Read-only restored synthetic database; must be below guest backup folder")
     args = parser.parse_args()
     # This is NOT a VM attestation. The separate interactive PS script checks
     # guest model, guest marker, and requires explicit owner confirmation.
@@ -162,7 +197,14 @@ def main():
     identity = os.environ.get("OUTREACH_IDENTITY_KEY")
     if not key or not identity:
         raise RuntimeError("M2_GUEST_SYNTHETIC_KEYS_REQUIRED")
-    print(json.dumps(seed_synthetic_fixture(target, key, identity), indent=2))
+    if args.verify_restored:
+        recovered = Path(args.verify_restored).resolve()
+        backup_root = (target / "backups").resolve()
+        if backup_root not in recovered.parents:
+            raise ValueError("M2_RESTORED_DB_MUST_BE_UNDER_GUEST_BACKUPS")
+        print(json.dumps(verify_restored_fixture(recovered, key, identity), indent=2))
+    else:
+        print(json.dumps(seed_synthetic_fixture(target, key, identity), indent=2))
 
 
 if __name__ == "__main__":
