@@ -15,6 +15,14 @@ Separate manual official application possibility from actual application; no unn
 ## Versioned review packet
 Use `outreach_agent/career_intelligence_packet.py` through the safe offline CLI for V2.1 public-only organization reports. The existing strict 19-column person exporter remains legacy/unchanged; do not insert V2.1 schema keys into it or transfer private feedback to Google Drive. Do not call a structural preflight CONTACT_READY.
 
+## Leader/contact shortlist — mandatory in discovery mode
+
+Use `../../../references/leader-contact-discovery-brief.md` as the default human-facing format in read-only discovery mode. Display PRIMARY leader and optional ALTERNATE separately, plus organization, exact business trigger, candidate-specific reason, CURRENT title and role evidence, initiative-ownership evidence level, professional contact value/type (if public), contact-source URL/date, and recommended manual research step.
+
+Split outcomes into **PERSON_ROUTE_SUPPORTED**, **PROFILE_ONLY**, and **CONTACT_HOLD**; a documented employer opportunity with no safely identified executive may be retained in a separate research backlog, not counted as a located contact. Quote or link sources for name/title, mandate, and contact **independently**. An INDIVIDUAL_PROFILE_IDENTIFIED is not a verified direct message route. Never label a record CONTACT_READY, sent, applied or approved because a contact detail exists; those are separate restricted statuses.
+
+End with short counts: organizations screened, leaders with sourced current roles, documented vs plausible initiative owners, person-specific publicly listed work routes, profile-only contacts, and unresolved contact holds. If zero qualify, say zero with reasons.
+
 ## Output boundary
 
 Return only cited facts, clearly marked hypotheses and reason-coded HOLDs. Record whether this specialist was natively selected, NOT_VERIFIED, or SKIPPED_NOT_APPLICABLE. Research findings and drafts are not contact-ready or sent.
