@@ -21,6 +21,8 @@ Use `../../../references/leader-contact-discovery-brief.md` as the default human
 
 Split outcomes into **PERSON_ROUTE_SUPPORTED**, **PROFILE_ONLY**, and **CONTACT_HOLD**; a documented employer opportunity with no safely identified executive may be retained in a separate research backlog, not counted as a located contact. Quote or link sources for name/title, mandate, and contact **independently**. An INDIVIDUAL_PROFILE_IDENTIFIED is not a verified direct message route. Never label a record CONTACT_READY, sent, applied or approved because a contact detail exists; those are separate restricted statuses.
 
+For each result show public-only repeat status (NEW_IN_THIS_RESEARCH / ALREADY_RESEARCHED / UPDATED_OPPORTUNITY / REPEAT_STATUS_UNKNOWN), independently from private relationship novelty (always UNVERIFIED without owner screening). In the headline do not count a prior known leader as newly found; include re-discoveries in a separate updates section. Include a two-sentence specific career-conversation thesis and name existing leadership overlap/unknown where relevant. Show a compact organization-screening count and, for a five-person trial, why the approximately 8–10 organization breadth target was or was not achieved. No count of investigated organizations is a mandate to output unqualified people.
+
 End with short counts: organizations screened, leaders with sourced current roles, documented vs plausible initiative owners, person-specific publicly listed work routes, profile-only contacts, and unresolved contact holds. If zero qualify, say zero with reasons.
 
 ## Output boundary
