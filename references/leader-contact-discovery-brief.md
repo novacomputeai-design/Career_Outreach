@@ -23,12 +23,13 @@ research list** if available. It is a bounded research-exclusion aid, not a
 private relationship or outreach-history lookup. Never inspect DPAPI, private
 SQLite, contact notes, or prior-owner relationship data from Codex.
 
-For a five-leader test, screen approximately **8–10 distinct employers** with
-concrete employer initiatives or verified primary ATS sources before choosing
-people, where live source access allows. This is a discovery-breadth guide,
-not a quota; report actual coverage and the reason if fewer were screened.
-Exclude weak evidence honestly. Do not start by looking up known executive
-names and then retrofitting a generic business reason.
+For a focused five-leader test, screen approximately **5–8 distinct employers**
+with credible public business triggers, then **deeply investigate the best
+three organizations** before expanding. Record current roles, initiative
+ownership, relevant alternatives, and the source paths checked for published
+person-specific work contacts. This is a research-depth guide, not a quota;
+report actual coverage and shortfalls. Do not start with familiar executive
+names or invent a business justification.
 
 For each displayed record show exactly one **public research reuse status**:
 
