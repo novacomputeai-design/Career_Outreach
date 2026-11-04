@@ -25,6 +25,12 @@ For each result show public-only repeat status (NEW_IN_THIS_RESEARCH / ALREADY_R
 
 End with short counts: organizations screened, leaders with sourced current roles, documented vs plausible initiative owners, person-specific publicly listed work routes, profile-only contacts, and unresolved contact holds. If zero qualify, say zero with reasons.
 
+## User-facing five-question checkpoint
+
+For each primary leader explicitly answer **who**, **why that leader rather than a CEO/alternate**, **why a specific career conversation makes sense**, **what published professional route exists and its age/purpose**, and **whether already researched**. Display clear source links for employer trigger, current role, responsibility and contact, with a short per-person contact-search trail. Preserve historical/purpose-restricted contacts as research evidence, not as currently suitable outreach paths. Include separate counts for (a) PERSON_ROUTE_SUPPORTED with current appropriate sources, (b) PROFILE_ONLY, (c) HISTORICAL_PERSON_WORK_CONTACT_RECHECK or PURPOSE_RESTRICTED_ROUTE_REVIEW and (d) CONTACT_HOLD, while retaining the existing protected CONTACT_READY=false boundary.
+
+The final report should note which known people were excluded or updated using `config/public-career-research-baseline.json`. When the baseline was unavailable, state repeat status UNKNOWN; never invent a "new person" count from absence in an untrusted source.
+
 ## Output boundary
 
 Return only cited facts, clearly marked hypotheses and reason-coded HOLDs. Record whether this specialist was natively selected, NOT_VERIFIED, or SKIPPED_NOT_APPLICABLE. Research findings and drafts are not contact-ready or sent.
