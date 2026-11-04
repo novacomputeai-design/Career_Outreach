@@ -73,6 +73,66 @@ employment feasibility UNKNOWN / INFEASIBLE where supported. An official
 current role without an identified hiring manager stays an employer hiring
 opportunity, not a fabricated executive contact.
 
+## Repeat baseline and ranked leader selection
+
+Read `config/public-career-research-baseline.json` before starting discovery.
+It contains only names/employers from publicly discussed research, never
+personal relationships, conversation notes or contact addresses. Compare
+**person plus employer** for people and separately check employer aliases.
+Do not mislabel an indexed person or employer as a fresh discovery; do
+not suppress a genuinely distinct new initiative at a known employer.
+When the index is missing or partial, mark repeat status UNKNOWN. A
+new-to-research leader is **not** proven new to the owner. Do not mutate the
+baseline automatically; propose public-only additions for owner review.
+
+For each shortlisted employer, compare up to three relevant leaders:
+outcome owner, product/transformation VP or director, and enterprise AI/CIO
+leader. Prefer directly connected responsibility, credible distinct
+contribution and realistic professional access; seniority is last. Explain
+why the chosen primary is preferable to a plausible alternate or CEO,
+without upgrading a functional inference to documented ownership.
+
+The conversation thesis must describe the specific, sourced business
+change; an affected workflow, product or user; a concrete decision and
+one bounded internal leadership contribution linked to approved experience;
+the plausible metric; and existing-owner overlap. Separate all inference
+from employer facts. `CONTRIBUTION_UNCLEAR` is valid: a broad AI
+announcement is not evidence of an executive vacancy or a missing team.
+
+## Contact-search completion and current-use interpretation
+
+For each primary/alternate, try at least three independent public-source
+lanes when available unless a **current, suitable named work route** is
+already confirmed: (1) official employer directory/biography,
+(2) current professional event or association sources, (3) lawfully
+public institutional filings or government/utility/contract PDFs,
+and (4) an individual identity-checked profile as fallback.
+Keep a one-line search trail per leader; stop honestly if a lane has no
+accessible sources. Never use a restricted page, scraping, predicted
+email pattern, personal number, or automated outreach.
+
+A contract's named work contact can be displayed as historical
+professional evidence, **not automatically a suitable networking route**.
+Record contact source date, identity, employer role at the time, later
+role verification and purpose restriction separately:
+
+- `CURRENT_PERSON_WORK_ROUTE`: source-linked individual professional
+  contact and appropriate current business context, no unresolved conflict.
+  May map to `PERSON_ROUTE_SUPPORTED` as a *research* finding only.
+- `HISTORICAL_PERSON_WORK_CONTACT_RECHECK`: archived/old source; show
+  date and value in private research brief but hold current-use claim.
+- `PURPOSE_RESTRICTED_ROUTE_REVIEW`: contact given specifically for
+  procurement, utility contract administration, legal or media purposes;
+  not assumed suitable for a job-networking approach.
+- `PROFILE_ONLY`, `INDIRECT_GENERAL`, `NO_VERIFIED_PERSON_ROUTE`:
+  no source-supported appropriate direct work route.
+
+Historical or purpose-limited findings belong under
+`PROMISING_RESEARCH_PROSPECTS` or `CONTACT_HOLD`, *not* the count of
+currently suitable named routes. A source-listed professional contact
+never establishes message delivery, relationship history, recipient
+interest, or SEND_AUTHORIZED; sending remains blocked.
+
 ## Contact types and report-only result buckets
 
 | Contact type | Evidence required | Brief bucket |
