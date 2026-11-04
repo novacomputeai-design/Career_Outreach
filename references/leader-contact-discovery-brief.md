@@ -32,7 +32,7 @@ deliver a message. A person-specific source contact does not establish an
 existing relationship, acceptance of contact, hiring interest, or readiness
 to send. These three buckets are HUMAN-FACING FINDING labels only and MUST
 NOT replace `research_state`, `engagement_readiness`, `contact_ready`,
-`send_authorized`, or protected owner history.
+`send_authorized`, or protected owner history. The system state `SEND_AUTHORIZED` remains BLOCKED.
 
 ## Brief presentation
 
