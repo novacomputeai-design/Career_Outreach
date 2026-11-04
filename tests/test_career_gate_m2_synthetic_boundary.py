@@ -23,6 +23,7 @@ from outreach_agent.career_owner_journal import (
     validate_owner_handoff,
 )
 from scripts.assess_career_opportunities_v22 import assess_v22_packet
+from scripts.gate_m2_disposable_guest_fixture import seed_synthetic_fixture, verify_restored_fixture
 from test_career_contribution import fixture, pack
 
 
@@ -30,6 +31,36 @@ PUBLIC = lambda host, port, **kw: [(2, 1, 0, "", ("93.184.216.34", 443))]
 
 
 class GateM2SyntheticBoundaryTests(unittest.TestCase):
+    def test_new_guest_fixture_seed_and_restored_proof(self):
+        with tempfile.TemporaryDirectory(prefix="m2-test-fixture-") as scratch:
+            root = Path(scratch)
+            state_key = Fernet.generate_key()
+            identity = secrets.token_hex(32)
+            result = seed_synthetic_fixture(root, state_key, identity)
+            self.assertTrue(result["fixture_only"])
+            self.assertEqual(result["people_seeded"], 3)
+            self.assertEqual(result["opportunities_seeded"], 4)
+            self.assertFalse(result["source_truth_independently_verified"])
+            self.assertEqual(result["contact_ready"], 0)
+            with self.assertRaises(FileExistsError):
+                seed_synthetic_fixture(root, state_key, identity)
+            source = PrivateStore(root / "relationships.sqlite", key=state_key,
+                                  identity_key=identity, read_only=True)
+            snapshot = root / "backups" / "test.fernet"
+            try:
+                create_encrypted_backup(source, snapshot)
+            finally:
+                source.close()
+            verified = verify_encrypted_backup(snapshot, state_key, identity)
+            self.assertEqual(verified["status"], "AUTHENTICATED_SQLITE_BACKUP_VALID")
+            restored = root / "backups" / "new-restore.sqlite"
+            restore_to_new_file(snapshot, restored, state_key, identity)
+            proof = verify_restored_fixture(restored, state_key, identity)
+            self.assertTrue(proof["restored_memory_verified"])
+            self.assertEqual(proof["namesake"], "POSSIBLE_NAMESAKE_HOLD")
+            self.assertEqual(proof["opt_out"], "SUPPRESSED")
+            self.assertFalse(proof["contact_ready"])
+
     def test_recovery_people_witness_journal_and_negative_controls(self):
         with tempfile.TemporaryDirectory(prefix="career-m2-synthetic-") as folder:
             root = Path(folder)
