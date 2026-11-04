@@ -194,6 +194,92 @@ def _scenario(case_id):
         x["career_value"]["complementary_scope"] = "Take over the existing chief function"
         x["career_value"]["mandate_boundary"] = "REPLACES_EXISTING_CHIEF_FUNCTION"
         return p, "Candidate cannot claim to replace an established chief function; evaluator should hold or bound the contribution.", "assert", lambda r: r["assessments"][0]["career_value_assessment"]["contribution_quality"] != "STRONG_CONTRIBUTION"
+    # E2E-17..51: source, continuity and governance synthetic probes.
+    # A case receives PASS only for a property observed through the bounded CLI.
+    # Unobservable source semantics, private memory, native host and multi-run
+    # properties remain HOLD; a generic no-send assertion is not substituted.
+    if case_id == "E2E-17":
+        x["claims"][0]["page_read_success"] = False
+        return p, "Unavailable objective source cannot establish assessable source evidence.", "assert", lambda r: (
+            r["assessments"][0]["research_state"] == "EVIDENCE_HOLD"
+            and r["source_truth_independently_verified"] is False)
+    if case_id == "E2E-18":
+        x["claims"][0]["page_read_success"] = True  # intentionally untrusted caller flag
+        return p, "Caller-asserted page read cannot be independent source verification.", "assert", lambda r: (
+            r["source_truth_independently_verified"] is False
+            and r["stage_manifest"]["source_provenance"] == "SELF_REPORTED_NOT_INDEPENDENTLY_VERIFIED")
+    if case_id == "E2E-24":
+        x["executive"]["ownership"]["ownership_grade"] = "FUNCTIONALLY_PLAUSIBLE"
+        return p, "Executive title without documented initiative ownership stays unverified.", "assert", lambda r: (
+            "EXECUTIVE_OWNER_UNVERIFIED" in r["assessments"][0]["reasons"]
+            and r["contact_ready"] == 0)
+    if case_id == "E2E-25":
+        x["claims"][2]["object_id"] = "other-unrelated-initiative"
+        return p, "General executive AI remit is not direct evidence of this initiative ownership.", "assert", lambda r: (
+            "EXECUTIVE_OWNERSHIP_SOURCE_MISSING" in r["assessments"][0]["reasons"]
+            and r["contact_ready"] == 0)
+    if case_id == "E2E-28":
+        first = _as_remote_direct_hire(x)
+        first["job"]["remote_eligibility"] = "AZ_ELIGIBLE"
+        second = deepcopy(first)
+        second["job"]["requisition_id"] = "R-101"
+        second["job"]["official_ats_url"] = "https://employer.example/jobs/R-101"
+        second["job"]["status_claim_id"] = "job-active-101"
+        for c in second["claims"]:
+            if c["claim_id"] == "job-active":
+                c["claim_id"] = "job-active-101"
+                c["object_id"] = "R-101"
+                c["claim_text"] = "Applications are open for synthetic requisition R-101."
+                c["excerpt"] = "Synthetic page states: " + c["claim_text"]
+        p["opportunities"] = [first, second]
+        return p, "Two distinct ATS requisitions at one employer retain distinct identities.", "assert", lambda r: (
+            r["reviewed"] == 2 and
+            len({a["opportunity_identity"] for a in r["assessments"]}) == 2 and
+            all("IDENTITY_COLLISION_HOLD" not in a["reasons"] for a in r["assessments"]))
+    if case_id == "E2E-32":
+        second = deepcopy(x)
+        second["contribution"]["mandate_key"] = "separate-product-adoption-mandate"
+        p["opportunities"] = [x, second]
+        return p, "Distinct mandates under one initiative stay separately identifiable.", "assert", lambda r: (
+            r["reviewed"] == 2 and
+            len({a["opportunity_identity"] for a in r["assessments"]}) == 2 and
+            all("IDENTITY_COLLISION_HOLD" not in a["reasons"] for a in r["assessments"]))
+    if case_id == "E2E-33":
+        return p, "A strategic exploration without an official posted role never becomes posted hiring.", "assert", lambda r: (
+            r["assessments"][0]["hiring_evidence"] == "STRATEGIC_ACTIVITY_NO_HIRING_EVIDENCE"
+            and r["applications_submitted"] == 0)
+    if case_id == "E2E-39":
+        x["executive"]["route"]["verified_for_person"] = False
+        x["executive"]["route"]["route_type"] = "MANUAL"
+        return p, "A public profile does not attest to a working person-specific messaging route.", "assert", lambda r: (
+            "NO_VERIFIED_PERSON_ROUTE" in r["assessments"][0]["reasons"] and r["contact_ready"] == 0)
+    if case_id == "E2E-40":
+        x["executive"]["route"]["route_type"] = "INDIRECT_GENERAL"
+        x["executive"]["route"]["verified_for_person"] = False
+        x["executive"]["route"]["url"] = "https://employer.example/press"
+        return p, "General press inbox cannot be promoted to a person-specific route.", "assert", lambda r: (
+            "NO_VERIFIED_PERSON_ROUTE" in r["assessments"][0]["reasons"] and r["contact_ready"] == 0)
+    if case_id == "E2E-43":
+        x["executive"]["opted_out"] = True
+        return p, "Person-specific opt-out suppresses engagement, without authorizing outreach.", "assert", lambda r: (
+            r["assessments"][0]["engagement_readiness"] == "SUPPRESSED"
+            and "OPT_OUT_SUPPRESSION" in r["assessments"][0]["reasons"]
+            and r["contact_ready"] == 0)
+    if case_id == "E2E-44":
+        x["purpose"] = "Send Nova Compute subcontracting proposals to government prime contractors"
+        return p, "Commercial subcontracting purpose is excluded from personal career research.", "assert", lambda r: (
+            r["assessments"][0]["research_state"] == "EXCLUDED"
+            and r["contact_ready"] == 0 and r["send_authorized"] is False)
+    if case_id == "E2E-47":
+        x = _as_remote_direct_hire(x)
+        x["job"]["remote_eligibility"] = "AZ_ELIGIBLE"
+        p["opportunities"][0] = x
+        return p, "Even structurally active ATS listing cannot submit an application.", "assert", lambda r: (
+            r["assessments"][0]["hiring_evidence"] == "ACTIVE_POSTED_ROLE"
+            and r["applications_submitted"] == 0
+            and r["assessments"][0]["application_submitted"] is False)
+    if 17 <= int(case_id.split("-")[1]) <= 54:
+        return p, "Requires a distinct independent evidence oracle, private/host boundary, or multi-run workflow.", "hold", None
     raise KeyError(case_id)
 
 
@@ -247,7 +333,7 @@ def run_cases(result_path: Path, case_ids: list[str] | None = None):
         }
         if mode == "hold":
             status = "HOLD"
-            observation = HOLD_BLOCKERS[cid]
+            observation = HOLD_BLOCKERS.get(cid, "No trusted executable oracle in this synthetic CLI for this case; requires independently observed workflow evidence.")
         elif mode == "reject":
             passed = proc.returncode != 0 and report is None and "V2.2_SCHEMA_INVALID" in proc.stderr
             status = "PASS" if passed else "FAIL"
