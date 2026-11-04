@@ -144,6 +144,26 @@ def _as_remote_direct_hire(record):
     return record
 
 
+def _e2e37_output_contract(report):
+    """Run real V2.2 output through the independent state schema, compare to code/policy."""
+    from jsonschema import Draft202012Validator
+    from outreach_agent.career_intelligence import RESEARCH_STATES, ENGAGEMENT_STATES
+    schema = json.loads(
+        (ROOT / "schemas" / "career-assessment-v2.2-output.schema.json").read_text(encoding="utf-8")
+    )
+    policy = json.loads(
+        (ROOT / "config" / "operating-policy.json").read_text(encoding="utf-8")
+    )["career_intelligence"]
+    Draft202012Validator.check_schema(schema)
+    fields = schema["properties"]["assessments"]["items"]["properties"]
+    return (
+        set(fields["research_state"]["enum"]) == RESEARCH_STATES == set(policy["research_states"])
+        and set(fields["engagement_readiness"]["enum"]) == ENGAGEMENT_STATES
+            == set(policy["engagement_states"])
+        and Draft202012Validator(schema).is_valid(report)
+    )
+
+
 def _scenario(case_id):
     p = _packet()
     x = p["opportunities"][0]
@@ -276,6 +296,8 @@ def _scenario(case_id):
         return p, "A strategic exploration without an official posted role never becomes posted hiring.", "assert", lambda r: (
             r["assessments"][0]["hiring_evidence"] == "STRATEGIC_ACTIVITY_NO_HIRING_EVIDENCE"
             and r["applications_submitted"] == 0)
+    if case_id == "E2E-37":
+        return p, "Real CLI output meets the separate assessment output-schema and the policy/code enum sets.", "assert", _e2e37_output_contract
     if case_id == "E2E-39":
         x["executive"]["route"]["verified_for_person"] = False
         x["executive"]["route"]["route_type"] = "MANUAL"
