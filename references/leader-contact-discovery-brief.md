@@ -55,6 +55,24 @@ that chief's job, return `CONTRIBUTION_UNCLEAR` and a next research question,
 not a generic invitation to discuss "AI strategy." Never imply hiring or a
 budget without source evidence.
 
+## Preserve promising people when a route or work mode is unknown
+
+Return two distinct sections: **PERSON_ROUTE_SUPPORTED** for cited person-specific
+professional routes, and **PROMISING_RESEARCH_PROSPECTS** for credible current
+leaders with a source-backed business trigger and bounded contribution thesis
+but only PROFILE_ONLY / CONTACT_HOLD route evidence. The latter must show
+what official directory, public event, and individual profile sources were
+checked and one next evidence step; they are not contact-ready or eligible
+for sending.
+
+Evaluate **professional-conversation relevance** separately from whether a
+future position can be performed in Tucson or remotely. An unknown or
+infeasible employment work mode is a material hiring-path limitation, but
+does not erase an otherwise relevant strategic networking lead. Label
+employment feasibility UNKNOWN / INFEASIBLE where supported. An official
+current role without an identified hiring manager stays an employer hiring
+opportunity, not a fabricated executive contact.
+
 ## Contact types and report-only result buckets
 
 | Contact type | Evidence required | Brief bucket |
