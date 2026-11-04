@@ -16,6 +16,44 @@ For each organization, report:
 - **Professional contact:** type, exact public work contact value *if listed*, publisher and source URL, last checked date, contact-to-person linkage and any accessibility caveat. Use NOT_FOUND rather than guessed or personal details.
 - **Next manual step:** e.g. inspect official directory, check a newer role source, request owner review of a sourced contact. No unsolicited sending or automatic application.
 
+## Organization-first search and repeat transparency
+
+Before selecting named executives, review an **owner-provided, public-safe prior
+research list** if available. It is a bounded research-exclusion aid, not a
+private relationship or outreach-history lookup. Never inspect DPAPI, private
+SQLite, contact notes, or prior-owner relationship data from Codex.
+
+For a five-leader test, screen approximately **8–10 distinct employers** with
+concrete employer initiatives or verified primary ATS sources before choosing
+people, where live source access allows. This is a discovery-breadth guide,
+not a quota; report actual coverage and the reason if fewer were screened.
+Exclude weak evidence honestly. Do not start by looking up known executive
+names and then retrofitting a generic business reason.
+
+For each displayed record show exactly one **public research reuse status**:
+
+- `NEW_IN_THIS_RESEARCH`: not in the supplied public prior-research list and
+  discovered from an employer-first source. **Not proof** the owner has never
+  encountered or contacted the person.
+- `ALREADY_RESEARCHED`: same named leader or same employer opportunity was
+  previously surfaced; separate from fresh leads.
+- `UPDATED_OPPORTUNITY`: a genuinely distinct, newly evidenced initiative or
+  requisition at an already researched employer; does **not** make that
+  employer or previously known person new.
+- `REPEAT_STATUS_UNKNOWN`: no adequate public prior-research list to compare.
+
+Always mark **private relationship novelty UNVERIFIED** unless the owner
+separately supplies a safe, authenticated minimal classification outside Codex.
+Do not describe a new-to-public-research result as a newly verified contact.
+
+For the **two-sentence conversation thesis**, cite the specific employer
+business decision, name the limited internal leadership contribution that
+matches approved candidate history, and note whether the relevant AI/product
+executive's remit already covers it. When responsibility might simply duplicate
+that chief's job, return `CONTRIBUTION_UNCLEAR` and a next research question,
+not a generic invitation to discuss "AI strategy." Never imply hiring or a
+budget without source evidence.
+
 ## Contact types and report-only result buckets
 
 | Contact type | Evidence required | Brief bucket |
