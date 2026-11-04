@@ -12,6 +12,8 @@ Use the V2.1 opportunity record. Assess independently: organizational attractive
 
 STRATEGIC_EXPLORATION: a directly evidenced strategic signal and truthful contribution may be ASSESSABLE without a known sponsor, but never assumed hiring. Only DOCUMENTED relevant executive ownership plus specific verified route yields ENGAGEMENT_REVIEW_ELIGIBLE (still not contact-ready). DIRECT_HIRING: verify official active ATS requisition, mandatory fit, Arizona/remote feasibility; retain valid role without manager; manual application requires owner authorization.
 
+In focused leader discovery, add a **two-sentence specific conversation thesis** before promoting a person to the human-facing shortlist: (1) the sourced business change and a concrete decision/adoption/product problem; (2) a bounded possible INTERNAL leadership responsibility grounded in the approved candidate profile, plus how it would complement rather than replace the known CIO/CAIO/product/transformation remit. Separate employer-stated facts from the candidate-fit hypothesis. If a senior AI leader already owns the work and there is no evidence of a distinct useful role, mark CONTRIBUTION_UNCLEAR and keep the contact as research-only; do not pitch a generic AI strategy or imply hiring. An evidence-supported new initiative at an already known employer may still be valuable but is not a new leader discovery.
+
 Never let old >=70/75 person/organization scores override a missing claim, owner rejection, route, credentials, opt-out or other hard gate. Return research_state, engagement_readiness, reasons and blocked next actions.
 
 ## Output boundary
