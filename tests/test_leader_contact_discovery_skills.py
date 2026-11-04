@@ -111,5 +111,56 @@ class LeaderContactDiscoverySkillTests(unittest.TestCase):
 
 
 
+    def test_prior_research_baseline_is_public_only_and_prevents_repeat_claims(self):
+        baseline = json.loads(
+            (ROOT / "config" / "public-career-research-baseline.json").read_text(encoding="utf-8")
+        )
+        self.assertEqual(baseline["scope"], "PUBLIC_RESEARCH_ONLY")
+        self.assertIn("TMC Health", baseline["previously_screened_employers"])
+        self.assertIn("Tucson Electric Power", baseline["previously_screened_employers"])
+        known = {(p["name"], p["employer"]) for p in baseline["previously_researched_people"]}
+        self.assertIn(("Josh Lee", "TMC Health"), known)
+        self.assertIn(("Susan Gray", "Tucson Electric Power"), known)
+        self.assertIn(("Dallas Dukes", "Tucson Electric Power"), known)
+        self.assertEqual(len(known), len(baseline["previously_researched_people"]))
+        self.assertTrue(all(set(p) == {"name", "employer"} for p in baseline["previously_researched_people"]))
+        for forbidden in ("previously_met", "private_email", "personal_phone",
+                          "relationship_status", "sent_at", "approval", "@"):
+            self.assertNotIn(forbidden, json.dumps(baseline).lower())
+        for skill in ("daily-executive-outreach", "organization-discovery",
+                      "run-quality-audit", "daily-executive-brief"):
+            self.assertIn("public-career-research-baseline.json", self.skill[skill]
+                          if skill in self.skill else
+                          (SKILL_ROOT / skill / "SKILL.md").read_text(encoding="utf-8"))
+
+    def test_leader_ranking_requires_business_proximity_not_ceo_prestige(self):
+        leadership = self.skill["leadership-discovery"]
+        qualification = (SKILL_ROOT / "relationship-qualification" / "SKILL.md").read_text(encoding="utf-8")
+        for phrase in ("Decision-maker selection", "outcome owner",
+                       "primary", "CEO", "FUNCTIONALLY_PLAUSIBLE"):
+            self.assertIn(phrase.lower(), leadership.lower())
+        for phrase in ("affected users/workflow", "bounded", "CONTRIBUTION_UNCLEAR"):
+            self.assertIn(phrase, qualification)
+        self.assertIn("Why this person", qualification)
+
+    def test_contact_research_checks_three_lanes_and_historical_purpose(self):
+        contact = self.skill["contact-verification"]
+        for phrase in ("at least three distinct public-source lanes",
+                       "government/utility", "contract PDFs",
+                       "HISTORICAL_PERSON_WORK_CONTACT_RECHECK",
+                       "PURPOSE_RESTRICTED_ROUTE_REVIEW",
+                       "CURRENT_PERSON_WORK_ROUTE"):
+            self.assertIn(phrase, contact)
+            self.assertIn(phrase.split("_")[0] if "_" in phrase else phrase,
+                          contact)
+        for phrase in ("HISTORICAL_PERSON_WORK_CONTACT_RECHECK",
+                       "PURPOSE_RESTRICTED_ROUTE_REVIEW",
+                       "PROMISING_RESEARCH_PROSPECTS"):
+            self.assertIn(phrase, self.brief)
+        self.assertIn("person-contact binding", self.skill["run-quality-audit"])
+        self.assertIn("person-specific work route", self.skill["daily-executive-brief"])
+
+
+
 if __name__ == "__main__":
     unittest.main()
