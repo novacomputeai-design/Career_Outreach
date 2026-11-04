@@ -25,6 +25,23 @@ For the human-facing private research brief record: **contact type** (LISTED_WOR
 
 V2.2 `executive.route` remains a minimal structural research field; the human-facing contact summary may include sourced work email/phone not represented by that field. A route URL, `verified_for_person` flag or self-reported `page_read_success` never independently proves reachability. Record unknowns honestly. A published contact finding is not CONTACT_READY, and it is not an authorization to communicate. Keep public professional contact details out of PUBLIC Git and all personal communications behind separate human approval.
 
+## Contact-search depth, age and intended-use checks
+
+For each selected primary leader and any supported alternate, perform **at least three distinct public-source lanes when available** before declaring NO_VERIFIED_PERSON_ROUTE, unless a current, suitable, named professional route is already found. Record the specific lanes searched, exact search/source URL, and negative result or reason for stopping. Lanes:
+
+- **Official employer:** staff/leadership directories, role biography, contact pages, and indexed official pages using exact-name + employer/domain queries.
+- **Professional appearances:** conferences, speakers, association rosters, public publications, interviews and current professional biographies.
+- **Public institutional records:** indexed, lawfully public government/utility documents, procurement and contract PDFs, agency directories and publicly filed professional documents, using exact person+employer queries. Use these only as evidence of *historically published professional identity/contact*; do not treat contract-administration or bid-only details as a general-purpose networking route.
+- **Identity/profile fallback:** verify individual public professional profile identity and current affiliation without scraping, automated platform actions, sign-in circumvention or inferred contact details.
+
+Classify every discovered contact independently by **identity match**, **currentness**, and **intended purpose**:
+- `CURRENT_PERSON_WORK_ROUTE` only when the source ties the exact person to a work email, dedicated office number, or person-targeted form and there is no material freshness/purpose contradiction. Public listing still does not prove delivery or consent.
+- `HISTORICAL_PERSON_WORK_CONTACT_RECHECK` when the only evidence is an older contract, event or archived directory; show source/date but do **not** claim current reachability.
+- `PURPOSE_RESTRICTED_ROUTE_REVIEW` when a business contact was published specifically for government procurement, contract administration, legal matters or media; it may not be appropriate for career networking even if the person is current.
+- `PROFILE_ONLY`, `INDIRECT_GENERAL`, or `NO_VERIFIED_PERSON_ROUTE` otherwise.
+
+A name in a PDF is not enough: verify the document pairs the same person, the employer, and the actual business contact; check a newer official source for role continuity. Never guess email patterns, harvest personal/home/mobile contact information, scrape gated platforms, or send anything. These are **report-only evidence labels**, not changes to V2.2 route schema or a license to contact.
+
 ## Output boundary
 
 Return only cited facts, clearly marked hypotheses and reason-coded HOLDs. Record whether this specialist was natively selected, NOT_VERIFIED, or SKIPPED_NOT_APPLICABLE. Research findings and drafts are not contact-ready or sent.
