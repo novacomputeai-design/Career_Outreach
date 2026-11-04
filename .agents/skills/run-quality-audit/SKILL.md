@@ -12,6 +12,12 @@ Audit all relevant record boundaries, project intent, exact claims, page-read tr
 
 Reject numeric-score promotion, 20-person quota inflation, user PUSH as source truth, misreported meetings, invented contact routes, cross-project sales and external actions. Record native skill activation evidence; reading SKILL.md alone is NOT_VERIFIED. Include PASS/HOLD/FAIL with reasons and cannot self-authorize any approval or contact-ready state. No live field assurance is derived from synthetic tests.
 
+## Contact-shortlist acceptance audit
+
+For read-only discovery, inspect each proposed person against the brief contract before counting a usable contact. Separately demand: a source-grounded employer trigger; current affiliation/title and contradiction search; exact initiative/biz outcome ownership (DOCUMENTED or explicitly FUNCTIONALLY_PLAUSIBLE); a concrete professional contact value **actually tied to that person** and a supporting URL/date; and a truthful, bounded reason for the candidate to seek a conversation. A senior-sounding title, employer switchboard, guessed email, unverified profile, or stale business card cannot be silently promoted.
+
+Classify each row **PERSON_ROUTE_SUPPORTED** (source-listed person-specific professional route), **PROFILE_ONLY** (identity profile but no verified direct route), or **CONTACT_HOLD** (identity, evidence, or person-route unresolved). These are REPORT-ONLY discovery labels, NOT engagement/approval states; CONTACT_READY and SEND_AUTHORIZED remain false. Verify the brief doesn't equate a LinkedIn profile with message availability and doesn't infer vacancies from AI initiatives. Track total investigated versus useful sourced rows; explicitly preserve shortfalls and give the next evidence check for every hold.
+
 ## Output boundary
 
 Return only cited facts, clearly marked hypotheses and reason-coded HOLDs. Record whether this specialist was natively selected, NOT_VERIFIED, or SKIPPED_NOT_APPLICABLE. Research findings and drafts are not contact-ready or sent.
