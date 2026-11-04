@@ -69,10 +69,10 @@ class LeaderContactDiscoverySkillTests(unittest.TestCase):
         self.assertIs(policy["safety"]["contact_ready_from_research"], False)
         self.assertIs(policy["v22_candidate_hardening"]["enabled_for_production"], False)
 
-    def test_six_adversarial_examples_cover_expected_buckets_without_fake_passes(self):
+    def test_ten_adversarial_examples_cover_expected_buckets_without_fake_passes(self):
         self.assertEqual(self.cases["assurance"], "UNEXECUTED_TEST_SCENARIOS")
         rows = self.cases["cases"]
-        self.assertEqual(len(rows), 6)
+        self.assertEqual(len(rows), 10)
         self.assertEqual(len({row["name"] for row in rows}), len(rows))
         expected = {
             "official_named_work_email": "PERSON_ROUTE_SUPPORTED",
@@ -81,6 +81,10 @@ class LeaderContactDiscoverySkillTests(unittest.TestCase):
             "former_officer_bio_conflict": "CONTACT_HOLD",
             "active_role_without_named_hiring_manager": "CONTACT_HOLD",
             "executive_office_number_vs_company_switchboard": "PERSON_ROUTE_SUPPORTED",
+            "already_researched_high_profile_executive": "PERSON_ROUTE_SUPPORTED",
+            "new_initiative_at_known_employer": "PROFILE_ONLY",
+            "weak_two_employer_search_breadth": "PROFILE_ONLY",
+            "existing_ai_chief_no_distinct_role": "PROFILE_ONLY",
         }
         self.assertEqual({row["name"]: row["expected_bucket"] for row in rows}, expected)
         for row in rows:
