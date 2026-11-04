@@ -23,7 +23,7 @@ For every specifically selected leader, follow this order, stopping when a groun
 
 For the human-facing private research brief record: **contact type** (LISTED_WORK_EMAIL / LISTED_OFFICE_PHONE / VERIFIED_PERSON_SPECIFIC_FORM / INDIVIDUAL_PROFILE_IDENTIFIED / INDIRECT_GENERAL / NONE), exact **publicly listed professional value** (or NOT_FOUND), supporting source URL, source publisher, source date/UNDATED, check date, and whether that source actually binds the contact to the selected person and current employer. A direct work email or office phone must be explicitly published in a professional context; do not harvest private/mobile numbers or personal email addresses. Never convert an aggregator's unverified address or an inferred pattern into a DIRECT route.
 
-V2.2 `executive.route` remains a minimal structural research field; the human-facing contact summary may include sourced work email/phone not represented by that field. A route URL, `verified_for_person` flag or self-reported `page_read_success` never independently proves reachability. Record unknowns honestly. Keep public professional contact details out of PUBLIC Git and all personal communications behind separate human approval.
+V2.2 `executive.route` remains a minimal structural research field; the human-facing contact summary may include sourced work email/phone not represented by that field. A route URL, `verified_for_person` flag or self-reported `page_read_success` never independently proves reachability. Record unknowns honestly. A published contact finding is not CONTACT_READY, and it is not an authorization to communicate. Keep public professional contact details out of PUBLIC Git and all personal communications behind separate human approval.
 
 ## Output boundary
 
