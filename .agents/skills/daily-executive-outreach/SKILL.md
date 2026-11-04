@@ -14,6 +14,14 @@ Required when research is run: organization-discovery, provenance-and-freshness,
 
 Pipeline: organization and AI/product strategy -> specific documented business objective -> initiative and hiring evidence -> executive responsibility graph -> resume-grounded contribution -> independent engagement pathway -> factual audit -> owner opportunity brief. Include research holds and zero useful findings honestly. Contact-ready, send authorization and application submission are always false in the current research process.
 
+## Focused read-only leader-discovery mode
+
+For an owner-requested discovery test, optimize for **a short list of relevant, source-grounded PEOPLE and professional routes**. An employer/initiative is the reason to search, not the final deliverable. A useful row must answer: (1) why this organization now, (2) why this specific current leader, (3) which publicly evidenced professional route can be tried manually, and (4) what remains unknown. The research objective is finding appropriate leaders for the owner's personal career conversations; an open vacancy is not required and must not be invented.
+
+Use organization-discovery + provenance-and-freshness + leadership-discovery + contact-verification + relationship-qualification + run-quality-audit + daily-executive-brief. Keep relationship-memory **owner-only** and all other specialists conditional. For each promising employer, compare the documented initiative owner with a relevant, more accessible operating or product leader before choosing the primary target. Seek an alternate only when its identity and relevance are supportable. Return fewer people rather than filling a quota with CEOs, job titles, profile guesses, or general company inboxes.
+
+Use the presentation contract in `../../../references/leader-contact-discovery-brief.md`. A public person-specific work route is a research FINDING, not CONTACT_READY or permission to message. A profile without a confirmed way to message remains PROFILE_ONLY; missing identity/route is CONTACT_HOLD with a concrete next research action. No owner-memory access, drafting, sending, application or changes to files unless separately requested.
+
 ## Offline handoff boundary
 When a bounded public-only V2.1 opportunity JSON is created in a protected user-owned run folder, use `scripts/assess_career_opportunities.py --input PRIVATE_INPUT --out PRIVATE_UNUSED_OUTPUT` for structural preflight. This validates format/claims but does not fetch pages, authenticate the owner, access DPAPI, authorize outreach or record applications. Preserve the complete owner-only and source-truth gaps. If a real Codex skill was not selected natively, report NOT_VERIFIED, not an invented activation.
 
