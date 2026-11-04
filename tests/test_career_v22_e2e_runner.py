@@ -63,7 +63,7 @@ class V22E2ERunnerTests(unittest.TestCase):
             by_id = {x["case_id"]: x for x in result["case_results"]}
             observed_synthetic = {
                 "E2E-17", "E2E-18", "E2E-24", "E2E-25",
-                "E2E-28", "E2E-32", "E2E-33",
+                "E2E-28", "E2E-32", "E2E-33", "E2E-37",
                 "E2E-39", "E2E-40", "E2E-43", "E2E-44", "E2E-47",
             }
             self.assertEqual(len(by_id), 35)
