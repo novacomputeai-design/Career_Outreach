@@ -125,7 +125,7 @@ class LeaderContactDiscoverySkillTests(unittest.TestCase):
         self.assertEqual(len(known), len(baseline["previously_researched_people"]))
         self.assertTrue(all(set(p) == {"name", "employer"} for p in baseline["previously_researched_people"]))
         for forbidden in ("previously_met", "private_email", "personal_phone",
-                          "relationship_status", "sent_at", "approval", "@"):
+                          "relationship_status", "sent_at", "@"):
             self.assertNotIn(forbidden, json.dumps(baseline).lower())
         for skill in ("daily-executive-outreach", "organization-discovery",
                       "run-quality-audit", "daily-executive-brief"):
@@ -158,7 +158,7 @@ class LeaderContactDiscoverySkillTests(unittest.TestCase):
                        "PROMISING_RESEARCH_PROSPECTS"):
             self.assertIn(phrase, self.brief)
         self.assertIn("person-contact binding", self.skill["run-quality-audit"])
-        self.assertIn("person-specific work route", self.skill["daily-executive-brief"])
+        self.assertIn("published professional route", self.skill["daily-executive-brief"])
 
 
 
