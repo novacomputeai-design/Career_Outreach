@@ -14,7 +14,7 @@ DIRECT_HIRING can preserve a current official ATS application as MANUAL_APPLICAT
 
 ## Bounded professional contact-finding procedure
 
-For every specifically selected leader, follow this order, stopping when a grounded route is found or the accessible public sources are exhausted:
+For each prioritized employer's primary leader (and a supported alternate where justified), perform the following bounded search in depth. Do not stop just because an individual profile was found; check relevant official and professional sources for an actual person-specific work route. Stop only when a source-supported person-specific route is established or the accessible source paths below have been checked, recording which were tried:
 
 1. Check the **current employer's official** leadership/staff/contact directory or individual biography for a **named** work email, named office line, or person-specific public booking/contact page. Quote the source's person-to-contact association; an employer's generic number is not that person's phone.
 2. Check publicly accessible, dated event/speaker pages, industry-association bios, and official professional publications for a contact expressly associated with that same person. Resolve employer and identity conflicts before accepting a historical contact. Prefer the current employer's route over old affiliations.
