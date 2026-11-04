@@ -130,6 +130,7 @@ def _as_remote_direct_hire(record):
     record["claims"] = [c for c in record["claims"] if c["claim_type"] == "BUSINESS_OBJECTIVE"]
     job_claim = _claim("job-active", "JOB_ACTIVE", "Applications are open for synthetic requisition R-100.")
     job_claim["object_id"] = "R-100"
+    job_claim["source_url"] = "https://employer.example/jobs/R-100"
     record["claims"].append(job_claim)
     record["job"] = {
         "requisition_id": "R-100", "official_ats_url": "https://employer.example/jobs/R-100",
@@ -255,12 +256,13 @@ def _scenario(case_id):
             if c["claim_id"] == "job-active":
                 c["claim_id"] = "job-active-101"
                 c["object_id"] = "R-101"
+                c["source_url"] = "https://employer.example/jobs/R-101"
                 c["claim_text"] = "Applications are open for synthetic requisition R-101."
                 c["excerpt"] = "Synthetic page states: " + c["claim_text"]
         p["opportunities"] = [first, second]
         return p, "Two distinct ATS requisitions at one employer retain distinct identities.", "assert", lambda r: (
             r["reviewed"] == 2 and
-            len({a["opportunity_identity"] for a in r["assessments"]}) == 2 and
+            len({tuple(a["opportunity_identity"]) for a in r["assessments"]}) == 2 and
             all("IDENTITY_COLLISION_HOLD" not in a["reasons"] for a in r["assessments"]))
     if case_id == "E2E-32":
         second = deepcopy(x)
@@ -268,7 +270,7 @@ def _scenario(case_id):
         p["opportunities"] = [x, second]
         return p, "Distinct mandates under one initiative stay separately identifiable.", "assert", lambda r: (
             r["reviewed"] == 2 and
-            len({a["opportunity_identity"] for a in r["assessments"]}) == 2 and
+            len({tuple(a["opportunity_identity"]) for a in r["assessments"]}) == 2 and
             all("IDENTITY_COLLISION_HOLD" not in a["reasons"] for a in r["assessments"]))
     if case_id == "E2E-33":
         return p, "A strategic exploration without an official posted role never becomes posted hiring.", "assert", lambda r: (
