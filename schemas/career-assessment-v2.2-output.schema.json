@@ -1,0 +1,68 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Career V2.2 offline assessment OUTPUT state contract; synthetic structural research only",
+  "description": "Validates the state vocabulary of the offline assessment report. NOT a source-truth, native-skill, protected memory, human approval, or production certification.",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "project_id",
+    "assessments",
+    "source_truth_independently_verified",
+    "native_skills_verified",
+    "contact_ready",
+    "send_authorized",
+    "status"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "2.2"
+    },
+    "project_id": {
+      "const": "PERSONAL_CAREER_OUTREACH"
+    },
+    "assessments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "research_state",
+          "engagement_readiness"
+        ],
+        "properties": {
+          "research_state": {
+            "enum": [
+              "DISCOVERED",
+              "ASSESSABLE",
+              "EVIDENCE_HOLD",
+              "CLOSED_INACTIVE",
+              "EXCLUDED"
+            ]
+          },
+          "engagement_readiness": {
+            "enum": [
+              "RESEARCH_PENDING",
+              "ENGAGEMENT_REVIEW_ELIGIBLE",
+              "SUPPRESSED",
+              "NOT_PREPARED"
+            ]
+          }
+        }
+      }
+    },
+    "source_truth_independently_verified": {
+      "const": false
+    },
+    "native_skills_verified": {
+      "const": false
+    },
+    "contact_ready": {
+      "const": 0
+    },
+    "send_authorized": {
+      "const": false
+    },
+    "status": {
+      "const": "RESEARCH_STRUCTURAL_REVIEW_NOT_FULL_E2E"
+    }
+  }
+}
