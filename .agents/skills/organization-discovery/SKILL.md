@@ -12,6 +12,10 @@ Discover any-industry employers Tucson/Southern Arizona first, followed by genui
 
 For every candidate record employer and work mode; what leadership publicly states; business outcome; AI/product/operational initiative; tangible pilot/deployment/partnership/organizational activity when evidenced; maturity as SOURCE_SUPPORTED or UNKNOWN; relevant current vacancy when verified; conflicting/unknown details and exact research questions. Document exact visited source URL, publisher, original lineage, passage, retrieved_at and published_on or UNDATED. A company saying it uses AI does not prove it needs an AI strategy, new executive or funded position. No public information means UNKNOWN, not absent AI.
 
+In focused leader-discovery mode, first build a **small organization-first candidate pool** from different sectors and employer sources. For a request for up to five leaders, investigate approximately 8–10 distinct feasible employers when live public coverage permits, before deep-diving into particular people. Start with employer announcements, official AI/product transformation pages, and primary job postings; search executive names only AFTER sourcing a specific employer trigger. If time/access yields fewer organizations, disclose the actual count and why; never fabricate breadth or fill a quota with weak employers. Do not mistake a search query or snippet for a visited employer source.
+
+Apply an owner-provided **public-only previously-researched exclusion list** to tag repeats. Keep previously researched leaders or employers as ALREADY_RESEARCHED, not NEW_DISCOVERY. A new independently sourced initiative/requisition at a known employer can be UPDATED_OPPORTUNITY but is not a new organization/person; preserve it separately if valuable. No list provided means REPEAT_STATUS_UNKNOWN, not presumed new. Do not consult DPAPI, private relationship history, or user-specific contact notes.
+
 Output organization + separate initiative records and candidate business objectives, not invented executive contact lists. Neither a Tucson location nor an interesting announcement alone establishes meaningful candidate contribution.
 
 ## Output boundary
