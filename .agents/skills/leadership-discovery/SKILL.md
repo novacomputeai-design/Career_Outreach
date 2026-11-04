@@ -18,6 +18,12 @@ For each of the three prioritized employer objectives, systematically investigat
 
 Return one PRIMARY leader plus at most one ALTERNATE when supported. For each, give current-role source, initiative-responsibility source or UNKNOWN, selection rationale, role confidence, and unresolved changes/departures. A current official title is not itself proof of initiative ownership, budget, hiring influence, or interest. If no safe name survives checks, keep the organization as EXECUTIVE_OWNER_UNVERIFIED instead of inventing a person.
 
+## Decision-maker selection — evidence-first ranking
+
+For each shortlisted employer, compare the most relevant **business outcome owner**, **product/portfolio or transformation VP/Director**, and **CIO/AI executive** (up to three viable people, as available). Select PRIMARY by: **(1)** documented responsibility for the specific business decision or initiative (not merely the person’s title), **(2)** ability to discuss a distinct internal leadership contribution without duplicating an incumbent remit, **(3)** credible professional accessibility, and only then **(4)** seniority. Distinguish a hiring sponsor from the business owner and a recruiter from an executive. A broadly responsible CEO is not automatically a better prospect than a VP who actually owns the affected program; conversely, never upgrade an undocumented VP to DOCUMENTED ownership just for accessibility.
+
+Require a short comparison: PRIMARY — why this person; ALTERNATE — why less suitable (if supported); CEO considered/not preferred — reason (when relevant). For each, keep current affiliation/role verification and exact initiative ownership evidence independent. If the primary has no published person-specific route, an appropriately responsible alternate may be useful but must not displace the more relevant leader without explaining the trade-off. Search for namesakes, departed executives, and role changes; when identity cannot be resolved, HOLD the individual rather than merge records.
+
 ## Output boundary
 
 Return only cited facts, clearly marked hypotheses and reason-coded HOLDs. Record whether this specialist was natively selected, NOT_VERIFIED, or SKIPPED_NOT_APPLICABLE. Research findings and drafts are not contact-ready or sent.
