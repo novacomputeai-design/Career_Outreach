@@ -28,6 +28,14 @@ For every hold, name the **one next verification step**. Report both counts: new
 
 Flag as HOLD when: (a) a Southern Arizona site is used to "localize" an unrelated Phoenix/Tempe/statewide initiative (`LOCAL_INITIATIVE_UNVERIFIED`); (b) a relevant but historical VP title is elevated to current PRIMARY without role recheck; (c) an inaccessible but prestigious COO/CEO/CTO is chosen as the practical first target despite a better-evidenced, appropriate operational leader; (d) a contact hold lacks a bounded three-lane search trail and explicit onward-selection outcome; or (e) the contribution proposal duplicates the incumbent's remit without a distinct initiative-specific decision, bounded responsibility and plausible metric. The accountable sponsor and practical first-conversation candidate may legitimately be different; verify each independently. Do not require a public contact to exist, force new leaders, or make zero-result searches into fabricated PASS outcomes.
 
+## Three-field correction audit
+
+Audit every displayed result for **CONTACT_BINDING**: if an owner-signed webpage says to send questions to `howdy@` or similar shared company mailbox, the route is contextual shared—not a direct named email, even if the same page proves the owner's identity. If a named `armen@`-style address is listed only as a media contact, classify purpose-restricted. Require exact publisher, source date, purpose, current affiliation and person-to-destination binding. Do not inflate `PERSON_ROUTE_SUPPORTED` or `CONTACT_READY`.
+
+Audit **PUBLIC_REPEAT_COVERAGE**: the public-only index includes past screened employers and people from all reviewed supervised rounds. Distinguish employer, person and opportunity novelty, report any missing index coverage as UNKNOWN and propose owner-reviewed public-only additions; never read protected relationship notes.
+
+Audit **CAREER_CONTRIBUTION_FIT** independently of route ease: prove the discussion is about one initiative-specific business decision and a plausible distinct internal leadership responsibility supported by approved candidate experience. A local manufacturing opening for operator jobs cannot be recast as evidence of senior product/AI employment. Flag `LOW_CAREER_FIT` or `PROMISING_RESEARCH_ONLY` rather than recommending the most contactable person by default. These labels do not authorize engagement.
+
 ## Output boundary
 
 Return only cited facts, clearly marked hypotheses and reason-coded HOLDs. Record whether this specialist was natively selected, NOT_VERIFIED, or SKIPPED_NOT_APPLICABLE. Research findings and drafts are not contact-ready or sent.
