@@ -20,6 +20,12 @@ In focused leader discovery, add a **two-sentence specific conversation thesis**
 
 Never let old >=70/75 person/organization scores override a missing claim, owner rejection, route, credentials, opt-out or other hard gate. Return research_state, engagement_readiness, reasons and blocked next actions.
 
+## Conversation-worthiness before contact convenience
+
+Do not confuse **interesting company**, **reachable person**, and **credible personal leadership opportunity**. Evaluate each independently. A prospect is `CONVERSATION_WORTH_EXPLORING` only when the source-backed initiative has a consequential business decision or implementation gap to *investigate*, the named leader is relevant to that decision, the candidate's proven skills could support a genuinely **distinct, bounded internal leadership responsibility**, and a specific timely question makes a peer conversation credible. A plausible hypothesis is allowed; do not claim a staffing gap, available role, recruiting intent or organizational deficiency without evidence.
+
+Use `PROMISING_RESEARCH_ONLY` if the business problem is promising but sponsor, current implementation status or distinct responsibility is unresolved. Use `LOW_CAREER_FIT` when the opportunity's evidenced scope is mainly production staffing, product sales, executive duties already fully owned or otherwise unrelated to the candidate's permanent internal leadership objective—even if a contact email is easily found. These are **human review labels**, not new machine states or score thresholds. The contact route cannot improve the factual contribution score or override a weak fit. Before promoting a conversation thesis, explicitly answer: **What would I ask this leader about their business decision, and what could I personally own that they don't already clearly own?** If this cannot be answered without a generic pitch, hold.
+
 ## Output boundary
 
 Return only cited facts, clearly marked hypotheses and reason-coded HOLDs. Record whether this specialist was natively selected, NOT_VERIFIED, or SKIPPED_NOT_APPLICABLE. Research findings and drafts are not contact-ready or sent.
