@@ -30,6 +30,10 @@ Report two distinct judgments when they differ: **ACCOUNTABLE_SPONSOR** (best ev
 
 Choose an operating VP/Director over a less accessible C-suite sponsor **only if** current role is independently supported, the VP's work actually intersects the bounded outcome, and a legitimate professional entry path is better supported. If current role, scope or route is unverified, retain the relevant VP as **FIRST_CONVERSATION_TARGET_CANDIDATE — RESEARCH_HOLD**, not as a confirmed primary. If all choices are inaccessible, keep the best evidenced decision owner as a research prospect, but do not represent the prospect as actionable. Explain the sponsor-versus-target trade-off in one sentence rather than defaulting to the most senior official biography.
 
+## Opportunity-before-accessibility guard
+
+Select and verify a relevant accountable initiative owner before using accessibility to break ties between **equally relevant** conversation candidates. A friendly contact route or published email cannot rescue `LOW_CAREER_FIT` or a leader with no initiative connection. Compare an operating VP/Director only if recent sources establish a real role and meaningful proximity to the specific decision. If a CIO owns delivery already, differentiate the proposed internal product/adoption responsibility with evidence or retain `CONTRIBUTION_UNCLEAR`. Clearly separate `ACCOUNTABLE_SPONSOR` from `FIRST_CONVERSATION_TARGET`, with a source-backed explanation when they differ.
+
 ## Output boundary
 
 Return only cited facts, clearly marked hypotheses and reason-coded HOLDs. Record whether this specialist was natively selected, NOT_VERIFIED, or SKIPPED_NOT_APPLICABLE. Research findings and drafts are not contact-ready or sent.
