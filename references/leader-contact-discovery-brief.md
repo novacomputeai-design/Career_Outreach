@@ -171,6 +171,46 @@ portfolio-prioritization proposal which merely restates the incumbent CIO's
 or COO's remit is `CONTRIBUTION_UNCLEAR`. Keep factual opportunity
 research separate from hiring demand, contact readiness and authorization.
 
+## Three necessary corrections: contact, public research memory, career fit
+
+**Contact recipient binding has priority over surrounding prose.** A
+company owner's named signature next to a shared `howdy@`, `info@` or
+`hello@` inbox does *not* establish that mailbox is addressed to or
+delivered directly to the owner. Preserve a documented topic-specific
+invitation as `SHARED_INBOX_CONTEXTUAL_INVITATION` (an indirect, potentially
+relevant inquiry route), never `PERSON_ROUTE_SUPPORTED`. An individual
+email address disclosed only under "Media Contacts", procurement or
+investor relations is `PURPOSE_RESTRICTED_ROUTE_REVIEW` even when named.
+Only a currently credible **individual-targeted professional channel
+appropriate to the conversation purpose** belongs in
+`PERSON_ROUTE_SUPPORTED`. Record the published value, named-recipient
+binding, route type, publisher, date, purpose and uncertainty separately.
+A contact route never equals consent, delivery, human-approved outreach
+or a vacant leadership role.
+
+**Research-history reconciliation precedes new-lead counts.** Read
+`config/public-career-research-baseline.json`, including all previously
+screened companies and researched people from the supervised rounds.
+State employer repeat, named-person repeat and genuinely distinct
+initiative separately. A known employer can still have a newly found
+leader/initiative; a first-found email cannot make an already known person
+new. The index is intentionally partial and PUBLIC_RESEARCH_ONLY; absence
+does not establish private-relationship novelty. In read-only mode, only
+propose public-safe additions; do not change history automatically.
+
+**Worthwhile career conversation is independent of contact convenience.**
+Label each person `CONVERSATION_WORTH_EXPLORING`,
+`PROMISING_RESEARCH_ONLY`, or `LOW_CAREER_FIT` based on a sourced,
+timely business decision, relevance of the verified person, a defensible
+distinct internal leadership responsibility grounded in the approved
+profile, an outcome to measure, and incumbent overlap. A factory recruiting
+operators may justify a supplier or operations conversation, but it does
+not by itself establish a senior AI/product leadership opportunity.
+A credible complex transformation with no direct contact may remain a
+valuable research prospect. **Never rank a weak-fit owner above a
+strong-fit but route-held leader merely because an email is published.**
+These are report-only evaluations, not new V2.2 schema states.
+
 ## Contact types and report-only result buckets
 
 | Contact type | Evidence required | Brief bucket |
