@@ -32,6 +32,16 @@ Read `../../../config/public-career-research-baseline.json` **before** discovery
 
 Prefer a source-backed business **decision with unresolved adoption, product, implementation or cross-functional coordination work** over a generic facility opening, executive biography or fashionable AI announcement. A new factory hiring production staff is not evidence of a senior AI/product leadership opening; retain factual change but classify its personal-career fit separately. Direct job opportunities require a live, official employer ATS check and Arizona/Tucson or US-remote feasibility evidence.
 
+## Opportunity-demand signal before leader/contact expansion
+
+For focused personal-career discovery, **screen for evidence of a leadership-relevant opportunity before looking for a leader's email**. For each employer, distinguish and cite one of three *report-only* evidence levels:
+
+- `VERIFIED_LEADERSHIP_OPENING`: a current, read official employer/ATS senior product, AI strategy, innovation or enterprise transformation role, with Tucson/Arizona or verified US-remote feasibility and mandatory requirements still to be checked.
+- `STRATEGIC_LEADERSHIP_SIGNAL`: a specific current initiative **plus** an observable shift in responsibility, new operating capability, organizational appointment/mandate, material scaling decision, or transformation work needing a cross-functional owner. This is an evidence-supported **reason to investigate**, never an invented hiring gap or vacant position.
+- `INITIATIVE_ONLY_NO_LEADERSHIP_SIGNAL`: a project, new building, technology announcement or operational expansion with no observed internal leadership mandate or plausible distinct contribution. Preserve as context/hold; do not spend deep contact-search effort merely because executives are named.
+
+For the first small read-only pilot, precommit **three named Tucson-area employers** before outcome research and keep all three in the denominator. Prefer employers absent from the partial public baseline; allow a previously screened employer only for a separately sourced new business initiative or current official requisition and label employer repeat. Research each employer's leadership-demand evidence **before** selecting a named person. If evidence is insufficient, report HOLD rather than backfilling with an attractive CEO, generic AI initiative or easier-to-contact business. Report sources, evidence age, local initiative relevance, current work feasibility and one decisive next check. This is a focused diagnostic protocol, **not** the six-employer V2.1 field-qualification or production gate.
+
 ## Output boundary
 
 Return only cited facts, clearly marked hypotheses and reason-coded HOLDs. Record whether this specialist was natively selected, NOT_VERIFIED, or SKIPPED_NOT_APPLICABLE. Research findings and drafts are not contact-ready or sent.
