@@ -35,6 +35,12 @@ The final report should note which known people were excluded or updated using `
 
 Report `LOCAL_INITIATIVE_CONFIRMED` versus `LOCAL_INITIATIVE_UNVERIFIED` explicitly and never treat an unrelated Arizona project as a Tucson opportunity. For each deep employer list: ACCOUNTABLE_SPONSOR; FIRST_CONVERSATION_TARGET (or candidate on hold); reason for that distinction; evidence grade for each person's initiative connection; contact-search lanes actually completed; and one bounded measurable contribution with known overlap. If the best target is still a hypothetical or unreachable executive, show it as **PROMISING_RESEARCH_PROSPECTS**, not a newly contactable lead. After CONTACT_SEARCH_COMPLETED_NO_SUITABLE_ROUTE, show the next screened employer examined or state no source-supported substitute exists. Keep the local-first usefulness assessment distinct from novelty and CONTACT_READY=false.
 
+## Three-item human acceptance gate
+
+Before displaying a recommendation, answer in plain language: **(1) Why is this a worthwhile personal career conversation rather than only a newsworthy project? (2) Was the employer or person already researched? (3) Is the discovered route actually addressed to the person and appropriate for the intended conversation?** Keep `CONVERSATION_WORTH_EXPLORING`, `PROMISING_RESEARCH_ONLY` and `LOW_CAREER_FIT` separate from `PERSON_ROUTE_SUPPORTED`, `SHARED_INBOX_CONTEXTUAL_INVITATION`, `PURPOSE_RESTRICTED_ROUTE_REVIEW`, `PROFILE_ONLY` and `CONTACT_HOLD`. Shared address plus an owner signature is **not** `PERSON_ROUTE_SUPPORTED`.
+
+Report newly discovered people/employers against `config/public-career-research-baseline.json`, and explicitly call out prior-screened matches even if their initiatives are new. Do not count a new email discovery as a new leader. Prefer **one leader genuinely worth discussing** to a long list of available inboxes. All findings remain owner-review research, not CONTACT_READY, send approved or job applications.
+
 ## Output boundary
 
 Return only cited facts, clearly marked hypotheses and reason-coded HOLDs. Record whether this specialist was natively selected, NOT_VERIFIED, or SKIPPED_NOT_APPLICABLE. Research findings and drafts are not contact-ready or sent.
