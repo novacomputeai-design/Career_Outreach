@@ -206,5 +206,60 @@ class LeaderContactDiscoverySkillTests(unittest.TestCase):
         self.assertIn("CONTACT_READY=false", self.skill["daily-executive-brief"])
 
 
+    def test_public_research_index_reconciles_all_four_discovery_rounds(self):
+        baseline = json.loads(
+            (ROOT / "config" / "public-career-research-baseline.json").read_text(encoding="utf-8")
+        )
+        employers = set(baseline["previously_screened_employers"])
+        people = {(p["name"], p["employer"]) for p in baseline["previously_researched_people"]}
+        self.assertGreaterEqual(len(employers), 45)
+        self.assertGreaterEqual(len(people), 32)
+        for employer in ("Tucson Airport Authority", "ARTO",
+                         "Critical Path Institute", "Pima County",
+                         "Freeport-McMoRan", "Honeywell Aerospace",
+                         "GitLab", "Red Robin", "Veralto"):
+            self.assertIn(employer, employers)
+        for key in (("Anthony Casella", "Tucson Airport Authority"),
+                    ("Armen Alajian", "ARTO"),
+                    ("Michelle Simon", "Pima County"),
+                    ("Ramona Walls", "Critical Path Institute"),
+                    ("Cory Stevens", "Freeport-McMoRan")):
+            self.assertIn(key, people)
+        self.assertEqual(len(employers), len(baseline["previously_screened_employers"]))
+        self.assertEqual(len(people), len(baseline["previously_researched_people"]))
+        self.assertIn("private", json.dumps(baseline["limitations"]).lower())
+        self.assertNotIn("@", json.dumps(baseline))
+        self.assertTrue(all(set(row) == {"name", "employer"} for row in baseline["previously_researched_people"]))
+
+    def test_arto_shared_inbox_and_media_email_are_not_direct_routes(self):
+        contact = self.skill["contact-verification"]
+        brief_skill = self.skill["daily-executive-brief"]
+        audit = self.skill["run-quality-audit"]
+        for fragment in ("SHARED_INBOX_CONTEXTUAL_INVITATION",
+                         "PURPOSE_RESTRICTED_ROUTE_REVIEW",
+                         "howdy@", "PERSON_ROUTE_SUPPORTED"):
+            self.assertIn(fragment, contact)
+            self.assertIn(fragment, self.brief)
+        self.assertIn("SHARED_INBOX_CONTEXTUAL_INVITATION", brief_skill)
+        self.assertIn("SHARED_INBOX_CONTEXTUAL_INVITATION", audit)
+        self.assertIn("armen@", audit)
+        self.assertIn("not a direct named email", audit)
+        self.assertIn("A contact route never equals consent", self.brief)
+
+    def test_career_fit_distinct_from_contact_accessibility(self):
+        qualification = (SKILL_ROOT / "relationship-qualification" / "SKILL.md").read_text(encoding="utf-8")
+        org = (SKILL_ROOT / "organization-discovery" / "SKILL.md").read_text(encoding="utf-8")
+        leader = self.skill["leadership-discovery"]
+        for label in ("CONVERSATION_WORTH_EXPLORING", "PROMISING_RESEARCH_ONLY", "LOW_CAREER_FIT"):
+            self.assertIn(label, qualification)
+            self.assertIn(label, self.brief)
+            self.assertIn(label, self.skill["daily-executive-brief"])
+        self.assertIn("production staffing", org)
+        self.assertIn("LOW_CAREER_FIT", leader)
+        self.assertIn("contact route cannot improve", qualification)
+        self.assertIn("Never rank a weak-fit owner", self.brief)
+
+
+
 if __name__ == "__main__":
     unittest.main()
