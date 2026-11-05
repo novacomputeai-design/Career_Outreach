@@ -36,6 +36,10 @@ Audit **PUBLIC_REPEAT_COVERAGE**: the public-only index includes past screened e
 
 Audit **CAREER_CONTRIBUTION_FIT** independently of route ease: prove the discussion is about one initiative-specific business decision and a plausible distinct internal leadership responsibility supported by approved candidate experience. A local manufacturing opening for operator jobs cannot be recast as evidence of senior product/AI employment. Flag `LOW_CAREER_FIT` or `PROMISING_RESEARCH_ONLY` rather than recommending the most contactable person by default. These labels do not authorize engagement.
 
+## Narrow opportunity-discovery pilot audit
+
+Inspect each of the **precommitted three employer** cases before counting anything as a useful lead. Reject an inflated `VERIFIED_LEADERSHIP_OPENING` without a freshly visited official employer/ATS posting that actually accepts applications and supports candidate location/requirements; reject a `STRATEGIC_LEADERSHIP_SIGNAL` without a specific dated organizational mandate, scaling decision or responsibility change; classify otherwise as `INITIATIVE_ONLY_NO_LEADERSHIP_SIGNAL`. A new site or deployed technology alone is not an unmet leadership need. Prefer unseen employers but never count a baseline-known person or employer as new, and never replace a failed employer within the pilot denominator. Audit distinct permanent internal leadership contribution, incumbent overlap, and source-grounded contact binding independently. This is **supervised read-only behavioral evaluation**, not native activation evidence or production qualification.
+
 ## Output boundary
 
 Return only cited facts, clearly marked hypotheses and reason-coded HOLDs. Record whether this specialist was natively selected, NOT_VERIFIED, or SKIPPED_NOT_APPLICABLE. Research findings and drafts are not contact-ready or sent.
