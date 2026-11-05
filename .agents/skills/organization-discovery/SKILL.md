@@ -26,6 +26,12 @@ In a bounded local diagnostic, prioritize deeply investigating employers with *b
 
 Output organization + separate initiative records and candidate business objectives, not invented executive contact lists. Neither a Tucson location nor an interesting announcement alone establishes meaningful candidate contribution.
 
+## Research-history coverage and opportunity-first selection
+
+Read `../../../config/public-career-research-baseline.json` **before** discovery and compare all newly found employers and named people. The index includes screened employers and researched leaders from earlier read-only tests; it is a *partial public research index*, not protected relationship history. For each selected record keep **employer_seen_before**, **person_seen_before**, and **new_distinct_initiative** conceptually separate. A previously screened employer may contain a genuinely new named owner or business initiative, but never label that employer as first discovered; a person already researched is never new-to-public-research because a newer article names them. Propose public-only index additions for owner review after the run, never silently edit the file during read-only research. Do not infer private relationship novelty from absence in the index.
+
+Prefer a source-backed business **decision with unresolved adoption, product, implementation or cross-functional coordination work** over a generic facility opening, executive biography or fashionable AI announcement. A new factory hiring production staff is not evidence of a senior AI/product leadership opening; retain factual change but classify its personal-career fit separately. Direct job opportunities require a live, official employer ATS check and Arizona/Tucson or US-remote feasibility evidence.
+
 ## Output boundary
 
 Return only cited facts, clearly marked hypotheses and reason-coded HOLDs. Record whether this specialist was natively selected, NOT_VERIFIED, or SKIPPED_NOT_APPLICABLE. Research findings and drafts are not contact-ready or sent.
