@@ -261,5 +261,25 @@ class LeaderContactDiscoverySkillTests(unittest.TestCase):
 
 
 
+    def test_leadership_demand_gate_before_contact_search(self):
+        org = (SKILL_ROOT / "organization-discovery" / "SKILL.md").read_text(encoding="utf-8")
+        qualification = (SKILL_ROOT / "relationship-qualification" / "SKILL.md").read_text(encoding="utf-8")
+        orchestrator = self.skill["daily-executive-outreach"]
+        brief = self.skill["daily-executive-brief"]
+        audit = self.skill["run-quality-audit"]
+        labels = ("VERIFIED_LEADERSHIP_OPENING",
+                  "STRATEGIC_LEADERSHIP_SIGNAL",
+                  "INITIATIVE_ONLY_NO_LEADERSHIP_SIGNAL")
+        for body in (org, qualification, orchestrator, brief, audit, self.brief):
+            for label in labels:
+                self.assertIn(label, body)
+        self.assertIn("three named Tucson-area employers", org)
+        self.assertIn("do not backfill", orchestrator)
+        self.assertIn("precommitted three employer", audit)
+        self.assertIn("zero qualified leadership conversations", qualification)
+        self.assertIn("currently accepting", self.brief)
+        self.assertIn("not the production field qualification gate", brief)
+
+
 if __name__ == "__main__":
     unittest.main()
