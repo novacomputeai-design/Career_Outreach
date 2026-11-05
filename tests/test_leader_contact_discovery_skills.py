@@ -162,5 +162,49 @@ class LeaderContactDiscoverySkillTests(unittest.TestCase):
 
 
 
+    def test_local_initiative_must_be_supported_separately_from_local_site(self):
+        org = (SKILL_ROOT / "organization-discovery" / "SKILL.md").read_text(encoding="utf-8")
+        orchestrator = self.skill["daily-executive-outreach"]
+        audit = self.skill["run-quality-audit"]
+        brief = self.skill["daily-executive-brief"]
+        for required in ("LOCAL_SITE_CONFIRMED", "LOCAL_INITIATIVE_CONFIRMED",
+                         "LOCAL_INITIATIVE_UNVERIFIED", "Tempe/Phoenix",
+                         "REMOTE_US_FEASIBILITY_UNVERIFIED"):
+            self.assertIn(required, org)
+        self.assertIn("LOCAL_INITIATIVE_UNVERIFIED", audit)
+        self.assertIn("LOCAL_INITIATIVE_UNVERIFIED", brief)
+        self.assertIn("Tucson-area initiative", orchestrator)
+        self.assertIn("Tempe expansion plus a Tucson office", self.brief)
+
+    def test_sponsor_and_first_conversation_target_are_separate(self):
+        leadership = self.skill["leadership-discovery"]
+        brief = self.skill["daily-executive-brief"]
+        audit = self.skill["run-quality-audit"]
+        for required in ("ACCOUNTABLE_SPONSOR", "FIRST_CONVERSATION_TARGET",
+                         "FIRST_CONVERSATION_TARGET_CANDIDATE",
+                         "RESEARCH_HOLD", "DOCUMENTED"):
+            self.assertIn(required, leadership)
+        self.assertIn("source-verified operating VP", self.brief)
+        self.assertIn("ACCOUNTABLE_SPONSOR", brief)
+        self.assertIn("practical first-conversation candidate", audit)
+        self.assertIn("historical VP title", audit)
+
+    def test_bounded_contact_stop_and_distinct_contribution(self):
+        contact = self.skill["contact-verification"]
+        orchestrator = self.skill["daily-executive-outreach"]
+        qualification = (SKILL_ROOT / "relationship-qualification" / "SKILL.md").read_text(encoding="utf-8")
+        for required in ("one pass per lane", "one targeted source recheck",
+                         "CONTACT_SEARCH_COMPLETED_NO_SUITABLE_ROUTE",
+                         "next already-screened qualified employer"):
+            self.assertIn(required, contact.replace("**", ""))
+        self.assertIn("three-lane contact search", orchestrator)
+        self.assertIn("CONTRIBUTION_UNCLEAR", qualification)
+        self.assertIn("one initiative-specific decision", qualification)
+        self.assertIn("incumbent owner", qualification)
+        self.assertIn("CONTACT_SEARCH_COMPLETED_NO_SUITABLE_ROUTE", self.brief)
+        self.assertIn("CONTRIBUTION_UNCLEAR", self.brief)
+        self.assertIn("CONTACT_READY=false", self.skill["daily-executive-brief"])
+
+
 if __name__ == "__main__":
     unittest.main()
