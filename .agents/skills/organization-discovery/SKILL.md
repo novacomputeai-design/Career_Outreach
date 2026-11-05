@@ -18,6 +18,12 @@ Apply an owner-provided **public-only previously-researched exclusion list** to 
 
 Before naming leaders, load the public-only previously researched baseline at `../../../config/public-career-research-baseline.json` and any public-only owner-provided updates. Track employer and person repeats **separately**. Known employers may yield a new initiative or different current leader; a previous employer or person's presence in a fresh search does not reset their research history. Do not enter a public career-research name or employer in the private relationship-memory gate, and do not overwrite or append the baseline in a read-only run. Missing/incomplete baseline means REPEAT_STATUS_UNKNOWN, not proven novelty.
 
+## Tucson-local trigger decision gate
+
+Treat the Tucson-first instruction as a **geographically evidenced opportunity priority**, not merely an employer-address preference. For each candidate, report three separately sourced facts: (1) employer has a Tucson/Southern Arizona operation, (2) the specific business change affects that operation or has a named regional owner, and (3) the possible internal leadership position could realistically be based there. `LOCAL_SITE_CONFIRMED` alone is **not** `LOCAL_INITIATIVE_CONFIRMED`. If a source describes a Tempe/Phoenix or other non-Tucson expansion while another source only identifies a Tucson office, mark `LOCAL_INITIATIVE_UNVERIFIED`; keep the employer in a location/feasibility HOLD rather than promote it as a Tucson deep-investigation win. A separate independently verified Arizona-eligible US-remote opportunity can still qualify on the REMOTE track. Do not assume local leadership hiring or site ownership.
+
+In a bounded local diagnostic, prioritize deeply investigating employers with *both* current initiative evidence and a demonstrated Southern Arizona connection. If fewer than three survive, show the shortfall; do not backfill with a statewide initiative merely to fill three slots. Track `TUCSON_INITIATIVE_SUPPORTED`, `REGIONAL_EMPLOYER_ONLY`, and `REMOTE_US_FEASIBILITY_UNVERIFIED` as **human-facing research annotations**, not new schema fields. 
+
 Output organization + separate initiative records and candidate business objectives, not invented executive contact lists. Neither a Tucson location nor an interesting announcement alone establishes meaningful candidate contribution.
 
 ## Output boundary
