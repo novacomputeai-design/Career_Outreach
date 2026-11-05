@@ -24,6 +24,12 @@ For each shortlisted employer, compare the most relevant **business outcome owne
 
 Require a short comparison: PRIMARY — why this person; ALTERNATE — why less suitable (if supported); CEO considered/not preferred — reason (when relevant). For each, keep current affiliation/role verification and exact initiative ownership evidence independent. If the primary has no published person-specific route, an appropriately responsible alternate may be useful but must not displace the more relevant leader without explaining the trade-off. Search for namesakes, departed executives, and role changes; when identity cannot be resolved, HOLD the individual rather than merge records.
 
+## Separate accountable sponsor from practical conversation entry point
+
+Report two distinct judgments when they differ: **ACCOUNTABLE_SPONSOR** (best evidenced owner of the overall initiative) and **FIRST_CONVERSATION_TARGET** (best evidenced, appropriately influential and potentially accessible person for a bounded career conversation). Seniority alone never wins. Compare the current, source-verified operational/product VP or Director with the accountable COO/CTO/CIO/CEO. Require a specific initiative-to-function connection for each, graded DOCUMENTED or FUNCTIONALLY_PLAUSIBLE; the latter remains a research hypothesis and cannot be presented as an established sponsor. Never infer that an old event title remains current.
+
+Choose an operating VP/Director over a less accessible C-suite sponsor **only if** current role is independently supported, the VP's work actually intersects the bounded outcome, and a legitimate professional entry path is better supported. If current role, scope or route is unverified, retain the relevant VP as **FIRST_CONVERSATION_TARGET_CANDIDATE — RESEARCH_HOLD**, not as a confirmed primary. If all choices are inaccessible, keep the best evidenced decision owner as a research prospect, but do not represent the prospect as actionable. Explain the sponsor-versus-target trade-off in one sentence rather than defaulting to the most senior official biography.
+
 ## Output boundary
 
 Return only cited facts, clearly marked hypotheses and reason-coded HOLDs. Record whether this specialist was natively selected, NOT_VERIFIED, or SKIPPED_NOT_APPLICABLE. Research findings and drafts are not contact-ready or sent.
