@@ -31,6 +31,10 @@ For each primary leader explicitly answer **who**, **why that leader rather than
 
 The final report should note which known people were excluded or updated using `config/public-career-research-baseline.json`. When the baseline was unavailable, state repeat status UNKNOWN; never invent a "new person" count from absence in an untrusted source.
 
+## Focused diagnostic result accounting
+
+Report `LOCAL_INITIATIVE_CONFIRMED` versus `LOCAL_INITIATIVE_UNVERIFIED` explicitly and never treat an unrelated Arizona project as a Tucson opportunity. For each deep employer list: ACCOUNTABLE_SPONSOR; FIRST_CONVERSATION_TARGET (or candidate on hold); reason for that distinction; evidence grade for each person's initiative connection; contact-search lanes actually completed; and one bounded measurable contribution with known overlap. If the best target is still a hypothetical or unreachable executive, show it as **PROMISING_RESEARCH_PROSPECTS**, not a newly contactable lead. After CONTACT_SEARCH_COMPLETED_NO_SUITABLE_ROUTE, show the next screened employer examined or state no source-supported substitute exists. Keep the local-first usefulness assessment distinct from novelty and CONTACT_READY=false.
+
 ## Output boundary
 
 Return only cited facts, clearly marked hypotheses and reason-coded HOLDs. Record whether this specialist was natively selected, NOT_VERIFIED, or SKIPPED_NOT_APPLICABLE. Research findings and drafts are not contact-ready or sent.
