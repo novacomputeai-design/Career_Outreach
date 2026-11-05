@@ -26,6 +26,12 @@ Do not confuse **interesting company**, **reachable person**, and **credible per
 
 Use `PROMISING_RESEARCH_ONLY` if the business problem is promising but sponsor, current implementation status or distinct responsibility is unresolved. Use `LOW_CAREER_FIT` when the opportunity's evidenced scope is mainly production staffing, product sales, executive duties already fully owned or otherwise unrelated to the candidate's permanent internal leadership objective—even if a contact email is easily found. These are **human review labels**, not new machine states or score thresholds. The contact route cannot improve the factual contribution score or override a weak fit. Before promoting a conversation thesis, explicitly answer: **What would I ask this leader about their business decision, and what could I personally own that they don't already clearly own?** If this cannot be answered without a generic pitch, hold.
 
+## Evidence-based leadership demand triage
+
+After establishing the business initiative, explicitly ask **why an employer might need a distinct senior internal product/AI/transformation leader now**. Ground the answer in a current official leadership vacancy (`VERIFIED_LEADERSHIP_OPENING`), a source-backed change in organizational remit or business implementation mandate (`STRATEGIC_LEADERSHIP_SIGNAL`), or say `INITIATIVE_ONLY_NO_LEADERSHIP_SIGNAL`. The middle case is *research justification only*: assigning work to an incumbent can mean the organization is already staffed, and a launch announcement by itself says nothing about open leadership needs. A present vacancy still requires location/mandatory-qualification fit; a strategy conversation still requires a genuinely distinct bounded role hypothesis, not a claim of hiring intent.
+
+Rank candidate opportunities by **evidence of leadership demand and distinct transferable responsibility**, then Tucson/eligible-remote feasibility, then accountable decision-maker relevance, and only later contact convenience. If all three precommitted pilot employers lack evidence, report **zero** qualified leadership conversations and the next specific discovery question. Do not substitute volume, executive prestige, company size, published email or a generic AI proposal for fit.
+
 ## Output boundary
 
 Return only cited facts, clearly marked hypotheses and reason-coded HOLDs. Record whether this specialist was natively selected, NOT_VERIFIED, or SKIPPED_NOT_APPLICABLE. Research findings and drafts are not contact-ready or sent.
