@@ -24,6 +24,10 @@ Before finalizing the read-only brief, audit (1) **leader identification:** curr
 
 For every hold, name the **one next verification step**. Report both counts: new-to-public-research leaders with a sourced potentially usable work route, and promising leaders whose route is profile-only/historical/restricted/unknown. Never equate any research finding, a public email or a valid LinkedIn profile with contact readiness, consent, novelty in the private store or employment feasibility.
 
+## Focused local discovery acceptance checks
+
+Flag as HOLD when: (a) a Southern Arizona site is used to "localize" an unrelated Phoenix/Tempe/statewide initiative (`LOCAL_INITIATIVE_UNVERIFIED`); (b) a relevant but historical VP title is elevated to current PRIMARY without role recheck; (c) an inaccessible but prestigious COO/CEO/CTO is chosen as the practical first target despite a better-evidenced, appropriate operational leader; (d) a contact hold lacks a bounded three-lane search trail and explicit onward-selection outcome; or (e) the contribution proposal duplicates the incumbent's remit without a distinct initiative-specific decision, bounded responsibility and plausible metric. The accountable sponsor and practical first-conversation candidate may legitimately be different; verify each independently. Do not require a public contact to exist, force new leaders, or make zero-result searches into fabricated PASS outcomes.
+
 ## Output boundary
 
 Return only cited facts, clearly marked hypotheses and reason-coded HOLDs. Record whether this specialist was natively selected, NOT_VERIFIED, or SKIPPED_NOT_APPLICABLE. Research findings and drafts are not contact-ready or sent.
