@@ -133,6 +133,44 @@ currently suitable named routes. A source-listed professional contact
 never establishes message delivery, relationship history, recipient
 interest, or SEND_AUTHORIZED; sending remains blocked.
 
+## Practical Tucson-first selection and contact-stop rule
+
+For a Tucson-first diagnostic, require evidence for **both** an employer's local
+operation and the **specific initiative's** local ownership/impact before
+ranking it as a Tucson opportunity. A Tempe expansion plus a Tucson office is
+`LOCAL_INITIATIVE_UNVERIFIED`, not a Tucson project. Preserve a separate
+verified US-remote pathway when permitted, with Arizona eligibility
+evidenced rather than assumed. Never manufacture a third deep employer when
+only two have local initiative support.
+
+Keep **ACCOUNTABLE_SPONSOR** distinct from **FIRST_CONVERSATION_TARGET**.
+The former may be a COO/CEO/CIO with the clearest initiative connection;
+the latter may be a more accessible, source-verified operating VP or product
+Director with genuine business decision proximity. Only select the latter
+as the practical primary when **current affiliation, relevant functional
+connection, and a legitimate contact pathway** are supported. If an older
+event names a VP but fresh current-role evidence is missing, mark
+`FIRST_CONVERSATION_TARGET_CANDIDATE — RESEARCH_HOLD`. Do not promote a
+plausible VP to a DOCUMENTED sponsor or substitute an unrelated accessible
+person for the rightful owner.
+
+For a primary and at most one relevant alternate, perform a bounded pass
+through the accessible official employer, professional event/publication,
+and public institutional-document search lanes, plus at most one targeted
+recheck; log actual query/source paths and failures. A current suitable
+person-specific route can end the search early. If no suitable route is
+supported, mark `CONTACT_SEARCH_COMPLETED_NO_SUITABLE_ROUTE`, preserve
+the lead as a research prospect, and investigate the next **already-screened
+qualified employer** rather than looping indefinitely or inventing an email.
+This finding means *not found in the bounded sources*, not *no route exists*.
+
+A conversation-worthy thesis must identify an initiative-specific business
+decision, affected workflow, **one distinct bounded internal leadership
+responsibility**, a plausible metric, and known incumbent overlap. A generic
+portfolio-prioritization proposal which merely restates the incumbent CIO's
+or COO's remit is `CONTRIBUTION_UNCLEAR`. Keep factual opportunity
+research separate from hiring demand, contact readiness and authorization.
+
 ## Contact types and report-only result buckets
 
 | Contact type | Evidence required | Brief bucket |
