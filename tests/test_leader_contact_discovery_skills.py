@@ -254,7 +254,7 @@ class LeaderContactDiscoverySkillTests(unittest.TestCase):
             self.assertIn(label, qualification)
             self.assertIn(label, self.brief)
             self.assertIn(label, self.skill["daily-executive-brief"])
-        self.assertIn("production staffing", org)
+        self.assertIn("production staff", org)
         self.assertIn("LOW_CAREER_FIT", leader)
         self.assertIn("contact route cannot improve", qualification)
         self.assertIn("Never rank a weak-fit owner", self.brief)
