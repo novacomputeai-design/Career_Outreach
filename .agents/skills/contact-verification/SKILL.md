@@ -42,6 +42,12 @@ Classify every discovered contact independently by **identity match**, **current
 
 A name in a PDF is not enough: verify the document pairs the same person, the employer, and the actual business contact; check a newer official source for role continuity. Never guess email patterns, harvest personal/home/mobile contact information, scrape gated platforms, or send anything. These are **report-only evidence labels**, not changes to V2.2 route schema or a license to contact.
 
+## Bounded contact completion and onward selection
+
+For each employer's best evidenced practical conversation candidate and at most one supported alternate, run the three distinct available public-source lanes above; cap the search at a bounded **one pass per lane and one targeted source recheck** for a promising lead, not repeated open-ended variants of the same query. Record the exact search strings/pages and each result or access limitation. Stop early for a *current, suitable, person-specific professional route*; otherwise set `CONTACT_SEARCH_COMPLETED_NO_SUITABLE_ROUTE` after the lanes are exhausted, alongside the original contact classification and the one highest-value unresolved check. This is **not** a claim that no contact exists elsewhere.
+
+When the practical candidate lacks a suitable route, test a source-supported alternate only if that alternate has real proximity to the same business decision; do not switch to a general switchboard or unrelated easier-to-contact executive. Once the bounded search is complete, **keep the employer as a research prospect and move on to the next already-screened qualified employer**. Do not discard the strategic signal, relax route standards, or spend the full run repeating generic email searches. A purpose-limited procurement contact is never promoted solely because a named address appears in an official PDF. No contact-ready or send authorization follows.
+
 ## Output boundary
 
 Return only cited facts, clearly marked hypotheses and reason-coded HOLDs. Record whether this specialist was natively selected, NOT_VERIFIED, or SKIPPED_NOT_APPLICABLE. Research findings and drafts are not contact-ready or sent.
