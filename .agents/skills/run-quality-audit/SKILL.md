@@ -30,7 +30,7 @@ Flag as HOLD when: (a) a Southern Arizona site is used to "localize" an unrelate
 
 ## Three-field correction audit
 
-Audit every displayed result for **CONTACT_BINDING**: if an owner-signed webpage says to send questions to `howdy@` or similar shared company mailbox, the route is contextual shared—not a direct named email, even if the same page proves the owner's identity. If a named `armen@`-style address is listed only as a media contact, classify purpose-restricted. Require exact publisher, source date, purpose, current affiliation and person-to-destination binding. Do not inflate `PERSON_ROUTE_SUPPORTED` or `CONTACT_READY`.
+Audit every displayed result for **CONTACT_BINDING** (shared mailboxes are `SHARED_INBOX_CONTEXTUAL_INVITATION`, not direct routes): if an owner-signed webpage says to send questions to `howdy@` or similar shared company mailbox, the route is contextual shared—not a direct named email, even if the same page proves the owner's identity. If a named `armen@`-style address is listed only as a media contact, classify purpose-restricted. Require exact publisher, source date, purpose, current affiliation and person-to-destination binding. Do not inflate `PERSON_ROUTE_SUPPORTED` or `CONTACT_READY`.
 
 Audit **PUBLIC_REPEAT_COVERAGE**: the public-only index includes past screened employers and people from all reviewed supervised rounds. Distinguish employer, person and opportunity novelty, report any missing index coverage as UNKNOWN and propose owner-reviewed public-only additions; never read protected relationship notes.
 
