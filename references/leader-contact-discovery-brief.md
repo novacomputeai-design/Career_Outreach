@@ -211,6 +211,31 @@ valuable research prospect. **Never rank a weak-fit owner above a
 strong-fit but route-held leader merely because an email is published.**
 These are report-only evaluations, not new V2.2 schema states.
 
+## Early evidence of genuine leadership demand
+
+Before investigating an executive's contact address, distinguish three
+**human-facing, report-only** categories with exact visited sources:
+
+- `VERIFIED_LEADERSHIP_OPENING`: an official **currently accepting**
+  product/AI/transformation leadership requisition, subject to actual work
+  location and mandatory credential fit; no invented hiring manager.
+- `STRATEGIC_LEADERSHIP_SIGNAL`: a dated initiative **with a demonstrated
+  change in organizational mandate, cross-functional ownership,
+  implementation capacity or scale** that may justify a specific senior
+  internal leadership conversation; it is not proof of a vacancy.
+- `INITIATIVE_ONLY_NO_LEADERSHIP_SIGNAL`: an interesting project,
+  new site, press release or technology adoption without such evidence.
+  Preserve useful employer intelligence, but do not launch executive-email
+  searches solely for the announcement.
+
+Give more weight to **distinct useful leadership scope** than to a public
+email or famous executive. A three-employer supervised diagnostic must
+name the original three employers **before** searching, prefer employer
+novelty from the public baseline, never backfill after a poor result, and
+report all three with PASS/HOLD/FAIL and exact next steps. Existing-company
+new initiatives are eligible but not new employers. This is not a full
+V2.1 six-employer field qualification or a live native skill attestation.
+
 ## Contact types and report-only result buckets
 
 | Contact type | Evidence required | Brief bucket |
