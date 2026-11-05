@@ -41,6 +41,10 @@ Before displaying a recommendation, answer in plain language: **(1) Why is this 
 
 Report newly discovered people/employers against `config/public-career-research-baseline.json`, and explicitly call out prior-screened matches even if their initiatives are new. Do not count a new email discovery as a new leader. Prefer **one leader genuinely worth discussing** to a long list of available inboxes. All findings remain owner-review research, not CONTACT_READY, send approved or job applications.
 
+## Small-pilot reporting contract
+
+For a **three-employer precommitted pilot**, display the original three employers whether qualified or not, each source-backed trigger, publication date, research-history repeat status and `VERIFIED_LEADERSHIP_OPENING` / `STRATEGIC_LEADERSHIP_SIGNAL` / `INITIATIVE_ONLY_NO_LEADERSHIP_SIGNAL`. For any qualifying deeper prospect report the specific internal senior leadership responsibility that may be distinct from the current incumbent, direct-hiring versus exploratory pathway, local/Arizona-remote feasibility, current appropriate person-specific contact or honest route hold, and exact next research action. Separate a genuinely verified current official job from a possible strategic conversation, and separate both from a general interesting initiative. Report **zero qualified conversations** rather than treating all three employer screenings or published inboxes as useful discoveries. Note that this diagnostic is not the production field qualification gate.
+
 ## Output boundary
 
 Return only cited facts, clearly marked hypotheses and reason-coded HOLDs. Record whether this specialist was natively selected, NOT_VERIFIED, or SKIPPED_NOT_APPLICABLE. Research findings and drafts are not contact-ready or sent.
