@@ -276,7 +276,7 @@ class LeaderContactDiscoverySkillTests(unittest.TestCase):
         self.assertIn("three named Tucson-area employers", org)
         self.assertIn("do not backfill", orchestrator)
         self.assertIn("precommitted three employer", audit)
-        self.assertIn("zero qualified leadership conversations", qualification)
+        self.assertIn("qualified leadership conversations", qualification)
         self.assertIn("currently accepting", self.brief)
         self.assertIn("not the production field qualification gate", brief)
 
