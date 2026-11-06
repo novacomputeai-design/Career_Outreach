@@ -281,5 +281,25 @@ class LeaderContactDiscoverySkillTests(unittest.TestCase):
         self.assertIn("not the production field qualification gate", brief)
 
 
+    def test_decision_maker_depth_is_independent_of_new_employer_discovery(self):
+        leader = self.skill["leadership-discovery"]
+        contact = self.skill["contact-verification"]
+        orchestrator = self.skill["daily-executive-outreach"]
+        brief = self.skill["daily-executive-brief"]
+        audit = self.skill["run-quality-audit"]
+        for term in ("Decision-maker depth check", "DOCUMENTED_OWNER",
+                     "FIRST_CONVERSATION_TARGET", "APPLICATION_ROUTE"):
+            self.assertIn(term, leader)
+        for term in ("Decision-maker-specific second pass", "ALTERNATE_PERSON_ROUTE_HOLD",
+                     "RECRUITING_PROCESS_ROUTE", "OFFICIAL_APPLICATION_ROUTE"):
+            self.assertIn(term, contact)
+        self.assertIn("two already shortlisted employers", orchestrator)
+        self.assertIn("no employer expansion", self.brief.lower())
+        self.assertIn("named recruiting-process contact", self.brief)
+        self.assertIn("who to contact", brief)
+        self.assertIn("Decision-maker discovery-depth acceptance check", audit)
+        self.assertIn("does not require inventing a direct email", audit)
+
+
 if __name__ == "__main__":
     unittest.main()
