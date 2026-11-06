@@ -1,6 +1,6 @@
 ---
 name: daily-executive-outreach
-description: Orchestrate recurring daily career-networking intelligence to discover and vet up to 20 NEW contact-ready executives, Tucson-first and suitable remote, with zero automatic sending.
+description: Orchestrate Tucson-first career opportunity research, decision-maker selection and verified professional contact checks, with no automatic outreach.
 ---
 # daily-executive-outreach
 
@@ -8,3 +8,14 @@ Read `../../../references/daily-operating-contract.md`. Before sourcing, verify 
 
 ## First-release report boundary
 For the five-person supervised Google review run, follow `../../../docs/DRIVE_REVIEW_HANDOFF.md`: source-backed public people/role/initiative/route into a bounded private JSON research packet only. Call the relevant specialists using Codex's supported native mechanism and record each actual activation. No Google connector access or memory authority is conferred by a GitHub skill. Operator alone screens encrypted relationship memory and imports a reviewed report into Google. Keep contact-ready=0, sending=0 until independently qualified.
+
+## Supervised decision-maker discovery — mode and handoff
+
+**Mode precedence:** Follow the owner's explicit scope first. For FIXED_EMPLOYER/FIXED_REQUISITION research, investigate only the named employers and roles; do not restart a Tucson employer scan or apply older sample-size and daily-quota targets. For BROAD_DISCOVERY, research Tucson/Southern Arizona first and feasible US-remote second. Apply a special local or frozen-employer pilot constraint only if the owner explicitly requests that pilot. These modes govern source research, not contact-ready certification or authorization.
+
+**Activation trigger:** After organization-discovery establishes a sourced, plausibly relevant DIRECT_HIRING vacancy, start leadership-discovery **even when the hiring manager is unnamed**, then hand relevant people to contact-verification. A live ATS status or location HOLD remains a separate limitation; do not call an opening active on indexed text alone. Also trigger leadership-discovery for a specific STRATEGIC_EXPLORATION initiative selected for person-targeted research when a bounded potential leadership contribution is credible; hiring remains unconfirmed. A generic AI announcement without a meaningful leadership connection does not justify a broad contact hunt. Do not treat a missing named manager or personal work email as evidence that no worthwhile person exists.
+
+**Ordered handoff:** Research the official role/reporting line and the business/data/product operating function; search exact job title/requisition and employer posts for a named hiring-process promoter or recruiter before final selection. Leadership-discovery evaluates materially relevant people without treating three as a research cap; it recommends one FIRST_CONVERSATION_TARGET and, if supported, one alternate. Contact-verification checks those exact names with bounded public, purpose-appropriate sources. Keep ACCOUNTABLE_SPONSOR, functional leader, recruiting-process contact, public role promotion/invitation, and official application route distinct. A recruiter can be the best initial hiring-process entry without becoming a proven hiring decision-maker.
+
+**Research-only output:** Show documented opportunity, strongest current people, source-based reason to connect, route class and unresolved checks. Preserve promising PROFILE_ONLY or CONTACT_HOLD findings without declaring CONTACT_READY, personal novelty, a currently accepting vacancy, or send/apply authority. The operator-only encrypted relationship screen and all existing review and send blocks remain unchanged; no protected memory is opened in Codex.
+

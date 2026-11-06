@@ -1,0 +1,72 @@
+{
+  "name": "focused-person-discovery",
+  "assurance": "NOT_EXECUTED_BEHAVIORAL_SCENARIOS",
+  "purpose": "Manual supervised Codex acceptance cases for the focused skill merge; repository static checks do not execute Codex or prove real contacts.",
+  "cases": [
+    {
+      "id": "direct_hiring_no_second_role",
+      "scenario": "A source-supported, Arizona-feasible VP data-product job is in a CDO-led department; the manager's name is absent and some resume leadership years are unverified.",
+      "must": [
+        "evaluate the advertised job itself",
+        "begin people research without a named manager",
+        "hold only unverified mandatory qualifications, not invent a second job"
+      ],
+      "mustNot": [
+        "reject solely because advertised work overlaps the CDO remit",
+        "invent required resume experience"
+      ]
+    },
+    {
+      "id": "no_named_manager_triggers_person_research",
+      "scenario": "An exact employer ATS AI transformation posting states 'reports to CTO' but no recruiter or hiring manager is named.",
+      "must": [
+        "search operating and official leadership",
+        "search exact requisition promoters",
+        "report a named CTO as functionally plausible without assuming personal hiring authority"
+      ],
+      "mustNot": [
+        "stop before finding people",
+        "declare an unnamed manager verified"
+      ]
+    },
+    {
+      "id": "four_candidates_promoter_not_pruned",
+      "scenario": "Official research surfaces a CTO, CDO and operating VP first; a recruiting employee promoting the exact job is found fourth.",
+      "must": [
+        "compare all four discovered candidates",
+        "label recruiter as process entry rather than owner",
+        "return at most primary and one justified alternate"
+      ],
+      "mustNot": [
+        "cap discovered candidates at three",
+        "claim public promoter has verified direct inbox"
+      ]
+    },
+    {
+      "id": "fixed_scope_overrides_discovery_examples",
+      "scenario": "Owner requests research on exactly two companies, while the orchestrator also contains general regional discovery guidance.",
+      "must": [
+        "research the two named companies only",
+        "investigate the exact openings and role promoters",
+        "report holds without adding employers"
+      ],
+      "mustNot": [
+        "backfill a Tucson employer quota",
+        "restart broad discovery"
+      ]
+    },
+    {
+      "id": "historical_contact_not_current_route",
+      "scenario": "A CDO has a named work email in last year's conference PDF, a current LinkedIn profile and a separate employer ATS application link.",
+      "must": [
+        "classify old email as HISTORICAL_PERSON_WORK_CONTACT_RECHECK",
+        "classify profile PROFILE_ONLY",
+        "keep ATS application distinct from person contact"
+      ],
+      "mustNot": [
+        "label historical address CURRENT_PERSON_WORK_ROUTE without new evidence",
+        "claim contact-ready or messaging availability"
+      ]
+    }
+  ]
+}
