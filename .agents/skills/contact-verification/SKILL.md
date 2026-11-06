@@ -60,6 +60,12 @@ For a promising employer with no person-specific route to the documented senior 
 
 An official ATS **application link** is `OFFICIAL_APPLICATION_ROUTE`, not a verified manager email; a named recruiter/contact given by the employer can be `RECRUITING_PROCESS_ROUTE` only for its stated purpose, and does not prove business decision authority. Neither may be passed off as direct executive outreach. No guessed email, personal mobile lookup, restricted-content access, or outreach permission. Before moving on, report primary and alternate route classifications independently.
 
+## Route check for role-specific promoters
+
+When leadership-discovery supplies an independently role-verified `ROLE_SPECIFIC_PROMOTER`, inspect the **exact public post** for a purpose-aligned invitation ("reach out", "contact me", or equivalent) and record the direct URL, publication date, attributed account, exact role/requisition match, and invitation text in the private research summary. Classify a verified public person-authored **role-specific invitation** as `ROLE_SPECIFIC_INVITATION_PUBLIC` even when no address is printed; this is **not** `CURRENT_PERSON_WORK_ROUTE`, a verified message channel, consent for automation, or proof that platform messaging is available. A recruiter sharing a listing without inviting inquiries is `ROLE_SPECIFIC_PROMOTION_ONLY` and may be a recruiting-process lead, not a permission to contact. Official job applications are `OFFICIAL_APPLICATION_ROUTE`, never a named executive route.
+
+For each promoted person who is a credible functional/recruiting entry, run the **existing bounded official, professional, and institutional three-lane person-specific search** for an explicitly published current business email, named office contact, or appropriate individual form. Validate exact person and intended purpose, report `PROFILE_ONLY` / `ALTERNATE_PERSON_ROUTE_HOLD` if no such route is verified, and do **not** call public-profile visibility a verified messaging path. Keep `ROLE_SPECIFIC_INVITATION_PUBLIC` as a separate, valuable **reason-to-connect signal** from the actual contact route and current posting acceptance. No guessing addresses, private personal numbers, platform bypass or messages.
+
 ## Output boundary
 
 Return only cited facts, clearly marked hypotheses and reason-coded HOLDs. Record whether this specialist was natively selected, NOT_VERIFIED, or SKIPPED_NOT_APPLICABLE. Research findings and drafts are not contact-ready or sent.
