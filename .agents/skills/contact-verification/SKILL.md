@@ -54,6 +54,12 @@ When the practical candidate lacks a suitable route, test a source-supported alt
 
 For each contact result record separately: `published_value` (private human-facing report only), `recipient_binding` (NAMED_INDIVIDUAL / SHARED_OR_UNDETERMINED), `publication_purpose` (GENERAL_PROFESSIONAL / CONTEXTUAL_INQUIRY / MEDIA / PROCUREMENT / OTHER / UNKNOWN), `source_date`, `role_currentness`, `channel_type`, and `research_bucket`. These are display-only annotations, not runtime/schema migrations. A contextual shared route can support a *manual inquiry for its stated topic* after owner review, but it is never proof of an executive's direct inbox and never grants contact authorization.
 
+## Decision-maker-specific second pass
+
+For a promising employer with no person-specific route to the documented senior sponsor, take **one bounded second pass** on the *supported functional VP/Director alternate* identified by leadership-discovery, **not** a generic broad email search or additional employer search. Search (a) current company bio/directory and indexed official pages for exact person's name, (b) current public professional conference/association/speaker pages, and (c) appropriate official institution/filing records; inspect one newly discovered source for explicit individual-binding, current affiliation and purpose. If a current, appropriate, named work route appears, record the value with publisher, date and person binding. Otherwise explicitly return `ALTERNATE_PERSON_ROUTE_HOLD` and the precise failed lanes; do not mark the whole employer `PERSON_ROUTE_SUPPORTED`.
+
+An official ATS **application link** is `OFFICIAL_APPLICATION_ROUTE`, not a verified manager email; a named recruiter/contact given by the employer can be `RECRUITING_PROCESS_ROUTE` only for its stated purpose, and does not prove business decision authority. Neither may be passed off as direct executive outreach. No guessed email, personal mobile lookup, restricted-content access, or outreach permission. Before moving on, report primary and alternate route classifications independently.
+
 ## Output boundary
 
 Return only cited facts, clearly marked hypotheses and reason-coded HOLDs. Record whether this specialist was natively selected, NOT_VERIFIED, or SKIPPED_NOT_APPLICABLE. Research findings and drafts are not contact-ready or sent.
