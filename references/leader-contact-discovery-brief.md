@@ -242,6 +242,41 @@ For a follow-up focused on contact selection, **keep the already identified empl
 
 Show a compact table with: `PERSON`, `CURRENT_ROLE_SOURCE`, `DECISION_CONNECTION` (DOCUMENTED / FUNCTIONALLY_PLAUSIBLE / UNKNOWN), `WHY_PRIMARY_OR_ALTERNATE`, `SOURCE_DATE`, `CONTACT_ROUTE_CLASS`, `EXACT_PERSON_BINDING_SOURCE`, and `NEXT_CHECK`. Mark `OFFICIAL_APPLICATION_ROUTE` separately from `RECRUITING_PROCESS_ROUTE`, and both separately from a verified individual office/work address. For each *supported* primary and alternate, include the three-lane search/hold summary. A no-direct-email result can still be a useful **verified decision-maker identification**, but never a contact-ready lead.
 
+## Exact-role promoters: evidence of an appropriate entry person
+
+Before finalizing a named hiring/strategy contact, search the **exact
+employer + job title/requisition** (or initiative title) for a current
+employee's accessible public promotion or first-person invitation. Use
+a bounded set of employer recruiting/news channels and current staff
+professional posts; do not rely only on official organization charts.
+Independent employer/role validation is mandatory. A person who
+publicly promoted **this precise opportunity** may be a more
+appropriate initial conversation target than a technically relevant but
+unconnected executive, even if the post author is in recruiting.
+
+Compare three distinct things:
+
+- **Decision relevance:** sponsor, operating leader, recruiting-process
+  contact, or `ROLE_SPECIFIC_PROMOTER` (sometimes one person fills more
+  than one function). The invitation itself never establishes budget,
+  interview, or appointment authority.
+- **Expressed invitation:** `ROLE_SPECIFIC_INVITATION_PUBLIC` for a
+  genuine first-person open invitation about the exact role;
+  `ROLE_SPECIFIC_PROMOTION_ONLY` for an ordinary share/repost. Record
+  published URL/date and exact opportunity match.
+- **Actual contact channel:** employer-published named work email,
+  dedicated office number, purpose-appropriate personal form, or
+  `PROFILE_ONLY` / `ALTERNATE_PERSON_ROUTE_HOLD`; **a publicly visible
+  LinkedIn post/profile is not proof that a DM can be delivered**.
+  `OFFICIAL_APPLICATION_ROUTE` stays separate.
+
+If no new role promoter is found, document the exact-title search and
+continue with the best sourced decision owner. **Do not backfill
+unrelated people or new employers**. The finished brief must say who is
+best to approach, why that person is connected to this particular job,
+what contact method is actually verified, and what remains on HOLD.
+These report labels add no schema, readiness, or sending authority.
+
 ## Contact types and report-only result buckets
 
 | Contact type | Evidence required | Brief bucket |
