@@ -49,6 +49,10 @@ For a **three-employer precommitted pilot**, display the original three employer
 
 When tasked with deepening **who to contact**, keep the two prior employers fixed and report: verified role/initiative mandate; accountable sponsor; operational/functional primary target; any recruiter publicly promoting the exact requisition; how each decision connection was established; primary versus alternate rationale; exact source-bound appropriate contact information, role-specific public invitation, profile-only or no-route hold; and official application separately. Do not count an executive name as success without a defensible reason that *this person* can discuss the opportunity. A role-specific invitation supports a purpose-aligned outreach **hypothesis** only; platform message reachability, consent and current job acceptance still require confirmation. Finish with an evidence-based decision-maker discovery score distinct from person-route accessibility, and no engagement authorization.
 
+## Exact-role promoter checkpoint
+
+For each of the same two employers, briefly report: whether the researcher searched the **exact title or requisition** for current employee public posts; any `ROLE_SPECIFIC_PROMOTER` found and whether their post is a first-person invitation or a generic reshare; current title/company proof and exact role linkage; how they compare with the decision-owner and recruiting-process route; whether a **real person-specific professional channel** is verified or a `ROLE_SPECIFIC_INVITATION_PUBLIC` merely provides a reason-to-connect signal. Never drop a confirmed promoter merely because the employer CIO is senior; do not call role promoter a hiring manager without evidence. End with separate **Decision-maker fit**, **role-specific contact-intent evidence**, **verified contact reachability**, and **current vacancy acceptance** outcomes, including honest holds.
+
 ## Output boundary
 
 Return only cited facts, clearly marked hypotheses and reason-coded HOLDs. Record whether this specialist was natively selected, NOT_VERIFIED, or SKIPPED_NOT_APPLICABLE. Research findings and drafts are not contact-ready or sent.
