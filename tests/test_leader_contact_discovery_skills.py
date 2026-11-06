@@ -294,7 +294,7 @@ class LeaderContactDiscoverySkillTests(unittest.TestCase):
                      "RECRUITING_PROCESS_ROUTE", "OFFICIAL_APPLICATION_ROUTE"):
             self.assertIn(term, contact)
         self.assertIn("two already shortlisted employers", orchestrator)
-        self.assertIn("no employer expansion", self.brief.lower())
+        self.assertIn("keep the already identified employer set fixed", self.brief)
         self.assertIn("named recruiting-process contact", self.brief)
         self.assertIn("who to contact", brief)
         self.assertIn("Decision-maker discovery-depth acceptance check", audit)
