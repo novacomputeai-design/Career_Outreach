@@ -1,0 +1,190 @@
+{
+  "schema_version": "1.0",
+  "as_of": "2026-11-04",
+  "scope": "PUBLIC_RESEARCH_ONLY",
+  "provenance": "Partial public-only prior-research index compiled from owner-reviewed ChatGPT/Codex supervised discovery reports through 2026-11-04. An employer may have only been screened; a named person may have been held for identity/current-role/contact. No private relationship status or contact permission is inferred.",
+  "limitations": [
+    "This is a partial research repeat baseline, not a private relationship database or proof that another person is new to the owner.",
+    "Employers may have new distinct initiatives; an employer match is not a reason to discard every new person or role.",
+    "Never store personal contact histories, private notes, outreach status, work emails, office numbers, profile access tokens or owner decisions in PUBLIC Git.",
+    "Read only during Codex discovery. Proposed additions must be reviewed before a separate owner-approved update.",
+    "Previously screened does not mean no new initiative or person at that employer; previously researched people can remain incomplete or held for stale affiliation."
+  ],
+  "previously_screened_employers": [
+    "Albers Aerospace",
+    "American Battery Factory",
+    "Amgen",
+    "Arizona Chamber of Commerce & Industry",
+    "Arizona Public Service (APS)",
+    "Arizona State University",
+    "ARTO",
+    "ASARCO",
+    "Ascent Aviation Services",
+    "Banner Health",
+    "Bombardier",
+    "Caterpillar",
+    "City of Phoenix",
+    "City of Tucson",
+    "Cognizant",
+    "Critical Path Institute",
+    "Edmund Optics",
+    "El Rio Health",
+    "First American",
+    "Freeport-McMoRan",
+    "GitLab",
+    "Hexagon Mining",
+    "Honeywell Aerospace",
+    "HP Inc.",
+    "Kilgore Manufacturing",
+    "Marana Health",
+    "Microsoft",
+    "Mister Car Wash",
+    "Pima Community College",
+    "Pima County",
+    "Raytheon / RTX",
+    "Red Robin",
+    "Roche Tissue Diagnostics",
+    "Sargent Aerospace & Defense",
+    "State of Arizona",
+    "Sundt Construction",
+    "TMC Health",
+    "Tucson Airport Authority",
+    "Tucson Electric Power",
+    "Tucson Federal Credit Union",
+    "Tucson Unified School District",
+    "UnitedHealthcare",
+    "University of Arizona",
+    "Vantage West Credit Union",
+    "Veralto"
+  ],
+  "previously_researched_people": [
+    {
+      "name": "Kimberly Clark",
+      "employer": "Arizona State University"
+    },
+    {
+      "name": "Armen Alajian",
+      "employer": "ARTO"
+    },
+    {
+      "name": "Vod Alajian",
+      "employer": "ARTO"
+    },
+    {
+      "name": "John Rares Almasan",
+      "employer": "Banner Health"
+    },
+    {
+      "name": "Kevin Manemann",
+      "employer": "Banner Health"
+    },
+    {
+      "name": "Chris Mazzarella",
+      "employer": "City of Tucson"
+    },
+    {
+      "name": "Ramona Walls",
+      "employer": "Critical Path Institute"
+    },
+    {
+      "name": "Cory Stevens",
+      "employer": "Freeport-McMoRan"
+    },
+    {
+      "name": "Justin Cross",
+      "employer": "Freeport-McMoRan"
+    },
+    {
+      "name": "Kathleen Quirk",
+      "employer": "Freeport-McMoRan"
+    },
+    {
+      "name": "Manav Khurana",
+      "employer": "GitLab"
+    },
+    {
+      "name": "Dave Goddard",
+      "employer": "Hexagon Mining"
+    },
+    {
+      "name": "Ben Driggs",
+      "employer": "Honeywell Aerospace"
+    },
+    {
+      "name": "Jim Currier",
+      "employer": "Honeywell Aerospace"
+    },
+    {
+      "name": "Krista Dixon",
+      "employer": "Honeywell Aerospace"
+    },
+    {
+      "name": "Carlos Chavez",
+      "employer": "Mister Car Wash"
+    },
+    {
+      "name": "Isaac Abbs",
+      "employer": "Pima Community College"
+    },
+    {
+      "name": "Michelle Simon",
+      "employer": "Pima County"
+    },
+    {
+      "name": "Deena DePhilips",
+      "employer": "Red Robin"
+    },
+    {
+      "name": "J.R. Sloan",
+      "employer": "State of Arizona"
+    },
+    {
+      "name": "Lisa Dee Meyerson Marshall",
+      "employer": "State of Arizona"
+    },
+    {
+      "name": "Josh Lee",
+      "employer": "TMC Health"
+    },
+    {
+      "name": "Anthony Casella",
+      "employer": "Tucson Airport Authority"
+    },
+    {
+      "name": "Bruce Goetz",
+      "employer": "Tucson Airport Authority"
+    },
+    {
+      "name": "Danette Bewley",
+      "employer": "Tucson Airport Authority"
+    },
+    {
+      "name": "John Ivanoff",
+      "employer": "Tucson Airport Authority"
+    },
+    {
+      "name": "Keith Goodman",
+      "employer": "Tucson Airport Authority"
+    },
+    {
+      "name": "Dallas Dukes",
+      "employer": "Tucson Electric Power"
+    },
+    {
+      "name": "Susan Gray",
+      "employer": "Tucson Electric Power"
+    },
+    {
+      "name": "Tracey Metcalfe",
+      "employer": "Tucson Unified School District"
+    },
+    {
+      "name": "David Ebert",
+      "employer": "University of Arizona"
+    },
+    {
+      "name": "Samir Kumar",
+      "employer": "Veralto"
+    }
+  ]
+}

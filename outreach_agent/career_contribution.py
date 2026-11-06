@@ -38,7 +38,13 @@ def validate_v22_packet(packet):
 
 
 def assess_contribution(record):
-    """Evaluate a bounded *hypothesis*, not the need for a new job."""
+    """Conservatively assess a *source-reported* career hypothesis, never proven value.
+
+    A descriptive narrative and known candidate reference IDs are not enough
+    for STRONG_CONTRIBUTION. A source-claimed operational problem, measurable
+    outcome and bounded non-replacement mandate must be explicitly linked.
+    This is still structural corroboration, NOT independently verified truth.
+    """
     value = record["career_value"]
     org = record["organization"]
     claims = {c["claim_id"]: c for c in record["claims"]}
@@ -46,11 +52,13 @@ def assess_contribution(record):
     candidate_refs = value["candidate_evidence_refs"]
     if not candidate_refs or not set(candidate_refs) <= PUBLIC_CANDIDATE_CAPABILITIES:
         reasons.append("CANDIDATE_CAPABILITY_EVIDENCE_UNKNOWN")
-    if value["existing_owner_status"] == "OWNER_UNKNOWN":
+
+    owner_status = value["existing_owner_status"]
+    if owner_status == "OWNER_UNKNOWN":
         reasons.append("EXISTING_PRODUCT_LEADERSHIP_UNKNOWN")
-    # An existing executive may make a complementary remit sensible; there
-    # must still be an explicit owner review, not an invented vacancy.
-    if value["existing_owner_status"] == "EXISTING_OWNER_DOCUMENTED":
+    if owner_status == "EXISTING_OWNER_DOCUMENTED":
+        # A self-reported complementary remit is not sufficient to conclude
+        # an existing chief / product leader needs a second executive.
         reasons.append("EXISTING_OWNER_REMIT_REQUIRES_COMPARATIVE_REVIEW")
     if value["maturity"] == "UNKNOWN":
         reasons.append("INITIATIVE_MATURITY_UNVERIFIED")
@@ -60,6 +68,22 @@ def assess_contribution(record):
         if not _claim(claims, objective_id, kind="BUSINESS_OBJECTIVE",
                       subject=org["organization_id"]):
             reasons.append("BUSINESS_OBJECTIVE_SOURCE_UNVERIFIED")
+
+    problem = _claim(
+        claims, value.get("problem_claim_id"), kind="OPERATIONAL_PROBLEM",
+        subject=org["organization_id"],
+        object_id=record["initiative"]["initiative_id"]
+    ) if value.get("problem_claim_id") else None
+    if not problem or problem.get("support_relationship") != "DIRECT":
+        reasons.append("OPERATIONAL_PROBLEM_NOT_DIRECTLY_SOURCE_LINKED")
+    if not value.get("outcome_metric"):
+        reasons.append("MEASURABLE_OUTCOME_NOT_SPECIFIED")
+
+    boundary = value.get("mandate_boundary")
+    if boundary == "REPLACES_EXISTING_CHIEF_FUNCTION":
+        reasons.append("EXISTING_CHIEF_FUNCTION_TAKEOVER")
+    elif boundary != "COMPLEMENTARY_INTERNAL_SCOPE":
+        reasons.append("COMPLEMENTARY_MANDATE_NOT_ESTABLISHED")
 
     trigger = _claim(claims, value["trigger_claim_id"], kind="BUSINESS_TRIGGER",
                      subject=org["organization_id"]) if value["trigger_claim_id"] else None
@@ -77,22 +101,38 @@ def assess_contribution(record):
         else:
             timing = "MONITOR_TRIGGER"
             reasons.append("BUSINESS_TRIGGER_STALE_OR_UNDATED")
-    # Even a structurally strong claim is a source-reported hypothesis.
-    if "BUSINESS_OBJECTIVE_SOURCE_UNVERIFIED" in reasons or "CANDIDATE_CAPABILITY_EVIDENCE_UNKNOWN" in reasons:
+
+    if ("BUSINESS_OBJECTIVE_SOURCE_UNVERIFIED" in reasons
+            or "CANDIDATE_CAPABILITY_EVIDENCE_UNKNOWN" in reasons
+            or "EXISTING_CHIEF_FUNCTION_TAKEOVER" in reasons):
         quality = "NO_CREDIBLE_CONTRIBUTION"
-    elif (value["existing_owner_status"] == "OWNER_UNKNOWN"
-          or value["maturity"] == "UNKNOWN"):
+    elif any(code in reasons for code in (
+        "EXISTING_PRODUCT_LEADERSHIP_UNKNOWN",
+        "EXISTING_OWNER_REMIT_REQUIRES_COMPARATIVE_REVIEW",
+        "INITIATIVE_MATURITY_UNVERIFIED",
+        "OPERATIONAL_PROBLEM_NOT_DIRECTLY_SOURCE_LINKED",
+        "MEASURABLE_OUTCOME_NOT_SPECIFIED",
+        "COMPLEMENTARY_MANDATE_NOT_ESTABLISHED",
+    )):
         quality = "CONTRIBUTION_RESEARCH_NEEDED"
     else:
         quality = "STRONG_CONTRIBUTION"
+
     return {
         "contribution_quality": quality,
         "timing_status": timing,
         "reason_codes": sorted(set(reasons)),
         "proposed_internal_responsibility": value["proposed_internal_responsibility"],
         "candidate_capability_refs": list(candidate_refs),
-        "existing_owner_status": value["existing_owner_status"],
+        "existing_owner_status": owner_status,
         "source_assurance": "SELF_REPORTED_SOURCE_METADATA_NOT_INDEPENDENTLY_VERIFIED",
+        "operational_problem_source_status": (
+            "DIRECT_SOURCE_REPORTED_NOT_INDEPENDENTLY_VERIFIED"
+            if problem and problem.get("support_relationship") == "DIRECT"
+            else "NOT_DIRECTLY_SOURCE_LINKED"
+        ),
+        "career_value_proven": False,
+        "independent_semantic_review": "NOT_PERFORMED",
         "leadership_gap_or_hiring_proven": False,
     }
 
@@ -108,6 +148,7 @@ def evaluate_v22_opportunity(record):
     quality = assess_contribution(record)
     baseline["schema_version"] = "2.2"
     baseline["career_value_assessment"] = quality
+    baseline["reasons"] = sorted(set(baseline["reasons"] + quality["reason_codes"]))
     if record["engagement_pathway"] == "STRATEGIC_EXPLORATION":
         if quality["contribution_quality"] == "NO_CREDIBLE_CONTRIBUTION":
             baseline["research_state"] = "EVIDENCE_HOLD"

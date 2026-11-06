@@ -625,6 +625,31 @@
             "SCALING",
             "UNKNOWN"
           ]
+        },
+        "problem_claim_id": {
+          "anyOf": [
+            {
+              "type": "string",
+              "minLength": 1
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "Optional, explicitly bound source-reported OPERATIONAL_PROBLEM claim for this initiative. Missing means research needed."
+        },
+        "outcome_metric": {
+          "type": "string",
+          "minLength": 4,
+          "description": "Named success measure for the proposed responsibility; hypothetical until independently reviewed."
+        },
+        "mandate_boundary": {
+          "enum": [
+            "COMPLEMENTARY_INTERNAL_SCOPE",
+            "REQUIRES_SCOPE_REVIEW",
+            "REPLACES_EXISTING_CHIEF_FUNCTION"
+          ],
+          "description": "Conservative operator-research classification; self-report alone never proves complementary leadership need."
         }
       }
     }
