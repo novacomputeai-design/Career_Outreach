@@ -301,5 +301,30 @@ class LeaderContactDiscoverySkillTests(unittest.TestCase):
         self.assertIn("does not require inventing a direct email", audit)
 
 
+    def test_exact_role_promoter_search_and_channel_are_separate(self):
+        leader = self.skill["leadership-discovery"]
+        contact = self.skill["contact-verification"]
+        orchestrator = self.skill["daily-executive-outreach"]
+        audit = self.skill["run-quality-audit"]
+        brief = self.skill["daily-executive-brief"]
+        self.assertIn("Exact-opportunity promoter discovery", leader)
+        self.assertIn("exact job title or requisition ID", leader)
+        self.assertIn("ROLE_SPECIFIC_PROMOTER", leader)
+        self.assertIn("current identity and affiliation", leader)
+        self.assertIn("role-specific promoters", contact.lower())
+        self.assertIn("ROLE_SPECIFIC_INVITATION_PUBLIC", contact)
+        self.assertIn("ROLE_SPECIFIC_PROMOTION_ONLY", contact)
+        self.assertIn("not", contact.lower())
+        self.assertIn("OFFICIAL_APPLICATION_ROUTE", contact)
+        self.assertIn("two fixed employers", orchestrator)
+        self.assertIn("Role-specific promoter omission check", audit)
+        self.assertIn("role-specific contact-intent evidence", brief.lower())
+        self.assertIn("employer + job title/requisition", self.brief)
+        self.assertIn("a publicly visible", self.brief.lower())
+        self.assertIn("not proof that a dm can be delivered", self.brief.lower())
+        self.assertIn("no schema, readiness, or sending authority", self.brief)
+
+
+
 if __name__ == "__main__":
     unittest.main()
