@@ -236,6 +236,12 @@ report all three with PASS/HOLD/FAIL and exact next steps. Existing-company
 new initiatives are eligible but not new employers. This is not a full
 V2.1 six-employer field qualification or a live native skill attestation.
 
+## Decision-maker deep dive within already shortlisted employers
+
+For a follow-up focused on contact selection, **keep the already identified employer set fixed**; do not run a new employer list. For each organization and specific initiative/job, compare the **named sponsor**, **current operating/AI/product leader closest to execution** and—when it is a real role—the **named recruiting-process contact**, up to three relevant people. Distinguish exact person-to-role evidence from an assumption about hiring authority. A publicly posted *role-specific invitation to hear from applicants* is a stronger **purpose-aligned professional entry signal** than a generic leader biography, but a public LinkedIn profile still does **not** establish that direct messaging is available or an email address exists.
+
+Show a compact table with: `PERSON`, `CURRENT_ROLE_SOURCE`, `DECISION_CONNECTION` (DOCUMENTED / FUNCTIONALLY_PLAUSIBLE / UNKNOWN), `WHY_PRIMARY_OR_ALTERNATE`, `SOURCE_DATE`, `CONTACT_ROUTE_CLASS`, `EXACT_PERSON_BINDING_SOURCE`, and `NEXT_CHECK`. Mark `OFFICIAL_APPLICATION_ROUTE` separately from `RECRUITING_PROCESS_ROUTE`, and both separately from a verified individual office/work address. For each *supported* primary and alternate, include the three-lane search/hold summary. A no-direct-email result can still be a useful **verified decision-maker identification**, but never a contact-ready lead.
+
 ## Contact types and report-only result buckets
 
 | Contact type | Evidence required | Brief bucket |
