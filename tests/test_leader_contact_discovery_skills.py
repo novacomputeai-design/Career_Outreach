@@ -287,7 +287,7 @@ class LeaderContactDiscoverySkillTests(unittest.TestCase):
         orchestrator = self.skill["daily-executive-outreach"]
         brief = self.skill["daily-executive-brief"]
         audit = self.skill["run-quality-audit"]
-        for term in ("single ordered procedure", "DOCUMENTED_OWNER",
+        for term in ("one ordered procedure", "DOCUMENTED_OWNER",
                      "FIRST_CONVERSATION_TARGET", "official ATS applications"):
             self.assertIn(term, leader)
         for term in ("Decision-maker-specific second pass", "ALTERNATE_PERSON_ROUTE_HOLD",
