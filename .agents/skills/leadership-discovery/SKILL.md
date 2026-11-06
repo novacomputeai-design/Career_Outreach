@@ -1,6 +1,6 @@
 ---
 name: leadership-discovery
-description: Map executive accountability for each specific organizational initiative or hiring mandate.
+description: Find and compare decision owners, operating leaders, hiring sponsors and exact-role promoters for a specific career opportunity; select the best first-conversation target and hand off contact research.
 ---
 # leadership-discovery
 
