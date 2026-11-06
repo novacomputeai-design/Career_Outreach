@@ -287,13 +287,13 @@ class LeaderContactDiscoverySkillTests(unittest.TestCase):
         orchestrator = self.skill["daily-executive-outreach"]
         brief = self.skill["daily-executive-brief"]
         audit = self.skill["run-quality-audit"]
-        for term in ("Decision-maker depth check", "DOCUMENTED_OWNER",
-                     "FIRST_CONVERSATION_TARGET", "APPLICATION_ROUTE"):
+        for term in ("single ordered procedure", "DOCUMENTED_OWNER",
+                     "FIRST_CONVERSATION_TARGET", "official ATS applications"):
             self.assertIn(term, leader)
         for term in ("Decision-maker-specific second pass", "ALTERNATE_PERSON_ROUTE_HOLD",
                      "RECRUITING_PROCESS_ROUTE", "OFFICIAL_APPLICATION_ROUTE"):
             self.assertIn(term, contact)
-        self.assertIn("two already shortlisted employers", orchestrator)
+        self.assertIn("FIXED_EMPLOYER / FIXED_REQUISITION", orchestrator)
         self.assertIn("keep the already identified employer set fixed", self.brief)
         self.assertIn("named recruiting-process contact", self.brief)
         self.assertIn("who to contact", brief)
@@ -316,7 +316,7 @@ class LeaderContactDiscoverySkillTests(unittest.TestCase):
         self.assertIn("ROLE_SPECIFIC_PROMOTION_ONLY", contact)
         self.assertIn("not", contact.lower())
         self.assertIn("OFFICIAL_APPLICATION_ROUTE", contact)
-        self.assertIn("two fixed employers", orchestrator)
+        self.assertIn("FIXED_EMPLOYER / FIXED_REQUISITION", orchestrator)
         self.assertIn("Role-specific promoter omission check", audit)
         self.assertIn("role-specific contact-intent evidence", brief.lower())
         self.assertIn("employer + job title/requisition", self.brief)
@@ -324,6 +324,77 @@ class LeaderContactDiscoverySkillTests(unittest.TestCase):
         self.assertIn("not proof that a dm can be delivered", self.brief.lower())
         self.assertIn("no schema, readiness, or sending authority", self.brief)
 
+
+
+    def test_mode_precedence_and_opportunity_trigger_before_person_search(self):
+        orch = self.skill["daily-executive-outreach"]
+        lead = self.skill["leadership-discovery"]
+        self.assertLess(orch.index("## Scope and activation precedence"), orch.index("## Procedure"))
+        for phrase in ("FIXED_EMPLOYER / FIXED_REQUISITION", "BROAD_DISCOVERY",
+                       "EXPLICIT_LOCAL_DIAGNOSTIC", "triggers leadership-discovery",
+                       "Handoff is explicit"):
+            self.assertIn(phrase, orch)
+        self.assertNotIn("when an executive is investigated", orch)
+        self.assertIn("A vacancy does not need to name a hiring manager", lead)
+        self.assertIn("A current-status or Arizona/work-mode HOLD", lead)
+
+    def test_leader_procedure_discovers_before_comparing_and_limits_output_only(self):
+        lead = self.skill["leadership-discovery"]
+        phrases = [
+            "1. **Discover candidates from sources, not titles alone.**",
+            "2. **Map roles and verify identities.**",
+            "3. **Decision-maker selection — compare after discovery.**",
+            "4. **Handoff to contact-verification.**",
+            "5. **Stop and report honestly.**"
+        ]
+        positions = [lead.index(p) for p in phrases]
+        self.assertEqual(positions, sorted(positions))
+        self.assertIn("not a hard cap of three discovered people", lead)
+        self.assertIn("two-person limit applies to final recommendations only", lead)
+        self.assertIn("ROLE_SPECIFIC_PROMOTER", lead)
+        self.assertIn("ACCOUNTABLE_SPONSOR", lead)
+        self.assertIn("RECRUITING_PROCESS_CONTACT", lead)
+
+    def test_direct_hiring_does_not_require_second_hypothetical_role(self):
+        fit = (SKILL_ROOT / "relationship-qualification" / "SKILL.md").read_text(encoding="utf-8")
+        lead = self.skill["leadership-discovery"]
+        for phrase in ("## Pathway-specific candidate fit", "**DIRECT_HIRING:**",
+                       "**STRATEGIC_EXPLORATION:**", "Do not require a second",
+                       "CONTRIBUTION_UNCLEAR", "mandatory"):
+            self.assertIn(phrase, fit)
+        self.assertIn("DIRECT_HIRING", lead)
+        self.assertIn("STRATEGIC_EXPLORATION", lead)
+        audit = self.skill["run-quality-audit"]
+        self.assertIn("not require a second invented role", audit)
+        self.assertIn("no three-person research cap", audit)
+
+    def test_contact_handoff_obeys_fixed_scope_and_credible_alternates(self):
+        contact = self.skill["contact-verification"]
+        self.assertIn("a verified exact-role recruiter/promoter", contact)
+        self.assertIn("in FIXED_EMPLOYER report the route HOLD", contact)
+        self.assertIn("HISTORICAL_PERSON_WORK_CONTACT_RECHECK", contact)
+        self.assertIn("PROFILE_ONLY", contact)
+        self.assertIn("OFFICIAL_APPLICATION_ROUTE", contact)
+
+    def test_behavioral_acceptance_scenarios_exist_but_are_not_claimed_executed(self):
+        self.assertEqual(self.cases["behavioral_acceptance_status"],
+                         "NOT_RUN__REQUIRES_OBSERVED_CODEX_EXECUTION")
+        cases = self.cases["behavioral_acceptance_cases"]
+        self.assertEqual(len(cases), 5)
+        self.assertEqual({case["id"] for case in cases}, {
+            "direct_hiring_no_second_role",
+            "no_named_manager_triggers_person_research",
+            "four_candidates_promoter_not_pruned",
+            "fixed_scope_overrides_discovery_examples",
+            "historical_contact_is_not_current_reachability",
+        })
+        for case in cases:
+            self.assertEqual(case["mode"], "FIXED_EMPLOYER")
+            self.assertTrue(case["scenario"])
+            self.assertGreaterEqual(len(case["expected_observations"]), 3)
+            self.assertGreaterEqual(len(case["forbidden"]), 2)
+            self.assertNotIn("actual_result", case)
+            self.assertNotIn("passed", case)
 
 
 if __name__ == "__main__":
