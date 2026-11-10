@@ -382,6 +382,66 @@
           "Change opportunity rank based on contact-route availability."
         ]
       }
+    },
+    {
+      "id": "fresh_discovery_after_owner_evidence_2026_11_10",
+      "as_of": "2026-11-10",
+      "candidate_evidence_provenance": "OWNER_REPORTED career facts in public-safe profile; role listings are public source evidence.",
+      "opportunities": [
+        {
+          "organization": "NielsenIQ",
+          "title": "Director, AI Strategy & Transformation",
+          "source": "https://jobs.smartrecruiters.com/NielsenIQ/744000159476520-director-ai-strategy-transformation",
+          "location": "Fully remote U.S.",
+          "current_evidence": "Official listing current; Customer Success AI transformation portfolio, initiative prioritization, investments/dependencies/sequencing, matrix leadership, executive alignment, roadmaps, governance and execution. Mandatory qualifications are demonstrated portfolio leadership, matrix leadership and translating strategy into roadmaps/investment/coordinated execution. NIQ/data insights and external strategic-partner experience are preferred.",
+          "candidate_match": "OWNER_REPORTED enterprise product/AI strategy, investment planning, portfolio prioritization, commercial AI delivery, cross-functional leadership and executive translation align to core responsibilities. Domain and external partner experience not evidenced.",
+          "category": "RECOMMENDED"
+        },
+        {
+          "organization": "Paylocity",
+          "title": "Director Product Management — Workflows & AI",
+          "source": "https://2000recruiting.paylocity.com/Recruiting/Jobs/Details/46952",
+          "location": "Fully remote U.S.; Central/Eastern time zone preferred",
+          "current_evidence": "Official ATS listing active; requires 8+ years product management, 3+ years senior/group product leadership in SaaS, shipped B2B SaaS AI/data/agent/platform products and external workflow products at scale; leads AI/workflow portfolio and PM team.",
+          "candidate_match": "Commercial AI delivery and current PM team leadership are OWNER_REPORTED and relevant. Exact PM tenure/senior-group tenure and external workflow products at scale are NOT_EVIDENCED.",
+          "category": "CONDITIONAL"
+        },
+        {
+          "organization": "UnitedHealth Group / Optum Tech",
+          "title": "Director of AI Transformation and Business Modernization",
+          "requisition": "2389532",
+          "source": "https://careers.unitedhealthgroup.com/job/-/-/34088/102336385168",
+          "location": "Fully remote anywhere in U.S.",
+          "current_evidence": "Official listing published Oct. 23, 2026; requires 10+ years progressive leadership in large-scale transformation/technology/strategy/program delivery, highly visible enterprise programs, organizational change and operating-model transformation, AI/advanced analytics/automation/digital transformation.",
+          "candidate_match": "~12 cumulative years formal people management and commercial AI products are OWNER_REPORTED, but they do not independently establish 10+ years leading large-scale enterprise transformation programs, formal change initiatives or operating-model redesign.",
+          "category": "CONDITIONAL"
+        },
+        {
+          "organization": "Tucson Electric Power",
+          "title": "Director Operations PMO & Opex",
+          "requisition": "JR273",
+          "source": "https://tep.wd1.myworkdayjobs.com/TEP/job/Director-Operations-PMO---Opex_JR273",
+          "location": "Tucson onsite",
+          "current_evidence": "Official Workday listing posted 7 days before search; leads utility operations project portfolio, supervisors/managers, capital plans, budgeting/resources, operational improvement; minimums include successful complex capital plans within electric utility, PM/portfolio experience, utility systems/regulatory knowledge, staff supervision/fiscal management/executive work.",
+          "candidate_match": "Tucson location and owner-reported people management, portfolio planning, budgeting/resource allocation and cross-functional leadership are relevant. Electric-utility capital plans/systems/regulatory experience are NOT_EVIDENCED.",
+          "category": "CONDITIONAL"
+        }
+      ],
+      "comparison": {
+        "rank_order": [
+          "NielsenIQ Director, AI Strategy & Transformation",
+          "Paylocity Director Product Management — Workflows & AI",
+          "UnitedHealth Group Director AI Transformation and Business Modernization",
+          "Tucson Electric Power Director Operations PMO & Opex"
+        ],
+        "why": "NIQ has the closest evidenced overlap with the confirmed strategy, portfolio, AI commercialization and matrix-leadership record, and its mandatory requirements are expressed as demonstrable responsibilities rather than unverified numeric tenure thresholds. Paylocity has direct role fit but its exact tenure and external workflow scale thresholds remain unverified. UHG is strong in need and remote eligibility but enterprise-scale transformation and organizational-change leadership remain unproven. TEP is local with transferable scope but mandatory electric-utility capital-plan and regulatory depth remain unproven.",
+        "must_not": [
+          "Promote a conditional role above an evidence-supported recommendation solely because its title, location, or organizational need is attractive.",
+          "Treat 12 management years as 12 years product management or enterprise transformation.",
+          "Treat a research result as contact readiness or novelty proof.",
+          "Infer missing requirements are NOT_MET without owner verification."
+        ]
+      }
     }
   ]
 }
