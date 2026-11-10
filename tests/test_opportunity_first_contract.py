@@ -47,6 +47,60 @@ class OpportunityFirstContractTests(unittest.TestCase):
         self.assertIn("Leadership research can reveal material facts about organizational needs", leadership)
         self.assertIn("Contact accessibility, route availability", leadership)
 
+    def test_discovery_coverage_and_strategic_evidence_floor_are_explicit(self):
+        method = (ROOT / "references" / "opportunity-assessment.md").read_text(encoding="utf-8")
+        for phrase in (
+            "Discovery coverage and evidence floor",
+            "TUCSON_SOUTHERN_AZ",
+            "US_REMOTE",
+            "current direct-hiring leadership roles",
+            "current organizational need signals",
+            "plausible, bounded leadership contribution",
+            "meaningful organizational need",
+            "CONTEXT_ONLY",
+            "material rejects",
+            "organizational opportunity quality",
+            "candidate feasibility",
+            "contact readiness",
+        ):
+            self.assertIn(phrase, method)
+        discovery = read_skill("organization-discovery")
+        self.assertIn("including zero-results", discovery)
+        self.assertIn("material rejected alternatives", discovery)
+        self.assertIn("general announcements stay context until validated", discovery)
+
+    def test_coverage_ledger_records_observed_research_and_marks_unknowns(self):
+        template = (ROOT / "references" / "daily-brief-template.md").read_text(encoding="utf-8")
+        for field in (
+            "Actual query or target",
+            "Source checked",
+            "Date checked / source date",
+            "Result count",
+            "Research outcome, including failure or access limit",
+            "NOT_RECORDED",
+        ):
+            self.assertIn(field, template)
+        example = template.split("### Example: seven-employer supervised discovery, 2026-11-10", 1)[1]
+        for employer in (
+            "Pima County", "RTX", "Banner Health", "Mister Car Wash",
+            "Amgen", "Johnson & Johnson", "UnitedHealth Group",
+        ):
+            self.assertIn(employer, example)
+        self.assertIn("returned 404", example)
+        self.assertIn("not accessible/retained", example)
+        self.assertIn("Exact search strings and result counts were not retained", example)
+
+    def test_strategic_exploration_does_not_infer_vacancy_or_invitation(self):
+        method = (ROOT / "references" / "opportunity-assessment.md").read_text(encoding="utf-8")
+        template = (ROOT / "references" / "daily-brief-template.md").read_text(encoding="utf-8")
+        for text in (method, template):
+            self.assertIn("meaningful organizational need", text)
+            self.assertIn("plausible, bounded", text)
+            self.assertIn("willingness to meet", text)
+            self.assertIn("invitation", text)
+        self.assertIn("does not establish an advertised or unadvertised vacancy", method)
+        self.assertIn("does not imply a vacancy", template)
+
     def test_daily_brief_reports_opportunities_before_people(self):
         template = (ROOT / "references" / "daily-brief-template.md").read_text(encoding="utf-8")
         self.assertLess(template.index("## Ranked career opportunities"),
@@ -54,6 +108,9 @@ class OpportunityFirstContractTests(unittest.TestCase):
         self.assertLess(template.index("## Relevant people and professional routes"),
                         template.index("## Contact-ready people"))
         self.assertIn("Opportunity totals never count toward the person target", template)
+        self.assertIn("## Research coverage ledger", template)
+        self.assertIn("zero-result passes", template)
+        self.assertIn("rejected/held leads", template)
 
     def test_acceptance_scenarios_cover_requested_cases(self):
         data = json.loads((ROOT / "evals" / "opportunity_first_acceptance.json").read_text(encoding="utf-8"))
@@ -92,3 +149,4 @@ class OpportunityFirstContractTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
