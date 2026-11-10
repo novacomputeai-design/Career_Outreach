@@ -136,6 +136,21 @@ class OpportunityFirstContractTests(unittest.TestCase):
         self.assertTrue(cases["missing_route_does_not_lower_opportunity_quality"]["expected"]["opportunity_order_changes_due_to_route"] is False)
         self.assertFalse(cases["research_only_never_contact_ready"]["expected"]["contact_ready"])
 
+    def test_ranked_opportunity_table_header_and_separator_column_counts_match(self):
+        template = (ROOT / "references" / "daily-brief-template.md").read_text(encoding="utf-8")
+        lines = template.splitlines()
+        header_index = next(
+            index for index, line in enumerate(lines)
+            if line.startswith("| Category / rank |")
+        )
+        header = lines[header_index]
+        separator = lines[header_index + 1]
+
+        header_columns = len(header.strip().strip("|").split("|"))
+        separator_columns = len(separator.strip().strip("|").split("|"))
+        self.assertEqual(header_columns, 12)
+        self.assertEqual(separator_columns, header_columns)
+
     def test_candidate_fit_categories_separate_quality_feasibility_and_contact_readiness(self):
         method = (ROOT / "references" / "opportunity-assessment.md").read_text(encoding="utf-8")
         template = (ROOT / "references" / "daily-brief-template.md").read_text(encoding="utf-8")
