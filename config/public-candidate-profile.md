@@ -11,7 +11,7 @@
 
 ## Search rules
 **Industry agnostic:** qualify healthcare, technology, manufacturing, finance, logistics, government, universities, energy, professional services, defense and any other sector on demonstrated transferable fit. No industry exclusion.
-## Owner-confirmed location preferences
+### Owner-confirmed location preferences
 
 - **Priority 1:** Tucson / Southern Arizona — onsite or hybrid.
 - **Priority 2:** U.S.-remote positions — fully remote.
