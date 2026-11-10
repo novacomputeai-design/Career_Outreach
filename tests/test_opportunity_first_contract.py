@@ -130,7 +130,7 @@ class OpportunityFirstContractTests(unittest.TestCase):
         self.assertTrue(required.issubset(cases))
         risepoint = cases["risepoint_product_role_vs_architecture_role"]["expected"]
         self.assertEqual(risepoint["relative_ranking"], ["JR101253", "JR101288"])
-        self.assertIn("mandatory recent AI-led workflow transformation outcomes", " ".join(risepoint["explanation_must_include"]))
+        self.assertIn("required recent AI-led workflow transformation with changed workflows and measured outcomes", " ".join(risepoint["explanation_must_include"]))
         uofa = cases["university_of_arizona_role_and_initiative_comparison"]["expected"]
         self.assertIn("Chief AI and Data Science Officer / ORAI leadership", uofa["must_keep_org_structure"])
         self.assertTrue(cases["missing_route_does_not_lower_opportunity_quality"]["expected"]["opportunity_order_changes_due_to_route"] is False)
