@@ -216,6 +216,45 @@ class OpportunityFirstContractTests(unittest.TestCase):
         self.assertEqual(preferences["phoenix_hybrid"], "CONDITIONAL_UNTIL_SCHEDULE_AND_COMMUTE_CONFIRMED")
         self.assertEqual(preferences["relocation"], "NOT_ACCEPTABLE")
 
+    def test_owner_reported_profile_facts_and_candidate_fit_calibration(self):
+        profile = (ROOT / "config" / "public-candidate-profile.md").read_text(encoding="utf-8")
+        data = json.loads((ROOT / "evals" / "opportunity_first_acceptance.json").read_text(encoding="utf-8"))
+        self.assertIn("Owner-reported career scope (owner-confirmed; not independently verified)", profile)
+        self.assertIn("Approximately 12 cumulative years", profile)
+        self.assertIn("four direct-report Product Managers", profile)
+        self.assertIn("Three Business Analysts report through", profile)
+        self.assertIn("not direct reports", profile)
+        self.assertIn("formal CPO title", profile)
+        self.assertIn("Tucson / Southern Arizona", profile)
+        self.assertIn("Relocation", profile)
+
+        cases = {case["id"]: case for case in data["cases"]}
+        ua = cases["university_of_arizona_role_and_initiative_comparison"]
+        ua_text = " ".join(ua["expected"]["must_state"])
+        self.assertIn("supports the posting's five-year managerial minimum", ua_text)
+        self.assertNotIn("five years of managerial experience is not established", ua_text)
+        risepoint = cases["risepoint_product_role_vs_architecture_role"]
+        rp_text = " ".join(risepoint["expected"]["explanation_must_include"])
+        self.assertIn("Commercial AI product delivery is now OWNER_REPORTED", rp_text)
+        self.assertIn("measured outcomes", rp_text)
+        self.assertIn("large-scale engineering-organization ownership", rp_text)
+
+        calibration = cases["owner_reported_management_and_commercial_ai_evidence_calibration"]["expected"]
+        self.assertIn("quantified AI performance improvements", calibration["still_not_evidenced"])
+        self.assertIn("sole final budget approval or direct P&L ownership", calibration["still_not_evidenced"])
+        self.assertIn("management years", calibration["still_not_evidenced"][-1])
+        self.assertIn("Candidate fit does not imply contact readiness", calibration["governance"])
+        self.assertEqual(calibration["location"], "Preserve the existing Tucson/Southern Arizona, fully remote U.S., conditional Phoenix hybrid, no relocation rules.")
+
+    def test_amgen_roles_are_compared_by_actual_requirements(self):
+        data = json.loads((ROOT / "evals" / "opportunity_first_acceptance.json").read_text(encoding="utf-8"))
+        case = next(case for case in data["cases"] if case["id"] == "amgen_role_requirement_by_requirement_calibration")
+        self.assertEqual(len(case["opportunities"]), 3)
+        expected = case["expected"]
+        self.assertIn("Management threshold of four years is supported", expected["director"])
+        self.assertIn("NOT_EVIDENCED", expected["product_operations"])
+        self.assertTrue(any("preferred qualifications" in item for item in expected["must_not"]))
+
     def test_governance_and_codex_activation_boundaries_remain(self):
         policy = json.loads((ROOT / "config" / "operating-policy.json").read_text(encoding="utf-8"))
         self.assertFalse(policy["outreach"]["automatic_sending"])
