@@ -7,9 +7,12 @@
       "id": "risepoint_product_role_vs_architecture_role",
       "organization": "Risepoint",
       "candidate_evidence": [
-        "Head of Product at Mobius Logic AI since 2024; enterprise product portfolio, four direct-report product managers, AI opportunity evaluation/prioritization and product operating model.",
-        "Senior Product Manager at University of Chicago from 2020 to 2023; enterprise system modernization, workflows and platform strategy.",
-        "The supplied profile does not establish production AI workflow outcomes, deep online-program operations, large engineering-organization ownership, enterprise-architecture depth, or M&A integration leadership."
+        "OWNER_REPORTED: Approximately 12 cumulative years of formal people management; began around 2011–2012 at Wells Fargo, managed up to 18 direct reports with hiring, coaching and performance reviews; currently lead four direct-report Product Managers.",
+        "OWNER_REPORTED: Led multiple AI-powered products from ideation through go-to-market with paying customers, including multiple enterprise customers, in B2B and B2C; products support industry-specific customization.",
+        "OWNER_REPORTED: Enterprise product strategy, AI innovation, portfolio prioritization, product investment planning, commercialization, strategic oversight of product integrity/accuracy/effectiveness, resource allocation and trade-offs. Detailed discovery and requirements gathering are performed by Product Managers and Business Analysts.",
+        "Resume-provided: Senior Product Manager at University of Chicago (2020–2023), Product Owner at Hennepin Technical College (2018–2020), and Head of Product since 2024. Exact cumulative product-management tenure is not established by month-level dates; 12 management years must not be substituted for product tenure.",
+        "Cross-functional support to four engineering teams (~12 engineers) is OWNER_REPORTED collaboration, not direct people management or ownership of a large engineering organization.",
+        "Still NOT_EVIDENCED: recent AI-led workflow transformation with measured outcomes, deep online-program operations, enterprise architecture, production AI platform architecture, M&A integration, and exact AI/ML tenure."
       ],
       "opportunities": [
         {
@@ -32,8 +35,9 @@
         ],
         "explanation_must_include": [
           "The Senior Director product role is the stronger relative fit because product leadership, enterprise workflow/platform experience, and higher-education experience connect more directly to its actual scope.",
-          "The product role remains a qualification HOLD unless the candidate can evidence the mandatory recent AI-led workflow transformation outcomes and required university-system knowledge; do not invent either.",
-          "The VP role ranks lower because central engineering-organization, enterprise-architecture, production-AI-platform, and M&A requirements are not established by the profile.",
+          "Commercial AI product delivery is now OWNER_REPORTED, including multiple products taken from ideation through go-to-market with paying enterprise customers; this is relevant evidence but does not establish the required recent AI-led workflow transformation with changed workflows and measured outcomes.",
+          "The 8+ years technology product-management threshold requires month-level / qualifying-role confirmation; the available titles and years alone do not establish exact cumulative tenure. University system/process knowledge is relevant through education roles but the specific required systems/process knowledge remains to be matched to the posting.",
+          "The VP role ranks lower because enterprise-architecture, production-AI-platform, M&A, and large-scale engineering-organization ownership requirements remain NOT_EVIDENCED; cross-functional engineering support is not direct org ownership.",
           "Contact routes, named executives, private history, and contact readiness are not inputs to this opportunity ranking."
         ],
         "must_not": [
@@ -47,9 +51,11 @@
       "id": "university_of_arizona_role_and_initiative_comparison",
       "organization": "University of Arizona",
       "candidate_evidence": [
-        "Tucson-based Head of Product with enterprise product and AI portfolio experience.",
-        "Senior Product Manager at University of Chicago; enterprise systems modernization and workflow/platform strategy.",
-        "Profile does not establish five years of managerial experience, research administration/funding ownership, or the University's exact budget-administration depth."
+        "Tucson-based Head of Product; owner-reported product strategy, AI product commercialization, portfolio prioritization, budgeting/resource allocation and cross-functional leadership.",
+        "OWNER_REPORTED: Approximately 12 cumulative years of formal people management beginning around 2011–2012; prior teams up to 18 direct reports and current four direct-report Product Managers. This supports the posting's five-year managerial minimum, subject to employer interpretation of qualifying managerial experience.",
+        "OWNER_REPORTED: Three Business Analysts report through the Product Managers; candidate retains overall performance/development accountability. Four engineering teams (~12 engineers) are cross-functional collaborators, not direct reports.",
+        "University of Chicago Senior Product Manager (2020–2023) and Hennepin Technical College Product Owner (2018–2020) provide higher-education product experience.",
+        "Still NOT_EVIDENCED: research administration/funding, grant writing/proposal development, research portfolio operations, university-specific fiscal administration or final budget authority, and direct ownership of institution-wide AI roadmap implementation."
       ],
       "opportunities": [
         {
@@ -84,12 +90,13 @@
         ],
         "must_state": [
           "The posted Senior Director role is direct hiring; the roadmap is strategic context, not another vacancy.",
-          "Candidate's higher-education modernization and AI/product leadership are relevant, but five years of managerial experience is not established and must remain a mandatory qualification HOLD.",
-          "A strategic contribution must be bounded and complementary to the CAIO/ORAI leadership and not presented as an invented role."
+          "The candidate's higher-education modernization and AI/product leadership are relevant. OWNER_REPORTED ~12 cumulative years of formal management supports the posting's five-year managerial minimum; this removes the earlier management-evidence hold, but the employer's definition and qualifying dates should still be verified.",
+          "A strategic contribution must be bounded and complementary to the CAIO/ORAI leadership and not presented as an invented role.",
+          "General owner-reported budgeting and resource planning are transferable but do not prove research administration, grant funding/proposals, university fiscal administration, or final budget authority; assess each separately as NOT_EVIDENCED."
         ],
         "must_not": [
-          "Infer research administration or five years of management from titles alone.",
-          "Treat the faculty/staff AI cohort as an external job opportunity."
+          "Treat the faculty/staff AI cohort as an external job opportunity.",
+          "Treat general budgeting or resource allocation as proof of grant administration or final fiscal authority."
         ]
       }
     },
@@ -307,6 +314,72 @@
           "recommend relocation",
           "recommend regular onsite attendance outside the named locations",
           "treat Phoenix hybrid as RECOMMENDED before confirming schedule and commute"
+        ]
+      }
+    },
+    {
+      "id": "owner_reported_management_and_commercial_ai_evidence_calibration",
+      "candidate_evidence_provenance": "OWNER_REPORTED; supplied by owner for evaluation and not independently verified.",
+      "facts": [
+        "Approximately 12 cumulative years formal people management; prior up to 18 direct reports; currently four direct-report Product Managers.",
+        "Three Business Analysts report through Product Managers; overall development/performance accountability retained.",
+        "Cross-functional support to four engineering teams / approximately 12 engineers; not direct reports.",
+        "Multiple AI products led from ideation through go-to-market with paying enterprise customers, B2B/B2C markets and industry-specific customization.",
+        "Product investment planning/budgeting/resource allocation; no sole final budget approval, direct P&L or quantified outcomes established."
+      ],
+      "expected": {
+        "management_minimums": "May be SUPPORTED when the role asks for five years or less of formal management, subject to dates/definition confirmation; do not use this to satisfy product-management tenure.",
+        "commercial_ai_delivery": "Recognize as relevant evidence for delivered/commercial AI product requirements.",
+        "still_not_evidenced": [
+          "quantified AI performance improvements",
+          "measured workflow transformation outcomes",
+          "specialized credentials or clearance",
+          "sole final budget approval or direct P&L ownership",
+          "large engineering organization people management",
+          "exact product-management tenure from management years"
+        ],
+        "reporting_relationships": "Keep direct PM reports distinct from indirect Business Analysts and cross-functional engineering collaborators.",
+        "location": "Preserve the existing Tucson/Southern Arizona, fully remote U.S., conditional Phoenix hybrid, no relocation rules.",
+        "governance": "Candidate fit does not imply contact readiness, private-history novelty, owner approval to contact, or sending authorization."
+      }
+    },
+    {
+      "id": "amgen_role_requirement_by_requirement_calibration",
+      "organization": "Amgen",
+      "candidate_evidence_reference": "owner_reported_management_and_commercial_ai_evidence_calibration",
+      "opportunities": [
+        {
+          "title": "Director, AI Digital Product Management — Commercial Value & Access",
+          "requisition": "R-257593",
+          "location": "U.S. remote",
+          "evidence": "Official listing requires graduate degree plus 8 years (or other listed education/experience path) and at least four years people/team/project leadership; preferred qualifications include 10+ product years, 5+ years AI/ML/data-driven products, and biopharma/commercial value/access experience.",
+          "source": "https://careers.amgen.com/en/job/washington-d-c/director-ai-digital-product-management-commercial-value-and-access/87/101716300176"
+        },
+        {
+          "title": "Associate Director, Digital Product Management — Catalysts",
+          "requisition": "R-252761",
+          "location": "U.S. remote",
+          "evidence": "Official listing requires MS plus 5 years (or BS plus 7) related digital/product/transformation/technology strategy experience; role emphasizes player-coach product leadership, coaching, roadmaps, OKRs and operating model. AI-native and domain depth are preferred.",
+          "source": "https://careers.amgen.com/en/job/washington-d-c/associate-director-digital-product-management-catalysts/87/99449554928"
+        },
+        {
+          "title": "Senior Digital Product Manager, Product Operations — Tech Enablers & PDLC",
+          "requisition": "R-253239",
+          "location": "U.S. remote",
+          "evidence": "Official listing requires MS plus 6 years related experience and two years leadership; work focuses on product enablement, tooling, AI/PDLC workflow adoption; product operations/tooling/AI workflow experience is preferred.",
+          "source": "https://careers.amgen.com/en/job/washington-d-c/sr-digital-product-manager-product-operations-tech-enablers-and-pdlc/87/99773663328"
+        }
+      ],
+      "expected": {
+        "comparison": "Assess mandatory education/experience and leadership requirements individually; owner-reported management and commercial AI delivery improve fit but do not automatically satisfy years of product experience or role-specific domain/tooling requirements.",
+        "director": "Management threshold of four years is supported by OWNER_REPORTED evidence. Education/related experience pathway appears plausible but exact qualifying product/technology years require verification. Preferred 5 years AI product and biopharma/CVA experience remain NOT_EVIDENCED unless separately confirmed. CONDITIONAL pending qualifying-tenure confirmation.",
+        "associate_director": "Management/coaching and product operating-model evidence are relevant. Exact qualifying 5/7 years, catalyst-specific facilitation and role-specific methods remain to verify; CONDITIONAL.",
+        "product_operations": "Management threshold may be supported, but specific product operations/tooling and AI workflow adoption remain NOT_EVIDENCED; CONDITIONAL, weaker relative fit than the director role.",
+        "must_not": [
+          "Treat preferred qualifications as mandatory without the posting stating so.",
+          "Infer domain expertise from healthcare industry exposure alone.",
+          "Treat commercial AI delivery as proof of specific workflow outcomes or AI-native product development lifecycle metrics.",
+          "Change opportunity rank based on contact-route availability."
         ]
       }
     }
