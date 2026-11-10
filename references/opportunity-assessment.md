@@ -28,26 +28,54 @@ An initiative supports `STRATEGIC_EXPLORATION` only when current evidence establ
 
 Record promising alternatives and material rejects, not only winners. For each screened employer with multiple plausible roles or initiatives, show the actual opportunities compared and the reason each lost (for example, weaker candidate fit, stale/closed status, mandatory qualification gap, role already covered by an incumbent, no external career bridge, or insufficiently current evidence). This is a bounded comparison set, not a claim to have found every role at the employer.
 
-## Compare and rank before people research
+## Candidate-fit category and ranking
 
-For DIRECT_HIRING, report two related but distinct judgments: **opportunity quality** (organizational need, role scope, timing, and career potential) and **candidate feasibility** (actual match to mandatory qualifications, work authorization/location eligibility when evidenced, and work-mode feasibility). Mandatory requirements and actual eligibility affect feasibility and the candidate-opportunity ranking. Map each mandatory requirement to evidence; a missing fact is UNVERIFIED, while an established unmet requirement is NOT_MET. Do not call either one proof the organization has no worthwhile need. Keep optional/preferred requirements distinct from mandatory requirements. For STRATEGIC_EXPLORATION, assess fit to the evidenced need and bounded contribution, while explicitly marking hiring and eligibility as unconfirmed.
+Report three independent judgments for every opportunity: (1) **organizational opportunity quality** (need, evidence, timing, scope and potential contribution); (2) **candidate feasibility** (actual role requirements and eligibility for direct hiring, or evidence-backed fit to a bounded strategic contribution); and (3) **contact readiness** (identity, suitable route, relationship-history and human-approval gates). Contact readiness never affects opportunity category or rank. A strong organizational opportunity remains reportable even if candidate feasibility or contact readiness is low or unknown.
 
-Compare opportunities on candidate fit and feasibility, evidenced organizational need and timing, leadership contribution and scope, career potential, location/work-mode feasibility, and evidence quality. Explain the most consequential trade-offs in plain language. Do not use a numerical opportunity score unless the user asks for one; do not manufacture precision or force a quota.
+### Candidate evidence states
 
-When an organization has multiple relevant roles or initiatives, compare them side by side before choosing that organization's strongest lead. Record the alternatives considered and why each ranks higher or lower. Do not let a senior title outrank a better actual fit by default.
+For each material requirement or candidate fact, use:
 
-Keep three judgments explicit and independent: (1) **organizational opportunity quality** (need, evidence, timing, scope and potential contribution); (2) **candidate feasibility** (actual role requirements/eligibility for direct hiring, or fit to the bounded contribution for exploration); and (3) **contact readiness** (identity, suitable route, relationship-history and human approval gates). Only the first two inform opportunity ordering. Do not use missing source/contact access or novelty as a proxy for low organizational need. Conversely, a high-quality initiative does not establish hiring, candidate eligibility, or permission to contact.
+- `SUPPORTED`: current, supplied or owner-confirmed evidence supports it.
+- `PARTIAL`: evidence supports some but not all of the requirement.
+- `NOT_EVIDENCED`: the supplied profile does not establish it; this is unknown, not proof the candidate lacks it.
+- `NOT_MET`: reliable evidence establishes a conflict with the requirement.
 
-Keep organizational opportunity quality and its underlying need independent from:
+Map each advertised role's mandatory qualifications separately from preferred qualifications. A `PARTIAL` or `NOT_EVIDENCED` mandatory item cannot be treated as satisfied. Use `NOT_MET` only when evidence establishes the mismatch. If a role requires an owner-verifiable fact and the rest of the match is well supported, keep it conditional and state the exact verification question. If important parts of candidate experience remain broadly undocumented, use WATCHLIST until enough evidence supports a strong match.
 
-- whether a suitable executive has been identified;
-- whether a person-specific public route exists;
-- private relationship-history or novelty status;
-- contact readiness, outreach approval, or contact authorization.
+### Opportunity categories
 
-Candidate feasibility is a separate ranking dimension for DIRECT_HIRING and can lower the candidate's ranking for a particular role when mandatory qualifications or eligibility are unmet or unverified. It must not be obscured by a strong title, attractive need, contact route, or relationship history. Record the role's opportunity quality even when candidate feasibility is low or unknown.
+Assign exactly one category, and report categories in this order:
 
-These are separate downstream findings. A strong research opportunity remains reportable when any of them is unknown or on hold. Such a hold must still block the corresponding contact-ready or authorization state under the existing policy.
+1. **RECOMMENDED** — The current opportunity is supported by evidence; every material mandatory qualification and actual eligibility condition is `SUPPORTED`; location/work-mode feasibility is supported by the confirmed preferences below; and the candidate has a strong evidence-backed match. For strategic exploration, this means only a recommended conversation hypothesis based on a meaningful organizational need and a plausible, bounded contribution; it never means a vacancy, offer, or invitation.
+2. **CONDITIONAL** — The opportunity is promising and the candidate otherwise has a credible match, but one or more important, owner-verifiable qualifications or eligibility facts remain `NOT_EVIDENCED` or `PARTIAL`. Name each unanswered verification item. Do not describe a conditional role as confirmed feasible.
+3. **WATCHLIST** — The organization or initiative may be interesting, but it is closed, stale, location-infeasible, has an established mandatory mismatch (`NOT_MET`), has a weak candidate match, or lacks sufficient organizational/candidate evidence for a recommendation. Keep high organizational opportunity quality visible while explaining why it is not a candidate recommendation.
+
+A confirmed `NOT_MET` mandatory qualification or confirmed incompatible location makes a direct-hiring opportunity WATCHLIST. Do not let organizational prestige, need, title, or career scope move it above any RECOMMENDED opportunity. A closed or stale posting is not RECOMMENDED even if the candidate appears qualified. A candidate fact that has not been supplied remains `NOT_EVIDENCED`, not `NOT_MET`.
+
+### Confirmed location preferences
+
+Use only these owner-confirmed preferences when assessing location:
+
+- Priority 1: Tucson / Southern Arizona — onsite or hybrid.
+- Priority 2: U.S.-remote positions — fully remote.
+- Priority 3: Phoenix metro — hybrid, conditional until the required onsite schedule and practical commute are confirmed.
+- Relocation is not acceptable at this time.
+- Do not recommend positions requiring relocation or regular onsite attendance outside the listed locations.
+
+A Phoenix hybrid role is CONDITIONAL until the actual onsite schedule is confirmed. A fully remote U.S. role is location-supported subject to any separately stated work-authorization or jurisdiction requirements. If a listing's work mode or location requirement is unclear, mark it `NOT_EVIDENCED` and hold at CONDITIONAL or WATCHLIST as appropriate; do not infer remote eligibility from a search filter or title.
+
+### Ordering and comparison
+
+First order all RECOMMENDED opportunities, then CONDITIONAL, then WATCHLIST. No CONDITIONAL or WATCHLIST opportunity can outrank a genuinely RECOMMENDED opportunity, even when it has stronger organizational need, a more senior title, or greater scale. Within a category, compare evidence-backed candidate fit and feasibility, location preference, organizational need and timing, leadership contribution and scope, career potential, and source quality. Do not use a numerical opportunity score unless requested.
+
+For DIRECT_HIRING, assess current posting status, each mandatory qualification, actual work location and mode, and any explicit eligibility requirement. For STRATEGIC_EXPLORATION, assess fit to the evidenced need and bounded contribution while marking hiring and employment eligibility unconfirmed. Do not imply a vacancy.
+
+When an organization has multiple relevant roles or initiatives, compare them side by side before selecting its strongest opportunity. Record alternatives and why each ranks higher or lower, including category, location, mandatory requirements, current status, and fit. Do not let a senior title outrank stronger actual candidate fit.
+
+Keep organizational opportunity quality independent from whether a person-specific route exists, private relationship novelty, or contact readiness. Only need, candidate feasibility, role scope, location feasibility, timing, and evidence quality may inform opportunity category and ordering. Candidate contact-readiness and approval gates remain separate.
+
+These categories and rankings do not grant permission to contact, apply, draft, or send. Existing identity, private-history, human-review, and explicit authorization safeguards remain in force.
 
 ## Handoff
 
