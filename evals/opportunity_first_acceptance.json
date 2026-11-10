@@ -26,7 +26,10 @@
         }
       ],
       "expected": {
-        "relative_ranking": ["JR101253", "JR101288"],
+        "relative_ranking": [
+          "JR101253",
+          "JR101288"
+        ],
         "explanation_must_include": [
           "The Senior Director product role is the stronger relative fit because product leadership, enterprise workflow/platform experience, and higher-education experience connect more directly to its actual scope.",
           "The product role remains a qualification HOLD unless the candidate can evidence the mandatory recent AI-led workflow transformation outcomes and required university-system knowledge; do not invent either.",
@@ -73,13 +76,21 @@
       ],
       "expected": {
         "must_evaluate_actual_responsibilities": true,
-        "must_keep_org_structure": ["Chief AI and Data Science Officer / ORAI leadership", "Office of Responsible AI", "Arizona Institute for AI and Society", "cross-campus research, academic, operations and finance partners"],
+        "must_keep_org_structure": [
+          "Chief AI and Data Science Officer / ORAI leadership",
+          "Office of Responsible AI",
+          "Arizona Institute for AI and Society",
+          "cross-campus research, academic, operations and finance partners"
+        ],
         "must_state": [
           "The posted Senior Director role is direct hiring; the roadmap is strategic context, not another vacancy.",
           "Candidate's higher-education modernization and AI/product leadership are relevant, but five years of managerial experience is not established and must remain a mandatory qualification HOLD.",
           "A strategic contribution must be bounded and complementary to the CAIO/ORAI leadership and not presented as an invented role."
         ],
-        "must_not": ["Infer research administration or five years of management from titles alone.", "Treat the faculty/staff AI cohort as an external job opportunity."]
+        "must_not": [
+          "Infer research administration or five years of management from titles alone.",
+          "Treat the faculty/staff AI cohort as an external job opportunity."
+        ]
       }
     },
     {
@@ -87,8 +98,18 @@
       "scenario": "An organization has a current, first-party AI workflow initiative with measured operational goals, executive sponsorship and business-unit owners, but no advertised leadership vacancy.",
       "expected": {
         "recommendation_type": "STRATEGIC_EXPLORATION",
-        "must_include": ["source-backed initiative", "bounded contribution distinct from incumbents", "specific conversation question", "observable business measure", "hiring unconfirmed"],
-        "must_not": ["invent a job", "equate an AI announcement alone with a career opportunity", "require a verified email before ranking the opportunity"]
+        "must_include": [
+          "source-backed initiative",
+          "bounded contribution distinct from incumbents",
+          "specific conversation question",
+          "observable business measure",
+          "hiring unconfirmed"
+        ],
+        "must_not": [
+          "invent a job",
+          "equate an AI announcement alone with a career opportunity",
+          "require a verified email before ranking the opportunity"
+        ]
       }
     },
     {
@@ -96,8 +117,16 @@
       "scenario": "Two sourced opportunities have equal fit, need, contribution scope, timing, geography, and evidence quality. The higher-ranked strategic prospect has no verified person-specific route; the other has a publicly listed direct work route.",
       "expected": {
         "opportunity_order_changes_due_to_route": false,
-        "must_report_separately": ["opportunity rank", "person/contact route status", "novelty status", "contact-ready state"],
-        "must_not": ["demote a strong opportunity because of route availability", "claim contact-ready when its route or history gate fails"]
+        "must_report_separately": [
+          "opportunity rank",
+          "person/contact route status",
+          "novelty status",
+          "contact-ready state"
+        ],
+        "must_not": [
+          "demote a strong opportunity because of route availability",
+          "claim contact-ready when its route or history gate fails"
+        ]
       }
     },
     {
@@ -108,7 +137,11 @@
         "contact_ready": false,
         "novelty": "UNVERIFIED",
         "outbound_activity": 0,
-        "must_not": ["promote research-only prospect to contact-ready", "draft or send a message", "let opportunity quality override governance gates"]
+        "must_not": [
+          "promote research-only prospect to contact-ready",
+          "draft or send a message",
+          "let opportunity quality override governance gates"
+        ]
       }
     },
     {
@@ -118,7 +151,11 @@
         "organizational_opportunity_quality": "reported separately and not erased",
         "candidate_feasibility": "lowered or held according to whether evidence is NOT_MET or NOT_EVIDENCED",
         "ranking": "must account for candidate feasibility and actual eligibility",
-        "must_not": ["ignore a mandatory requirement", "treat unknown evidence as proof of eligibility", "confuse role quality with candidate feasibility"]
+        "must_not": [
+          "ignore a mandatory requirement",
+          "treat unknown evidence as proof of eligibility",
+          "confuse role quality with candidate feasibility"
+        ]
       }
     },
     {
@@ -126,9 +163,151 @@
       "scenario": "Initial rankings are made before people research. Leadership discovery finds sourced new facts about an incumbent's remit and a distinct unowned operating responsibility; it also finds a public route for a lower-ranked opportunity.",
       "expected": {
         "rank_revision": "permitted only if organizational/role evidence materially changes comparative need, scope, timing, authority, incumbency, or candidate feasibility",
-        "revision_record": ["prior rank", "new fact and source/date", "reason", "revised rank"],
+        "revision_record": [
+          "prior rank",
+          "new fact and source/date",
+          "reason",
+          "revised rank"
+        ],
         "contact_accessibility_effect": "none",
-        "must_not": ["freeze rankings after leadership research", "revise rank solely because a person is easier to reach", "use novelty or route availability as opportunity evidence"]
+        "must_not": [
+          "freeze rankings after leadership research",
+          "revise rank solely because a person is easier to reach",
+          "use novelty or route availability as opportunity evidence"
+        ]
+      }
+    },
+    {
+      "id": "location_infeasible_high_need_cannot_outrank_feasible_recommendation",
+      "scenario": "Owner-confirmed preferences prioritize Tucson/Southern Arizona onsite or hybrid, then fully remote U.S. roles; Phoenix hybrid is conditional pending schedule/commute; relocation is not acceptable. Compare a strong Tucson role whose mandatory requirements and eligibility are supported with the high-need Walmart Senior Director AI Platform posting in Bentonville/Sunnyvale and Amazon Secure Work Enablement posting in Sunnyvale/Seattle/New York requiring regular onsite attendance.",
+      "opportunities": [
+        {
+          "name": "Tucson enterprise product director",
+          "organizational_opportunity_quality": "strong",
+          "mandatory_requirements": "SUPPORTED",
+          "location_feasibility": "SUPPORTED",
+          "category": "RECOMMENDED"
+        },
+        {
+          "name": "Walmart Senior Director, Enterprise AI Platform",
+          "organizational_opportunity_quality": "very strong",
+          "mandatory_requirements": "NOT_EVIDENCED",
+          "location_feasibility": "NOT_MET: regular onsite outside permitted locations; relocation required",
+          "category": "WATCHLIST"
+        },
+        {
+          "name": "Amazon Sr Principal/Director PMT, Secure Work Enablement",
+          "organizational_opportunity_quality": "very strong",
+          "mandatory_requirements": "NOT_EVIDENCED",
+          "location_feasibility": "NOT_MET: regular onsite outside permitted locations; relocation required",
+          "category": "WATCHLIST"
+        }
+      ],
+      "expected": {
+        "category_order": [
+          "RECOMMENDED",
+          "CONDITIONAL",
+          "WATCHLIST"
+        ],
+        "candidate_recommendation_order": [
+          "Tucson enterprise product director",
+          "Walmart Senior Director, Enterprise AI Platform",
+          "Amazon Sr Principal/Director PMT, Secure Work Enablement"
+        ],
+        "must_preserve_organizational_quality_for_watchlist": true,
+        "must_not": [
+          "rank Walmart or Amazon above the feasible Tucson recommendation because their organizational need or title is stronger",
+          "treat the employer's interest as evidence of candidate feasibility",
+          "recommend relocation or regular onsite work outside the confirmed locations"
+        ]
+      }
+    },
+    {
+      "id": "phoenix_hybrid_requires_schedule_confirmation",
+      "scenario": "A current Phoenix-metro hybrid director role otherwise has a strong fit and supported mandatory qualifications, but the actual onsite cadence and commute practicality are not established.",
+      "opportunities": [
+        {
+          "name": "Phoenix hybrid director",
+          "mandatory_requirements": "SUPPORTED",
+          "location_feasibility": "NOT_EVIDENCED: onsite schedule and practical commute not confirmed",
+          "category": "CONDITIONAL"
+        }
+      ],
+      "expected": {
+        "category": "CONDITIONAL",
+        "verification_items": [
+          "required onsite schedule",
+          "practical commute"
+        ],
+        "must_not": [
+          "label RECOMMENDED before schedule and commute feasibility are confirmed"
+        ]
+      }
+    },
+    {
+      "id": "missing_mandatory_evidence_is_conditional_not_not_met",
+      "scenario": "A current fully remote U.S. role is otherwise a strong fit, but the candidate profile does not establish the exact required product-management tenure; no reliable evidence proves the candidate falls short.",
+      "opportunities": [
+        {
+          "name": "Remote product director",
+          "mandatory_requirement_status": "NOT_EVIDENCED",
+          "category": "CONDITIONAL"
+        }
+      ],
+      "expected": {
+        "category": "CONDITIONAL",
+        "candidate_evidence_status": "NOT_EVIDENCED",
+        "must_not": [
+          "reinterpret missing dates as NOT_MET",
+          "claim that the mandatory requirement is satisfied"
+        ]
+      }
+    },
+    {
+      "id": "verified_mandatory_mismatch_is_watchlist_below_recommended",
+      "scenario": "A current role requires 12 years of product management. Owner-confirmed dates establish fewer than 12 qualifying years, while another current Tucson role has all mandatory qualifications supported.",
+      "opportunities": [
+        {
+          "name": "Verified-feasible Tucson role",
+          "mandatory_requirement_status": "SUPPORTED",
+          "location_feasibility": "SUPPORTED",
+          "category": "RECOMMENDED"
+        },
+        {
+          "name": "12-year role",
+          "mandatory_requirement_status": "NOT_MET",
+          "location_feasibility": "SUPPORTED",
+          "category": "WATCHLIST"
+        }
+      ],
+      "expected": {
+        "candidate_recommendation_order": [
+          "Verified-feasible Tucson role",
+          "12-year role"
+        ],
+        "must_preserve_organizational_quality_for_watchlist": true,
+        "must_not": [
+          "place an established mandatory mismatch above a RECOMMENDED role",
+          "convert NOT_MET into NOT_EVIDENCED"
+        ]
+      }
+    },
+    {
+      "id": "confirmed_location_preferences_control_eligibility",
+      "scenario": "The candidate's confirmed location rules are Tucson/Southern Arizona onsite or hybrid first, fully remote U.S. second, Phoenix hybrid third and conditional pending schedule/commute; relocation is unacceptable.",
+      "expected": {
+        "preferences": {
+          "tucson_southern_arizona": "SUPPORTED_ONSITE_OR_HYBRID",
+          "us_remote": "SUPPORTED_FULLY_REMOTE",
+          "phoenix_hybrid": "CONDITIONAL_UNTIL_SCHEDULE_AND_COMMUTE_CONFIRMED",
+          "relocation": "NOT_ACCEPTABLE",
+          "regular_onsite_outside_these_locations": "NOT_FEASIBLE"
+        },
+        "must_not": [
+          "recommend relocation",
+          "recommend regular onsite attendance outside the named locations",
+          "treat Phoenix hybrid as RECOMMENDED before confirming schedule and commute"
+        ]
       }
     }
   ]

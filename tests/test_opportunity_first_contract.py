@@ -136,6 +136,86 @@ class OpportunityFirstContractTests(unittest.TestCase):
         self.assertTrue(cases["missing_route_does_not_lower_opportunity_quality"]["expected"]["opportunity_order_changes_due_to_route"] is False)
         self.assertFalse(cases["research_only_never_contact_ready"]["expected"]["contact_ready"])
 
+    def test_ranked_opportunity_table_header_and_separator_column_counts_match(self):
+        template = (ROOT / "references" / "daily-brief-template.md").read_text(encoding="utf-8")
+        lines = template.splitlines()
+        header_index = next(
+            index for index, line in enumerate(lines)
+            if line.startswith("| Category / rank |")
+        )
+        header = lines[header_index]
+        separator = lines[header_index + 1]
+
+        header_columns = len(header.strip().strip("|").split("|"))
+        separator_columns = len(separator.strip().strip("|").split("|"))
+        self.assertEqual(header_columns, 12)
+        self.assertEqual(separator_columns, header_columns)
+
+    def test_candidate_fit_categories_separate_quality_feasibility_and_contact_readiness(self):
+        method = (ROOT / "references" / "opportunity-assessment.md").read_text(encoding="utf-8")
+        template = (ROOT / "references" / "daily-brief-template.md").read_text(encoding="utf-8")
+        profile = (ROOT / "config" / "public-candidate-profile.md").read_text(encoding="utf-8")
+
+        for category in ("RECOMMENDED", "CONDITIONAL", "WATCHLIST"):
+            self.assertIn(category, method)
+            self.assertIn(category, template)
+        self.assertIn("NOT_EVIDENCED", method)
+        self.assertIn("not proof", method)
+        self.assertIn("NOT_MET", method)
+        self.assertIn("confirmed incompatible location", method)
+        self.assertIn("No CONDITIONAL or WATCHLIST opportunity can outrank a genuinely RECOMMENDED opportunity", method)
+        self.assertIn("contact readiness", method.lower())
+        self.assertIn("Phoenix hybrid", method)
+        self.assertIn("relocation is not acceptable", method.lower())
+        self.assertIn("Priority 1", profile)
+        self.assertIn("Priority 2", profile)
+        self.assertIn("Priority 3", profile)
+        self.assertIn("Relocation", profile)
+
+        self.assertIn("Owner-verification record", method)
+        self.assertIn("NOT_PROVIDED", template)
+        for field in (
+            "Product-management and senior-leadership tenure",
+            "Direct people management",
+            "AI product or transformation delivery",
+            "Budget, portfolio, program, and organizational scope",
+            "Industry-specific experience and transferability",
+            "Eligibility and role-level preferences",
+        ):
+            self.assertIn(field, template)
+        self.assertIn("Never commit a private resume or relationship history", method)
+
+    def test_candidate_fit_acceptance_scenarios_enforce_location_and_evidence_rules(self):
+        data = json.loads((ROOT / "evals" / "opportunity_first_acceptance.json").read_text(encoding="utf-8"))
+        cases = {case["id"]: case for case in data["cases"]}
+        required = {
+            "location_infeasible_high_need_cannot_outrank_feasible_recommendation",
+            "phoenix_hybrid_requires_schedule_confirmation",
+            "missing_mandatory_evidence_is_conditional_not_not_met",
+            "verified_mandatory_mismatch_is_watchlist_below_recommended",
+            "confirmed_location_preferences_control_eligibility",
+        }
+        self.assertTrue(required.issubset(cases))
+
+        location = cases["location_infeasible_high_need_cannot_outrank_feasible_recommendation"]["expected"]
+        opportunities = cases["location_infeasible_high_need_cannot_outrank_feasible_recommendation"]["opportunities"]
+        self.assertEqual(location["category_order"], ["RECOMMENDED", "CONDITIONAL", "WATCHLIST"])
+        self.assertEqual(location["candidate_recommendation_order"][0], "Tucson enterprise product director")
+        self.assertEqual([item["category"] for item in opportunities],
+                         ["RECOMMENDED", "WATCHLIST", "WATCHLIST"])
+        self.assertTrue(location["must_preserve_organizational_quality_for_watchlist"])
+
+        unknown = cases["missing_mandatory_evidence_is_conditional_not_not_met"]
+        self.assertEqual(unknown["opportunities"][0]["mandatory_requirement_status"], "NOT_EVIDENCED")
+        self.assertEqual(unknown["opportunities"][0]["category"], "CONDITIONAL")
+        mismatch = cases["verified_mandatory_mismatch_is_watchlist_below_recommended"]
+        self.assertEqual([item["category"] for item in mismatch["opportunities"]],
+                         ["RECOMMENDED", "WATCHLIST"])
+
+        preferences = cases["confirmed_location_preferences_control_eligibility"]["expected"]["preferences"]
+        self.assertEqual(preferences["phoenix_hybrid"], "CONDITIONAL_UNTIL_SCHEDULE_AND_COMMUTE_CONFIRMED")
+        self.assertEqual(preferences["relocation"], "NOT_ACCEPTABLE")
+
     def test_governance_and_codex_activation_boundaries_remain(self):
         policy = json.loads((ROOT / "config" / "operating-policy.json").read_text(encoding="utf-8"))
         self.assertFalse(policy["outreach"]["automatic_sending"])

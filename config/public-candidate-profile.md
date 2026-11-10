@@ -11,6 +11,12 @@
 
 ## Search rules
 **Industry agnostic:** qualify healthcare, technology, manufacturing, finance, logistics, government, universities, energy, professional services, defense and any other sector on demonstrated transferable fit. No industry exclusion.
-**Location:** Tucson metro/Southern Arizona highest priority; remote US acceptable. Outside-area hybrid needs specific feasibility.
+### Owner-confirmed location preferences
+
+- **Priority 1:** Tucson / Southern Arizona — onsite or hybrid.
+- **Priority 2:** U.S.-remote positions — fully remote.
+- **Priority 3:** Phoenix metro — hybrid, subject to a practical commute and onsite schedule; classify feasibility as CONDITIONAL until the required onsite schedule is confirmed.
+- **Relocation:** Not acceptable at this time.
+- Do not recommend positions requiring relocation or regular onsite attendance outside these locations.
 **Role hypotheses, not credential claims:** Head/Director/VP Product; AI/innovation strategy; enterprise modernization/technology strategy; transformation; analogous senior business/technology leadership. Hiring influence may also reside with a CEO, COO or business unit head.
 **Do not invent:** CIO/CTO employment, quantified financial impacts, clinical credentials, security clearances, government outcomes, open jobs, or CEO-level experience as employment. Keep personal mobile, personal email and relationship records out of this public file.

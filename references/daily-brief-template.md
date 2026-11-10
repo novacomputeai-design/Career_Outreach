@@ -14,14 +14,35 @@ Show observable research, not just a planned search. For every row record the ac
 |---|---|---|---|---|---:|---|
 
 ## Ranked career opportunities
-Rank strongest opportunities first, before contact-readiness checks. Include direct-hiring and evidence-backed strategic-exploration leads. Preserve strong research-only opportunities when person, route, vacancy status, or novelty is unresolved.
+Assign exactly one candidate-fit category and list each category in the order shown. Category is separate from organizational opportunity quality and contact readiness.
 
-| Rank | Organization | Opportunity type and role/initiative | Evidence of current need and timing | Candidate fit and mandatory qualification/eligibility feasibility | Leadership contribution / career potential | Location and work mode | Opportunity status | Initial rank → revised rank and evidence, if changed | Why ranked here | Sources and next check |
-|---:|---|---|---|---|---|---|---|---|---|
+- **RECOMMENDED:** current, strong candidate match; all material mandatory requirements and actual eligibility supported; confirmed location/work mode feasible. For strategic exploration, this is a conversation hypothesis only, with hiring unconfirmed.
+- **CONDITIONAL:** credible opportunity and fit, with important owner-verifiable qualification or eligibility questions unresolved. List the precise questions.
+- **WATCHLIST:** interesting organizational need but closed/stale, location-infeasible, an established mandatory mismatch, weak candidate fit, or insufficient evidence for a candidate recommendation. Preserve its organizational quality separately.
 
-Compare related roles or initiatives within each organization and explain why the selected lead ranks highest. For direct roles, distinguish SUPPORTED/PARTIAL/NOT_EVIDENCED/NOT_MET mandatory qualifications and eligibility from the organization's need. Do not imply a vacancy for strategic exploration. Leadership research may change the ranking only on new evidence about need, timing, incumbents, responsibilities, authority, scope, or candidate feasibility; show the before/after and source. Contact accessibility and relationship novelty are never ranking evidence.
+Do not place CONDITIONAL or WATCHLIST above RECOMMENDED. Use `NOT_EVIDENCED` for missing facts and `NOT_MET` only for an established mismatch.
 
-For each employer with plausible alternatives, give a short comparison of the strongest candidate opportunity against material alternatives and rejected/held leads, with specific reasons (fit or mandatory gap, current status, incumbent overlap, insufficiently current need, or no supported candidate-relevant contribution). Strategic leads require current evidence of meaningful organizational need and a plausible, bounded, non-duplicative leadership contribution tied to an outcome. State that this is a research hypothesis only: it does not imply a vacancy, hiring intent, willingness to meet, invitation, or contact route. Record an invitation only when directly sourced. Keep organizational opportunity quality, candidate feasibility, and contact readiness in separate fields.
+| Category / rank | Organization | Opportunity type and role/initiative | Organizational opportunity quality: need, timing, evidence | Candidate feasibility: mandatory qualifications and eligibility | Candidate fit evidence / owner-verification questions | Leadership contribution / career potential | Location and work mode | Status | Initial category → revised category and evidence, if changed | Why placed here | Sources and next check |
+|---:|---|---|---|---|---|---|---|---|---|---|---|
+
+For each employer with plausible alternatives, compare related opportunities within that organization and record material alternatives and rejected/held leads, with specific reasons. Record mandatory requirements as SUPPORTED/PARTIAL/NOT_EVIDENCED/NOT_MET and do not treat missing facts as failed qualifications. A verified mandatory mismatch or an incompatible location must be WATCHLIST; Phoenix hybrid stays CONDITIONAL until the onsite schedule and commute are confirmed. Relocation and regular onsite attendance outside Tucson/Southern Arizona, U.S.-remote, or Phoenix are not feasible under the confirmed preferences.
+
+Keep organizational opportunity quality, candidate feasibility, and contact readiness in separate fields. A person, route, novelty finding, or contact approval cannot change opportunity category or rank. Leadership research may revise category/rank only when sourced facts materially change organizational need, timing, incumbents, responsibilities, authority, scope, or candidate feasibility; record prior category/rank, the new fact/source/date, reason, and revised category/rank.
+
+Strategic leads require current evidence of meaningful organizational need and a plausible, bounded, non-duplicative leadership contribution tied to an outcome. Mark these as strategic-exploration hypotheses. This research hypothesis does not imply a vacancy, hiring intent, willingness to meet, invitation, or contact route. Record an invitation only when directly sourced.
+
+## Candidate evidence verification
+
+Use this queue when candidate fit depends on information the public-safe profile does not establish. An owner response is required before changing an unknown to SUPPORTED or NOT_MET. Record only a concise public-safe fact confirmed by the owner; keep private resume documents, personal contact data, and relationship history out of this repository.
+
+| Opportunity / requirement | Evidence currently stated in public-safe profile | Evidence state | Owner verification question | Owner-confirmed public-safe fact |
+|---|---|---|---|---|
+| Product-management and senior-leadership tenure |  | NOT_EVIDENCED until verified | Exact dates and qualifying responsibilities? | NOT_PROVIDED |
+| Direct people management |  | NOT_EVIDENCED until verified | Years, report count/levels, and formal management duties? | NOT_PROVIDED |
+| AI product or transformation delivery |  | NOT_EVIDENCED until verified | What reached production, what did you own, and what outcomes are supportable? | NOT_PROVIDED |
+| Budget, portfolio, program, and organizational scope |  | NOT_EVIDENCED until verified | Which decisions, budgets, programs, teams, or business outcomes did you own? | NOT_PROVIDED |
+| Industry-specific experience and transferability |  | NOT_EVIDENCED until verified | Which sectors and concrete transferable responsibilities can be confirmed? | NOT_PROVIDED |
+| Eligibility and role-level preferences |  | Verify only the actual job requirement or owner preference | Does a stated work-authorization/eligibility condition apply, and what level/scope is desired? | NOT_PROVIDED |
 
 ## Relevant people and professional routes
 List the best-supported primary person and at most one justified alternate under the opportunity they relate to. Keep accountable sponsor, hiring-process contact, role promoter, person-specific route, and official application route distinct. Missing or unverified routes do not remove the opportunity from the ranked section.
