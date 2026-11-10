@@ -6,6 +6,13 @@
 **Person/governance coverage:** people considered, verified, suppressed, novelty status, contact routes, source outages, geography. Opportunity totals never count toward the person target.
 **No automatic messages were sent.**
 
+## Research coverage ledger
+
+Show the actual bounded screen by geography and search lane. Include employers/industry, role or initiative source lane, result count (including zero-result passes), observation date, validation sources, and unsearched lanes or access gaps. Do not imply market-wide coverage. Keep search coverage counts separate from opportunity and people counts.
+
+| Geography lane | Employer / industry | Search lane and source types | Results | Observed / source dates | Validation / coverage gap |
+|---|---|---|---:|---|---|
+
 ## Ranked career opportunities
 Rank strongest opportunities first, before contact-readiness checks. Include direct-hiring and evidence-backed strategic-exploration leads. Preserve strong research-only opportunities when person, route, vacancy status, or novelty is unresolved.
 
@@ -13,6 +20,8 @@ Rank strongest opportunities first, before contact-readiness checks. Include dir
 |---:|---|---|---|---|---|---|---|---|---|
 
 Compare related roles or initiatives within each organization and explain why the selected lead ranks highest. For direct roles, distinguish SUPPORTED/PARTIAL/NOT_EVIDENCED/NOT_MET mandatory qualifications and eligibility from the organization's need. Do not imply a vacancy for strategic exploration. Leadership research may change the ranking only on new evidence about need, timing, incumbents, responsibilities, authority, scope, or candidate feasibility; show the before/after and source. Contact accessibility and relationship novelty are never ranking evidence.
+
+For each employer with plausible alternatives, give a short comparison of the strongest candidate opportunity against material alternatives and rejected/held leads, with specific reasons (fit or mandatory gap, current status, incumbent overlap, insufficiently current need, or no credible external leadership-conversation bridge). Strategic leads require current evidence of material need, a bounded complementary contribution, and a credible bridge to an external conversation; general announcements remain context. Keep organizational opportunity quality, candidate feasibility, and contact readiness in separate fields. For strategic leads, hiring remains unconfirmed unless separately evidenced.
 
 ## Relevant people and professional routes
 List the best-supported primary person and at most one justified alternate under the opportunity they relate to. Keep accountable sponsor, hiring-process contact, role promoter, person-specific route, and official application route distinct. Missing or unverified routes do not remove the opportunity from the ranked section.
@@ -34,3 +43,4 @@ Each individually drafted message is only PENDING_CONTENT_APPROVAL; separate SEN
 
 ## Gaps and reviewer checks
 State missing data, unresolved identity conflicts, incomplete history, any pipeline or source error, and whether 20 were supportable. Never invent sources or claim a message was transmitted.
+
