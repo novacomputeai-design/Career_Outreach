@@ -80,7 +80,8 @@ class OpportunityFirstContractTests(unittest.TestCase):
             "NOT_RECORDED",
         ):
             self.assertIn(field, template)
-        example = template.split("### Example: seven-employer supervised discovery, 2026-11-10", 1)[1]
+        self.assertNotIn("seven-employer supervised discovery", template)
+        example = (ROOT / "evals" / "phase2_coverage_ledger_example.md").read_text(encoding="utf-8")
         for employer in (
             "Pima County", "RTX", "Banner Health", "Mister Car Wash",
             "Amgen", "Johnson & Johnson", "UnitedHealth Group",
@@ -89,6 +90,7 @@ class OpportunityFirstContractTests(unittest.TestCase):
         self.assertIn("returned 404", example)
         self.assertIn("not accessible/retained", example)
         self.assertIn("Exact search strings and result counts were not retained", example)
+        self.assertIn("NOT_RECORDED", example)
 
     def test_strategic_exploration_does_not_infer_vacancy_or_invitation(self):
         method = (ROOT / "references" / "opportunity-assessment.md").read_text(encoding="utf-8")
