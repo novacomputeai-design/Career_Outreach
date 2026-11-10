@@ -31,6 +31,19 @@ Keep organizational opportunity quality, candidate feasibility, and contact read
 
 Strategic leads require current evidence of meaningful organizational need and a plausible, bounded, non-duplicative leadership contribution tied to an outcome. Mark these as strategic-exploration hypotheses. This research hypothesis does not imply a vacancy, hiring intent, willingness to meet, invitation, or contact route. Record an invitation only when directly sourced.
 
+## Candidate evidence verification
+
+Use this queue when candidate fit depends on information the public-safe profile does not establish. An owner response is required before changing an unknown to SUPPORTED or NOT_MET. Record only a concise public-safe fact confirmed by the owner; keep private resume documents, personal contact data, and relationship history out of this repository.
+
+| Opportunity / requirement | Evidence currently stated in public-safe profile | Evidence state | Owner verification question | Owner-confirmed public-safe fact |
+|---|---|---|---|---|
+| Product-management and senior-leadership tenure |  | NOT_EVIDENCED until verified | Exact dates and qualifying responsibilities? | NOT_PROVIDED |
+| Direct people management |  | NOT_EVIDENCED until verified | Years, report count/levels, and formal management duties? | NOT_PROVIDED |
+| AI product or transformation delivery |  | NOT_EVIDENCED until verified | What reached production, what did you own, and what outcomes are supportable? | NOT_PROVIDED |
+| Budget, portfolio, program, and organizational scope |  | NOT_EVIDENCED until verified | Which decisions, budgets, programs, teams, or business outcomes did you own? | NOT_PROVIDED |
+| Industry-specific experience and transferability |  | NOT_EVIDENCED until verified | Which sectors and concrete transferable responsibilities can be confirmed? | NOT_PROVIDED |
+| Eligibility and role-level preferences |  | Verify only the actual job requirement or owner preference | Does a stated work-authorization/eligibility condition apply, and what level/scope is desired? | NOT_PROVIDED |
+
 ## Relevant people and professional routes
 List the best-supported primary person and at most one justified alternate under the opportunity they relate to. Keep accountable sponsor, hiring-process contact, role promoter, person-specific route, and official application route distinct. Missing or unverified routes do not remove the opportunity from the ranked section.
 
