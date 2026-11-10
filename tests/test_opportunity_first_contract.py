@@ -151,7 +151,7 @@ class OpportunityFirstContractTests(unittest.TestCase):
         self.assertIn("No CONDITIONAL or WATCHLIST opportunity can outrank a genuinely RECOMMENDED opportunity", method)
         self.assertIn("contact readiness", method.lower())
         self.assertIn("Phoenix hybrid", method)
-        self.assertIn("relocation is not acceptable", method)
+        self.assertIn("relocation is not acceptable", method.lower())
         self.assertIn("Priority 1", profile)
         self.assertIn("Priority 2", profile)
         self.assertIn("Priority 3", profile)
