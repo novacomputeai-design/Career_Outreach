@@ -45,6 +45,10 @@ For each material requirement or candidate fact, use:
 
 Map each advertised role's mandatory qualifications separately from preferred qualifications. A `PARTIAL` or `NOT_EVIDENCED` mandatory item cannot be treated as satisfied. Use `NOT_MET` only when evidence establishes the mismatch. If a role requires an owner-verifiable fact and the rest of the match is well supported, keep it conditional and state the exact verification question. If important parts of candidate experience remain broadly undocumented, use WATCHLIST until enough evidence supports a strong match.
 
+### Owner-verification record
+
+When a role depends on candidate facts the public-safe profile does not establish, ask a specific owner-verification question. Record the supplied-profile evidence, state (`SUPPORTED`, `PARTIAL`, `NOT_EVIDENCED`, or `NOT_MET`), the exact question, and whether an owner-confirmed public-safe fact was provided. Until confirmed, leave the fact `NOT_EVIDENCED`; do not infer a negative or positive answer. Relevant fields include qualifying product-management and senior-leadership dates; direct people-management years and scope; AI products/workflow changes actually delivered, ownership and outcomes; portfolio, budget, program and organizational responsibility; industry experience and transferable evidence; actual role eligibility; and desired role level/scope. Store only concise, non-sensitive owner-confirmed facts in the public-safe profile. Never commit a private resume or relationship history.
+
 ### Opportunity categories
 
 Assign exactly one category, and report categories in this order:
