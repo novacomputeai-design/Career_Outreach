@@ -157,6 +157,19 @@ class OpportunityFirstContractTests(unittest.TestCase):
         self.assertIn("Priority 3", profile)
         self.assertIn("Relocation", profile)
 
+        self.assertIn("Owner-verification record", method)
+        self.assertIn("NOT_PROVIDED", template)
+        for field in (
+            "Product-management and senior-leadership tenure",
+            "Direct people management",
+            "AI product or transformation delivery",
+            "Budget, portfolio, program, and organizational scope",
+            "Industry-specific experience and transferability",
+            "Eligibility and role-level preferences",
+        ):
+            self.assertIn(field, template)
+        self.assertIn("Never commit a private resume or relationship history", method)
+
     def test_candidate_fit_acceptance_scenarios_enforce_location_and_evidence_rules(self):
         data = json.loads((ROOT / "evals" / "opportunity_first_acceptance.json").read_text(encoding="utf-8"))
         cases = {case["id"]: case for case in data["cases"]}
