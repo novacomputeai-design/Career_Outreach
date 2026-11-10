@@ -1,0 +1,115 @@
+{
+  "name": "opportunity-first-discovery",
+  "assurance": "MANUAL_CODEX_RUN_REQUIRED",
+  "purpose": "Acceptance scenarios for opportunity ranking before people/contact research. Fixture judgments are expected behavior, not proof of native skill activation or live source truth.",
+  "cases": [
+    {
+      "id": "risepoint_product_role_vs_architecture_role",
+      "organization": "Risepoint",
+      "candidate_evidence": [
+        "Head of Product at Mobius Logic AI since 2024; enterprise product portfolio, four direct-report product managers, AI opportunity evaluation/prioritization and product operating model.",
+        "Senior Product Manager at University of Chicago from 2020 to 2023; enterprise system modernization, workflows and platform strategy.",
+        "The supplied profile does not establish production AI workflow outcomes, deep online-program operations, large engineering-organization ownership, enterprise-architecture depth, or M&A integration leadership."
+      ],
+      "opportunities": [
+        {
+          "title": "Senior Director, Digital and AI Tech Product Management",
+          "requisition": "JR101253",
+          "evidence": "Official Risepoint Workday listing: US remote; owns digital/AI product strategy, workflow transformation, product roadmap, discovery-to-delivery, and cross-functional implementation. Must-have evidence includes 8+ years technology product management, university systems/process knowledge, and recent AI-led product/workflow transformation with changed workflows and outcomes. No direct reports in initial year.",
+          "source": "https://risepoint.wd503.myworkdayjobs.com/risepoint/job/us---remote/senior-director--digital-and-ai-tech-product-management_jr101253"
+        },
+        {
+          "title": "VP, AI Transformation & Enterprise Architecture",
+          "requisition": "JR101288",
+          "evidence": "Official Risepoint Workday listing: US remote; enterprise AI strategy and architecture, production AI platforms, engineering leadership, integrations and M&A; requires 15+ years progressive technology leadership including large-scale engineering organizations, demonstrated production AI products/platforms, architecture expertise, and M&A/integration experience.",
+          "source": "https://risepoint.wd503.myworkdayjobs.com/Risepoint/job/US---Remote/VP--AI-Transformation---Enterprise-Architecture_JR101288"
+        }
+      ],
+      "expected": {
+        "relative_ranking": ["JR101253", "JR101288"],
+        "explanation_must_include": [
+          "The Senior Director product role is the stronger relative fit because product leadership, enterprise workflow/platform experience, and higher-education experience connect more directly to its actual scope.",
+          "The product role remains a qualification HOLD unless the candidate can evidence the mandatory recent AI-led workflow transformation outcomes and required university-system knowledge; do not invent either.",
+          "The VP role ranks lower because central engineering-organization, enterprise-architecture, production-AI-platform, and M&A requirements are not established by the profile.",
+          "Contact routes, named executives, private history, and contact readiness are not inputs to this opportunity ranking."
+        ],
+        "must_not": [
+          "Rank the VP role higher only because its title is more senior.",
+          "Treat the first role's missing contact route as a reason to lower its opportunity quality.",
+          "Claim either job is currently accepting applications without current status evidence."
+        ]
+      }
+    },
+    {
+      "id": "university_of_arizona_role_and_initiative_comparison",
+      "organization": "University of Arizona",
+      "candidate_evidence": [
+        "Tucson-based Head of Product with enterprise product and AI portfolio experience.",
+        "Senior Product Manager at University of Chicago; enterprise systems modernization and workflow/platform strategy.",
+        "Profile does not establish five years of managerial experience, research administration/funding ownership, or the University's exact budget-administration depth."
+      ],
+      "opportunities": [
+        {
+          "type": "DIRECT_HIRING",
+          "title": "Senior Director, CAIO Office and Institutes",
+          "requisition": "req27470",
+          "evidence": "Posting describes senior administrative, strategic and operational leadership for the CAIO and affiliated ORAI/AI2S functions; institutional AI planning; research development; budgets/resources; cross-campus partnerships; performance measures and executive reporting. It names David Ebert as CAIO and Rudy Salcido as candidate contact. Posting says minimum 9 years related experience including 5 years managerial experience.",
+          "source": "https://www.higheredmilitary.com/jobs/details.cfm?JobCode=155523",
+          "organization_evidence": "Official ORAI directory says David Ebert leads ORAI/AI2S and sets institutional AI/data-science strategy; official roadmap covers research, education, operations and innovation.",
+          "organization_sources": [
+            "https://responsibleai.arizona.edu/about-orai/directory",
+            "https://responsibleai.arizona.edu/about-orai/ai-roadmap"
+          ]
+        },
+        {
+          "type": "STRATEGIC_EXPLORATION",
+          "title": "AI Roadmap implementation and campus AI adoption",
+          "evidence": "Official roadmap describes campus AI platform, responsible use, staff workflow adoption and fluency. This is organizational context, not an advertised external role; the AI Leadership Collaborative's cohort participation is limited to university faculty/staff and is not itself an eligible external opening.",
+          "sources": [
+            "https://responsibleai.arizona.edu/about-orai/ai-roadmap",
+            "https://responsibleai.arizona.edu/about-orai/ai-roadmap/ai-leadership-collaborative"
+          ]
+        }
+      ],
+      "expected": {
+        "must_evaluate_actual_responsibilities": true,
+        "must_keep_org_structure": ["Chief AI and Data Science Officer / ORAI leadership", "Office of Responsible AI", "Arizona Institute for AI and Society", "cross-campus research, academic, operations and finance partners"],
+        "must_state": [
+          "The posted Senior Director role is direct hiring; the roadmap is strategic context, not another vacancy.",
+          "Candidate's higher-education modernization and AI/product leadership are relevant, but five years of managerial experience is not established and must remain a mandatory qualification HOLD.",
+          "A strategic contribution must be bounded and complementary to the CAIO/ORAI leadership and not presented as an invented role."
+        ],
+        "must_not": ["Infer research administration or five years of management from titles alone.", "Treat the faculty/staff AI cohort as an external job opportunity."]
+      }
+    },
+    {
+      "id": "strategic_opportunity_without_vacancy",
+      "scenario": "An organization has a current, first-party AI workflow initiative with measured operational goals, executive sponsorship and business-unit owners, but no advertised leadership vacancy.",
+      "expected": {
+        "recommendation_type": "STRATEGIC_EXPLORATION",
+        "must_include": ["source-backed initiative", "bounded contribution distinct from incumbents", "specific conversation question", "observable business measure", "hiring unconfirmed"],
+        "must_not": ["invent a job", "equate an AI announcement alone with a career opportunity", "require a verified email before ranking the opportunity"]
+      }
+    },
+    {
+      "id": "missing_route_does_not_lower_opportunity_quality",
+      "scenario": "Two sourced opportunities have equal fit, need, contribution scope, timing, geography, and evidence quality. The higher-ranked strategic prospect has no verified person-specific route; the other has a publicly listed direct work route.",
+      "expected": {
+        "opportunity_order_changes_due_to_route": false,
+        "must_report_separately": ["opportunity rank", "person/contact route status", "novelty status", "contact-ready state"],
+        "must_not": ["demote a strong opportunity because of route availability", "claim contact-ready when its route or history gate fails"]
+      }
+    },
+    {
+      "id": "research_only_never_contact_ready",
+      "scenario": "A strong opportunity is ranked and a suitable executive is identified, but no person-specific route, private-history check, or independent human review is available.",
+      "expected": {
+        "opportunity_remains_reportable": true,
+        "contact_ready": false,
+        "novelty": "UNVERIFIED",
+        "outbound_activity": 0,
+        "must_not": ["promote research-only prospect to contact-ready", "draft or send a message", "let opportunity quality override governance gates"]
+      }
+    }
+  ]
+}

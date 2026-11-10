@@ -8,6 +8,8 @@ First reject any commercial business capture/prime/subcontracting opportunity as
 
 ## Supervised person-finding acceptance audit
 
+Audit opportunity ordering independently from people/contact readiness. Confirm opportunity records were ranked before person research, that related roles or initiatives within the same organization were compared, and that route availability, private novelty, or lack of an advertised vacancy did not incorrectly lower an evidence-backed opportunity. Then audit all existing person identity, route, novelty, privacy, review, and authorization gates unchanged.
+
 Assess the requested FIXED_EMPLOYER or BROAD_DISCOVERY mode separately from production contact-ready requirements. Check that a sourced direct-hiring role triggered leadership-discovery even without a named manager, and that direct-hiring fit was assessed **against the advertised responsibilities** rather than a second imagined role. For strategic exploration, require a plausible distinct bounded contribution and no invented hiring intent.
 
 Require a bounded **discovery-before-shortlist** source trail covering official reporting/leadership, closest operating function, and public exact-job-title/requisition promoters, or a justified negative result. Evaluate all relevant surfaced candidates before selecting the final primary plus at most one alternate; verify each person's current employer/title and EXACT opportunity link. A CEO/CTO title, reporting line, named recruiter or promoter post is not automatically documented hiring authority. Verify the handoff of exact selected people to contact-verification and report the actual official/professional/institutional source lanes checked.

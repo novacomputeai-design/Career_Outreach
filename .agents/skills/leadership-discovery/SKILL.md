@@ -8,6 +8,8 @@ For each organization research official people, leadership, governance, speaker,
 
 ## Supervised selection procedure — discover before narrowing
 
+Begin only after the opportunity has been recorded and ranked. Preserve its opportunity type, role/initiative evidence, candidate-fit findings and unresolved questions throughout people research. A person-specific route or relationship-history result cannot change that opportunity's rank.
+
 **Trigger:** Start for any sourced DIRECT_HIRING opportunity selected for review, including one with an unnamed manager, and for credible STRATEGIC_EXPLORATION opportunities chosen for person-targeted research. Do not assume current vacancy acceptance or hiring from an unverified source.
 
 1. **Discover:** Make one bounded source-led pass through employer role/reporting and leadership pages, the closest product/data/AI/operating business function, and an **exact title or requisition + employer** public recruiter/promoter search. Investigate current employee hiring posts as well as org charts; check one promising newly found source for corroboration if necessary. Do not stop after the first CTO/CEO or cap discovery at three names. A three-person limit is NOT a candidate search limit. Record failed searches and access gaps; do not chase unrelated executives indefinitely.

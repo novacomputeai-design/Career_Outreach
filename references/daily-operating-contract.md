@@ -10,25 +10,24 @@ Before processing candidates or publishing a brief, verify project ID `PERSONAL_
 Every candidate requires project ID `PERSONAL_CAREER_OUTREACH` and an individual-career networking rationale. Cross-project subcontracting, commercial sales and procurement pursuits are HOLD; never report them as career contacts.
 
 ## Required inputs
-Resume-derived profile; date in America/Phoenix; authorized current research tools; private persistent relationship state; optional user-approved prior conversations. The repository itself is PUBLIC and must not store private history.
+For opportunity discovery: resume-derived public-safe profile; date in America/Phoenix; authorized current public research tools. Private relationship state is not required to discover or rank opportunities. For contact-ready people counts, private persistent relationship state and the other mandatory policy gates remain required. Supervised research-only work may proceed without memory access, but novelty must remain UNVERIFIED and confirmed-new/contact-ready counts remain zero. The repository itself is PUBLIC and must not store private history.
 
 ## Workflow
-1. **Organization discovery:** Rotate sectors, Tucson tech parks, employers, innovation ecosystems, company sites, associations, plus US remote prospects. Find actual organizational initiatives or opportunities; source URLs and dates.
-2. **Leadership discovery:** Identify real people with plausible professional connection, differentiate verified hiring authority from suspected hiring influence vs strategic introduction.
-3. **Early private memory screen:** compare identities with prior discoveries, contacts, existing relationships and opt-outs in trusted operator-side process; unavailable history => HOLD_UNVERIFIED.
-4. **Contact verification:** Independently corroborate person/current position, record primary sources/recency, verify permitted professional route. Explicitly mark indirect route vs direct route.
-5. **Qualification:** Apply `references/scoring-rubric.md` and mandatory hard gates. Topic must be interesting to both parties, not simply a cold job request.
-6. **Final memory and governance gate:** recheck private history and policy, including name collisions, source/route evidence and prior discoveries; no skill can override HOLD/REJECT.
-7. **Outreach preparation:** Personalize a draft for user review, never send automatically. Draft-content approval is not permission to transmit.
-8. **Quality audit:** Independently review evidence, score arithmetic, novelty, privacy and authorization state **before** the brief.
-9. **Daily brief:** Report up to 20 independently human-reviewed NEW contacts, source-corroborated pending reviews, prior discoveries and follow-ups separately, true shortfalls and blocked checks.
+1. **Opportunity discovery:** Find direct-hiring leadership roles and evidence-backed strategic opportunities; source and date the need, assess the candidate against actual requirements or a bounded contribution, and compare related roles/initiatives within each organization.
+2. **Opportunity ranking:** Rank opportunity quality before researching people. Preserve strategic leads without claiming vacancies. Do not use contactability, private novelty, or contact-ready status as opportunity-quality factors.
+3. **Leadership discovery:** For selected opportunities, compare relevant operating leaders, sponsors, hiring-process contacts, and role promoters; differentiate documented authority from plausible influence.
+4. **Contact and relationship checks:** For the selected people, verify identity, role, permitted person-specific route, novelty, and suppression through the authorized operator-side process. Missing history blocks novelty/contact readiness, not the opportunity assessment.
+5. **Person qualification and governance:** Apply `references/scoring-rubric.md` only to person-to-person contact qualification and enforce all existing hard gates.
+6. **Conditional preparation:** Draft only if requested and eligible for review. Draft-content approval is not permission to transmit. Follow-up and conversation preparation apply only when warranted.
+7. **Quality audit:** Audit opportunity ranking separately from evidence, identity, route, novelty, privacy, and authorization before reporting.
+8. **Daily brief:** Show ranked opportunities first, then associated people/routes/holds. Keep opportunity counts separate from up to 20 independently human-reviewed NEW contact-ready people and all existing follow-ups.
 
 ## State definitions
 DISCOVERED -> VERIFIED -> QUALIFIED -> CONTACT_READY -> DRAFTED -> DRAFT_APPROVED -> SEND_AUTHORIZED -> CONTACTED -> REPLIED -> MEETING -> FOLLOW_UP_PENDING -> CLOSED. **Target state machine only:** CONTACT_READY and SEND_AUTHORIZED are not production-qualified. The current implementation hard-blocks SEND_AUTHORIZED pending trusted history, verified recipient/route and human-operator authentication. Alternative states: HOLD_UNVERIFIED, DUPLICATE, SUPPRESSED, OPTED_OUT, NOT_RELEVANT.
 Only observed human acts can authorize outbound transmission. If durable private history is unavailable, output novelty=UNVERIFIED and 0 confirmed NEW; do not presume an unfamiliar person was never contacted.
 
 ## Expected brief counters
-date / target / considered / verified / qualified / confirmed new contact-ready / duplicates / excluded / follow-ups / source access gaps / quota shortfall / skill activation mechanism / outbound activity (always 0 unless separately authorized).
+date / organizations screened / opportunities found and ranked (direct-hiring vs strategic-exploration) / related within-organization alternatives compared / target / people considered / verified / qualified / confirmed new contact-ready / duplicates / excluded / follow-ups / source access gaps / quota shortfall / skill activation mechanism / outbound activity (always 0 unless separately authorized). Opportunity counts never contribute to the person target.
 
 ## Runtime boundary
 SKILL.md is a procedure, NOT a scheduler, API connection or CRM. A real daily run needs authorized search, private storage, an agent host, a scheduler, logs, independent testing and a human approval UI. CI only tests repository integrity.
