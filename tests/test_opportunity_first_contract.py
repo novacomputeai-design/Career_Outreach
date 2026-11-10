@@ -26,16 +26,26 @@ class OpportunityFirstContractTests(unittest.TestCase):
         self.assertIn("A strong research opportunity remains reportable", method)
 
         discovery = read_skill("organization-discovery")
-        self.assertLess(discovery.index("capture the opportunity record before researching people"),
-                        discovery.index("Rank and compare opportunities before triggering person research"))
+        self.assertLess(discovery.index("capture the opportunity record and provisional ranking before researching people"),
+                        discovery.index("Rank and compare opportunities provisionally before triggering person research"))
 
     def test_person_score_and_contact_gates_do_not_change_opportunity_rank(self):
         qualification = read_skill("relationship-qualification")
-        self.assertIn("must not determine or alter the opportunity's rank", qualification)
-        self.assertIn("does not lower opportunity quality", qualification)
+        self.assertIn("must not determine or alter opportunity rank", qualification)
+        self.assertIn("does not lower organizational opportunity quality", qualification)
         rubric = (ROOT / "references" / "scoring-rubric.md").read_text(encoding="utf-8")
         self.assertIn("person-to-person career connection only", rubric)
         self.assertIn("missing route", rubric)
+
+    def test_mandatory_qualifications_and_leadership_evidence_have_distinct_rank_rules(self):
+        method = (ROOT / "references" / "opportunity-assessment.md").read_text(encoding="utf-8")
+        self.assertIn("candidate feasibility", method)
+        self.assertIn("mandatory qualifications or eligibility are unmet or unverified", method)
+        self.assertIn("Mere accessibility", method)
+        self.assertIn("Record the prior rank, new fact and source", method)
+        leadership = read_skill("leadership-discovery")
+        self.assertIn("Leadership research can reveal material facts about organizational needs", leadership)
+        self.assertIn("Contact accessibility, route availability", leadership)
 
     def test_daily_brief_reports_opportunities_before_people(self):
         template = (ROOT / "references" / "daily-brief-template.md").read_text(encoding="utf-8")
@@ -55,6 +65,8 @@ class OpportunityFirstContractTests(unittest.TestCase):
             "strategic_opportunity_without_vacancy",
             "missing_route_does_not_lower_opportunity_quality",
             "research_only_never_contact_ready",
+            "mandatory_qualification_affects_candidate_feasibility",
+            "leadership_evidence_can_revise_rank_contact_access_cannot",
         }
         self.assertTrue(required.issubset(cases))
         risepoint = cases["risepoint_product_role_vs_architecture_role"]["expected"]

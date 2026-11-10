@@ -14,12 +14,12 @@ For opportunity discovery: resume-derived public-safe profile; date in America/P
 
 ## Workflow
 1. **Opportunity discovery:** Find direct-hiring leadership roles and evidence-backed strategic opportunities; source and date the need, assess the candidate against actual requirements or a bounded contribution, and compare related roles/initiatives within each organization.
-2. **Opportunity ranking:** Rank opportunity quality before researching people. Preserve strategic leads without claiming vacancies. Do not use contactability, private novelty, or contact-ready status as opportunity-quality factors.
-3. **Leadership discovery:** For selected opportunities, compare relevant operating leaders, sponsors, hiring-process contacts, and role promoters; differentiate documented authority from plausible influence.
+2. **Provisional opportunity ranking:** Compare organizational opportunity quality and candidate feasibility before researching people. For direct roles, actual eligibility and evidence for mandatory qualifications affect candidate feasibility and ranking; report the underlying organizational opportunity separately. Preserve strategic leads without claiming vacancies. Contactability, private novelty, and contact-ready status are never ranking factors.
+3. **Leadership discovery and reassessment:** For selected opportunities, compare relevant operating leaders, sponsors, hiring-process contacts, and role promoters; differentiate documented authority from plausible influence. Feed back new sourced facts about organizational need, timing, incumbents, responsibilities, authority, scope, or candidate feasibility and revise the ranking when warranted. Record prior rank, source/date, reasoning and revised rank. Contact accessibility alone cannot trigger a revision.
 4. **Contact and relationship checks:** For the selected people, verify identity, role, permitted person-specific route, novelty, and suppression through the authorized operator-side process. Missing history blocks novelty/contact readiness, not the opportunity assessment.
 5. **Person qualification and governance:** Apply `references/scoring-rubric.md` only to person-to-person contact qualification and enforce all existing hard gates.
 6. **Conditional preparation:** Draft only if requested and eligible for review. Draft-content approval is not permission to transmit. Follow-up and conversation preparation apply only when warranted.
-7. **Quality audit:** Audit opportunity ranking separately from evidence, identity, route, novelty, privacy, and authorization before reporting.
+7. **Quality audit:** Audit candidate feasibility against mandatory qualifications and actual eligibility; audit any evidence-based ranking revision and reject changes driven only by access/contact/novelty. Separately audit identity, route, novelty, privacy, and authorization before reporting.
 8. **Daily brief:** Show ranked opportunities first, then associated people/routes/holds. Keep opportunity counts separate from up to 20 independently human-reviewed NEW contact-ready people and all existing follow-ups.
 
 ## State definitions

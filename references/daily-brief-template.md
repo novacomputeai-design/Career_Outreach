@@ -9,10 +9,10 @@
 ## Ranked career opportunities
 Rank strongest opportunities first, before contact-readiness checks. Include direct-hiring and evidence-backed strategic-exploration leads. Preserve strong research-only opportunities when person, route, vacancy status, or novelty is unresolved.
 
-| Rank | Organization | Opportunity type and role/initiative | Evidence of current need and timing | Candidate fit and key gaps | Leadership contribution / career potential | Location and work mode | Opportunity status | Why ranked here | Sources and next check |
+| Rank | Organization | Opportunity type and role/initiative | Evidence of current need and timing | Candidate fit and mandatory qualification/eligibility feasibility | Leadership contribution / career potential | Location and work mode | Opportunity status | Initial rank → revised rank and evidence, if changed | Why ranked here | Sources and next check |
 |---:|---|---|---|---|---|---|---|---|---|
 
-Compare related roles or initiatives within each organization and explain why the selected lead ranks highest. Do not imply a vacancy for strategic exploration.
+Compare related roles or initiatives within each organization and explain why the selected lead ranks highest. For direct roles, distinguish SUPPORTED/PARTIAL/NOT_EVIDENCED/NOT_MET mandatory qualifications and eligibility from the organization's need. Do not imply a vacancy for strategic exploration. Leadership research may change the ranking only on new evidence about need, timing, incumbents, responsibilities, authority, scope, or candidate feasibility; show the before/after and source. Contact accessibility and relationship novelty are never ranking evidence.
 
 ## Relevant people and professional routes
 List the best-supported primary person and at most one justified alternate under the opportunity they relate to. Keep accountable sponsor, hiring-process contact, role promoter, person-specific route, and official application route distinct. Missing or unverified routes do not remove the opportunity from the ranked section.

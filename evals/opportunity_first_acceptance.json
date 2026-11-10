@@ -110,6 +110,26 @@
         "outbound_activity": 0,
         "must_not": ["promote research-only prospect to contact-ready", "draft or send a message", "let opportunity quality override governance gates"]
       }
+    },
+    {
+      "id": "mandatory_qualification_affects_candidate_feasibility",
+      "scenario": "A direct-hiring role has strong organizational need and appealing scope, but at least one mandatory qualification is explicitly unsupported or established unmet by the supplied profile.",
+      "expected": {
+        "organizational_opportunity_quality": "reported separately and not erased",
+        "candidate_feasibility": "lowered or held according to whether evidence is NOT_MET or NOT_EVIDENCED",
+        "ranking": "must account for candidate feasibility and actual eligibility",
+        "must_not": ["ignore a mandatory requirement", "treat unknown evidence as proof of eligibility", "confuse role quality with candidate feasibility"]
+      }
+    },
+    {
+      "id": "leadership_evidence_can_revise_rank_contact_access_cannot",
+      "scenario": "Initial rankings are made before people research. Leadership discovery finds sourced new facts about an incumbent's remit and a distinct unowned operating responsibility; it also finds a public route for a lower-ranked opportunity.",
+      "expected": {
+        "rank_revision": "permitted only if organizational/role evidence materially changes comparative need, scope, timing, authority, incumbency, or candidate feasibility",
+        "revision_record": ["prior rank", "new fact and source/date", "reason", "revised rank"],
+        "contact_accessibility_effect": "none",
+        "must_not": ["freeze rankings after leadership research", "revise rank solely because a person is easier to reach", "use novelty or route availability as opportunity evidence"]
+      }
     }
   ]
 }
