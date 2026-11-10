@@ -23,7 +23,7 @@ Assign exactly one candidate-fit category and list each category in the order sh
 Do not place CONDITIONAL or WATCHLIST above RECOMMENDED. Use `NOT_EVIDENCED` for missing facts and `NOT_MET` only for an established mismatch.
 
 | Category / rank | Organization | Opportunity type and role/initiative | Organizational opportunity quality: need, timing, evidence | Candidate feasibility: mandatory qualifications and eligibility | Candidate fit evidence / owner-verification questions | Leadership contribution / career potential | Location and work mode | Status | Initial category → revised category and evidence, if changed | Why placed here | Sources and next check |
-|---:|---|---|---|---|---|---|---|---|---|
+|---:|---|---|---|---|---|---|---|---|---|---|---|
 
 For each employer with plausible alternatives, compare related opportunities within that organization and record material alternatives and rejected/held leads, with specific reasons. Record mandatory requirements as SUPPORTED/PARTIAL/NOT_EVIDENCED/NOT_MET and do not treat missing facts as failed qualifications. A verified mandatory mismatch or an incompatible location must be WATCHLIST; Phoenix hybrid stays CONDITIONAL until the onsite schedule and commute are confirmed. Relocation and regular onsite attendance outside Tucson/Southern Arizona, U.S.-remote, or Phoenix are not feasible under the confirmed preferences.
 
