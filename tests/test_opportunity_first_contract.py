@@ -255,6 +255,22 @@ class OpportunityFirstContractTests(unittest.TestCase):
         self.assertIn("NOT_EVIDENCED", expected["product_operations"])
         self.assertTrue(any("preferred qualifications" in item for item in expected["must_not"]))
 
+
+    def test_fresh_discovery_rank_uses_owner_evidence_without_inflating_fit(self):
+        data = json.loads((ROOT / "evals" / "opportunity_first_acceptance.json").read_text(encoding="utf-8"))
+        case = next(case for case in data["cases"] if case["id"] == "fresh_discovery_after_owner_evidence_2026_11_10")
+        opportunities = case["opportunities"]
+        self.assertEqual([item["organization"] for item in opportunities], [
+            "NielsenIQ", "Paylocity", "UnitedHealth Group / Optum Tech", "Tucson Electric Power"
+        ])
+        self.assertEqual(opportunities[0]["category"], "RECOMMENDED")
+        self.assertTrue(all(item["category"] == "CONDITIONAL" for item in opportunities[1:]))
+        self.assertIn("NOT_EVIDENCED", opportunities[1]["candidate_match"])
+        self.assertIn("large-scale enterprise transformation", opportunities[2]["candidate_match"])
+        self.assertIn("electric-utility capital plans", opportunities[3]["candidate_match"])
+        self.assertIn("12 management years as 12 years product management", " ".join(case["comparison"]["must_not"]))
+        self.assertIn("contact readiness", " ".join(case["comparison"]["must_not"]))
+
     def test_governance_and_codex_activation_boundaries_remain(self):
         policy = json.loads((ROOT / "config" / "operating-policy.json").read_text(encoding="utf-8"))
         self.assertFalse(policy["outreach"]["automatic_sending"])
