@@ -28,5 +28,5 @@ Exit criteria: no fabricated records, no unauthorized sends, no unmarked identit
 - Encrypted private state and report restoration must survive a simulated output failure.
 - Source dated older than two years must not establish a CURRENT role; undated source stays uncertain.
 - Bounded research costs, no automatic message sender, and user-reviewed readiness are mandatory.
-- All 14 skills must be shown to activate by the actual configured agent host before native-skill conformance is claimed.
+- Native skill conformance requires host evidence for each applicable skill across representative runs; no single run should activate irrelevant conditional skills merely to satisfy an activation count. Where the host exposes no reliable trace, mark activation NOT VERIFIED and assess observed behavior separately.
 - Run outcome-intelligence and query optimization on actual manually observed response and meeting records, not speculative outcomes.

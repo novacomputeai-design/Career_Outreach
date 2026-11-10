@@ -22,8 +22,8 @@ class FocusedPersonDiscoveryContractTests(unittest.TestCase):
     def test_discover_before_narrowing(self):
         s = skill("leadership-discovery")
         steps = ["1. **Discover:**", "2. **Verify and classify:**",
-                 "3. **Compare after searching:**", "4. **Handoff:**",
-                 "5. **Report honestly:**"]
+                 "3. **Compare after searching:**", "4. **Reassess the opportunity:**",
+                 "5. **Handoff:**", "6. **Report honestly:**"]
         positions = [s.index(step) for step in steps]
         self.assertEqual(sorted(positions), positions)
         for text in ("NOT a candidate search limit", "fourth person",
