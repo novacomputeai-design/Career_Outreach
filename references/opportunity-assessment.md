@@ -28,7 +28,9 @@ An initiative supports `STRATEGIC_EXPLORATION` only when current evidence establ
 
 Record promising alternatives and material rejects, not only winners. For each screened employer with multiple plausible roles or initiatives, show the actual opportunities compared and the reason each lost (for example, weaker candidate fit, stale/closed status, mandatory qualification gap, role already covered by an incumbent, no external career bridge, or insufficiently current evidence). This is a bounded comparison set, not a claim to have found every role at the employer.
 
-## Candidate-fit category and ranking
+## Compare and rank before people research
+
+### Candidate-fit categories
 
 Report three independent judgments for every opportunity: (1) **organizational opportunity quality** (need, evidence, timing, scope and potential contribution); (2) **candidate feasibility** (actual role requirements and eligibility for direct hiring, or evidence-backed fit to a bounded strategic contribution); and (3) **contact readiness** (identity, suitable route, relationship-history and human-approval gates). Contact readiness never affects opportunity category or rank. A strong organizational opportunity remains reportable even if candidate feasibility or contact readiness is low or unknown. A strong research opportunity remains reportable when person, route, vacancy status, or novelty is unresolved. Candidate feasibility is lowered or held when mandatory qualifications or eligibility are unmet or unverified; keep that result separate from organizational opportunity quality.
 
