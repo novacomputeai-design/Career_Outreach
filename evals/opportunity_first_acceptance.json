@@ -10,7 +10,8 @@
         "OWNER_REPORTED: Approximately 12 cumulative years of formal people management; began around 2011–2012 at Wells Fargo, managed up to 18 direct reports with hiring, coaching and performance reviews; currently lead four direct-report Product Managers.",
         "OWNER_REPORTED: Led multiple AI-powered products from ideation through go-to-market with paying customers, including multiple enterprise customers, in B2B and B2C; products support industry-specific customization.",
         "OWNER_REPORTED: Enterprise product strategy, AI innovation, portfolio prioritization, product investment planning, commercialization, strategic oversight of product integrity/accuracy/effectiveness, resource allocation and trade-offs. Detailed discovery and requirements gathering are performed by Product Managers and Business Analysts.",
-        "Resume-provided: Senior Product Manager at University of Chicago (2020–2023), Product Owner at Hennepin Technical College (2018–2020), and Head of Product since 2024. Exact cumulative product-management tenure is not established by month-level dates; 12 management years must not be substituted for product tenure.",
+        "Resume-provided, owner-confirmed dates: Product Owner at Hennepin Technical College (September 2018–July 2020), Senior Product Manager at University of Chicago (July 2020–December 2023), and Head of Product at Mobius Logic AI (January 2024–present). These consecutive product-role dates represent approximately 8 years and 2 months as of November 2026, subject to the employer's definition and responsibility mapping; this is separate from formal management tenure.",
+        "OWNER_REPORTED University of Chicago scope: portfolio across marketing, security, AI/ML and enterprise technology; led Product Owners and Business Analysts in a decentralized hybrid reporting structure; participated in hiring panels; contributed to product-related performance evaluations without exclusive formal-review ownership; directed product priorities and cross-functional delivery. Treat this as matrix product-team leadership, not confirmed direct reports or sole performance-review authority.",
         "Cross-functional support to four engineering teams (~12 engineers) is OWNER_REPORTED collaboration, not direct people management or ownership of a large engineering organization.",
         "Still NOT_EVIDENCED: recent AI-led workflow transformation with measured outcomes, deep online-program operations, enterprise architecture, production AI platform architecture, M&A integration, and exact AI/ML tenure."
       ],
@@ -36,7 +37,8 @@
         "explanation_must_include": [
           "The Senior Director product role is the stronger relative fit because product leadership, enterprise workflow/platform experience, and higher-education experience connect more directly to its actual scope.",
           "Commercial AI product delivery is now OWNER_REPORTED, including multiple products taken from ideation through go-to-market with paying enterprise customers; this is relevant evidence but does not establish the required recent AI-led workflow transformation with changed workflows and measured outcomes.",
-          "The 8+ years technology product-management threshold requires month-level / qualifying-role confirmation; the available titles and years alone do not establish exact cumulative tenure. University system/process knowledge is relevant through education roles but the specific required systems/process knowledge remains to be matched to the posting.",
+          "The month-level product-role timeline supports approximately 8 years and 2 months of product-role experience, meeting the stated 8+ year threshold if the employer accepts these actual responsibilities as technology product management. Hennepin digital products/student-faculty systems and University of Chicago enterprise systems/workflows support higher-education systems/process experience; verify any more specific system requirement from the posting. Do not derive product tenure from management years.",
+          "University of Chicago portfolio and matrix leadership add relevant product-team leadership evidence, but do not establish formal direct reports. The mandatory recent AI-led workflow transformation with changed workflows and measured outcomes remains NOT_EVIDENCED despite commercial AI product delivery.",
           "The VP role ranks lower because enterprise-architecture, production-AI-platform, M&A, and large-scale engineering-organization ownership requirements remain NOT_EVIDENCED; cross-functional engineering support is not direct org ownership.",
           "Contact routes, named executives, private history, and contact readiness are not inputs to this opportunity ranking."
         ],
@@ -52,6 +54,7 @@
       "organization": "University of Arizona",
       "candidate_evidence": [
         "Tucson-based Head of Product; owner-reported product strategy, AI product commercialization, portfolio prioritization, budgeting/resource allocation and cross-functional leadership.",
+        "OWNER_REPORTED University of Chicago product scope (July 2020–December 2023): managed a portfolio across marketing, security, AI/ML and enterprise technology; led Product Owners and Business Analysts in a decentralized hybrid reporting structure; participated in hiring panels and contributed to product-related evaluations; directed priorities and cross-functional delivery. This supports matrix leadership, not additional formal direct-report management.",
         "OWNER_REPORTED: Approximately 12 cumulative years of formal people management beginning around 2011–2012; prior teams up to 18 direct reports and current four direct-report Product Managers. This supports the posting's five-year managerial minimum, subject to employer interpretation of qualifying managerial experience.",
         "OWNER_REPORTED: Three Business Analysts report through the Product Managers; candidate retains overall performance/development accountability. Four engineering teams (~12 engineers) are cross-functional collaborators, not direct reports.",
         "University of Chicago Senior Product Manager (2020–2023) and Hennepin Technical College Product Owner (2018–2020) provide higher-education product experience.",
@@ -90,7 +93,8 @@
         ],
         "must_state": [
           "The posted Senior Director role is direct hiring; the roadmap is strategic context, not another vacancy.",
-          "The candidate's higher-education modernization and AI/product leadership are relevant. OWNER_REPORTED ~12 cumulative years of formal management supports the posting's five-year managerial minimum; this removes the earlier management-evidence hold, but the employer's definition and qualifying dates should still be verified.",
+          "The candidate's higher-education modernization and AI/product leadership are relevant. OWNER_REPORTED approximately 12 cumulative years of formal people management supports the posting's five-year managerial minimum; the University of Chicago matrix leadership is additional product-team leadership but is not counted as direct management. Verify the employer's definition and the underlying qualifying management dates.",
+          "The stated product-role timeline and Wells Fargo technology/regulated-operations history support the nine-year related-experience threshold at a broad level; assess those duties against the employer's definition. The five-year management minimum is supported by the separate owner-reported formal-management evidence.",
           "A strategic contribution must be bounded and complementary to the CAIO/ORAI leadership and not presented as an invented role.",
           "General owner-reported budgeting and resource planning are transferable but do not prove research administration, grant funding/proposals, university fiscal administration, or final budget authority; assess each separately as NOT_EVIDENCED."
         ],
@@ -321,7 +325,9 @@
       "id": "owner_reported_management_and_commercial_ai_evidence_calibration",
       "candidate_evidence_provenance": "OWNER_REPORTED; supplied by owner for evaluation and not independently verified.",
       "facts": [
-        "Approximately 12 cumulative years formal people management; prior up to 18 direct reports; currently four direct-report Product Managers.",
+      "Approximately 12 cumulative years formal people management; prior up to 18 direct reports; currently four direct-report Product Managers.",
+      "Consecutive product roles: Hennepin Technical College Product Owner (September 2018–July 2020), University of Chicago Senior Product Manager (July 2020–December 2023), Mobius Logic AI Head of Product (January 2024–present), approximately 8 years and 2 months by November 2026. Employer-specific qualifying experience depends on actual responsibilities and interpretation.",
+      "University of Chicago OWNER_REPORTED matrix leadership (July 2020–December 2023): portfolio across marketing, security, AI/ML and enterprise technology; led Product Owners and Business Analysts in a decentralized hybrid structure; hiring-panel participation and contribution to product-related performance evaluations; directed priorities and cross-functional delivery. Direct-report status and exclusive formal review ownership are not established.",
         "Three Business Analysts report through Product Managers; overall development/performance accountability retained.",
         "Cross-functional support to four engineering teams / approximately 12 engineers; not direct reports.",
         "Multiple AI products led from ideation through go-to-market with paying enterprise customers, B2B/B2C markets and industry-specific customization.",
@@ -336,11 +342,47 @@
           "specialized credentials or clearance",
           "sole final budget approval or direct P&L ownership",
           "large engineering organization people management",
-          "exact product-management tenure from management years"
+      "whether each employer accepts the documented product-role months as qualifying based on the actual responsibilities",
+      "University of Chicago direct-report status for Product Owners or Business Analysts",
+      "exclusive ownership of formal employee reviews at University of Chicago"
         ],
         "reporting_relationships": "Keep direct PM reports distinct from indirect Business Analysts and cross-functional engineering collaborators.",
         "location": "Preserve the existing Tucson/Southern Arizona, fully remote U.S., conditional Phoenix hybrid, no relocation rules.",
         "governance": "Candidate fit does not imply contact readiness, private-history novelty, owner approval to contact, or sending authorization."
+      }
+    },
+    {
+      "id": "phase_3_2_product_tenure_and_matrix_leadership_reconciliation",
+      "candidate_evidence_provenance": "Resume-provided employment dates and OWNER_REPORTED University of Chicago responsibilities; not independently verified.",
+      "product_role_timeline": [
+        "Hennepin Technical College — Product Owner: September 2018–July 2020",
+        "University of Chicago — Senior Product Manager: July 2020–December 2023",
+        "Mobius Logic AI — Head of Product: January 2024–present"
+      ],
+      "calendar_product_role_tenure_as_of_2026_11": "Approximately 8 years and 2 months, subject to each employer's definition and actual duty mapping.",
+      "university_of_chicago_owner_reported_scope": [
+        "Portfolio initiatives across marketing, security, AI/ML and enterprise technology.",
+        "Led Product Owners and Business Analysts within a decentralized, hybrid reporting structure; direct-report status is not established.",
+        "Participated in hiring interview panels.",
+        "Contributed to employee performance evaluations based on product-related responsibilities without exclusive formal-review ownership.",
+        "Directed product priorities and coordinated cross-functional delivery."
+      ],
+      "expected": {
+        "keep_distinct": [
+          "calendar product-role tenure",
+          "formal direct people-management tenure and scope",
+          "matrix product-team leadership and evaluation/hiring participation"
+        ],
+        "risepoint_8_year_product_requirement": "SUPPORTED by the dated product roles if the employer accepts the documented duties as technology product management; keep its specific recent AI workflow outcome requirement NOT_EVIDENCED.",
+        "university_of_arizona_5_year_management_requirement": "SUPPORTED by separate OWNER_REPORTED formal management evidence, subject to dates and employer definition; do not count UChicago matrix leadership as direct management.",
+        "three_year_group_product_leadership_requirement": "University of Chicago supplies approximately 3.5 years of matrix product-team leadership evidence, but SaaS domain and whether this meets the specific senior/group PM criterion remain conditional on role definition.",
+        "must_not": [
+          "substitute management years for product-role tenure",
+          "convert matrix leadership into direct reports",
+          "claim exclusive ownership of formal performance reviews",
+          "treat hiring-panel participation as sole hiring authority",
+          "treat product tenure as proof of every specialized domain, workflow, or technical qualification"
+        ]
       }
     },
     {
@@ -371,10 +413,10 @@
         }
       ],
       "expected": {
-        "comparison": "Assess mandatory education/experience and leadership requirements individually; owner-reported management and commercial AI delivery improve fit but do not automatically satisfy years of product experience or role-specific domain/tooling requirements.",
-        "director": "Management threshold of four years is supported by OWNER_REPORTED evidence. Education/related experience pathway appears plausible but exact qualifying product/technology years require verification. Preferred 5 years AI product and biopharma/CVA experience remain NOT_EVIDENCED unless separately confirmed. CONDITIONAL pending qualifying-tenure confirmation.",
-        "associate_director": "Management/coaching and product operating-model evidence are relevant. Exact qualifying 5/7 years, catalyst-specific facilitation and role-specific methods remain to verify; CONDITIONAL.",
-        "product_operations": "Management threshold may be supported, but specific product operations/tooling and AI workflow adoption remain NOT_EVIDENCED; CONDITIONAL, weaker relative fit than the director role.",
+    "comparison": "Assess mandatory education/experience and leadership requirements individually. The dated product-role timeline supports approximately 8 years and 2 months of product-role experience, while approximately 12 cumulative years of formal people management are a separate fact. University of Chicago matrix product-team leadership adds leadership evidence but is not direct-report management. Role-specific domain, workflow, and tooling requirements remain separate.",
+    "director": "The MS and approximately 8 years and 2 months of documented product roles support the listed mandatory education/experience pathway subject to the employer's definition; the four-year leadership threshold is supported by OWNER_REPORTED formal management evidence. Preferred 10+ product years are not supported by the supplied timeline; 5+ years AI/ML and biopharma/CVA experience remain NOT_EVIDENCED. Do not treat preferred gaps as mandatory failures; keep CONDITIONAL for material role/domain fit and any actual eligibility question.",
+    "associate_director": "The MS and documented product-role timeline support the listed five-year related-experience path subject to the employer's definition; leadership/coaching evidence includes both formal management and separate University of Chicago matrix leadership. Catalyst-specific facilitation and role methods still require evidence; CONDITIONAL if those are material fit questions, not because product tenure is absent.",
+    "product_operations": "The MS, approximately 8 years and 2 months of product-role experience, and formal management record support the stated six-year experience and two-year leadership thresholds subject to employer definitions. Specific product operations/tooling and AI workflow adoption remain NOT_EVIDENCED; CONDITIONAL and weaker relative fit than the director role.",
         "must_not": [
           "Treat preferred qualifications as mandatory without the posting stating so.",
           "Infer domain expertise from healthcare industry exposure alone.",
@@ -403,7 +445,7 @@
           "source": "https://2000recruiting.paylocity.com/Recruiting/Jobs/Details/46952",
           "location": "Fully remote U.S.; Central/Eastern time zone preferred",
           "current_evidence": "Official ATS listing active; requires 8+ years product management, 3+ years senior/group product leadership in SaaS, shipped B2B SaaS AI/data/agent/platform products and external workflow products at scale; leads AI/workflow portfolio and PM team.",
-          "candidate_match": "Commercial AI delivery and current PM team leadership are OWNER_REPORTED and relevant. Exact PM tenure/senior-group tenure and external workflow products at scale are NOT_EVIDENCED.",
+      "candidate_match": "Approximately 8 years and 2 months of product-role experience, current direct PM management since January 2024, and 3.5 years of University of Chicago matrix leadership over Product Owners and Business Analysts are OWNER_REPORTED or resume-dated. Count the calendar product tenure separately from leadership type. Whether the matrix leadership satisfies the posting's 3+ years of senior/group PM leadership in SaaS is dependent on employer interpretation and relevant role duties; SaaS and external workflow products at scale remain NOT_EVIDENCED.",
           "category": "CONDITIONAL"
         },
         {
@@ -434,7 +476,7 @@
           "UnitedHealth Group Director AI Transformation and Business Modernization",
           "Tucson Electric Power Director Operations PMO & Opex"
         ],
-        "why": "NIQ has the closest evidenced overlap with the confirmed strategy, portfolio, AI commercialization and matrix-leadership record, and its mandatory requirements are expressed as demonstrable responsibilities rather than unverified numeric tenure thresholds. Paylocity has direct role fit but its exact tenure and external workflow scale thresholds remain unverified. UHG is strong in need and remote eligibility but enterprise-scale transformation and organizational-change leadership remain unproven. TEP is local with transferable scope but mandatory electric-utility capital-plan and regulatory depth remain unproven.",
+      "why": "NIQ has the closest evidenced overlap with confirmed strategy, portfolio, AI commercialization and matrix-leadership responsibilities. Paylocity's eight-year product-role threshold is supported by the dated timeline subject to its definition; the three-year SaaS senior/group leadership criterion is partially supported by University of Chicago matrix leadership but SaaS/group-PM equivalence and external workflow scale remain to verify. UHG is strong in need and remote eligibility but enterprise-scale transformation and organizational-change outcomes remain unproven. TEP is local with transferable scope and supported formal-management evidence, but mandatory electric-utility capital-plan and regulatory depth remain unproven.",
         "must_not": [
           "Promote a conditional role above an evidence-supported recommendation solely because its title, location, or organizational need is attractive.",
           "Treat 12 management years as 12 years product management or enterprise transformation.",
