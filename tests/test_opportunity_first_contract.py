@@ -268,7 +268,7 @@ class OpportunityFirstContractTests(unittest.TestCase):
         self.assertTrue(all(item["category"] == "CONDITIONAL" for item in opportunities[1:]))
         self.assertIn("NOT_EVIDENCED", opportunities[1]["candidate_match"])
         self.assertIn("large-scale enterprise transformation", opportunities[2]["candidate_match"])
-        self.assertIn("electric-utility capital plans/systems/regulatory experience are NOT_EVIDENCED", opportunities[3]["candidate_match"])
+        self.assertIn("Electric-utility capital plans/systems/regulatory experience are NOT_EVIDENCED", opportunities[3]["candidate_match"])
         self.assertIn("12 management years as 12 years product management", " ".join(case["comparison"]["must_not"]))
         self.assertIn("contact readiness", " ".join(case["comparison"]["must_not"]))
 
