@@ -171,6 +171,16 @@ class OpportunityFirstContractTests(unittest.TestCase):
         self.assertIn("Priority 2", profile)
         self.assertIn("Priority 3", profile)
         self.assertIn("Relocation", profile)
+        for timeline_item in (
+            "September 2018–July 2020",
+            "July 2020–December 2023",
+            "January 2024–present",
+            "approximately 8 years and 2 months",
+        ):
+            self.assertIn(timeline_item, profile)
+        self.assertIn("matrix product-team leadership", profile)
+        self.assertIn("direct-report status", profile)
+        self.assertIn("without exclusive ownership of formal reviews", profile)
 
         self.assertIn("Owner-verification record", method)
         self.assertIn("NOT_PROVIDED", template)
@@ -242,16 +252,42 @@ class OpportunityFirstContractTests(unittest.TestCase):
         calibration = cases["owner_reported_management_and_commercial_ai_evidence_calibration"]["expected"]
         self.assertIn("quantified AI performance improvements", calibration["still_not_evidenced"])
         self.assertIn("sole final budget approval or direct P&L ownership", calibration["still_not_evidenced"])
-        self.assertIn("management years", calibration["still_not_evidenced"][-1])
+        self.assertIn("quantified AI performance improvements", calibration["still_not_evidenced"][0])
+        self.assertIn("exclusive ownership", calibration["still_not_evidenced"][-1])
         self.assertIn("Candidate fit does not imply contact readiness", calibration["governance"])
         self.assertEqual(calibration["location"], "Preserve the existing Tucson/Southern Arizona, fully remote U.S., conditional Phoenix hybrid, no relocation rules.")
+
+        phase32 = cases["phase_3_2_product_tenure_and_matrix_leadership_reconciliation"]
+        self.assertIn("8 years and 2 months", phase32["calendar_product_role_tenure_as_of_2026_11"])
+        phase32_expected = phase32["expected"]
+        self.assertIn("SUPPORTED", phase32_expected["risepoint_8_year_product_requirement"])
+        self.assertIn("NOT_EVIDENCED", phase32_expected["risepoint_8_year_product_requirement"])
+        self.assertIn("SUPPORTED", phase32_expected["university_of_arizona_5_year_management_requirement"])
+        self.assertIn("matrix", phase32_expected["three_year_group_product_leadership_requirement"])
+        self.assertIn("direct reports", " ".join(phase32_expected["must_not"]))
+        self.assertIn("exclusive ownership", " ".join(phase32_expected["must_not"]))
+
+    def test_candidate_tenure_and_leadership_types_are_not_conflated_in_fixtures(self):
+        data = json.loads((ROOT / "evals" / "opportunity_first_acceptance.json").read_text(encoding="utf-8"))
+        cases = {case["id"]: case for case in data["cases"]}
+        risepoint = cases["risepoint_product_role_vs_architecture_role"]
+        resume_evidence = " ".join(risepoint["candidate_evidence"])
+        self.assertIn("September 2018", resume_evidence)
+        self.assertIn("approximately 8 years and 2 months", resume_evidence)
+        ua = cases["university_of_arizona_role_and_initiative_comparison"]
+        self.assertIn("supports the posting's five-year managerial minimum", " ".join(ua["expected"]["must_state"]))
+        self.assertIn("not counted as direct management", " ".join(ua["expected"]["must_state"]))
+        prior = cases["reassessment_prior_opportunities_after_owner_evidence_2026_11_10"]
+        paylocity = next(item for item in prior["opportunities"] if item["organization"] == "Paylocity")
+        self.assertIn("8 years and 2 months", paylocity["candidate_match"])
+        self.assertIn("NOT_EVIDENCED", paylocity["candidate_match"])
 
     def test_amgen_roles_are_compared_by_actual_requirements(self):
         data = json.loads((ROOT / "evals" / "opportunity_first_acceptance.json").read_text(encoding="utf-8"))
         case = next(case for case in data["cases"] if case["id"] == "amgen_role_requirement_by_requirement_calibration")
         self.assertEqual(len(case["opportunities"]), 3)
         expected = case["expected"]
-        self.assertIn("Management threshold of four years is supported", expected["director"])
+        self.assertIn("four-year leadership threshold is supported", expected["director"])
         self.assertIn("NOT_EVIDENCED", expected["product_operations"])
         self.assertTrue(any("preferred qualifications" in item for item in expected["must_not"]))
 

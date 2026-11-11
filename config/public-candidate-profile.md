@@ -1,10 +1,11 @@
 # Professional profile (public-safe research brief)
 **Fadi Bchara | Tucson, Arizona | www.linkedin.com/in/fadi-bchara/**
 
-## Resume-provided career evidence (October 2026)
-- Head of Product, Mobius Logic AI (2024–present): enterprise product portfolio across HR, risk, finance, B2B/B2C; 4 direct-report product managers; AI opportunity evaluation, prioritization and product operating model.
-- Senior Product Manager, University of Chicago (2020–2023): enterprise system modernization, organizational workflows and platform strategy.
-- Product Owner, Hennepin Technical College (2018–2020): digital products, students/faculty systems and workflows.
+## Resume-provided career evidence (owner-confirmed dates, November 2026)
+- Head of Product, Mobius Logic AI (January 2024–present): enterprise product portfolio across HR, risk, finance, B2B/B2C; 4 direct-report product managers; AI opportunity evaluation, prioritization and product operating model.
+- Senior Product Manager, University of Chicago (July 2020–December 2023): enterprise system modernization, organizational workflows and platform strategy.
+- Product Owner, Hennepin Technical College (September 2018–July 2020): digital products, students/faculty systems and workflows.
+- These consecutive product-role dates represent approximately 8 years and 2 months as of November 2026. This is calendar tenure; assess each employer's definition and the actual software/product responsibilities before treating all time as qualifying experience. Do not derive product-management tenure from people-management tenure.
 - Wells Fargo, various roles (2007–2018): enterprise technology delivery, regulated operations and stakeholder alignment.
 - M.S. Computer Software Engineering (University of St. Thomas, 2020); B.S. Information Technology (Metropolitan State University, 2017); minor in Project Management.
 - Professional themes: enterprise product strategy, AI and emerging-technology adoption, enterprise platforms, innovation, governance, digital transformation, leadership.
@@ -18,6 +19,12 @@ The following details were provided by the owner for candidate-fit evaluation. T
 - Previously managed up to 18 direct reports, including hiring, coaching and performance-review responsibilities.
 - Currently manage four direct-report Product Managers. Three Business Analysts report through those Product Managers; overall performance and development accountability is retained for this group.
 - Provide cross-functional leadership and support to four engineering teams (approximately 12 engineers). These engineers are collaborators, not direct reports.
+
+### University of Chicago product leadership (OWNER_REPORTED)
+- Managed a portfolio of initiatives across marketing, security, AI/ML and enterprise technology; directed product priorities and coordinated cross-functional delivery.
+- Led Product Owners and Business Analysts in a decentralized, hybrid reporting structure. This is matrix product-team leadership; direct-report status for those Product Owners and Business Analysts is not established here.
+- Participated in hiring interview panels and contributed to employee performance evaluations based on product-related responsibilities, without exclusive ownership of formal reviews.
+- Credit this as relevant product-team leadership and hiring/evaluation participation where a role accepts matrix influence. Do not count it as formal direct people management or claim exclusive review authority from these facts.
 
 ### Executive product and technology strategy
 
