@@ -258,7 +258,8 @@ class OpportunityFirstContractTests(unittest.TestCase):
 
     def test_fresh_discovery_rank_uses_owner_evidence_without_inflating_fit(self):
         data = json.loads((ROOT / "evals" / "opportunity_first_acceptance.json").read_text(encoding="utf-8"))
-        case = next(case for case in data["cases"] if case["id"] == "fresh_discovery_after_owner_evidence_2026_11_10")
+        case = next(case for case in data["cases"] if case["id"] == "reassessment_prior_opportunities_after_owner_evidence_2026_11_10")
+        self.assertEqual(case["sample_type"], "REASSESSMENT_OF_PREVIOUSLY_IDENTIFIED_OPPORTUNITIES_NOT_AN_INDEPENDENT_FRESH_EMPLOYER_SAMPLE")
         opportunities = case["opportunities"]
         self.assertEqual([item["organization"] for item in opportunities], [
             "NielsenIQ", "Paylocity", "UnitedHealth Group / Optum Tech", "Tucson Electric Power"
@@ -267,7 +268,7 @@ class OpportunityFirstContractTests(unittest.TestCase):
         self.assertTrue(all(item["category"] == "CONDITIONAL" for item in opportunities[1:]))
         self.assertIn("NOT_EVIDENCED", opportunities[1]["candidate_match"])
         self.assertIn("large-scale enterprise transformation", opportunities[2]["candidate_match"])
-        self.assertIn("electric-utility capital plans", opportunities[3]["candidate_match"])
+        self.assertIn("electric-utility capital plans/systems/regulatory experience are NOT_EVIDENCED", opportunities[3]["candidate_match"])
         self.assertIn("12 management years as 12 years product management", " ".join(case["comparison"]["must_not"]))
         self.assertIn("contact readiness", " ".join(case["comparison"]["must_not"]))
 
