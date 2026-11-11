@@ -384,9 +384,9 @@
       }
     },
     {
-      "id": "fresh_discovery_after_owner_evidence_2026_11_10",
+      "id": "reassessment_prior_opportunities_after_owner_evidence_2026_11_10",
       "as_of": "2026-11-10",
-      "candidate_evidence_provenance": "OWNER_REPORTED career facts in public-safe profile; role listings are public source evidence.",
+      "candidate_evidence_provenance": "OWNER_REPORTED career facts in public-safe profile; role listings are public source evidence. This is a reassessment of previously identified employers/opportunities, not a fresh-employer discovery sample.",
       "opportunities": [
         {
           "organization": "NielsenIQ",
@@ -441,7 +441,8 @@
           "Treat a research result as contact readiness or novelty proof.",
           "Infer missing requirements are NOT_MET without owner verification."
         ]
-      }
+      },
+      "sample_type": "REASSESSMENT_OF_PREVIOUSLY_IDENTIFIED_OPPORTUNITIES_NOT_AN_INDEPENDENT_FRESH_EMPLOYER_SAMPLE"
     }
   ]
 }
